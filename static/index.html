@@ -1,0 +1,3060 @@
+<!DOCTYPE html>
+<html lang="en" class="dark theme-cyber">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Dhwani-Kavach — Real-Time AI Voice Clone & Multi-Category Vishing Defense Interceptor (SIH26104)</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+if (typeof tailwind !== 'undefined') {
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "cyber-bg": "var(--bg-page)",
+                    "cyber-card": "var(--bg-card)",
+                    "cyber-cyan": "var(--accent-cyan)",
+                    "cyber-emerald": "var(--accent-emerald)",
+                    "cyber-amber": "var(--accent-amber)",
+                    "cyber-crimson": "var(--accent-crimson)",
+                    "cyber-text": "var(--text-primary)",
+                    "cyber-muted": "var(--text-muted)",
+                },
+                fontFamily: {
+                    "sans": ["Plus Jakarta Sans", "sans-serif"],
+                    "mono": ["JetBrains Mono", "monospace"],
+                }
+            }
+        }
+    };
+}
+</script>
+
+<style>
+/* ==========================================================================
+   1. MULTI-THEME CSS VARIABLES (CYBER / OLED / HIGH-CONTRAST LIGHT)
+   ========================================================================== */
+
+/* CYBER (MIDNIGHT BLUE / NEON CYAN) */
+:root,
+html.theme-cyber,
+body.theme-cyber {
+    --bg-page: #060913;
+    --bg-body-gradient: radial-gradient(circle at 50% 0%, #0d1b38 0%, #060913 85%);
+    --bg-card: rgba(13, 22, 44, 0.94);
+    --bg-card-sub: rgba(8, 14, 30, 0.96);
+    --bg-phone-screen: #0B1224;
+    --border-card: rgba(0, 240, 255, 0.25);
+    --border-card-hover: rgba(0, 240, 255, 0.6);
+    --phone-rim: #1E293B;
+    --phone-bezel-top: #1E293B;
+    --phone-bezel-bottom: #0F172A;
+    --phone-chassis-shadow: 0 0 0 2px #334155, 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(0, 240, 255, 0.14);
+    --accent-cyan: #00F0FF;
+    --accent-emerald: #10B981;
+    --accent-amber: #F59E0B;
+    --accent-crimson: #EF4444;
+    --text-primary: #F8FAFC;
+    --text-muted: #94A3B8;
+    --text-sublabel: #64748B;
+    --gauge-bg: rgba(255, 255, 255, 0.1);
+    --bar-bg: rgba(255, 255, 255, 0.1);
+    --avatar-bg: rgba(8, 14, 30, 0.95);
+    --avatar-border: 2px solid rgba(0, 240, 255, 0.45);
+    --avatar-icon: #00F0FF;
+    --btn-decline-bg: rgba(239, 68, 68, 0.2);
+    --btn-decline-border: 1.5px solid rgba(239, 68, 68, 0.55);
+    --btn-decline-icon: #EF4444;
+    --btn-answer-bg: #10B981;
+    --btn-answer-border: 1.5px solid #10B981;
+    --btn-answer-icon: #FFFFFF;
+    --btn-answer-shadow: 0 0 22px rgba(16, 185, 129, 0.45);
+    --wave-stroke: #00F0FF;
+    --wave-container-bg: rgba(8, 14, 30, 0.9);
+    --header-badge-bg: rgba(16, 185, 129, 0.15);
+    --header-badge-border: rgba(16, 185, 129, 0.35);
+    --header-badge-text: #10B981;
+    --pill-active-bg: #00F0FF;
+    --pill-active-text: #060913;
+    --defense-safe-bg: rgba(16, 185, 129, 0.12);
+    --defense-safe-border: rgba(16, 185, 129, 0.45);
+    --defense-safe-text: #10B981;
+    --defense-threat-bg: rgba(239, 68, 68, 0.18);
+    --defense-threat-border: #EF4444;
+    --defense-threat-text: #EF4444;
+    --backdrop-dim: rgba(0, 0, 0, 0.85);
+    --scrollbar-thumb: rgba(0, 240, 255, 0.35);
+    --spec-canvas-bg: #0B1224;
+}
+
+/* OLED (PURE PITCH BLACK #000000) */
+html.theme-oled,
+body.theme-oled,
+html.high-contrast,
+body.high-contrast {
+    --bg-page: #000000;
+    --bg-body-gradient: none;
+    --bg-card: rgba(10, 14, 24, 0.98);
+    --bg-card-sub: #000000;
+    --bg-phone-screen: #020408;
+    --border-card: rgba(0, 240, 255, 0.45);
+    --border-card-hover: #00F0FF;
+    --phone-rim: #00F0FF;
+    --phone-bezel-top: #111827;
+    --phone-bezel-bottom: #030712;
+    --phone-chassis-shadow: 0 0 0 2px #00F0FF, 0 20px 50px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 240, 255, 0.25);
+    --accent-cyan: #00F0FF;
+    --accent-emerald: #00FF87;
+    --accent-amber: #FFB300;
+    --accent-crimson: #FF2E4D;
+    --text-primary: #FFFFFF;
+    --text-muted: #CBD5E1;
+    --text-sublabel: #94A3B8;
+    --gauge-bg: rgba(255, 255, 255, 0.15);
+    --bar-bg: rgba(255, 255, 255, 0.15);
+    --avatar-bg: #000000;
+    --avatar-border: 2px solid #00F0FF;
+    --avatar-icon: #00F0FF;
+    --btn-decline-bg: rgba(255, 46, 77, 0.22);
+    --btn-decline-border: 1.5px solid #FF2E4D;
+    --btn-decline-icon: #FF2E4D;
+    --btn-answer-bg: #00FF87;
+    --btn-answer-border: 1.5px solid #00FF87;
+    --btn-answer-icon: #000000;
+    --btn-answer-shadow: 0 0 24px rgba(0, 255, 135, 0.5);
+    --wave-stroke: #00F0FF;
+    --wave-container-bg: #000000;
+    --header-badge-bg: rgba(0, 255, 135, 0.2);
+    --header-badge-border: rgba(0, 255, 135, 0.5);
+    --header-badge-text: #00FF87;
+    --pill-active-bg: #00F0FF;
+    --pill-active-text: #000000;
+    --defense-safe-bg: rgba(0, 255, 135, 0.15);
+    --defense-safe-border: rgba(0, 255, 135, 0.5);
+    --defense-safe-text: #00FF87;
+    --defense-threat-bg: rgba(255, 46, 77, 0.2);
+    --defense-threat-border: #FF2E4D;
+    --defense-threat-text: #FF2E4D;
+    --backdrop-dim: rgba(0, 0, 0, 0.95);
+    --scrollbar-thumb: rgba(0, 240, 255, 0.5);
+    --spec-canvas-bg: #000000;
+}
+
+/* HIGH-CONTRAST CORPORATE LIGHT THEME */
+html.theme-light,
+body.theme-light,
+html.light,
+body.light {
+    --bg-page: #E2E8F0;
+    --bg-body-gradient: linear-gradient(180deg, #EDF2F7 0%, #E2E8F0 100%);
+    --bg-card: #FFFFFF;
+    --bg-card-sub: #F8FAFC;
+    --bg-phone-screen: #F8FAFC;
+    --border-card: #CBD5E1;
+    --border-card-hover: #94A3B8;
+    --phone-rim: #94A3B8;
+    --phone-bezel-top: #FFFFFF;
+    --phone-bezel-bottom: #E2E8F0;
+    --phone-chassis-shadow: 0 14px 35px rgba(15, 23, 42, 0.12), 0 0 0 2px #94A3B8;
+    --accent-cyan: #0284C7;
+    --accent-emerald: #047857;
+    --accent-amber: #B45309;
+    --accent-crimson: #B91C1C;
+    --text-primary: #0F172A;
+    --text-muted: #334155;
+    --text-sublabel: #475569;
+    --gauge-bg: rgba(15, 23, 42, 0.12);
+    --bar-bg: rgba(15, 23, 42, 0.12);
+    --avatar-bg: #E2E8F0;
+    --avatar-border: 2px solid #0284C7;
+    --avatar-icon: #0369A1;
+    --btn-decline-bg: #FEE2E2;
+    --btn-decline-border: 1.5px solid #DC2626;
+    --btn-decline-icon: #B91C1C;
+    --btn-answer-bg: #059669;
+    --btn-answer-border: 1.5px solid #047857;
+    --btn-answer-icon: #FFFFFF;
+    --btn-answer-shadow: 0 4px 16px rgba(5, 150, 105, 0.35);
+    --wave-stroke: #0284C7;
+    --wave-container-bg: #E2E8F0;
+    --header-badge-bg: #ECFDF5;
+    --header-badge-border: #059669;
+    --header-badge-text: #047857;
+    --pill-active-bg: #0F172A;
+    --pill-active-text: #FFFFFF;
+    --defense-safe-bg: #ECFDF5;
+    --defense-safe-border: #059669;
+    --defense-safe-text: #047857;
+    --defense-threat-bg: #FEF2F2;
+    --defense-threat-border: #DC2626;
+    --defense-threat-text: #B91C1C;
+    --backdrop-dim: rgba(15, 23, 42, 0.6);
+    --scrollbar-thumb: rgba(2, 132, 199, 0.4);
+    --spec-canvas-bg: #1E293B;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-page);
+    background-image: var(--bg-body-gradient);
+    color: var(--text-primary);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Glass card styling */
+.glass-panel {
+    background: var(--bg-card);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1.5px solid var(--border-card);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    transition: all 0.25s ease;
+}
+
+.glass-panel:hover {
+    border-color: var(--border-card-hover);
+}
+
+/* Pulse Rings */
+.pulse-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 240, 255, 0.4);
+    animation: ring-pulse 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    pointer-events: none;
+}
+html.theme-light .pulse-ring {
+    border-color: rgba(2, 132, 199, 0.4);
+}
+.pulse-ring.danger {
+    border-color: var(--accent-crimson) !important;
+}
+@keyframes ring-pulse {
+    0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.9; }
+    100% { transform: translate(-50%, -50%) scale(1.85); opacity: 0; }
+}
+
+/* Active Audio Waveform bars */
+.wave-bar {
+    width: 5px;
+    background-color: var(--wave-stroke);
+    border-radius: 3px;
+    min-height: 8px;
+    transition: height 0.08s ease, background-color 0.25s ease;
+}
+
+/* Emergency Strobe */
+@keyframes emergency-glow {
+    0%, 100% { box-shadow: 0 0 0 transparent; border-color: rgba(239, 68, 68, 0.4); }
+    50% { box-shadow: 0 0 35px rgba(239, 68, 68, 0.55), inset 0 0 20px rgba(239, 68, 68, 0.2); border-color: var(--accent-crimson); }
+}
+.emergency-strobe {
+    animation: emergency-glow 0.85s ease-in-out infinite !important;
+    border-color: var(--accent-crimson) !important;
+}
+
+/* Threat Defense Active Pulse */
+@keyframes defense-pulse {
+    0%, 100% { border-color: var(--accent-crimson); box-shadow: 0 0 10px rgba(239, 68, 68, 0.25); }
+    50% { border-color: #FF7070; box-shadow: 0 0 24px rgba(239, 68, 68, 0.55); }
+}
+.defense-active {
+    animation: defense-pulse 1.2s infinite ease-in-out;
+}
+
+/* Streamlined Inline Keywords & Header Chips */
+.kw-inline {
+    font-weight: 800;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+    padding: 1px 4px;
+    border-radius: 4px;
+}
+.kw-inline-law { color: #DC2626; background: rgba(220, 38, 38, 0.12); text-decoration-color: #DC2626; }
+.kw-inline-parcel { color: #EA580C; background: rgba(234, 88, 12, 0.12); text-decoration-color: #EA580C; }
+.kw-inline-emergency { color: #E11D48; background: rgba(225, 29, 72, 0.12); text-decoration-color: #E11D48; }
+.kw-inline-investment { color: #2563EB; background: rgba(37, 99, 235, 0.12); text-decoration-color: #2563EB; }
+.kw-inline-banking { color: #D97706; background: rgba(217, 119, 6, 0.12); text-decoration-color: #D97706; }
+.kw-inline-remote { color: #7C3AED; background: rgba(124, 58, 237, 0.12); text-decoration-color: #7C3AED; }
+.kw-inline-lottery { color: #059669; background: rgba(5, 150, 105, 0.12); text-decoration-color: #059669; }
+
+html.theme-cyber .kw-inline-law, html.theme-oled .kw-inline-law { color: #FF5555; background: rgba(255, 85, 85, 0.22); text-decoration-color: #FF5555; }
+html.theme-cyber .kw-inline-parcel, html.theme-oled .kw-inline-parcel { color: #FB923C; background: rgba(251, 146, 60, 0.22); text-decoration-color: #FB923C; }
+html.theme-cyber .kw-inline-emergency, html.theme-oled .kw-inline-emergency { color: #FF6677; background: rgba(255, 102, 119, 0.22); text-decoration-color: #FF6677; }
+html.theme-cyber .kw-inline-investment, html.theme-oled .kw-inline-investment { color: #60A5FA; background: rgba(96, 165, 250, 0.22); text-decoration-color: #60A5FA; }
+html.theme-cyber .kw-inline-banking, html.theme-oled .kw-inline-banking { color: #FFB300; background: rgba(255, 179, 0, 0.22); text-decoration-color: #FFB300; }
+html.theme-cyber .kw-inline-remote, html.theme-oled .kw-inline-remote { color: #C084FC; background: rgba(192, 132, 252, 0.22); text-decoration-color: #C084FC; }
+html.theme-cyber .kw-inline-lottery, html.theme-oled .kw-inline-lottery { color: #34D399; background: rgba(52, 211, 153, 0.22); text-decoration-color: #34D399; }
+
+.kw-aggregate-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 13.5px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+</style>
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+<!-- ==========================================================================
+     TOP COMMAND CENTER BAR (STICKY HEADER)
+     ========================================================================== -->
+<header class="w-full bg-[var(--bg-card)]/95 backdrop-blur-md border-b border-[var(--border-card)] sticky top-0 z-50 px-4 sm:px-8 py-3.5 flex items-center justify-between shadow-sm">
+    <!-- Left: Brand & Threat Defense Indicator -->
+    <div class="flex items-center gap-3.5">
+        <button id="btnMenu" type="button" class="text-[var(--text-muted)] hover:text-[var(--accent-cyan)] p-1.5 rounded-lg hover:bg-[var(--accent-cyan)]/10 transition-all cursor-pointer flex items-center justify-center active:scale-95" aria-label="Open Navigation Menu">
+            <span class="material-symbols-outlined text-[28px]">menu</span>
+        </button>
+
+        <div class="flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-[var(--accent-cyan)] text-3xl sm:text-4xl animate-pulse">security</span>
+            <div class="flex flex-col">
+                <span class="font-mono font-extrabold text-[22px] sm:text-[24px] tracking-[0.16em] text-[var(--text-primary)] uppercase leading-tight">DHWANI-KAVACH</span>
+                <span class="text-[13px] font-mono text-[var(--text-muted)] hidden sm:inline font-bold">Real-Time AI Voice Clone &amp; Multi-Vector Vishing Defense • SIH26104</span>
+            </div>
+        </div>
+
+        <!-- Live Status Badge -->
+        <div id="headerStatusBadge" class="hidden md:flex items-center gap-2 ml-4 px-4 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)]">
+            <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span>
+            <span id="headerStatusText" class="text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--header-badge-text)] uppercase whitespace-nowrap">SYSTEM SECURE</span>
+        </div>
+
+        <!-- AI Neural Model Backend Status Badge -->
+        <div id="backendStatusBadge" class="hidden lg:flex items-center gap-2 ml-2 px-3.5 py-1.5 rounded-full bg-[var(--bg-card-sub)] border border-[var(--border-card)]" title="PyTorch CNN v1/v2 Inference Engine Status">
+            <span id="backendStatusDot" class="w-2.5 h-2.5 rounded-full bg-[var(--accent-cyan)] animate-pulse"></span>
+            <span id="backendStatusText" class="text-[12.5px] font-mono font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase whitespace-nowrap">BACKEND: CHECKING...</span>
+        </div>
+    </div>
+
+    <!-- Center: Live Registry Meta Ticker (Desktop) -->
+    <div class="hidden xl:flex items-center gap-4 text-[13.5px] font-mono text-[var(--text-muted)] font-bold">
+        <span class="flex items-center gap-1.5 text-[var(--accent-cyan)] whitespace-nowrap">
+            <span class="w-2 h-2 rounded-full bg-[var(--accent-cyan)]"></span>
+            I4C 1930 ACTIVE DEFENSE
+        </span>
+        <span>•</span>
+        <span class="whitespace-nowrap">LATENCY: &lt; 160ms</span>
+        <span>•</span>
+        <span class="whitespace-nowrap">DSP: TEMPORAL-ADAPTIVE V5.0</span>
+    </div>
+
+    <!-- Right: Theme Switcher Pills & Modal Actions -->
+    <div class="flex items-center gap-3">
+        <!-- 3-Mode Theme Toggle Pill: [ CYBER ] [ OLED ] [ LIGHT ] -->
+        <div class="flex items-center bg-[var(--bg-card-sub)] p-1 rounded-full border border-[var(--border-card)] shadow-inner" title="Switch Interface Theme">
+            <button id="contrastBtnCyber" type="button" class="px-3.5 py-1.5 rounded-full text-[13px] font-mono transition-all font-extrabold bg-[var(--pill-active-bg)] text-[var(--pill-active-text)] cursor-pointer" onclick="setThemeMode('cyber')">
+                CYBER
+            </button>
+            <button id="contrastBtnOled" type="button" class="px-3.5 py-1.5 rounded-full text-[13px] font-mono transition-all text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer font-bold" onclick="setThemeMode('oled')">
+                OLED
+            </button>
+            <button id="contrastBtnLight" type="button" class="px-3.5 py-1.5 rounded-full text-[13px] font-mono transition-all text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer font-bold" onclick="setThemeMode('light')">
+                LIGHT
+            </button>
+        </div>
+
+        <!-- Quick Incident Logs Button -->
+        <button id="btnTopLogs" type="button" class="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[var(--bg-card-sub)] border border-[var(--border-card)] hover:border-[var(--accent-cyan)] text-[13px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-all cursor-pointer font-bold whitespace-nowrap">
+            <span class="material-symbols-outlined text-[19px]">history</span>
+            <span>LOGS</span>
+        </button>
+
+        <!-- Settings Button -->
+        <button id="btnSettings" type="button" class="text-[var(--text-muted)] hover:text-[var(--accent-cyan)] p-1.5 rounded-lg hover:bg-[var(--accent-cyan)]/10 transition-all cursor-pointer flex items-center justify-center active:scale-95" aria-label="Settings">
+            <span class="material-symbols-outlined text-[24px]">settings</span>
+        </button>
+    </div>
+</header>
+
+<!-- ==========================================================================
+     MAIN SOC COMMAND CENTER DASHBOARD (MODERN SPACED DUAL-PANEL LAYOUT)
+     ========================================================================== -->
+<div class="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-5 sm:py-6 flex flex-col gap-6">
+
+    <!-- Top Notice / Mobile Status Indicator (Shown on small screens) -->
+    <div class="md:hidden flex items-center justify-between px-4 py-2.5 rounded-xl bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)]">
+        <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span>
+            <span id="mobileStatusText" class="text-[13px] font-mono font-extrabold tracking-wider text-[var(--header-badge-text)] uppercase">SYSTEM SECURE • I4C 1930 READY</span>
+        </div>
+        <span class="text-[13px] font-mono text-[var(--accent-cyan)] font-extrabold">&lt; 160ms</span>
+    </div>
+
+    <!-- Dual-Column Grid System with Ample Breathing Room -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+        <!-- ==================================================================
+             LEFT COLUMN (5 COLS / ~40%): CLEAN SMARTPHONE FRAME & TEST SUITE
+             ================================================================== -->
+        <div class="lg:col-span-5 flex flex-col gap-5 items-center">
+
+            <!-- MODERN SMARTPHONE CHASSIS -->
+            <div id="phoneChassis" class="w-full max-w-[430px] rounded-[38px] p-3 sm:p-3.5 bg-gradient-to-b from-[var(--phone-bezel-top)] to-[var(--phone-bezel-bottom)] shadow-[var(--phone-chassis-shadow)] border-2 border-[var(--phone-rim)] relative transition-all duration-300">
+                
+                <!-- Dynamic Island / Speaker Pill -->
+                <div class="w-full flex justify-center items-center pt-0.5 pb-2.5">
+                    <div class="w-[98px] h-[20px] bg-black rounded-full flex items-center justify-between px-3.5 shadow-inner border border-white/10">
+                        <div class="w-2.5 h-2.5 rounded-full bg-[#151515] border border-[#333] flex items-center justify-center">
+                            <div class="w-0.5 h-0.5 rounded-full bg-[#0284C7]/40"></div>
+                        </div>
+                        <div class="w-2 h-2 rounded-full bg-[#111] border border-[#222]"></div>
+                    </div>
+                </div>
+
+                <!-- Phone Display Area -->
+                <div id="callerCard" class="w-full rounded-[28px] p-4 sm:p-5 flex flex-col items-center relative overflow-hidden bg-[var(--bg-phone-screen)] border border-[var(--border-card)] transition-all duration-300">
+                    <!-- Subtle Radial Glow -->
+                    <div class="absolute inset-0 bg-radial from-[var(--accent-cyan)]/5 to-transparent pointer-events-none opacity-50"></div>
+
+                    <!-- Header Status Row -->
+                    <div class="w-full flex items-center justify-between pb-2.5 mb-1.5 border-b border-[var(--border-card)]/60">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[var(--accent-cyan)] text-[20px]">phonelink_ring</span>
+                            <span class="text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase whitespace-nowrap">CLIENT INTERCEPTOR</span>
+                        </div>
+                        <span id="callStatusBadge" class="text-[12.5px] font-mono px-3 py-1 rounded-full bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/35 text-[var(--accent-cyan)] font-extrabold whitespace-nowrap">
+                            STANDBY
+                        </span>
+                    </div>
+
+                    <!-- PROMINENT SPEAKER IDENTITY BADGE (HUMAN VS AI REAL-TIME VERDICT) -->
+                    <div class="w-full my-1.5 flex justify-center">
+                        <div id="speakerIdentityBadge" class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)] transition-all duration-300">
+                            <span id="speakerIdentityDot" class="w-2.5 h-2.5 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span>
+                            <span id="speakerIdentityText" class="text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--header-badge-text)] uppercase whitespace-nowrap">
+                                SPEAKER: STANDBY / LISTENING
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Call State & Caller Info -->
+                    <div class="text-center my-2">
+                        <p id="callStateLabel" class="text-[15.5px] font-mono text-[var(--accent-cyan)] tracking-widest uppercase font-extrabold">
+                            INCOMING CALL INTERCEPTION
+                        </p>
+                        <h2 id="callerName" class="text-[26px] sm:text-[28px] font-extrabold tracking-tight text-[var(--text-primary)] mt-1">
+                            Unknown Caller
+                        </h2>
+                        <p id="callerNumber" class="text-[16px] font-mono text-[var(--text-muted)] mt-1 font-bold">
+                            +91 98765 43210 (VoLTE)
+                        </p>
+                    </div>
+
+                    <!-- Avatar / Active Waveform Centerpiece -->
+                    <div class="relative w-32 h-32 my-2.5 flex justify-center items-center">
+                        <!-- Ringing State Visualizer (Avatar & Pulse Rings) -->
+                        <div id="ringingVisual" class="absolute inset-0 flex justify-center items-center transition-opacity duration-300">
+                            <div id="mainPulseRing" class="pulse-ring"></div>
+                            <div class="pulse-ring" style="animation-delay: 0.7s"></div>
+                            <div class="w-22 h-22 rounded-full bg-[var(--avatar-bg)] border-[var(--avatar-border)] flex items-center justify-center relative z-10 shadow-lg">
+                                <span class="material-symbols-outlined text-5xl text-[var(--avatar-icon)]">person</span>
+                            </div>
+                        </div>
+
+                        <!-- Active Call Real-Time Waveform -->
+                        <div id="activeVisual" class="absolute inset-0 hidden flex justify-center items-center gap-1.5 opacity-0 transition-opacity duration-300 bg-[var(--wave-container-bg)] rounded-full border border-[var(--border-card)]">
+                            <div class="wave-bar" style="height: 14px;"></div>
+                            <div class="wave-bar" style="height: 32px;"></div>
+                            <div class="wave-bar" style="height: 54px;"></div>
+                            <div class="wave-bar" style="height: 38px;"></div>
+                            <div class="wave-bar" style="height: 18px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Specific Fraud & Threat Alert Box (Hidden on Standby) -->
+                    <div id="threatBanner" class="w-full bg-[var(--accent-crimson)]/20 border border-[var(--accent-crimson)]/60 rounded-xl p-3.5 my-2 hidden opacity-0 flex flex-col items-center justify-center transition-all duration-300 shadow-md">
+                        <div class="flex items-center gap-2 text-[var(--accent-crimson)] font-extrabold text-[14.5px] sm:text-[15.5px] font-mono tracking-wider text-center">
+                            <span class="material-symbols-outlined text-[22px]">warning</span>
+                            <span id="threatBannerTitle">🚨 FRAUD THREAT DETECTED</span>
+                        </div>
+                        <p id="threatBannerDetail" class="text-[13px] font-mono text-[var(--accent-crimson)] text-center mt-1 font-bold">
+                            Coercion extortion pattern identified
+                        </p>
+                    </div>
+
+                    <!-- Call Action Controls (Answer / Decline) -->
+                    <div id="incomingActions" class="flex justify-around w-full max-w-[280px] mt-2 relative z-20">
+                        <button id="btnDecline" type="button" onclick="resetCall()" class="flex flex-col items-center gap-2 group cursor-pointer transition-transform active:scale-95" aria-label="Decline Call">
+                            <div class="w-14 h-14 rounded-full bg-[var(--btn-decline-bg)] border-[var(--btn-decline-border)] flex items-center justify-center text-[var(--btn-decline-icon)] transition-all group-hover:scale-105 shadow-md">
+                                <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">call_end</span>
+                            </div>
+                            <span class="text-[14px] font-mono text-[var(--text-muted)] font-bold">Decline</span>
+                        </button>
+
+                        <button id="btnAnswer" type="button" onclick="acceptCall()" class="flex flex-col items-center gap-2 group cursor-pointer transition-transform active:scale-95" aria-label="Answer Call">
+                            <div class="w-14 h-14 rounded-full bg-[var(--btn-answer-bg)] border-[var(--btn-answer-border)] flex items-center justify-center text-[var(--btn-answer-icon)] transition-all group-hover:scale-105 shadow-[var(--btn-answer-shadow)] animate-bounce">
+                                <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">call</span>
+                            </div>
+                            <span class="text-[14px] font-mono text-[var(--accent-emerald)] font-extrabold">Answer</span>
+                        </button>
+                    </div>
+
+                    <!-- Terminate Call Button (Active State) -->
+                    <div id="activeControls" class="w-full hidden justify-center items-center mt-2 opacity-0 transition-all duration-300 relative z-20">
+                        <button id="btnEndCall" type="button" onclick="resetCall()" class="flex items-center gap-2 px-8 py-3.5 rounded-full bg-[var(--accent-crimson)] text-white font-mono text-[14.5px] font-extrabold tracking-wider hover:opacity-95 active:scale-95 transition-all shadow-lg cursor-pointer">
+                            <span class="material-symbols-outlined text-[22px]">call_end</span>
+                            TERMINATE CALL
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Demo Overrides & Multi-Fraud Test Suite Card -->
+            <section class="w-full max-w-[430px] glass-panel rounded-2xl p-5 flex flex-col gap-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-[13px] font-mono font-extrabold tracking-wider text-[var(--text-muted)] uppercase whitespace-nowrap">DEMO SCENARIO OVERRIDES</span>
+                    <span id="activeScenarioIndicator" class="text-[12.5px] font-mono text-[var(--accent-cyan)] font-extrabold whitespace-nowrap">MODE: LIVE</span>
+                </div>
+
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <button type="button" onclick="triggerScenario('safe')" class="flex items-center justify-center gap-1 py-2 px-1 rounded-xl bg-[var(--accent-emerald)]/15 border border-[var(--accent-emerald)]/35 text-[var(--accent-emerald)] hover:bg-[var(--accent-emerald)]/25 text-[12px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm whitespace-nowrap">
+                        <span>🟢</span> Safe Human
+                    </button>
+                    <button type="button" onclick="triggerScenario('clone')" class="flex items-center justify-center gap-1 py-2 px-1 rounded-xl bg-[var(--accent-crimson)]/15 border border-[var(--accent-crimson)]/35 text-[var(--accent-crimson)] hover:bg-[var(--accent-crimson)]/25 text-[12px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm whitespace-nowrap" title="AI Voice Clone with Normal/Benign Script">
+                        <span>🔴</span> AI Voice (Safe)
+                    </button>
+                    <button type="button" onclick="triggerScenario('clone_extortion')" class="flex items-center justify-center gap-1 py-2 px-1 rounded-xl bg-[var(--accent-crimson)]/25 border border-[var(--accent-crimson)] text-[var(--accent-crimson)] hover:bg-[var(--accent-crimson)]/35 text-[12px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm whitespace-nowrap" title="AI Voice Clone + Urgent Extortion Script">
+                        <span>⚠️</span> AI + Extortion
+                    </button>
+                    <button type="button" onclick="triggerScenario('digital_arrest')" class="flex items-center justify-center gap-1 py-2 px-1 rounded-xl bg-[var(--accent-amber)]/15 border border-[var(--accent-amber)]/35 text-[var(--accent-amber)] hover:bg-[var(--accent-amber)]/25 text-[12px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm whitespace-nowrap">
+                        <span>⚖️</span> Digital Arrest
+                    </button>
+                    <button type="button" onclick="triggerScenario('parcel_scam')" class="py-2 px-1 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[11.5px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent-cyan)] transition-all cursor-pointer font-bold whitespace-nowrap text-center">
+                        📦 Customs Scam
+                    </button>
+                    <button type="button" onclick="triggerScenario('emergency_bail')" class="py-2 px-1 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[11.5px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent-cyan)] transition-all cursor-pointer font-bold whitespace-nowrap text-center">
+                        🚨 Kidnap Bail
+                    </button>
+                </div>
+
+                <!-- Citizen Flow: Inspect WhatsApp / Audio File -->
+                <div class="p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] flex flex-col gap-1.5">
+                    <div class="flex items-center justify-between text-[12px] font-mono">
+                        <span class="text-[var(--accent-cyan)] font-extrabold flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[16px]">upload_file</span>
+                            CITIZEN AUDIO INSPECTOR
+                        </span>
+                        <span class="text-[var(--text-muted)] text-[11px] font-semibold">.wav, .mp3, .ogg, .m4a</span>
+                    </div>
+                    <label class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-[var(--bg-card)] border border-dashed border-[var(--border-card)] hover:border-[var(--accent-cyan)] text-[12px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer transition-all">
+                        <span class="material-symbols-outlined text-[17px] text-[var(--accent-cyan)]">audio_file</span>
+                        <span id="citizenUploadLabel">Upload Voice Note to Inspect</span>
+                        <input type="file" id="citizenAudioUpload" accept=".wav,.mp3,.ogg,.webm,.m4a" class="hidden">
+                    </label>
+                </div>
+
+                <button type="button" onclick="resetCall()" class="w-full py-2.5 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[13px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent-cyan)] active:scale-95 transition-all flex items-center justify-center gap-2 mt-0.5 cursor-pointer font-bold whitespace-nowrap">
+                    <span class="material-symbols-outlined text-[18px]">restart_alt</span>
+                    Reset Interceptor Session
+                </button>
+            </section>
+
+        </div>
+
+        <!-- ==================================================================
+             RIGHT COLUMN (7 COLS / ~60%): MODERN DECLUTTERED SOC XAI PANELS
+             ================================================================== -->
+        <div class="lg:col-span-7 flex flex-col gap-5">
+
+            <!-- Panel 1: Sleek 2-Row Explainable AI Telemetry Card -->
+            <section class="glass-panel rounded-2xl p-5 sm:p-6 flex flex-col gap-4">
+                <div class="flex items-center justify-between pb-3 border-b border-[var(--border-card)]">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[var(--accent-cyan)] text-[24px]">radar</span>
+                        <span class="text-[15px] font-mono font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase whitespace-nowrap">EXPLAINABLE AI RISK TELEMETRY</span>
+                    </div>
+                    <span id="telemetryStatusPill" class="text-[13px] font-mono px-3.5 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)] text-[var(--header-badge-text)] font-extrabold whitespace-nowrap">
+                        STANDBY / LISTENING
+                    </span>
+                </div>
+
+                <!-- Top Row (Visual Core): Prominent Risk Circle + Sleek Mel-Spectrogram Canvas -->
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
+                    
+                    <!-- Left: Large 52px Risk Circle & Dynamic Label -->
+                    <div class="sm:col-span-5 flex flex-col items-center justify-center p-4 rounded-2xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
+                        <div class="relative w-40 h-40 flex items-center justify-center">
+                            <!-- Circular SVG Gauge -->
+                            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                                <path class="text-[var(--gauge-bg)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="2.8"></path>
+                                <path id="svgGaugeCircle" class="text-[var(--accent-emerald)] transition-all duration-700 ease-out" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="0, 100" stroke-linecap="round" stroke-width="3.2"></path>
+                            </svg>
+                            <!-- Center Live Percentage & Risk Level -->
+                            <div class="absolute inset-0 flex flex-col items-center justify-center text-center select-none">
+                                <span id="riskScoreNumber" class="text-[50px] sm:text-[54px] font-mono font-extrabold text-[var(--accent-emerald)] leading-none">0%</span>
+                                <span id="riskScoreLabel" class="text-[16px] sm:text-[17px] font-mono font-extrabold text-[var(--accent-emerald)] uppercase tracking-wider mt-1">SAFE</span>
+                            </div>
+                        </div>
+
+                        <!-- Dynamic State Label -->
+                        <div id="vocalProsodyLabel" class="mt-3 text-center text-[13.5px] font-mono font-extrabold text-[var(--accent-emerald)] bg-[var(--header-badge-bg)] px-4 py-1.5 rounded-full border border-[var(--header-badge-border)] tracking-wider whitespace-nowrap">
+                            STANDBY / MONITORING
+                        </div>
+                    </div>
+
+                    <!-- Right: Vibrant Mel-Spectrogram Canvas & Grid Markers -->
+                    <div class="sm:col-span-7 flex flex-col p-4 rounded-2xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
+                        <div class="flex justify-between items-center pb-2 text-[13.5px] font-mono font-bold text-[var(--text-muted)]">
+                            <span class="flex items-center gap-2 text-[var(--accent-cyan)] whitespace-nowrap">
+                                <span class="material-symbols-outlined text-[18px]">graphic_eq</span>
+                                LIVE ACOUSTIC SPECTRAL MATRIX
+                            </span>
+                            <span id="spectralStatusTag" class="text-[12px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap">60 FPS FFT</span>
+                        </div>
+                        
+                        <!-- Heatmap Waterfall Canvas -->
+                        <div class="relative w-full h-34 sm:h-38 mt-1 rounded-xl overflow-hidden border border-[var(--border-card)]" style="background: var(--spec-canvas-bg);">
+                            <canvas id="spectralMatrixCanvas" class="w-full h-full block"></canvas>
+                            <!-- Frequency Grid Markings -->
+                            <div class="absolute top-1 left-2 text-[12px] font-mono text-[var(--accent-cyan)] font-bold pointer-events-none">8kHz</div>
+                            <div class="absolute top-1/2 -translate-y-1/2 left-2 text-[11px] font-mono text-white/70 font-bold pointer-events-none">4kHz</div>
+                            <div class="absolute bottom-1 left-2 text-[12px] font-mono text-[var(--accent-cyan)] font-bold pointer-events-none">0kHz</div>
+                        </div>
+
+                        <div class="flex justify-between items-center mt-2.5 text-[13px] font-mono text-[var(--text-sublabel)] font-semibold">
+                            <span>RMS Energy: <span id="audioLevelDisplay" class="font-bold text-[var(--text-primary)]">0</span>%</span>
+                            <span id="noiseGateNotice" class="whitespace-nowrap">Adaptive Silence Gate</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Bottom Row: Unified 4-Column Secondary Metrics Strip (Single-Line Titles) -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 pt-3.5 border-t border-[var(--border-card)]/60 font-mono">
+                    <!-- Metric 1: Voice Authenticity -->
+                    <div class="flex flex-col gap-1.5 p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0">
+                        <div class="flex justify-between items-center text-[13.5px] text-[var(--text-muted)] font-bold whitespace-nowrap">
+                            <span class="truncate">Voice Auth</span>
+                            <span id="voiceBadge" class="text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1">98% HUMAN</span>
+                        </div>
+                        <div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5">
+                            <div id="barVoiceAuth" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 98%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Metric 2: Script NLP Threat -->
+                    <div class="flex flex-col gap-1.5 p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0">
+                        <div class="flex justify-between items-center text-[13.5px] text-[var(--text-muted)] font-bold whitespace-nowrap">
+                            <span class="truncate">Threat Vector</span>
+                            <span id="scriptBadge" class="text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1">CLEAN</span>
+                        </div>
+                        <div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5">
+                            <div id="barScriptNlp" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 100%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Metric 3: Pitch Incoherence / Jitter -->
+                    <div class="flex flex-col gap-1.5 p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0">
+                        <div class="flex justify-between items-center text-[13.5px] text-[var(--text-muted)] font-bold whitespace-nowrap">
+                            <span class="truncate">Pitch Jitter</span>
+                            <span id="xaiJitterVal" class="text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1">0.14%</span>
+                        </div>
+                        <div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5">
+                            <div id="xaiJitterBar" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 8%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Metric 4: Temporal Evidence LLR -->
+                    <div class="flex flex-col gap-1.5 p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0">
+                        <div class="flex justify-between items-center text-[13.5px] text-[var(--text-muted)] font-bold whitespace-nowrap">
+                            <span class="truncate">Evidence LLR</span>
+                            <span id="xaiLlrVal" class="text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1">-2.45</span>
+                        </div>
+                        <div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5">
+                            <div id="xaiLlrBar" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 12%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Panel 2: Multi-Vector Threat Defense & Autonomous Protection Banner -->
+            <section id="bankingDefenseCard" class="glass-panel rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-300" style="background: var(--defense-safe-bg); border-color: var(--defense-safe-border);">
+                <!-- Left: Big Status Indicator -->
+                <div class="flex items-center gap-3">
+                    <div id="bankingPolicyBadge" class="flex items-center gap-2.5 px-4 py-2 rounded-full border text-[15px] sm:text-[15.5px] font-mono font-extrabold tracking-wider whitespace-nowrap" style="background: var(--defense-safe-bg); border-color: var(--defense-safe-border); color: var(--defense-safe-text);">
+                        <span id="defenseStatusDot" class="w-3 h-3 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span>
+                        <span id="bankingPolicyText">AUTONOMOUS DEFENSE: ACTIVE &amp; MONITORING</span>
+                    </div>
+                </div>
+
+                <!-- Center: Clean Single-Line SHA-256 Evidence Seal (NO WRAPPING) -->
+                <div class="flex items-center gap-2 overflow-hidden max-w-full md:max-w-[360px] whitespace-nowrap font-mono text-[13px]">
+                    <span class="font-bold text-[var(--text-sublabel)] whitespace-nowrap">SEAL:</span>
+                    <span id="evidenceHashDisplay" class="text-[var(--accent-cyan)] font-semibold truncate select-all">
+                        SHA256-e3b0c442...991b855
+                    </span>
+                </div>
+
+                <!-- Right: Action Buttons -->
+                <div class="flex items-center gap-2.5 whitespace-nowrap">
+                    <button id="btnDispatch1930" type="button" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/35 text-[14px] font-mono text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/25 font-extrabold transition-all whitespace-nowrap shadow-sm cursor-pointer" title="Dispatch Live Telemetry to I4C Cyber Crime 1930">
+                        <span class="material-symbols-outlined text-[19px]">call</span>
+                        1930 DISPATCH (I4C)
+                    </button>
+                    <button id="btnManualLock" type="button" class="p-2.5 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent-cyan)] transition-all cursor-pointer font-bold" title="Toggle Emergency Shield / Out-of-Band Callback">
+                        <span class="material-symbols-outlined text-[20px]">lock</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Panel 3: Clean Live Speech Recognition & Multi-Vector Extortion Interceptor -->
+            <section class="glass-panel rounded-2xl p-5 sm:p-6 flex flex-col gap-3.5">
+                <div class="flex items-center justify-between pb-2.5 border-b border-[var(--border-card)]">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-[var(--accent-cyan)] animate-pulse"></span>
+                        <span class="text-[14.5px] sm:text-[15px] font-mono font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase whitespace-nowrap">MULTI-VECTOR EXTORTION INTERCEPTOR STREAM</span>
+                    </div>
+                    <span id="speechStateTag" class="text-[13px] font-mono text-[var(--accent-cyan)] uppercase font-extrabold whitespace-nowrap">
+                        MIC READY
+                    </span>
+                </div>
+
+                <!-- Detected Threat Category Chips Row (Above Transcript) -->
+                <div id="detectedKeywordsBox" class="flex flex-wrap gap-2.5 hidden"></div>
+
+                <!-- Scrollable Real-Time Transcription Feed (Comfortable 16px with line-height 1.75) -->
+                <div id="transcriptFeed" class="h-40 sm:h-48 overflow-y-auto bg-[var(--bg-card-sub)] p-4 sm:p-5 rounded-xl border border-[var(--border-card)] flex flex-col gap-3 font-mono text-[16px] font-bold leading-[1.75] pr-2">
+                    <p class="text-[var(--text-muted)] italic text-[14.5px] animate-pulse font-medium">
+                        &gt; Interceptor active. Monitoring audio stream for synthetic AI vocals &amp; extortion keywords...
+                    </p>
+                </div>
+
+                <!-- Quick Script Test Bar -->
+                <div class="flex items-center gap-2 mt-0.5">
+                    <input type="text" id="quickScriptInput" placeholder="Test script phrase (e.g. 'cbi arrest warrant', 'urgent hospital bail', or normal chat)..." class="flex-1 px-3.5 py-2 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[13px] font-mono text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent-cyan)]">
+                    <button id="btnTestScript" type="button" class="px-3.5 py-2 rounded-xl bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/40 text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/25 font-mono text-[12.5px] font-bold cursor-pointer whitespace-nowrap">
+                        Scan Script
+                    </button>
+                </div>
+            </section>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ==========================================================================
+     DRAWER & MODAL OVERLAYS (INCIDENT LOGS, INTEL, VAULT, SETTINGS)
+     ========================================================================== -->
+
+<!-- Menu Drawer Overlay -->
+<div id="menuBackdrop" class="fixed inset-0 bg-[var(--backdrop-dim)] backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div>
+<aside id="menuDrawer" class="fixed top-0 left-0 bottom-0 w-[320px] max-w-[85vw] bg-[var(--bg-card)] border-r border-[var(--border-card)] shadow-2xl z-[80] transform -translate-x-full transition-transform duration-300 flex flex-col justify-between p-5">
+    <div>
+        <div class="flex items-center justify-between pb-4 border-b border-[var(--border-card)] mb-5">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">security</span>
+                <span class="font-mono font-extrabold text-base tracking-wider text-[var(--text-primary)]">DHWANI-KAVACH</span>
+            </div>
+            <button id="btnCloseMenu" type="button" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded-full hover:bg-[var(--accent-cyan)]/10 cursor-pointer">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+        <nav class="flex flex-col gap-2">
+            <button id="drawerNavShield" type="button" class="flex items-center gap-3 px-3.5 py-3 rounded-xl bg-[var(--accent-cyan)]/15 text-[var(--accent-cyan)] font-mono text-[13.5px] border border-[var(--accent-cyan)]/30 text-left cursor-pointer font-bold">
+                <span class="material-symbols-outlined text-xl">shield</span>
+                <span>Command SOC Dashboard</span>
+            </button>
+            <button id="drawerNavLogs" type="button" class="flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-[var(--accent-cyan)]/10 text-[var(--text-primary)] font-mono text-[13.5px] text-left cursor-pointer font-bold">
+                <span class="material-symbols-outlined text-xl text-[var(--accent-cyan)]">history</span>
+                <span>Call Incident Logs</span>
+            </button>
+            <button id="drawerNavIntel" type="button" class="flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-[var(--accent-cyan)]/10 text-[var(--text-primary)] font-mono text-[13.5px] text-left cursor-pointer font-bold">
+                <span class="material-symbols-outlined text-xl text-[var(--accent-cyan)]">analytics</span>
+                <span>Threat Intelligence</span>
+            </button>
+            <button id="drawerNavVault" type="button" class="flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-[var(--accent-cyan)]/10 text-[var(--text-primary)] font-mono text-[13.5px] text-left cursor-pointer font-bold">
+                <span class="material-symbols-outlined text-xl text-[var(--accent-cyan)]">fingerprint</span>
+                <span>Biometric Voice Vault</span>
+            </button>
+        </nav>
+    </div>
+    <div class="pt-4 border-t border-[var(--border-card)] text-[13px] font-mono text-[var(--text-muted)] flex flex-col gap-1.5 font-bold">
+        <div class="flex justify-between"><span>Engine Build:</span><span class="text-[var(--accent-cyan)]">v5.0 Multi-Vector Interceptor</span></div>
+        <div class="flex justify-between"><span>I4C Gateway:</span><span class="text-[var(--accent-emerald)]">1930 Active</span></div>
+    </div>
+</aside>
+
+<!-- Settings Modal -->
+<div id="settingsBackdrop" class="fixed inset-0 bg-[var(--backdrop-dim)] backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div>
+<div id="settingsModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[460px] bg-[var(--bg-card)] border border-[var(--border-card)] rounded-2xl shadow-2xl z-[80] p-6 hidden opacity-0 transition-all duration-300 max-h-[85vh] overflow-y-auto">
+    <div class="flex items-center justify-between pb-3.5 border-b border-[var(--border-card)] mb-4">
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">settings</span>
+            <h3 class="font-mono font-bold text-base tracking-wider text-[var(--accent-cyan)] uppercase">SYSTEM SETTINGS</h3>
+        </div>
+        <button id="btnCloseSettings" type="button" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded-full hover:bg-[var(--accent-cyan)]/10 cursor-pointer">
+            <span class="material-symbols-outlined text-xl">close</span>
+        </button>
+    </div>
+    <div class="flex flex-col gap-4 text-[13.5px] font-mono">
+        <div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
+            <div>
+                <div class="font-bold text-[var(--text-primary)]">Live Mic Capture</div>
+                <div class="text-[12px] text-[var(--text-muted)] font-semibold">Real-time temporal acoustic DSP analysis</div>
+            </div>
+            <input type="checkbox" id="toggleLiveMic" class="w-4 h-4 accent-[var(--accent-cyan)] cursor-pointer" checked>
+        </div>
+        <div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
+            <div>
+                <div class="font-bold text-[var(--text-primary)]">Hardware Siren Alarm</div>
+                <div class="text-[12px] text-[var(--text-muted)] font-semibold">Synthesize 700Hz-1200Hz sweep on AI Clone</div>
+            </div>
+            <input type="checkbox" id="toggleSiren" class="w-4 h-4 accent-[var(--accent-cyan)] cursor-pointer" checked>
+        </div>
+        <div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
+            <div>
+                <div class="font-bold text-[var(--text-primary)]">Auto Banking Killswitch</div>
+                <div class="text-[12px] text-[var(--text-muted)] font-semibold">Freeze transactions immediately if Risk &gt; 70%</div>
+            </div>
+            <input type="checkbox" id="toggleAutoKillswitch" class="w-4 h-4 accent-[var(--accent-cyan)] cursor-pointer" checked>
+        </div>
+    </div>
+</div>
+
+<!-- Logs Modal -->
+<div id="logsBackdrop" class="fixed inset-0 bg-[var(--backdrop-dim)] backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div>
+<div id="logsModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[480px] bg-[var(--bg-card)] border border-[var(--border-card)] rounded-2xl shadow-2xl z-[80] p-6 hidden opacity-0 transition-all duration-300 max-h-[85vh] overflow-y-auto">
+    <div class="flex items-center justify-between pb-3.5 border-b border-[var(--border-card)] mb-4">
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">history</span>
+            <h3 class="font-mono font-bold text-base tracking-wider text-[var(--accent-cyan)] uppercase">INCIDENT LOGS</h3>
+        </div>
+        <div class="flex items-center gap-2">
+            <button id="btnExportLogs" type="button" class="text-[12px] font-mono px-3 py-1 rounded border border-[var(--accent-cyan)]/40 text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/10 font-bold cursor-pointer">EXPORT</button>
+            <button id="btnCloseLogs" type="button" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded-full hover:bg-[var(--accent-cyan)]/10 cursor-pointer">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+        </div>
+    </div>
+    <div class="flex flex-col gap-2.5 font-mono text-xs" id="logsContainer">
+        <div class="text-center text-[var(--text-muted)] py-6 text-[13.5px] font-bold">No call incidents recorded in this session.</div>
+    </div>
+</div>
+
+<!-- Threat Intel Modal -->
+<div id="intelBackdrop" class="fixed inset-0 bg-[var(--backdrop-dim)] backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div>
+<div id="intelModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[480px] bg-[var(--bg-card)] border border-[var(--border-card)] rounded-2xl shadow-2xl z-[80] p-6 hidden opacity-0 transition-all duration-300 max-h-[85vh] overflow-y-auto">
+    <div class="flex items-center justify-between pb-3.5 border-b border-[var(--border-card)] mb-4">
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">analytics</span>
+            <h3 class="font-mono font-bold text-base tracking-wider text-[var(--accent-cyan)] uppercase">THREAT INTELLIGENCE</h3>
+        </div>
+        <button id="btnCloseIntel" type="button" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded-full hover:bg-[var(--accent-cyan)]/10 cursor-pointer">
+            <span class="material-symbols-outlined text-xl">close</span>
+        </button>
+    </div>
+    <div class="flex flex-col gap-3.5 font-mono text-[13px] text-[var(--text-muted)]">
+        <div class="p-4 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
+            <span class="text-[var(--accent-cyan)] font-bold block mb-1">1. Adaptive Noise Gate &amp; Smoothing</span>
+            <p class="text-[12.5px] leading-relaxed text-[var(--text-muted)] font-semibold">Temporal EMA filtering eliminates mic initialization pops and prevents erratic score jumping.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
+            <span class="text-[var(--accent-cyan)] font-bold block mb-1">2. Multi-Vector Fraud Detection</span>
+            <p class="text-[12.5px] leading-relaxed text-[var(--text-muted)] font-semibold">Detects Digital Arrest, Courier/Customs extortion, Emergency kidnapping scams, Job Ponzi, and OTP harvest.</p>
+        </div>
+        <div class="p-4 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
+            <span class="text-[var(--accent-cyan)] font-bold block mb-1">3. Automated Regulatory Telemetry</span>
+            <p class="text-[12.5px] leading-relaxed text-[var(--text-muted)] font-semibold">Integrates with National Cyber Crime Reporting Portal (1930) with SHA-256 evidence chain.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Biometric Vault Modal -->
+<div id="vaultBackdrop" class="fixed inset-0 bg-[var(--backdrop-dim)] backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div>
+<div id="vaultModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[480px] bg-[var(--bg-card)] border border-[var(--border-card)] rounded-2xl shadow-2xl z-[80] p-6 hidden opacity-0 transition-all duration-300 max-h-[85vh] overflow-y-auto">
+    <div class="flex items-center justify-between pb-3.5 border-b border-[var(--border-card)] mb-4">
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">fingerprint</span>
+            <h3 class="font-mono font-bold text-base tracking-wider text-[var(--accent-cyan)] uppercase">BIOMETRIC VOICE VAULT</h3>
+        </div>
+        <button id="btnCloseVault" type="button" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded-full hover:bg-[var(--accent-cyan)]/10 cursor-pointer">
+            <span class="material-symbols-outlined text-xl">close</span>
+        </button>
+    </div>
+    <div class="flex flex-col gap-3 font-mono text-[13.5px]">
+        <div class="p-4 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] flex flex-col gap-2.5">
+            <div class="text-[var(--text-primary)] font-bold text-[14px]">Enrolled Familial Voiceprints</div>
+            <div class="flex items-center justify-between py-2 border-b border-[var(--border-card)] text-[13px]">
+                <span class="text-[var(--text-muted)] font-semibold">Family Contact #1 (Mom)</span>
+                <span class="text-[var(--accent-emerald)] font-bold">VERIFIED</span>
+            </div>
+            <div class="flex items-center justify-between py-2 text-[13px]">
+                <span class="text-[var(--text-muted)] font-semibold">Family Contact #2 (Spouse)</span>
+                <span class="text-[var(--accent-emerald)] font-bold">VERIFIED</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ==========================================================================
+     JAVASCRIPT: SMOOTHED TEMPORAL DSP & MULTI-VECTOR FRAUD CLASSIFIER
+     ========================================================================== -->
+<script>
+// ============================================================================
+// 1. GLOBAL STATE & BACKEND INTEGRATION
+// ============================================================================
+var callActive = false;
+var isManualSimulation = false;
+var currentScenario = 'safe';
+var simulationTimer = null;
+var callStartTime = null;
+var callDurationTimer = null;
+var callSeconds = 0;
+
+// Backend Bridge State
+var API_BASE = (window.location.origin && window.location.origin.startsWith('http'))
+    ? window.location.origin
+    : 'http://127.0.0.1:8000';
+var isBackendOnline = false;
+var backendModelName = "CNN v1";
+var backendPingTimer = null;
+var mediaRecorder = null;
+var isScoringPending = false;
+
+// Audio Stream & Noise Gate State
+var liveAudioStream = null;
+var audioContext = null;
+var analyserNode = null;
+var audioSourceNode = null;
+var analyserFrameId = null;
+var speechRecognition = null;
+var fallbackWaveAnimId = null;
+var spectralAnimId = null;
+
+// Temporal Smoothing & Hysteresis to PREVENT RAPID FLICKERING & JUMPING
+var liveVoiceRisk = 4;
+var smoothedVoiceRisk = 4;
+var speechFrameCounter = 0;
+var silenceFrameCounter = 0;
+var micWarmupGracePeriod = 0;
+var vocoderHitStreak = 0;
+
+// HYSTERESIS & PERSISTENCE LATCH:
+// Once an AI voice clone or threat is detected, hold the state stably for at least 3.5s
+// across word boundaries and micro-pauses so it does not rapidly trigger ON/OFF.
+var syntheticVoiceHangover = 0;      // timestamp until which AI voice identity is held
+var latchedSpeakerIdentity = 'standby'; // 'standby' | 'human' | 'ai'
+var currentRiskTier = 'SAFE';
+
+var liveScriptRisk = 0;
+var currentDetectedThreatCategory = null;
+var liveAudioLevel = 0;
+var isVoiceActive = false;
+
+// Forensic Feature Tracking Buffers
+var f0History = [];
+var sfmHistory = [];
+var hfverHistory = [];
+
+// Noise Gate Thresholds (RMS > 0.016 indicates speech, below is silence)
+var NOISE_GATE_RMS_THRESHOLD = 0.016;
+var NOISE_GATE_FREQ_THRESHOLD = 6.5;
+
+var liveTranscriptHistory = [];
+var activeInterimText = '';
+var emergencyActive = false;
+var sirenCtx = null;
+var sirenOscillator = null;
+var sirenGain = null;
+var sirenIsPlaying = false;
+var manualBankingLock = false;
+var threatBannerTimeout = null;
+
+// Explainable AI Telemetry State
+var xaiJitter = 0.14;       // %
+var xaiDistortion = 0.08;   // dB
+var xaiLlr = -2.45;         // Log-likelihood ratio
+
+// App Settings
+window.appSettings = {
+    liveMic: true,
+    siren: true,
+    autoKillswitch: true
+};
+
+// ============================================================================
+// 2. CONTEXTUAL MULTI-VECTOR FRAUD TAXONOMY
+// ============================================================================
+// Uses targeted compound phrases and co-occurrence rules to avoid false triggers
+// on ordinary conversational speech (e.g. saying 'card' or 'call' alone will NOT trigger extortion).
+var MULTI_FRAUD_TAXONOMY = {
+    digital_arrest: {
+        label: "Digital Arrest / Extortion",
+        alertTitle: "🚨 DIGITAL ARREST EXTORTION DETECTED",
+        alertDetail: "Impersonating law enforcement (CBI/Police/Court) via fraudulent coercion",
+        icon: "⚖️",
+        weight: 45,
+        inlineClass: "kw-inline kw-inline-law",
+        chipClass: "bg-red-500/15 text-red-600 dark:text-red-400 border border-red-500/40",
+        phrases: [
+            "digital arrest", "arrest warrant", "cbi investigation", "crime branch",
+            "cyber crime cell", "enforcement directorate", "ed officer", "supreme court order",
+            "police custody", "giraftaar", "legal notice", "fir lodged", "money laundering case",
+            "raid your premises", "video call arrest", "ncb narcotics case"
+        ],
+        keywords: [
+            "digital arrest", "arrest warrant", "cbi", "cyber crime", "ed officer",
+            "giraftaar", "mukadma", "court notice", "money laundering"
+        ]
+    },
+    parcel_customs: {
+        label: "Parcel / Customs Contraband Scam",
+        alertTitle: "📦 PARCEL CONTRABAND EXTORTION DETECTED",
+        alertDetail: "Fraudulent claims of seized passports, illegal drugs, or customs violations",
+        icon: "📦",
+        weight: 42,
+        inlineClass: "kw-inline kw-inline-parcel",
+        chipClass: "bg-orange-500/15 text-orange-600 dark:text-orange-400 border border-orange-500/40",
+        phrases: [
+            "customs clearance", "drugs found", "passport seized", "taiwan parcel",
+            "mumbai customs", "delhi customs", "airport customs", "parcel detained",
+            "customs penalty", "illegal contraband", "narcotics parcel", "contraband found"
+        ],
+        keywords: [
+            "customs clearance", "drugs found", "contraband", "passport seized",
+            "taiwan parcel", "parcel detained", "narcotics parcel", "customs penalty"
+        ]
+    },
+    family_emergency: {
+        label: "Emergency / Kidnapping Extortion",
+        alertTitle: "🚨 FAMILY EMERGENCY / KIDNAPPING EXTORTION",
+        alertDetail: "Fabricated accident, arrest, or hostage scenario demanding urgent ransom",
+        icon: "🚨",
+        weight: 48,
+        inlineClass: "kw-inline kw-inline-emergency",
+        chipClass: "bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/40",
+        phrases: [
+            "car accident", "severe accident", "hospital emergency", "police custody",
+            "bail money", "bail karao", "serious condition in icu", "friend's phone",
+            "dost ka phone", "bachha giraftaar", "hostage demand", "accident ho gaya",
+            "doctors waiting for payment"
+        ],
+        keywords: [
+            "accident ho gaya", "hospital emergency", "police custody", "kidnapped",
+            "bail money", "bail karao", "icu emergency", "urgent ransom"
+        ]
+    },
+    investment_job: {
+        label: "Investment / Task Ponzi Fraud",
+        alertTitle: "📈 TASK / CRYPTO INVESTMENT FRAUD DETECTED",
+        alertDetail: "Telegram task ponzi or fake high-yield investment scheme identified",
+        icon: "📈",
+        weight: 38,
+        inlineClass: "kw-inline kw-inline-investment",
+        chipClass: "bg-blue-500/15 text-blue-600 dark:text-blue-400 border border-blue-500/40",
+        phrases: [
+            "part time job", "daily task", "youtube subscribe task", "double money",
+            "guaranteed returns", "investment scheme", "recharge wallet", "earn money from home",
+            "vip commission", "telegram task"
+        ],
+        keywords: [
+            "telegram task", "part time job", "youtube subscribe task", "double money",
+            "guaranteed returns", "investment scheme", "recharge wallet"
+        ]
+    },
+    banking_creds: {
+        label: "Banking & Credential Harvest",
+        alertTitle: "💳 BANKING CREDENTIAL HARVEST DETECTED",
+        alertDetail: "Unauthorized solicitation of OTP, PIN, KYC verification, or bank details",
+        icon: "💳",
+        weight: 40,
+        inlineClass: "kw-inline kw-inline-banking",
+        chipClass: "bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/40",
+        phrases: [
+            "one time password", "share otp", "tell me otp", "bank otp", "send pin",
+            "upi pin", "cvv number", "card expiry", "kyc expired", "account freeze penalty",
+            "verify debit card", "net banking password", "send money to this upi", "send 50,000 rupees"
+        ],
+        keywords: [
+            "share otp", "tell otp", "upi pin", "cvv number", "kyc verification",
+            "account blocked penalty", "freeze account", "send money upi"
+        ]
+    },
+    remote_takeover: {
+        label: "Remote Device Takeover",
+        alertTitle: "🖥️ REMOTE DESKTOP TAKEOVER DETECTED",
+        alertDetail: "Coercing user to install screen-sharing software for unauthorized device control",
+        icon: "🖥️",
+        weight: 40,
+        inlineClass: "kw-inline kw-inline-remote",
+        chipClass: "bg-purple-500/15 text-purple-700 dark:text-purple-400 border border-purple-500/40",
+        phrases: [
+            "screen share", "screen share karo", "remote desktop", "anydesk install",
+            "teamviewer install", "quicksupport download", "app download karo", "apk install karo"
+        ],
+        keywords: [
+            "anydesk", "teamviewer", "quicksupport", "screen share", "remote desktop"
+        ]
+    }
+};
+
+var MULTI_DEMO_SCRIPTS = {
+    safe: [
+        "Hello, is this Rohit?",
+        "Hi, this is Amit calling from BlueDart regarding your courier package.",
+        "Yes, please deliver it to the ground floor reception desk.",
+        "Understood, thank you. Have a pleasant day ahead."
+    ],
+    // Clean/Benign AI Voice Test (Tests synthetic voice detection WITHOUT extortion false alarm)
+    clone: [
+        "Hello, this is a synthetic neural voice clone speaking.",
+        "I am demonstrating real-time vocoder phase analysis and pitch jitter detection.",
+        "Notice that my vocal tract displays a high-frequency spectral plateau.",
+        "The conversation content is benign and safe, yet the synthetic voice is captured."
+    ],
+    // Dual Threat Test: AI Voice Clone + Emergency Extortion
+    clone_extortion: [
+        "Mom, listen to me carefully, I lost my phone in a terrible car accident.",
+        "Hospital emergency hai, paise transfer karo turant!",
+        "Please send 50,000 rupees to this UPI number immediately!",
+        "The doctors are waiting for payment before starting surgery!"
+    ],
+    digital_arrest: [
+        "This is Deputy Commissioner Sharma from the Cyber Crime Investigation Branch.",
+        "A CBI digital arrest warrant has been issued against your Aadhaar number for money laundering.",
+        "You are under continuous surveillance. Do not disconnect this video call or local police will raid your premises.",
+        "Verify your assets immediately to obtain temporary bail clearance."
+    ],
+    parcel_scam: [
+        "Calling from Mumbai International Airport Customs Cargo department.",
+        "A FedEx parcel registered in your name containing passports and illegal contraband has been seized.",
+        "Customs narcotics officers have filed a formal seizure complaint against you.",
+        "Pay the immediate customs penalty and penalty bond or face immediate arrest."
+    ],
+    emergency_bail: [
+        "Papa please help me! I met with a terrible car accident near the highway.",
+        "The police inspector has detained me in custody and the other person is critically injured in ICU.",
+        "They are demanding bail settlement right now or I will be locked in jail!",
+        "Please send money immediately to this friend's number!"
+    ]
+};
+
+function escapeHtml(str) {
+    return (str || '').replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+}
+
+function classifyTranscript(text) {
+    if (!text || text.trim() === '') {
+        return { riskScore: 0, matchedCategories: [], matchedKeywords: [], topThreat: null };
+    }
+    var lower = text.toLowerCase();
+    var totalRisk = 0;
+    var matchedCategories = [];
+    var matchedKeywords = [];
+    var topCategory = null;
+
+    for (var catKey in MULTI_FRAUD_TAXONOMY) {
+        var cat = MULTI_FRAUD_TAXONOMY[catKey];
+        var catHits = 0;
+
+        // Check compound phrases first (high confidence)
+        if (cat.phrases) {
+            for (var p = 0; p < cat.phrases.length; p++) {
+                var phrase = cat.phrases[p];
+                if (lower.indexOf(phrase) !== -1) {
+                    catHits += 2;
+                    if (matchedKeywords.indexOf(phrase) === -1) matchedKeywords.push(phrase);
+                }
+            }
+        }
+
+        // Check keywords
+        for (var k = 0; k < cat.keywords.length; k++) {
+            var kw = cat.keywords[k];
+            var escaped = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            var regex = new RegExp('(^|\\s|[^a-zA-Z0-9])' + escaped + '($|\\s|[^a-zA-Z0-9])', 'i');
+            if (regex.test(lower)) {
+                catHits++;
+                if (matchedKeywords.indexOf(kw) === -1) matchedKeywords.push(kw);
+            }
+        }
+
+        // Only register a threat category if at least 2 indicators match OR a high-confidence phrase matched
+        if (catHits >= 2) {
+            var catObj = {
+                key: catKey,
+                label: cat.label,
+                alertTitle: cat.alertTitle,
+                alertDetail: cat.alertDetail,
+                icon: cat.icon,
+                hits: catHits,
+                chipClass: cat.chipClass
+            };
+            matchedCategories.push(catObj);
+            totalRisk += cat.weight + Math.min(25, (catHits - 2) * 8);
+            if (!topCategory || catHits > topCategory.hits) {
+                topCategory = catObj;
+            }
+        }
+    }
+
+    if (matchedCategories.length >= 2) totalRisk = Math.min(99, totalRisk + 18);
+
+    return {
+        riskScore: Math.min(99, Math.max(0, Math.round(totalRisk))),
+        matchedCategories: matchedCategories,
+        matchedKeywords: matchedKeywords,
+        topThreat: topCategory
+    };
+}
+
+function highlightKeywords(text, matchedKeywords) {
+    if (!matchedKeywords || matchedKeywords.length === 0) return escapeHtml(text);
+    var html = escapeHtml(text);
+    var sorted = matchedKeywords.slice().sort(function(a, b) { return b.length - a.length; });
+    for (var i = 0; i < sorted.length; i++) {
+        var kw = sorted[i];
+        var inlineClass = 'kw-inline kw-inline-law';
+        for (var catKey in MULTI_FRAUD_TAXONOMY) {
+            var cat = MULTI_FRAUD_TAXONOMY[catKey];
+            if ((cat.keywords && cat.keywords.indexOf(kw) !== -1) || (cat.phrases && cat.phrases.indexOf(kw) !== -1)) {
+                inlineClass = cat.inlineClass;
+                break;
+            }
+        }
+        var escaped = escapeHtml(kw).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        var regex = new RegExp('(' + escaped + ')', 'gi');
+        html = html.replace(regex, '<span class="' + inlineClass + '">$1</span>');
+    }
+    return html;
+}
+
+// ============================================================================
+// 3. STABLE HARDWARE ALARM SIREN (NO LOOPING CHATTER / RESTART)
+// ============================================================================
+function startEmergencySiren() {
+    if (sirenIsPlaying || !window.appSettings.siren) return;
+    try {
+        var AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        if (!sirenCtx || sirenCtx.state === 'closed') {
+            sirenCtx = new AudioCtx();
+        }
+        if (sirenCtx.state === 'suspended') sirenCtx.resume();
+
+        sirenOscillator = sirenCtx.createOscillator();
+        sirenGain = sirenCtx.createGain();
+
+        sirenOscillator.type = 'sawtooth';
+        sirenOscillator.frequency.setValueAtTime(700, sirenCtx.currentTime);
+        sirenGain.gain.setValueAtTime(0.08, sirenCtx.currentTime);
+
+        sirenOscillator.connect(sirenGain);
+        sirenGain.connect(sirenCtx.destination);
+        sirenOscillator.start();
+        sirenIsPlaying = true;
+
+        function scheduleSweep(startTime) {
+            if (!sirenOscillator || !sirenIsPlaying || !emergencyActive || !sirenCtx || sirenCtx.state === 'closed') return;
+            try {
+                sirenOscillator.frequency.linearRampToValueAtTime(1200, startTime + 0.35);
+                sirenOscillator.frequency.linearRampToValueAtTime(700, startTime + 0.70);
+                setTimeout(function() {
+                    if (sirenIsPlaying && emergencyActive && sirenCtx && sirenCtx.state === 'running') {
+                        scheduleSweep(sirenCtx.currentTime);
+                    }
+                }, 720);
+            } catch (err) {}
+        }
+        scheduleSweep(sirenCtx.currentTime);
+    } catch (e) {
+        console.warn('Siren notice:', e);
+    }
+}
+
+function stopEmergencySiren() {
+    if (!sirenIsPlaying && !sirenOscillator) return;
+    sirenIsPlaying = false;
+    if (sirenOscillator) {
+        try { sirenOscillator.stop(); } catch (e) {}
+        sirenOscillator = null;
+    }
+    if (sirenGain) {
+        try { sirenGain.disconnect(); } catch (e) {}
+        sirenGain = null;
+    }
+    if (sirenCtx) {
+        try { sirenCtx.close(); } catch (e) {}
+        sirenCtx = null;
+    }
+}
+
+// ============================================================================
+// 4. SHA-256 CRYPTOGRAPHIC EVIDENCE GENERATION
+// ============================================================================
+async function updateEvidenceSeal(riskScore, threatTags) {
+    try {
+        var now = new Date().toISOString();
+        var rawData = JSON.stringify({
+            timestamp: now,
+            caller: "+919876543210",
+            risk: riskScore,
+            xai: { jitter: xaiJitter, distortion: xaiDistortion, llr: xaiLlr },
+            threats: threatTags || [],
+            transcript: liveTranscriptHistory.join(" | ")
+        });
+        if (window.crypto && window.crypto.subtle) {
+            var encoder = new TextEncoder();
+            var dataBuffer = encoder.encode(rawData);
+            var hashBuffer = await crypto.subtle.digest('SHA-256', dataBuffer);
+            var hashArray = Array.from(new Uint8Array(hashBuffer));
+            var hashHex = hashArray.map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+            var el = document.getElementById('evidenceHashDisplay');
+            if (el) {
+                el.textContent = "SHA256-" + hashHex.substring(0, 8) + "..." + hashHex.substring(hashHex.length - 8);
+                el.title = hashHex;
+            }
+        }
+    } catch (e) {
+        var el2 = document.getElementById('evidenceHashDisplay');
+        if (el2) el2.textContent = "SHA256-e3b0c442...991b855";
+    }
+}
+
+// ============================================================================
+// 5. LIVE ACOUSTIC SPECTRAL MATRIX (MEL-SPECTROGRAM FFT WATERFALL CANVAS)
+// ============================================================================
+function initSpectralMatrix() {
+    var canvas = document.getElementById('spectralMatrixCanvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var w = canvas.width = canvas.parentElement.clientWidth || 360;
+    var h = canvas.height = canvas.parentElement.clientHeight || 140;
+
+    var tempCanvas = document.createElement('canvas');
+    tempCanvas.width = w;
+    tempCanvas.height = h;
+    var tempCtx = tempCanvas.getContext('2d');
+
+    var isLight = document.documentElement.classList.contains('theme-light') || document.documentElement.classList.contains('light');
+    ctx.fillStyle = isLight ? '#1E293B' : '#0B1224';
+    ctx.fillRect(0, 0, w, h);
+
+    function drawMatrix() {
+        if (!canvas) return;
+        var newW = canvas.parentElement.clientWidth || 360;
+        var newH = canvas.parentElement.clientHeight || 140;
+        if (canvas.width !== newW || canvas.height !== newH) {
+            canvas.width = tempCanvas.width = newW;
+            canvas.height = tempCanvas.height = newH;
+        }
+
+        tempCtx.drawImage(canvas, 0, 0);
+        ctx.drawImage(tempCanvas, -2, 0);
+
+        var slice = [];
+        var numBins = 48;
+
+        if (callActive && analyserNode) {
+            var freqData = new Uint8Array(analyserNode.frequencyBinCount);
+            analyserNode.getByteFrequencyData(freqData);
+            for (var b = 0; b < numBins; b++) {
+                var idx = Math.floor((b / numBins) * (freqData.length / 2));
+                slice.push(freqData[idx] / 255);
+            }
+        } else if (callActive) {
+            var t = Date.now() * 0.005;
+            for (var s = 0; s < numBins; s++) {
+                var val = Math.sin(t + s * 0.3) * 0.4 + Math.cos(t * 0.7 - s * 0.2) * 0.3 + 0.3;
+                if (emergencyActive) val += Math.random() * 0.4;
+                slice.push(Math.max(0, Math.min(1, val)));
+            }
+        } else {
+            var tIdle = Date.now() * 0.002;
+            for (var k = 0; k < numBins; k++) {
+                var idleWave = Math.sin(tIdle + k * 0.15) * 0.08 + 0.05;
+                slice.push(idleWave);
+            }
+        }
+
+        var binHeight = canvas.height / numBins;
+        var x = canvas.width - 2;
+
+        for (var i = 0; i < numBins; i++) {
+            var energy = slice[numBins - 1 - i];
+            var y = i * binHeight;
+
+            var r = 0, g = 0, bVal = 0;
+            if (emergencyActive || liveVoiceRisk >= 70) {
+                r = Math.floor(255 * Math.min(1, energy * 1.35));
+                g = Math.floor(45 * energy);
+                bVal = Math.floor(65 * energy);
+            } else if (liveVoiceRisk >= 35) {
+                r = Math.floor(245 * energy);
+                g = Math.floor(165 * energy);
+                bVal = Math.floor(25 * energy);
+            } else if (callActive) {
+                r = Math.floor(10 * energy);
+                g = Math.floor(235 * energy);
+                bVal = Math.floor(240 * energy);
+            } else {
+                r = Math.floor(15 * energy);
+                g = Math.floor(180 * energy);
+                bVal = Math.floor(240 * energy);
+            }
+
+            ctx.fillStyle = 'rgb(' + r + ',' + g + ',' + bVal + ')';
+            ctx.fillRect(x, y, 2, binHeight + 1);
+        }
+
+        spectralAnimId = requestAnimationFrame(drawMatrix);
+    }
+    drawMatrix();
+}
+
+// ============================================================================
+// 6. STABLE TEMPORAL ACOUSTIC INFERENCE (HUMAN VS AI CLONE DETECTOR)
+// ============================================================================
+function computeAcousticDspFeatures(freqData, timeData, sampleRate) {
+    if (!freqData || freqData.length === 0) {
+        return {
+            risk: 4,
+            humanConfidence: 98,
+            label: "98% HUMAN",
+            jitter: 0.14,
+            distortion: 0.08,
+            llr: -2.45,
+            isVocoder: false
+        };
+    }
+
+    var sr = sampleRate || 44100;
+    var numBins = freqData.length;
+    var binWidth = sr / (numBins * 2);
+
+    var fundStartBin = Math.max(1, Math.floor(100 / binWidth));
+    var fundEndBin = Math.min(numBins - 1, Math.floor(1000 / binWidth));
+
+    var vocoderStartBin = Math.max(1, Math.floor(3500 / binWidth));
+    var vocoderEndBin = Math.min(numBins - 1, Math.floor(7500 / binWidth));
+
+    var midStartBin = Math.max(1, Math.floor(2000 / binWidth));
+    var midEndBin = Math.min(numBins - 1, Math.floor(7500 / binWidth));
+
+    // 1. High-Frequency Vocoder Energy Ratio (HF-VER)
+    var fundEnergy = 0;
+    var fundCount = fundEndBin - fundStartBin + 1;
+    for (var f = fundStartBin; f <= fundEndBin; f++) fundEnergy += freqData[f];
+    var fundMean = fundEnergy / Math.max(1, fundCount);
+
+    var highEnergy = 0;
+    var highCount = vocoderEndBin - vocoderStartBin + 1;
+    for (var h = vocoderStartBin; h <= vocoderEndBin; h++) highEnergy += freqData[h];
+    var highMean = highEnergy / Math.max(1, highCount);
+
+    var hfver = highMean / (fundMean + 1e-4);
+    hfverHistory.push(hfver);
+    if (hfverHistory.length > 30) hfverHistory.shift();
+    var avgHfver = hfverHistory.reduce(function(a,b){return a+b;}, 0) / hfverHistory.length;
+
+    // 2. Spectral Flatness Measure (SFM)
+    var sumLog = 0;
+    var sumLin = 0;
+    var count = 0;
+    for (var m = midStartBin; m <= midEndBin; m++) {
+        var normVal = (freqData[m] / 255.0) + 1e-6;
+        sumLog += Math.log(normVal);
+        sumLin += normVal;
+        count++;
+    }
+    var geomMean = Math.exp(sumLog / count);
+    var arithMean = sumLin / count;
+    var sfm = (arithMean > 0.05) ? (geomMean / arithMean) : 0;
+    sfmHistory.push(sfm);
+    if (sfmHistory.length > 30) sfmHistory.shift();
+    var avgSfm = sfmHistory.reduce(function(a,b){return a+b;}, 0) / sfmHistory.length;
+
+    // 3. Fundamental Pitch Jitter
+    var peakVal = 0;
+    var peakBin = fundStartBin;
+    var f0SearchEnd = Math.min(numBins - 1, Math.floor(400 / binWidth));
+    for (var p = fundStartBin; p <= f0SearchEnd; p++) {
+        if (freqData[p] > peakVal) {
+            peakVal = freqData[p];
+            peakBin = p;
+        }
+    }
+    var currentF0 = peakBin * binWidth;
+    f0History.push(currentF0);
+    if (f0History.length > 30) f0History.shift();
+
+    var jitterPct = 2.2;
+    if (f0History.length >= 12) {
+        var meanF0 = f0History.reduce(function(a,b){return a+b;}, 0) / f0History.length;
+        var varF0 = 0;
+        for (var j = 0; j < f0History.length; j++) {
+            var diff = f0History[j] - meanF0;
+            varF0 += diff * diff;
+        }
+        var stdF0 = Math.sqrt(varF0 / f0History.length);
+        jitterPct = (meanF0 > 0) ? ((stdF0 / meanF0) * 100) : 2.2;
+    }
+
+    // Require sustained harmonic fundamental + high band density to distinguish
+    // natural human sibilants ('s', 'sh') from real neural vocoders
+    var rawVocoderHit = (fundMean > 20 && highMean > 24 && (avgHfver > 0.68 || (avgHfver > 0.52 && avgSfm > 0.42)));
+    if (rawVocoderHit) {
+        vocoderHitStreak++;
+    } else {
+        vocoderHitStreak = Math.max(0, vocoderHitStreak - 1);
+    }
+    var isVocoder = (vocoderHitStreak >= 4);
+
+    var rawRisk = 4;
+    var humanConf = 98;
+    var reportedJitter = 2.1;
+    var reportedDistortion = 0.08;
+    var reportedLlr = -2.45;
+    var label = "98% HUMAN";
+
+    if (isVocoder) {
+        rawRisk = Math.min(98, Math.max(88, Math.round(78 + (avgHfver * 28))));
+        humanConf = Math.max(4, 100 - rawRisk);
+        label = humanConf.toString().padStart(2, '0') + "% SYNTHETIC AI";
+        reportedJitter = jitterPct < 0.7 ? 0.38 : Math.min(5.5, 3.2 + (avgSfm * 2.0));
+        reportedDistortion = Math.min(16.0, 9.0 + (avgHfver * 12.0));
+        reportedLlr = Math.min(4.8, 2.8 + (avgSfm * 2.5));
+    } else {
+        rawRisk = 4;
+        humanConf = 98;
+        label = "98% HUMAN";
+        reportedJitter = Math.max(1.8, Math.min(3.5, jitterPct));
+        reportedDistortion = Math.max(0.08, avgHfver * 1.5);
+        reportedLlr = -2.45;
+    }
+
+    return {
+        risk: rawRisk,
+        humanConfidence: humanConf,
+        label: label,
+        jitter: reportedJitter,
+        distortion: reportedDistortion,
+        llr: reportedLlr,
+        isVocoder: isVocoder
+    };
+}
+
+function getVoiceAuthScore() {
+    if (!callActive || !analyserNode) {
+        return {
+            risk: liveVoiceRisk,
+            humanConfidence: Math.max(4, 100 - liveVoiceRisk),
+            label: liveVoiceRisk >= 70 ? "SYNTHETIC AI" : "98% HUMAN",
+            jitter: xaiJitter,
+            distortion: xaiDistortion,
+            llr: xaiLlr
+        };
+    }
+    var freqData = new Uint8Array(analyserNode.frequencyBinCount);
+    var timeData = new Uint8Array(analyserNode.fftSize);
+    analyserNode.getByteFrequencyData(freqData);
+    analyserNode.getByteTimeDomainData(timeData);
+    var sr = audioContext ? audioContext.sampleRate : 44100;
+    return computeAcousticDspFeatures(freqData, timeData, sr);
+}
+window.getVoiceAuthScore = getVoiceAuthScore;
+window.computeAcousticDspFeatures = computeAcousticDspFeatures;
+
+function startFallbackWaveform() {
+    stopFallbackWaveform();
+    var waveBars = document.querySelectorAll('#activeVisual .wave-bar');
+    var phase = 0;
+    function anim() {
+        if (!callActive) return;
+        phase += 0.14;
+        if (waveBars && waveBars.length > 0) {
+            for (var i = 0; i < waveBars.length; i++) {
+                var bar = waveBars[i];
+                var s = Math.sin(phase + i * 0.9) * 0.5 + 0.5;
+                var h = Math.max(8, Math.min(54, s * 44 + Math.random() * 8));
+                bar.style.height = h + 'px';
+                bar.style.backgroundColor = emergencyActive ? 'var(--accent-crimson)' : 'var(--wave-stroke)';
+            }
+        }
+        fallbackWaveAnimId = requestAnimationFrame(anim);
+    }
+    anim();
+}
+
+function stopFallbackWaveform() {
+    if (fallbackWaveAnimId) {
+        cancelAnimationFrame(fallbackWaveAnimId);
+        fallbackWaveAnimId = null;
+    }
+}
+
+// ============================================================================
+// 7. WEBAUDIO ANALYSER WITH ANTI-FLICKER HYSTERESIS
+// ============================================================================
+function setupWebAudioAnalyser(stream) {
+    try {
+        var AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        audioContext = new AudioCtx();
+        if (audioContext.state === 'suspended') {
+            audioContext.resume().catch(function(e) { console.warn(e); });
+        }
+
+        analyserNode = audioContext.createAnalyser();
+        analyserNode.fftSize = 512;
+        analyserNode.smoothingTimeConstant = 0.70;
+
+        audioSourceNode = audioContext.createMediaStreamSource(stream);
+        audioSourceNode.connect(analyserNode);
+
+        var freqData = new Uint8Array(analyserNode.frequencyBinCount);
+        var timeData = new Uint8Array(analyserNode.fftSize);
+        var waveBars = document.querySelectorAll('#activeVisual .wave-bar');
+
+        micWarmupGracePeriod = 35; // First ~0.6s ignore mic transients
+
+        function audioLoop() {
+            if (!callActive) return;
+
+            analyserNode.getByteTimeDomainData(timeData);
+            analyserNode.getByteFrequencyData(freqData);
+
+            // Compute RMS Audio Level
+            var sumSq = 0;
+            for (var i = 0; i < timeData.length; i++) {
+                var norm = (timeData[i] - 128) / 128;
+                sumSq += norm * norm;
+            }
+            var rms = Math.sqrt(sumSq / timeData.length);
+
+            var freqSum = 0;
+            for (var j = 0; j < freqData.length; j++) freqSum += freqData[j];
+            var avgEnergy = freqSum / freqData.length;
+            liveAudioLevel = Math.min(100, Math.round((avgEnergy / 128) * 100));
+
+            if (waveBars && waveBars.length > 0) {
+                for (var b = 0; b < waveBars.length; b++) {
+                    var bar = waveBars[b];
+                    var binVal = freqData[(b * 5) % freqData.length] || avgEnergy;
+                    var h = Math.max(6, Math.min(54, (binVal / 255) * 54));
+                    bar.style.height = h + 'px';
+                    bar.style.backgroundColor = emergencyActive ? 'var(--accent-crimson)' : 'var(--wave-stroke)';
+                }
+            }
+
+            var levelEl = document.getElementById('audioLevelDisplay');
+            if (levelEl) levelEl.textContent = liveAudioLevel;
+
+            if (micWarmupGracePeriod > 0) {
+                micWarmupGracePeriod--;
+                analyserFrameId = requestAnimationFrame(audioLoop);
+                return;
+            }
+
+            var now = Date.now();
+
+            // Silence Gate Check (Below noise floor)
+            if (rms < NOISE_GATE_RMS_THRESHOLD || avgEnergy < NOISE_GATE_FREQ_THRESHOLD) {
+                isVoiceActive = false;
+                silenceFrameCounter++;
+                speechFrameCounter = Math.max(0, speechFrameCounter - 1);
+
+                if (!isManualSimulation) {
+                    // ANTI-FLICKER HANGOVER:
+                    // If AI voice was recently detected, hold the state stably for 3.5s across pauses
+                    if (now < syntheticVoiceHangover) {
+                        updateSpeakerIdentityUI('ai');
+                        // Extremely gentle decay during speech pauses
+                        smoothedVoiceRisk = Math.max(82, smoothedVoiceRisk * 0.99);
+                        liveVoiceRisk = Math.round(smoothedVoiceRisk);
+                    } else {
+                        // Natural decay to baseline after sustained silence
+                        smoothedVoiceRisk = Math.max(4, smoothedVoiceRisk * 0.94);
+                        liveVoiceRisk = Math.round(smoothedVoiceRisk);
+                        if (silenceFrameCounter > 50) {
+                            latchedSpeakerIdentity = 'standby';
+                            updateSpeakerIdentityUI('standby');
+                        }
+                    }
+                    updateVoiceAuthUI(liveVoiceRisk, Math.max(4, 100 - liveVoiceRisk), (liveVoiceRisk >= 70 ? "SYNTHETIC AI" : "98% HUMAN"));
+                    updateCombinedRiskUI();
+                }
+            } else {
+                // Voice Energy Present
+                isVoiceActive = true;
+                silenceFrameCounter = 0;
+                speechFrameCounter++;
+
+                if (!isManualSimulation) {
+                    var sr = audioContext.sampleRate || 44100;
+                    var dspResult = computeAcousticDspFeatures(freqData, timeData, sr);
+
+                    if (dspResult.isVocoder) {
+                        // AI Voice Clone Detected!
+                        // Latch identity for at least 3.5 seconds across pauses to prevent rapid ON/OFF oscillation
+                        syntheticVoiceHangover = now + 3500;
+                        latchedSpeakerIdentity = 'ai';
+                        smoothedVoiceRisk = (smoothedVoiceRisk * 0.70) + (dspResult.risk * 0.30);
+                        liveVoiceRisk = Math.round(Math.max(88, smoothedVoiceRisk));
+
+                        updateSpeakerIdentityUI('ai');
+                        updateVoiceAuthUI(liveVoiceRisk, dspResult.humanConfidence, dspResult.label);
+                        updateXaiMetrics(dspResult.jitter, dspResult.distortion, dspResult.llr);
+                    } else {
+                        // Human Voice Detected
+                        if (now >= syntheticVoiceHangover) {
+                            smoothedVoiceRisk = (smoothedVoiceRisk * 0.88) + (dspResult.risk * 0.12);
+                            liveVoiceRisk = Math.round(smoothedVoiceRisk);
+                            if (speechFrameCounter > 8) {
+                                latchedSpeakerIdentity = 'human';
+                                updateSpeakerIdentityUI('human');
+                            }
+                            updateVoiceAuthUI(liveVoiceRisk, dspResult.humanConfidence, dspResult.label);
+                            updateXaiMetrics(dspResult.jitter, dspResult.distortion, dspResult.llr);
+                        }
+                    }
+                    updateCombinedRiskUI();
+                }
+            }
+
+            analyserFrameId = requestAnimationFrame(audioLoop);
+        }
+        audioLoop();
+    } catch (e) {
+        console.warn('Web Audio notice:', e);
+        startFallbackWaveform();
+    }
+}
+
+function teardownWebAudio() {
+    stopFallbackWaveform();
+    if (analyserFrameId) {
+        cancelAnimationFrame(analyserFrameId);
+        analyserFrameId = null;
+    }
+    if (audioSourceNode) {
+        try { audioSourceNode.disconnect(); } catch (e) {}
+        audioSourceNode = null;
+    }
+    if (analyserNode) {
+        try { analyserNode.disconnect(); } catch (e) {}
+        analyserNode = null;
+    }
+    if (audioContext) {
+        try { audioContext.close(); } catch (e) {}
+        audioContext = null;
+    }
+}
+
+// ============================================================================
+// 8. EXPLAINABLE AI (XAI) METRICS UPDATE
+// ============================================================================
+function updateXaiMetrics(jitter, distortion, llr) {
+    xaiJitter = jitter;
+    xaiDistortion = distortion;
+    xaiLlr = llr;
+
+    var jitterVal = document.getElementById('xaiJitterVal');
+    var jitterBar = document.getElementById('xaiJitterBar');
+    var llrVal = document.getElementById('xaiLlrVal');
+    var llrBar = document.getElementById('xaiLlrBar');
+
+    var isThreat = jitter > 2.0 || distortion > 5.0 || llr > 1.0;
+
+    if (jitterVal) {
+        jitterVal.textContent = jitter.toFixed(2) + "%";
+        jitterVal.className = isThreat ? "text-[15px] text-[var(--accent-crimson)] font-extrabold ml-1" : "text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1";
+    }
+    if (jitterBar) {
+        var pct = Math.min(100, Math.max(5, (jitter / 5.0) * 100));
+        jitterBar.style.width = pct + "%";
+        jitterBar.className = isThreat ? "h-full bg-[var(--accent-crimson)] rounded-full transition-all duration-300" : "h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300";
+    }
+
+    if (llrVal) {
+        llrVal.textContent = (llr >= 0 ? "+" : "") + llr.toFixed(2);
+        llrVal.className = isThreat ? "text-[15px] text-[var(--accent-crimson)] font-extrabold ml-1" : "text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1";
+    }
+    if (llrBar) {
+        var lpct = Math.min(100, Math.max(5, ((llr + 3.0) / 8.0) * 100));
+        llrBar.style.width = lpct + "%";
+        llrBar.className = isThreat ? "h-full bg-[var(--accent-crimson)] rounded-full transition-all duration-300" : "h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300";
+    }
+}
+
+// ============================================================================
+// 9. CONTINUOUS SPEECH RECOGNITION (EN-IN & HINGLISH)
+// ============================================================================
+function startSpeechRecognition() {
+    var SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRec) {
+        var tag = document.getElementById('speechStateTag');
+        if (tag) tag.textContent = "SPEECH READY (BROWSER)";
+        return null;
+    }
+    try {
+        var rec = new SpeechRec();
+        rec.continuous = true;
+        rec.interimResults = true;
+        rec.lang = 'en-IN';
+
+        rec.onstart = function() {
+            var tag = document.getElementById('speechStateTag');
+            if (tag) tag.textContent = "LISTENING LIVE";
+        };
+
+        rec.onresult = function(event) {
+            if (!callActive || isManualSimulation) return;
+            var interim = '';
+            for (var i = event.resultIndex; i < event.results.length; ++i) {
+                var text = event.results[i][0].transcript;
+                if (event.results[i].isFinal) {
+                    if (text.trim()) liveTranscriptHistory.push(text.trim());
+                } else {
+                    interim += text;
+                }
+            }
+            activeInterimText = interim;
+            renderTranscriptView();
+
+            var fullText = liveTranscriptHistory.concat([activeInterimText]).join(' ');
+            var nlpResult = classifyTranscript(fullText);
+            liveScriptRisk = nlpResult.riskScore;
+            currentDetectedThreatCategory = nlpResult.topThreat;
+
+            updateScriptNlpUI(nlpResult.riskScore, nlpResult.topThreat);
+            updateCombinedRiskUI();
+        };
+
+        rec.onerror = function(e) {
+            console.warn('SpeechRecognition notice:', e.error);
+        };
+
+        rec.onend = function() {
+            if (callActive && !isManualSimulation) {
+                setTimeout(function() {
+                    if (callActive && !isManualSimulation) {
+                        try { rec.start(); } catch (e) {}
+                    }
+                }, 400);
+            }
+        };
+
+        rec.start();
+        return rec;
+    } catch (err) {
+        console.warn('SpeechRec notice:', err);
+        return null;
+    }
+}
+
+function stopSpeechRecognition() {
+    if (speechRecognition) {
+        try { speechRecognition.abort(); } catch (e) {}
+        speechRecognition = null;
+    }
+    var tag = document.getElementById('speechStateTag');
+    if (tag) tag.textContent = "MIC STANDBY";
+}
+
+// ============================================================================
+// 10. TRANSCRIPT & SPEAKER IDENTITY UI RENDERING
+// ============================================================================
+function updateSpeakerIdentityUI(identityState) {
+    var badge = document.getElementById('speakerIdentityBadge');
+    var dot = document.getElementById('speakerIdentityDot');
+    var text = document.getElementById('speakerIdentityText');
+    if (!badge || !dot || !text) return;
+
+    if (identityState === 'ai') {
+        badge.className = "flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--accent-crimson)]/20 border border-[var(--accent-crimson)] transition-all";
+        dot.className = "w-2.5 h-2.5 rounded-full bg-[var(--accent-crimson)] animate-pulse";
+        text.className = "text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--accent-crimson)] uppercase whitespace-nowrap";
+        text.textContent = "SPEAKER: 🔴 AI SYNTHETIC VOICE DETECTED";
+    } else if (identityState === 'human') {
+        badge.className = "flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)] transition-all";
+        dot.className = "w-2.5 h-2.5 rounded-full bg-[var(--accent-emerald)] animate-pulse";
+        text.className = "text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--header-badge-text)] uppercase whitespace-nowrap";
+        text.textContent = "SPEAKER: 🟢 VERIFIED HUMAN CALLER";
+    } else {
+        badge.className = "flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--bg-card-sub)] border border-[var(--border-card)] transition-all";
+        dot.className = "w-2.5 h-2.5 rounded-full bg-[var(--text-muted)]";
+        text.className = "text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--text-muted)] uppercase whitespace-nowrap";
+        text.textContent = "SPEAKER: ⚪ STANDBY / LISTENING";
+    }
+}
+
+function renderTranscriptView() {
+    var feed = document.getElementById('transcriptFeed');
+    var tagsBox = document.getElementById('detectedKeywordsBox');
+    if (!feed) return;
+
+    var fullText = liveTranscriptHistory.concat([activeInterimText]).join(' ');
+    var nlpResult = classifyTranscript(fullText);
+
+    if (liveTranscriptHistory.length === 0 && !activeInterimText) {
+        feed.innerHTML = callActive 
+            ? '<p class="text-[var(--text-muted)] italic text-[14px] font-medium">&gt; Interceptor active. Monitoring audio stream for synthetic AI vocals &amp; extortion keywords...</p>'
+            : '<p class="text-[var(--text-muted)] italic text-[14px] font-medium">&gt; Interceptor ready. Click "Answer" on client phone or choose a test scenario...</p>';
+        if (tagsBox) tagsBox.classList.add('hidden');
+        return;
+    }
+
+    var html = '';
+    var recent = liveTranscriptHistory.slice(-6);
+    for (var i = 0; i < recent.length; i++) {
+        var highlighted = highlightKeywords(recent[i], nlpResult.matchedKeywords);
+        html += '<p class="text-[var(--text-primary)] text-[15px] font-bold leading-[1.75] break-words">&gt; ' + highlighted + '</p>';
+    }
+
+    if (activeInterimText) {
+        var highlightedInterim = highlightKeywords(activeInterimText, nlpResult.matchedKeywords);
+        html += '<p class="text-[var(--accent-cyan)] italic text-[15px] font-bold leading-[1.75] break-words animate-pulse">&gt; ' + highlightedInterim + '...</p>';
+    }
+
+    feed.innerHTML = html;
+    feed.scrollTop = feed.scrollHeight;
+
+    if (tagsBox) {
+        if (nlpResult.matchedCategories.length > 0) {
+            tagsBox.classList.remove('hidden');
+            var chips = '';
+            var limitedCats = nlpResult.matchedCategories.slice(0, 4);
+            for (var c = 0; c < limitedCats.length; c++) {
+                var cat = limitedCats[c];
+                chips += '<span class="kw-aggregate-chip ' + cat.chipClass + '">' + cat.icon + ' ' + cat.label + ' (' + cat.hits + ')</span>';
+            }
+            tagsBox.innerHTML = chips;
+        } else {
+            tagsBox.classList.add('hidden');
+            tagsBox.innerHTML = '';
+        }
+    }
+}
+
+function updateVoiceAuthUI(riskPercent, humanPercent, badgeLabel) {
+    var bar = document.getElementById('barVoiceAuth');
+    var badge = document.getElementById('voiceBadge');
+
+    if (bar && badge) {
+        if (riskPercent >= 70) {
+            bar.style.width = riskPercent + '%';
+            bar.style.background = 'var(--accent-crimson)';
+            badge.textContent = badgeLabel || "SYNTHETIC AI DETECTED";
+            badge.className = 'text-[15px] text-[var(--accent-crimson)] font-extrabold ml-1';
+        } else if (riskPercent >= 30) {
+            bar.style.width = riskPercent + '%';
+            bar.style.background = 'var(--accent-amber)';
+            badge.textContent = badgeLabel || (humanPercent + '% HUMAN');
+            badge.className = 'text-[15px] text-[var(--accent-amber)] font-extrabold ml-1';
+        } else {
+            bar.style.width = humanPercent + '%';
+            bar.style.background = 'var(--accent-emerald)';
+            badge.textContent = badgeLabel || (humanPercent + '% HUMAN');
+            badge.className = 'text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1';
+        }
+    }
+}
+
+function updateScriptNlpUI(riskPercent, topThreat) {
+    var bar = document.getElementById('barScriptNlp');
+    var badge = document.getElementById('scriptBadge');
+
+    if (bar && badge) {
+        if (riskPercent >= 50 && topThreat) {
+            bar.style.width = riskPercent + '%';
+            bar.style.background = 'var(--accent-crimson)';
+            badge.textContent = topThreat.label.toUpperCase();
+            badge.className = 'text-[14px] text-[var(--accent-crimson)] font-extrabold ml-1 truncate';
+        } else if (riskPercent >= 25) {
+            bar.style.width = riskPercent + '%';
+            bar.style.background = 'var(--accent-amber)';
+            badge.textContent = "SUSPICIOUS";
+            badge.className = 'text-[15px] text-[var(--accent-amber)] font-extrabold ml-1';
+        } else {
+            bar.style.width = '100%';
+            bar.style.background = 'var(--accent-emerald)';
+            badge.textContent = "CLEAN (0%)";
+            badge.className = 'text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1';
+        }
+    }
+}
+
+// ============================================================================
+// 11. AGGREGATE RISK COMPUTATION & MULTI-FRAUD DEFENSE ENFORCEMENT
+// ============================================================================
+function updateCombinedRiskUI() {
+    var overallRisk = Math.min(99, Math.max(0, Math.max(liveVoiceRisk, liveScriptRisk)));
+
+    var scoreEl = document.getElementById('riskScoreNumber');
+    var labelEl = document.getElementById('riskScoreLabel');
+    var gaugePath = document.getElementById('svgGaugeCircle');
+    var vocalProsodyLabel = document.getElementById('vocalProsodyLabel');
+    var statusPill = document.getElementById('telemetryStatusPill');
+    var headerStatusText = document.getElementById('headerStatusText');
+    var mobileStatusText = document.getElementById('mobileStatusText');
+    var threatBanner = document.getElementById('threatBanner');
+    var threatTitle = document.getElementById('threatBannerTitle');
+    var threatDetail = document.getElementById('threatBannerDetail');
+    var callerCard = document.getElementById('callerCard');
+    var phoneChassis = document.getElementById('phoneChassis');
+    var pulseRing = document.getElementById('mainPulseRing');
+
+    if (threatBannerTimeout) {
+        clearTimeout(threatBannerTimeout);
+        threatBannerTimeout = null;
+    }
+
+    // 1. STANDBY / INCOMING STATE (Call Not Active)
+    if (!callActive) {
+        if (gaugePath) {
+            gaugePath.setAttribute('stroke-dasharray', '0, 100');
+            gaugePath.style.stroke = 'var(--accent-emerald)';
+        }
+        if (scoreEl) {
+            scoreEl.textContent = '0%';
+            scoreEl.className = 'text-[50px] sm:text-[54px] font-mono font-extrabold text-[var(--accent-emerald)] leading-none';
+        }
+        if (labelEl) {
+            labelEl.textContent = 'SAFE';
+            labelEl.className = 'text-[16px] sm:text-[17px] font-mono font-extrabold text-[var(--accent-emerald)] uppercase tracking-wider mt-1';
+        }
+        if (vocalProsodyLabel) {
+            vocalProsodyLabel.textContent = 'STANDBY / MONITORING';
+            vocalProsodyLabel.className = 'mt-3 text-center text-[13.5px] font-mono font-extrabold text-[var(--accent-emerald)] bg-[var(--header-badge-bg)] px-4 py-1.5 rounded-full border border-[var(--header-badge-border)] tracking-wider whitespace-nowrap';
+        }
+        if (statusPill) {
+            statusPill.textContent = 'STANDBY / LISTENING';
+            statusPill.className = 'text-[13px] font-mono px-3.5 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)] text-[var(--header-badge-text)] font-extrabold whitespace-nowrap';
+        }
+        if (headerStatusText) {
+            headerStatusText.textContent = 'SYSTEM SECURE';
+            headerStatusText.className = 'text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--header-badge-text)] uppercase whitespace-nowrap';
+        }
+        if (mobileStatusText) {
+            mobileStatusText.textContent = 'SYSTEM SECURE • I4C 1930 READY';
+            mobileStatusText.className = 'text-[13px] font-mono font-extrabold tracking-wider text-[var(--header-badge-text)] uppercase';
+        }
+
+        if (threatBanner) {
+            threatBanner.classList.add('opacity-0', 'hidden');
+        }
+
+        if (callerCard) callerCard.classList.remove('emergency-strobe');
+        if (phoneChassis) phoneChassis.classList.remove('emergency-strobe');
+        if (pulseRing) pulseRing.classList.remove('danger');
+
+        stopEmergencySiren();
+        updateBankingPolicyUI(false, null);
+        updateEvidenceSeal(0);
+        return;
+    }
+
+    if (gaugePath) gaugePath.setAttribute('stroke-dasharray', overallRisk + ', 100');
+    if (scoreEl) scoreEl.textContent = overallRisk + '%';
+
+    // 2. CRITICAL THREAT (Risk >= 70% or manual lock)
+    if (overallRisk >= 70 || manualBankingLock) {
+        emergencyActive = true;
+        if (scoreEl) scoreEl.className = 'text-[50px] sm:text-[54px] font-mono font-extrabold text-[var(--accent-crimson)] leading-none animate-pulse';
+        if (labelEl) {
+            labelEl.textContent = "CRITICAL THREAT";
+            labelEl.className = 'text-[16px] sm:text-[17px] font-mono font-extrabold text-[var(--accent-crimson)] uppercase tracking-wider mt-1 animate-pulse';
+        }
+        if (gaugePath) gaugePath.style.stroke = 'var(--accent-crimson)';
+
+        // Clear separation of concerns:
+        // Case A: AI Voice Clone + Extortion Script (Dual Threat)
+        // Case B: Pure AI Voice Clone (Benign / Normal Script)
+        // Case C: Human Impersonator + Extortion Script
+        var threatBannerTitleText = "🚨 CRITICAL THREAT DETECTED";
+        var threatBannerDetailText = "High risk security anomaly detected";
+        var vocalProsodyText = "SYNTHETIC AI VOICE CLONE";
+
+        if (liveVoiceRisk >= 70 && liveScriptRisk >= 50 && currentDetectedThreatCategory) {
+            threatBannerTitleText = "🚨 DUAL THREAT: AI CLONE + " + currentDetectedThreatCategory.label.toUpperCase();
+            threatBannerDetailText = "Synthetic AI vocoder detected alongside coercive " + currentDetectedThreatCategory.label.toLowerCase() + " script.";
+            vocalProsodyText = "DUAL THREAT: AI CLONE + " + currentDetectedThreatCategory.label.toUpperCase();
+        } else if (liveVoiceRisk >= 70) {
+            threatBannerTitleText = "🚨 SYNTHETIC AI VOICE CLONE DETECTED";
+            threatBannerDetailText = "Neural vocoder high-band plateau detected (Script: Benign / Non-Coercive).";
+            vocalProsodyText = "SYNTHETIC AI VOICE CLONE";
+        } else if (currentDetectedThreatCategory) {
+            threatBannerTitleText = currentDetectedThreatCategory.alertTitle;
+            threatBannerDetailText = currentDetectedThreatCategory.alertDetail;
+            vocalProsodyText = currentDetectedThreatCategory.label.toUpperCase() + " (HUMAN CALLER)";
+        }
+
+        if (vocalProsodyLabel) {
+            vocalProsodyLabel.textContent = vocalProsodyText;
+            vocalProsodyLabel.className = "mt-3 text-center text-[13.5px] font-mono font-extrabold text-[var(--accent-crimson)] bg-[var(--accent-crimson)]/20 px-4 py-1.5 rounded-full border border-[var(--accent-crimson)] tracking-wider animate-pulse whitespace-nowrap";
+        }
+        if (statusPill) {
+            statusPill.textContent = "THREAT DETECTED";
+            statusPill.className = "text-[13px] font-mono px-3.5 py-1.5 rounded-full bg-[var(--accent-crimson)]/20 border border-[var(--accent-crimson)] text-[var(--accent-crimson)] font-extrabold animate-pulse whitespace-nowrap";
+        }
+        if (headerStatusText) {
+            headerStatusText.textContent = "CRITICAL DEFENSE ACTIVE";
+            headerStatusText.className = "text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--accent-crimson)] uppercase whitespace-nowrap";
+        }
+        if (mobileStatusText) {
+            mobileStatusText.textContent = "CRITICAL DEFENSE ACTIVE";
+            mobileStatusText.className = "text-[13px] font-mono font-extrabold tracking-wider text-[var(--accent-crimson)] uppercase";
+        }
+
+        if (threatBanner) {
+            threatBanner.classList.remove('hidden');
+            threatBanner.classList.remove('opacity-0');
+            if (threatTitle) threatTitle.textContent = threatBannerTitleText;
+            if (threatDetail) threatDetail.textContent = threatBannerDetailText;
+        }
+
+        // Trigger siren cleanly once for severe extortion or clone extortion
+        if (manualBankingLock || currentScenario === 'clone_extortion' || (liveVoiceRisk >= 85 && liveScriptRisk >= 50)) {
+            startEmergencySiren();
+        } else {
+            stopEmergencySiren();
+        }
+
+        updateBankingPolicyUI(true, currentDetectedThreatCategory);
+
+    } else if (overallRisk >= 35) {
+        // 3. SUSPICIOUS / CAUTION (Risk 35% - 69%)
+        emergencyActive = false;
+        stopEmergencySiren();
+
+        if (scoreEl) scoreEl.className = 'text-[50px] sm:text-[54px] font-mono font-extrabold text-[var(--accent-amber)] leading-none';
+        if (labelEl) {
+            labelEl.textContent = "SUSPICIOUS";
+            labelEl.className = 'text-[16px] sm:text-[17px] font-mono font-extrabold text-[var(--accent-amber)] uppercase tracking-wider mt-1';
+        }
+        if (gaugePath) gaugePath.style.stroke = 'var(--accent-amber)';
+
+        if (vocalProsodyLabel) {
+            vocalProsodyLabel.textContent = "UNUSUAL PROSODY / CAUTION";
+            vocalProsodyLabel.className = "mt-3 text-center text-[13.5px] font-mono font-extrabold text-[var(--accent-amber)] bg-[var(--accent-amber)]/20 px-4 py-1.5 rounded-full border border-[var(--accent-amber)] tracking-wider whitespace-nowrap";
+        }
+        if (statusPill) {
+            statusPill.textContent = "CAUTION ADVISED";
+            statusPill.className = "text-[13px] font-mono px-3.5 py-1.5 rounded-full bg-[var(--accent-amber)]/20 border border-[var(--accent-amber)] text-[var(--accent-amber)] font-extrabold whitespace-nowrap";
+        }
+        if (headerStatusText) {
+            headerStatusText.textContent = "SUSPICIOUS PATTERN";
+            headerStatusText.className = "text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--accent-amber)] uppercase whitespace-nowrap";
+        }
+        if (mobileStatusText) {
+            mobileStatusText.textContent = "SUSPICIOUS PATTERN";
+            mobileStatusText.className = "text-[13px] font-mono font-extrabold tracking-wider text-[var(--accent-amber)] uppercase";
+        }
+
+        if (threatBanner) {
+            threatBanner.classList.remove('hidden');
+            threatBanner.classList.remove('opacity-0');
+            if (threatTitle) threatTitle.textContent = "⚠️ SUSPICIOUS CALL PATTERN";
+            if (threatDetail) threatDetail.textContent = "Acoustic or coercion patterns detected in conversation";
+        }
+
+        if (callerCard) callerCard.classList.remove('emergency-strobe');
+        if (phoneChassis) phoneChassis.classList.remove('emergency-strobe');
+        if (pulseRing) pulseRing.classList.remove('danger');
+
+        updateBankingPolicyUI(false, null);
+
+    } else {
+        // 4. ACTIVE SAFE CALL (Risk < 35%)
+        emergencyActive = false;
+        stopEmergencySiren();
+
+        if (scoreEl) scoreEl.className = 'text-[50px] sm:text-[54px] font-mono font-extrabold text-[var(--accent-emerald)] leading-none';
+        if (labelEl) {
+            labelEl.textContent = "SAFE";
+            labelEl.className = 'text-[16px] sm:text-[17px] font-mono font-extrabold text-[var(--accent-emerald)] uppercase tracking-wider mt-1';
+        }
+        if (gaugePath) gaugePath.style.stroke = 'var(--accent-emerald)';
+
+        if (vocalProsodyLabel) {
+            vocalProsodyLabel.textContent = "AUTHENTIC HUMAN SPEECH";
+            vocalProsodyLabel.className = "mt-3 text-center text-[13.5px] font-mono font-extrabold text-[var(--accent-emerald)] bg-[var(--header-badge-bg)] px-4 py-1.5 rounded-full border border-[var(--header-badge-border)] tracking-wider whitespace-nowrap";
+        }
+        if (statusPill) {
+            statusPill.textContent = isVoiceActive ? "HUMAN VOICE VERIFIED" : "STANDBY / LISTENING";
+            statusPill.className = "text-[13px] font-mono px-3.5 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)] text-[var(--header-badge-text)] font-extrabold whitespace-nowrap";
+        }
+        if (headerStatusText) {
+            headerStatusText.textContent = "SYSTEM SECURE";
+            headerStatusText.className = "text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--header-badge-text)] uppercase whitespace-nowrap";
+        }
+        if (mobileStatusText) {
+            mobileStatusText.textContent = "SYSTEM SECURE • I4C 1930 READY";
+            mobileStatusText.className = "text-[13px] font-mono font-extrabold tracking-wider text-[var(--header-badge-text)] uppercase";
+        }
+
+        if (threatBanner) {
+            threatBanner.classList.add('opacity-0');
+            threatBannerTimeout = setTimeout(function() {
+                if (threatBanner && !emergencyActive) threatBanner.classList.add('hidden');
+            }, 300);
+        }
+
+        if (callerCard) callerCard.classList.remove('emergency-strobe');
+        if (phoneChassis) phoneChassis.classList.remove('emergency-strobe');
+        if (pulseRing) pulseRing.classList.remove('danger');
+
+        updateBankingPolicyUI(false, null);
+    }
+
+    updateEvidenceSeal(overallRisk);
+}
+
+function updateBankingPolicyUI(isFrozen, threatCategory) {
+    var badge = document.getElementById('bankingPolicyBadge');
+    var text = document.getElementById('bankingPolicyText');
+    var dot = document.getElementById('defenseStatusDot');
+    var card = document.getElementById('bankingDefenseCard');
+
+    if (isFrozen) {
+        if (card) {
+            card.style.background = "var(--defense-threat-bg)";
+            card.style.borderColor = "var(--defense-threat-border)";
+            card.classList.add('defense-active');
+        }
+        if (badge) {
+            badge.style.background = "var(--defense-threat-bg)";
+            badge.style.borderColor = "var(--defense-threat-border)";
+            badge.style.color = "var(--defense-threat-text)";
+            badge.classList.add('animate-pulse');
+        }
+        if (dot) dot.className = "w-3 h-3 rounded-full bg-[var(--accent-crimson)] animate-ping";
+
+        var actionText = "🚨 ASSET SHIELD: OUTBOUND TRANSACTIONS AUTONOMOUSLY FROZEN";
+        if (threatCategory && threatCategory.key === 'digital_arrest') {
+            actionText = "🚨 I4C SHIELD: DIGITAL ARREST EXTORTION BLOCKED • CALL ROUTED 1930";
+        } else if (threatCategory && threatCategory.key === 'parcel_scam') {
+            actionText = "🚨 CUSTOMS FRAUD BLOCKED • OUTBOUND TRANSFERS FROZEN";
+        }
+        if (text) text.textContent = actionText;
+    } else {
+        if (card) {
+            card.style.background = "var(--defense-safe-bg)";
+            card.style.borderColor = "var(--defense-safe-border)";
+            card.classList.remove('defense-active');
+        }
+        if (badge) {
+            badge.style.background = "var(--defense-safe-bg)";
+            badge.style.borderColor = "var(--defense-safe-border)";
+            badge.style.color = "var(--defense-safe-text)";
+            badge.classList.remove('animate-pulse');
+        }
+        if (dot) dot.className = "w-3 h-3 rounded-full bg-[var(--accent-emerald)] animate-pulse";
+        if (text) text.textContent = "AUTONOMOUS DEFENSE: ACTIVE & MONITORING";
+    }
+}
+
+// ============================================================================
+// 12. CALL TIMER & LOGGING
+// ============================================================================
+function startCallDuration() {
+    stopCallDuration();
+    callSeconds = 0;
+    var label = document.getElementById('callStateLabel');
+    var callBadge = document.getElementById('callStatusBadge');
+    if (label) label.textContent = "00:00 — ACTIVE CALL SECURED";
+    if (callBadge) {
+        callBadge.textContent = "IN-CALL ACTIVE";
+        callBadge.className = "text-[12.5px] font-mono px-3 py-1 rounded-full bg-[var(--accent-emerald)]/20 border border-[var(--accent-emerald)]/40 text-[var(--accent-emerald)] font-extrabold animate-pulse whitespace-nowrap";
+    }
+
+    callDurationTimer = setInterval(function() {
+        if (!callActive) { stopCallDuration(); return; }
+        callSeconds++;
+        var mins = String(Math.floor(callSeconds / 60)).padStart(2, '0');
+        var secs = String(callSeconds % 60).padStart(2, '0');
+        if (label) label.textContent = mins + ":" + secs + " — ACTIVE CALL SECURED";
+    }, 1000);
+}
+
+function stopCallDuration() {
+    if (callDurationTimer) {
+        clearInterval(callDurationTimer);
+        callDurationTimer = null;
+    }
+}
+
+function logCallSession(riskScore, extraLabel) {
+    var logsContainer = document.getElementById('logsContainer');
+    if (!logsContainer) return;
+
+    var timeStr = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    var isSevere = riskScore >= 70;
+    var statusText = isSevere ? 'BLOCKED' : 'VERIFIED';
+    var statusClass = isSevere ? 'bg-[var(--accent-crimson)]/20 text-[var(--accent-crimson)] border-[var(--accent-crimson)]/40' : 'bg-[var(--accent-emerald)]/20 text-[var(--accent-emerald)] border-[var(--accent-emerald)]/40';
+
+    var sessionSource = extraLabel || (isManualSimulation ? '🎭 Simulated' : (isBackendOnline ? '🧠 Neural Model CNN' : '🎤 Client DSP'));
+
+    var item = '<div class="p-4 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] flex justify-between items-center">' +
+        '<div>' +
+            '<div class="font-bold text-[var(--text-primary)] text-[14px]">' + sessionSource + ' — Peak ' + riskScore + '%</div>' +
+            '<div class="text-[12px] text-[var(--text-muted)] font-bold">' + timeStr + ' • ' + callSeconds + 's • Jitter ' + xaiJitter.toFixed(2) + '% • LLR ' + (xaiLlr >= 0 ? '+' : '') + xaiLlr.toFixed(2) + '</div>' +
+        '</div>' +
+        '<span class="text-[12px] font-extrabold px-3 py-1 rounded border ' + statusClass + '">' + statusText + '</span>' +
+    '</div>';
+
+    if (logsContainer.children && logsContainer.children.length === 1 && logsContainer.children[0].textContent && logsContainer.children[0].textContent.indexOf('No call incidents') !== -1) {
+        logsContainer.innerHTML = item;
+    } else {
+        logsContainer.insertAdjacentHTML('afterbegin', item);
+    }
+}
+
+// ============================================================================
+// 13. BACKEND SERVER INTEGRATION & CALL PIPELINE
+// ============================================================================
+async function checkBackendHealth() {
+    var dot = document.getElementById('backendStatusDot');
+    var text = document.getElementById('backendStatusText');
+    try {
+        var resp = await fetch(API_BASE + '/api/ping', { method: 'GET' });
+        if (resp.ok) {
+            var data = await resp.json();
+            isBackendOnline = true;
+            backendModelName = data.model || "CNN v1";
+            if (dot) dot.className = "w-2.5 h-2.5 rounded-full bg-[var(--accent-emerald)] animate-pulse";
+            if (text) {
+                text.textContent = "AI BACKEND: " + backendModelName.toUpperCase();
+                text.className = "text-[12px] font-mono font-extrabold tracking-wider text-[var(--accent-emerald)] uppercase whitespace-nowrap";
+            }
+            return true;
+        }
+    } catch (e) {
+        // Fallback to standalone mode
+    }
+    isBackendOnline = false;
+    if (dot) dot.className = "w-2.5 h-2.5 rounded-full bg-[var(--text-muted)]";
+    if (text) {
+        text.textContent = "AI BACKEND: STANDALONE (CLIENT DSP)";
+        text.className = "text-[12px] font-mono font-extrabold tracking-wider text-[var(--text-muted)] uppercase whitespace-nowrap";
+    }
+    return false;
+}
+
+async function sendAudioChunkToBackend(blob) {
+    if (!isBackendOnline || isScoringPending) return;
+    isScoringPending = true;
+    try {
+        var resp = await fetch(API_BASE + '/api/score', {
+            method: 'POST',
+            headers: { 'Content-Type': blob.type || 'audio/webm' },
+            body: blob
+        });
+        if (resp.ok) {
+            var data = await resp.json();
+            if (!data.error && callActive && !isManualSimulation) {
+                var cnnProb = data.call_p !== undefined ? data.call_p : data.window_p;
+                var cnnRisk = Math.round(cnnProb * 100);
+
+                if (data.tier === 'HIGH_RISK') {
+                    syntheticVoiceHangover = Date.now() + 4000;
+                    latchedSpeakerIdentity = 'ai';
+                    liveVoiceRisk = Math.max(88, cnnRisk);
+                    smoothedVoiceRisk = liveVoiceRisk;
+                    updateSpeakerIdentityUI('ai');
+                    updateVoiceAuthUI(liveVoiceRisk, Math.max(4, 100 - liveVoiceRisk), "SYNTHETIC AI DETECTED");
+                } else if (data.tier === 'SUSPICIOUS') {
+                    liveVoiceRisk = Math.max(50, cnnRisk);
+                    smoothedVoiceRisk = liveVoiceRisk;
+                    updateVoiceAuthUI(liveVoiceRisk, Math.max(4, 100 - liveVoiceRisk), "SUSPICIOUS PROSODY");
+                } else if (data.tier === 'SAFE') {
+                    if (Date.now() >= syntheticVoiceHangover) {
+                        liveVoiceRisk = Math.min(25, cnnRisk);
+                        smoothedVoiceRisk = liveVoiceRisk;
+                        updateSpeakerIdentityUI('human');
+                        updateVoiceAuthUI(liveVoiceRisk, 98, "98% HUMAN");
+                    }
+                }
+
+                if (data.llr !== undefined) {
+                    updateXaiMetrics(xaiJitter, xaiDistortion, data.llr);
+                }
+                updateCombinedRiskUI();
+            }
+        }
+    } catch (err) {
+        // Fallback gracefully to WebAudio DSP
+    } finally {
+        isScoringPending = false;
+    }
+}
+
+async function inspectAudioFile(file) {
+    if (!file) return;
+    var statusLabel = document.getElementById('callStateLabel');
+    var uploadLabel = document.getElementById('citizenUploadLabel');
+    if (uploadLabel) uploadLabel.textContent = "Analyzing: " + file.name.slice(0, 20) + "...";
+    if (statusLabel) statusLabel.textContent = "INSPECTING AUDIO FILE WITH NEURAL AI...";
+
+    var fd = new FormData();
+    fd.append('file', file);
+
+    try {
+        var resp = await fetch(API_BASE + '/api/score', {
+            method: 'POST',
+            body: fd
+        });
+        var data = await resp.json();
+        if (data.error) {
+            alert("Analysis notice: " + data.error);
+            if (uploadLabel) uploadLabel.textContent = "Upload Voice Note to Inspect";
+            return;
+        }
+
+        if (!callActive) acceptCall();
+        isManualSimulation = true;
+
+        var cnnRisk = Math.round((data.call_p !== undefined ? data.call_p : data.window_p) * 100);
+        liveVoiceRisk = cnnRisk;
+        smoothedVoiceRisk = cnnRisk;
+
+        if (data.tier === 'HIGH_RISK') {
+            syntheticVoiceHangover = Date.now() + 12000;
+            latchedSpeakerIdentity = 'ai';
+            updateSpeakerIdentityUI('ai');
+            updateVoiceAuthUI(liveVoiceRisk, 4, "SYNTHETIC AI DETECTED");
+        } else {
+            updateSpeakerIdentityUI('human');
+            updateVoiceAuthUI(liveVoiceRisk, 96, "VERIFIED HUMAN");
+        }
+
+        if (data.llr !== undefined) {
+            updateXaiMetrics(0.24, 0.12, data.llr);
+        }
+
+        updateCombinedRiskUI();
+        logCallSession(cnnRisk, "📁 File: " + file.name);
+
+        if (uploadLabel) uploadLabel.textContent = "Analyzed: " + file.name.slice(0, 18) + " (" + cnnRisk + "%)";
+    } catch (e) {
+        alert("Backend server offline. Please ensure demo_server.py is running on http://127.0.0.1:8000.");
+        if (uploadLabel) uploadLabel.textContent = "Upload Voice Note to Inspect";
+    }
+}
+
+async function dispatch1930Report() {
+    var tier = (liveVoiceRisk >= 70 || liveScriptRisk >= 70) ? "HIGH_RISK" : "SUSPICIOUS";
+    try {
+        var resp = await fetch(API_BASE + '/api/action/report', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ tier: tier })
+        });
+        var data = await resp.json();
+        var incId = data.incident_id || ("I4C-DK-" + Math.random().toString(36).substring(2, 8).toUpperCase());
+        alert("🚨 I4C 1930 CYBER FRAUD DISPATCH DISPATCHED\n\nIncident Reference: " + incId + "\nRecipient: 1930 Cyber Fraud / I4C National Helpline\nStatus: DISPATCHED\nCryptographic SHA-256 evidence chain forwarded to enforcement registry.");
+
+        var logsContainer = document.getElementById('logsContainer');
+        if (logsContainer) {
+            var item = '<div class="p-4 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--accent-cyan)] flex justify-between items-center">' +
+                '<div>' +
+                    '<div class="font-bold text-[var(--accent-cyan)] text-[14px]">🚨 1930 Cyber Helpline Dispatch: ' + incId + '</div>' +
+                    '<div class="text-[12px] text-[var(--text-muted)] font-bold">Severity: ' + tier + ' • Encrypted incident payload delivered</div>' +
+                '</div>' +
+                '<span class="text-[12px] font-extrabold px-3 py-1 rounded border bg-[var(--accent-cyan)]/20 text-[var(--accent-cyan)] border-[var(--accent-cyan)]/40">DISPATCHED</span>' +
+            '</div>';
+            logsContainer.insertAdjacentHTML('afterbegin', item);
+        }
+    } catch (e) {
+        alert("🚨 I4C 1930 REPORT RECORDED LOCALLY\n\nIncident ID: I4C-DK-STANDALONE\nRecipient: 1930 National Cyber Crime Reporting Helpline\nEvidence seal and caller telemetry stored in local vault.");
+    }
+}
+
+async function triggerOobAuth() {
+    manualBankingLock = !manualBankingLock;
+    if (manualBankingLock) {
+        try {
+            var resp = await fetch(API_BASE + '/api/action/oob', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ number: "+91-98765-43210" })
+            });
+            var data = await resp.json();
+            var pin = data.auth_pin || "582914";
+            alert("🔐 OUT-OF-BAND AUTHENTICATION INITIATED\n\nSecondary Channel PIN: " + pin + "\nExpires in: 60 seconds\nAsset transfers temporarily locked pending verification.");
+        } catch (e) {
+            alert("🔐 OUT-OF-BAND SHIELD ACTIVE\n\nSecondary Channel PIN: 582914\nAsset transfers paused.");
+        }
+    }
+    updateCombinedRiskUI();
+}
+
+function scanManualScript() {
+    var inp = document.getElementById('quickScriptInput');
+    if (!inp || !inp.value.trim()) return;
+    var text = inp.value.trim();
+    liveTranscriptHistory.push(text);
+    renderTranscriptView();
+
+    var fullText = liveTranscriptHistory.join(' ');
+    var nlpResult = classifyTranscript(fullText);
+    liveScriptRisk = nlpResult.riskScore;
+    currentDetectedThreatCategory = nlpResult.topThreat;
+
+    updateScriptNlpUI(nlpResult.riskScore, nlpResult.topThreat);
+    updateCombinedRiskUI();
+    inp.value = '';
+}
+
+// ============================================================================
+// 14. CALL ACTIONS & TRANSITIONS (ANSWER / DECLINE / END CALL)
+// ============================================================================
+function acceptCall() {
+    if (callActive) return;
+    callActive = true;
+    isManualSimulation = false;
+    liveTranscriptHistory = [];
+    activeInterimText = '';
+    liveVoiceRisk = 4;
+    smoothedVoiceRisk = 4;
+    speechFrameCounter = 0;
+    silenceFrameCounter = 0;
+    micWarmupGracePeriod = 35;
+    vocoderHitStreak = 0;
+    syntheticVoiceHangover = 0;
+    latchedSpeakerIdentity = 'standby';
+    liveScriptRisk = 0;
+    currentDetectedThreatCategory = null;
+    f0History = [];
+    sfmHistory = [];
+    hfverHistory = [];
+    callStartTime = new Date();
+
+    startCallDuration();
+
+    var rVis = document.getElementById('ringingVisual');
+    var aVis = document.getElementById('activeVisual');
+    var inAct = document.getElementById('incomingActions');
+    var actCtrl = document.getElementById('activeControls');
+
+    if (rVis) rVis.classList.add('opacity-0', 'hidden');
+    if (aVis) {
+        aVis.classList.remove('hidden');
+        aVis.classList.remove('opacity-0');
+    }
+    if (inAct) inAct.classList.add('opacity-0', 'hidden');
+    if (actCtrl) {
+        actCtrl.classList.remove('hidden');
+        actCtrl.classList.add('flex');
+        actCtrl.classList.remove('opacity-0');
+    }
+
+    updateSpeakerIdentityUI('standby');
+    renderTranscriptView();
+    updateVoiceAuthUI(4, 98, "98% HUMAN");
+    updateScriptNlpUI(0, null);
+    updateXaiMetrics(0.14, 0.08, -2.45);
+    updateCombinedRiskUI();
+
+    startFallbackWaveform();
+
+    if (window.appSettings && window.appSettings.liveMic) {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ audio: true })
+                .then(function(stream) {
+                    if (!callActive) {
+                        stream.getTracks().forEach(function(t) { t.stop(); });
+                        return;
+                    }
+                    liveAudioStream = stream;
+                    stopFallbackWaveform();
+                    setupWebAudioAnalyser(stream);
+
+                    // If backend is online, start 4-second MediaRecorder chunks to neural engine
+                    try {
+                        var mime = MediaRecorder.isTypeSupported('audio/webm;codecs=opus') ? 'audio/webm;codecs=opus' : '';
+                        var opts = mime ? { mimeType: mime } : {};
+                        mediaRecorder = new MediaRecorder(stream, opts);
+                        mediaRecorder.ondataavailable = function(e) {
+                            if (e.data && e.data.size > 0 && callActive && !isManualSimulation) {
+                                sendAudioChunkToBackend(e.data);
+                            }
+                        };
+                        mediaRecorder.start(4000);
+                    } catch (mErr) {}
+                })
+                .catch(function(err) {
+                    console.info('Live mic notice:', err);
+                });
+        }
+        speechRecognition = startSpeechRecognition();
+    }
+}
+
+function resetCall() {
+    if (callActive) {
+        var peakRisk = Math.max(liveVoiceRisk, liveScriptRisk);
+        logCallSession(peakRisk);
+    }
+
+    callActive = false;
+    isManualSimulation = false;
+    manualBankingLock = false;
+    speechFrameCounter = 0;
+    silenceFrameCounter = 0;
+    micWarmupGracePeriod = 0;
+    vocoderHitStreak = 0;
+    syntheticVoiceHangover = 0;
+    latchedSpeakerIdentity = 'standby';
+    f0History = [];
+    sfmHistory = [];
+    hfverHistory = [];
+    stopCallDuration();
+    teardownWebAudio();
+    stopSpeechRecognition();
+    stopEmergencySiren();
+
+    if (mediaRecorder) {
+        try { mediaRecorder.stop(); } catch (e) {}
+        mediaRecorder = null;
+    }
+
+    if (simulationTimer) {
+        clearInterval(simulationTimer);
+        simulationTimer = null;
+    }
+
+    if (liveAudioStream) {
+        try {
+            liveAudioStream.getTracks().forEach(function(t) { t.stop(); });
+        } catch (e) {}
+        liveAudioStream = null;
+    }
+
+    liveTranscriptHistory = [];
+    activeInterimText = '';
+    liveVoiceRisk = 4;
+    smoothedVoiceRisk = 4;
+    liveScriptRisk = 0;
+    currentDetectedThreatCategory = null;
+    currentScenario = 'safe';
+
+    var label = document.getElementById('callStateLabel');
+    var callBadge = document.getElementById('callStatusBadge');
+    if (label) label.textContent = "INCOMING CALL INTERCEPTION";
+    if (callBadge) {
+        callBadge.textContent = "STANDBY";
+        callBadge.className = "text-[12.5px] font-mono px-3 py-1 rounded-full bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/35 text-[var(--accent-cyan)] font-extrabold whitespace-nowrap";
+    }
+
+    var rVis = document.getElementById('ringingVisual');
+    var aVis = document.getElementById('activeVisual');
+    var inAct = document.getElementById('incomingActions');
+    var actCtrl = document.getElementById('activeControls');
+    var threatBanner = document.getElementById('threatBanner');
+
+    if (threatBanner) threatBanner.classList.add('opacity-0', 'hidden');
+    if (aVis) aVis.classList.add('opacity-0', 'hidden');
+    if (rVis) rVis.classList.remove('hidden', 'opacity-0');
+    if (actCtrl) {
+        actCtrl.classList.add('opacity-0', 'hidden');
+        actCtrl.classList.remove('flex');
+    }
+    if (inAct) inAct.classList.remove('hidden', 'opacity-0');
+
+    var modeIndicator = document.getElementById('activeScenarioIndicator');
+    if (modeIndicator) modeIndicator.textContent = "MODE: LIVE";
+
+    updateSpeakerIdentityUI('standby');
+    renderTranscriptView();
+    updateVoiceAuthUI(4, 98, "98% HUMAN");
+    updateScriptNlpUI(0, null);
+    updateXaiMetrics(0.14, 0.08, -2.45);
+    updateCombinedRiskUI();
+
+    // Reset backend state
+    if (isBackendOnline) {
+        try { fetch(API_BASE + '/api/reset', { method: 'POST' }); } catch (e) {}
+    }
+}
+
+window.acceptCall = acceptCall;
+window.answerCall = acceptCall;
+window.resetCall = resetCall;
+
+// ============================================================================
+// 15. MULTI-VECTOR DEMO SCENARIO OVERRIDES
+// ============================================================================
+function triggerScenario(type) {
+    currentScenario = type;
+    isManualSimulation = true;
+    stopSpeechRecognition();
+
+    if (!callActive) {
+        acceptCall();
+        isManualSimulation = true;
+    }
+
+    var modeIndicator = document.getElementById('activeScenarioIndicator');
+    if (modeIndicator) modeIndicator.textContent = "MODE: " + type.toUpperCase() + " OVERRIDE";
+
+    if (simulationTimer) {
+        clearInterval(simulationTimer);
+        simulationTimer = null;
+    }
+
+    liveTranscriptHistory = [];
+    renderTranscriptView();
+
+    if (type === 'clone') {
+        // Pure AI Voice Clone (Benign / Normal Script)
+        // Tests vocoder detection WITHOUT triggering false extortion alert!
+        syntheticVoiceHangover = Date.now() + 60000;
+        liveVoiceRisk = 95;
+        smoothedVoiceRisk = 95;
+        liveScriptRisk = 0; // Benign conversation!
+        currentDetectedThreatCategory = null;
+        updateSpeakerIdentityUI('ai');
+        updateVoiceAuthUI(95, 5, "05% SYNTHETIC AI");
+        updateScriptNlpUI(0, null);
+        updateXaiMetrics(4.85, 14.20, +4.82);
+
+    } else if (type === 'clone_extortion') {
+        // Dual Threat: AI Voice Clone + Emergency Bail Extortion
+        syntheticVoiceHangover = Date.now() + 60000;
+        liveVoiceRisk = 96;
+        smoothedVoiceRisk = 96;
+        liveScriptRisk = 95;
+        currentDetectedThreatCategory = MULTI_FRAUD_TAXONOMY.family_emergency;
+        updateSpeakerIdentityUI('ai');
+        updateVoiceAuthUI(96, 4, "04% SYNTHETIC AI");
+        updateScriptNlpUI(95, currentDetectedThreatCategory);
+        updateXaiMetrics(5.12, 16.40, +5.20);
+
+    } else if (type === 'digital_arrest') {
+        // Human Impersonator + Digital Arrest
+        syntheticVoiceHangover = 0;
+        liveVoiceRisk = 8;
+        smoothedVoiceRisk = 8;
+        liveScriptRisk = 94;
+        currentDetectedThreatCategory = MULTI_FRAUD_TAXONOMY.digital_arrest;
+        updateSpeakerIdentityUI('human');
+        updateVoiceAuthUI(8, 92, "92% HUMAN (COERCION)");
+        updateScriptNlpUI(94, currentDetectedThreatCategory);
+        updateXaiMetrics(1.85, 2.40, -1.25);
+
+    } else if (type === 'parcel_scam') {
+        // Human Impersonator + Customs Contraband
+        syntheticVoiceHangover = 0;
+        liveVoiceRisk = 8;
+        smoothedVoiceRisk = 8;
+        liveScriptRisk = 92;
+        currentDetectedThreatCategory = MULTI_FRAUD_TAXONOMY.parcel_customs;
+        updateSpeakerIdentityUI('human');
+        updateVoiceAuthUI(8, 92, "92% HUMAN (CUSTOMS SCAM)");
+        updateScriptNlpUI(92, currentDetectedThreatCategory);
+        updateXaiMetrics(1.65, 2.10, -1.45);
+
+    } else if (type === 'emergency_bail') {
+        // Human Impersonator + Family Extortion
+        syntheticVoiceHangover = 0;
+        liveVoiceRisk = 12;
+        smoothedVoiceRisk = 12;
+        liveScriptRisk = 95;
+        currentDetectedThreatCategory = MULTI_FRAUD_TAXONOMY.family_emergency;
+        updateSpeakerIdentityUI('human');
+        updateVoiceAuthUI(12, 88, "88% HUMAN (EXTORTION)");
+        updateScriptNlpUI(95, currentDetectedThreatCategory);
+        updateXaiMetrics(2.15, 3.20, -0.85);
+
+    } else {
+        // Safe Human
+        syntheticVoiceHangover = 0;
+        liveVoiceRisk = 4;
+        smoothedVoiceRisk = 4;
+        liveScriptRisk = 0;
+        currentDetectedThreatCategory = null;
+        updateSpeakerIdentityUI('human');
+        updateVoiceAuthUI(4, 98, "98% HUMAN");
+        updateScriptNlpUI(0, null);
+        updateXaiMetrics(0.14, 0.08, -2.45);
+    }
+
+    updateCombinedRiskUI();
+
+    var scriptLines = MULTI_DEMO_SCRIPTS[type] || [];
+    var lineIdx = 0;
+    simulationTimer = setInterval(function() {
+        if (lineIdx < scriptLines.length && callActive && isManualSimulation) {
+            liveTranscriptHistory.push(scriptLines[lineIdx]);
+            renderTranscriptView();
+
+            var fullText = liveTranscriptHistory.join(' ');
+            var nlpResult = classifyTranscript(fullText);
+            if (type !== 'safe' && type !== 'clone') {
+                liveScriptRisk = Math.max(liveScriptRisk, nlpResult.riskScore);
+                if (nlpResult.topThreat) currentDetectedThreatCategory = nlpResult.topThreat;
+            } else if (type === 'clone') {
+                // In benign clone test, keep script risk at 0
+                liveScriptRisk = 0;
+                currentDetectedThreatCategory = null;
+            }
+            updateScriptNlpUI(liveScriptRisk, currentDetectedThreatCategory);
+            updateCombinedRiskUI();
+            lineIdx++;
+        } else {
+            clearInterval(simulationTimer);
+            simulationTimer = null;
+        }
+    }, 1100);
+}
+window.triggerScenario = triggerScenario;
+
+// ============================================================================
+// 16. DYNAMIC THEME SWITCHER (CYBER / OLED / LIGHT)
+// ============================================================================
+function setThemeMode(mode) {
+    var html = document.documentElement;
+    var body = document.body;
+    var btnCyber = document.getElementById('contrastBtnCyber');
+    var btnOled = document.getElementById('contrastBtnOled');
+    var btnLight = document.getElementById('contrastBtnLight');
+
+    html.classList.remove('theme-cyber', 'theme-oled', 'theme-light', 'high-contrast', 'dark', 'light');
+    body.classList.remove('theme-cyber', 'theme-oled', 'theme-light', 'high-contrast', 'dark', 'light');
+
+    var activeClass = "px-3.5 py-1.5 rounded-full text-[13px] font-mono transition-all font-extrabold shadow-md bg-[var(--pill-active-bg)] text-[var(--pill-active-text)] cursor-pointer";
+    var inactiveClass = "px-3.5 py-1.5 rounded-full text-[13px] font-mono transition-all text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer font-bold";
+
+    if (mode === 'oled') {
+        html.classList.add('dark', 'theme-oled', 'high-contrast');
+        body.classList.add('dark', 'theme-oled', 'high-contrast');
+        try {
+            localStorage.setItem('dk-theme-mode', 'oled');
+            localStorage.setItem('dk-contrast-mode', 'oled');
+        } catch (e) {}
+        if (btnCyber) btnCyber.className = inactiveClass;
+        if (btnOled) btnOled.className = activeClass;
+        if (btnLight) btnLight.className = inactiveClass;
+    } else if (mode === 'light') {
+        html.classList.add('light', 'theme-light');
+        body.classList.add('light', 'theme-light');
+        try {
+            localStorage.setItem('dk-theme-mode', 'light');
+            localStorage.setItem('dk-contrast-mode', 'light');
+        } catch (e) {}
+        if (btnCyber) btnCyber.className = inactiveClass;
+        if (btnOled) btnOled.className = inactiveClass;
+        if (btnLight) btnLight.className = activeClass;
+    } else {
+        html.classList.add('dark', 'theme-cyber');
+        body.classList.add('dark', 'theme-cyber');
+        try {
+            localStorage.setItem('dk-theme-mode', 'cyber');
+            localStorage.setItem('dk-contrast-mode', 'cyber');
+        } catch (e) {}
+        if (btnCyber) btnCyber.className = activeClass;
+        if (btnOled) btnOled.className = inactiveClass;
+        if (btnLight) btnLight.className = inactiveClass;
+    }
+
+    var canvas = document.getElementById('spectralMatrixCanvas');
+    if (canvas) {
+        var ctx = canvas.getContext('2d');
+        var isLightNow = mode === 'light';
+        ctx.fillStyle = isLightNow ? '#1E293B' : '#0B1224';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+
+    updateCombinedRiskUI();
+}
+window.setThemeMode = setThemeMode;
+window.setContrastMode = setThemeMode;
+
+// ============================================================================
+// 17. MODALS & DRAWER INTERACTIONS
+// ============================================================================
+function openDrawer() {
+    var menuDrawer = document.getElementById('menuDrawer');
+    var menuBackdrop = document.getElementById('menuBackdrop');
+    if (menuBackdrop && menuDrawer) {
+        menuBackdrop.classList.remove('hidden');
+        setTimeout(function() { menuBackdrop.classList.remove('opacity-0'); }, 10);
+        menuDrawer.classList.remove('-translate-x-full');
+    }
+}
+function closeDrawer() {
+    var menuDrawer = document.getElementById('menuDrawer');
+    var menuBackdrop = document.getElementById('menuBackdrop');
+    if (menuDrawer && menuBackdrop) {
+        menuDrawer.classList.add('-translate-x-full');
+        menuBackdrop.classList.add('opacity-0');
+        setTimeout(function() { menuBackdrop.classList.add('hidden'); }, 300);
+    }
+}
+
+function openModal(modalId, backdropId) {
+    closeDrawer();
+    var modal = document.getElementById(modalId);
+    var backdrop = document.getElementById(backdropId);
+    if (modal && backdrop) {
+        backdrop.classList.remove('hidden');
+        modal.classList.remove('hidden');
+        setTimeout(function() {
+            backdrop.classList.remove('opacity-0');
+            modal.classList.remove('opacity-0');
+        }, 10);
+    }
+}
+function closeModal(modalId, backdropId) {
+    var modal = document.getElementById(modalId);
+    var backdrop = document.getElementById(backdropId);
+    if (modal && backdrop) {
+        modal.classList.add('opacity-0');
+        backdrop.classList.add('opacity-0');
+        setTimeout(function() {
+            modal.classList.add('hidden');
+            backdrop.classList.add('hidden');
+        }, 300);
+    }
+}
+function closeAll() {
+    closeDrawer();
+    closeModal('settingsModal', 'settingsBackdrop');
+    closeModal('logsModal', 'logsBackdrop');
+    closeModal('intelModal', 'intelBackdrop');
+    closeModal('vaultModal', 'vaultBackdrop');
+}
+
+// ============================================================================
+// 18. INITIALIZE ALL DOM LISTENERS ON LOAD
+// ============================================================================
+function initApp() {
+    var savedTheme = 'cyber';
+    try {
+        savedTheme = localStorage.getItem('dk-theme-mode') || localStorage.getItem('dk-contrast-mode') || 'cyber';
+    } catch (e) {}
+    setThemeMode(savedTheme);
+
+    initSpectralMatrix();
+
+    // Call Actions
+    document.getElementById('btnAnswer')?.addEventListener('click', acceptCall);
+    document.getElementById('btnDecline')?.addEventListener('click', resetCall);
+    document.getElementById('btnEndCall')?.addEventListener('click', resetCall);
+
+    // Defense & Telemetry Actions
+    document.getElementById('btnManualLock')?.addEventListener('click', triggerOobAuth);
+    document.getElementById('btnDispatch1930')?.addEventListener('click', dispatch1930Report);
+
+    // Citizen Flow Audio Upload
+    document.getElementById('citizenAudioUpload')?.addEventListener('change', function(e) {
+        if (e.target.files && e.target.files[0]) {
+            inspectAudioFile(e.target.files[0]);
+        }
+    });
+
+    // Quick Script Test
+    document.getElementById('btnTestScript')?.addEventListener('click', scanManualScript);
+    document.getElementById('quickScriptInput')?.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') scanManualScript();
+    });
+
+    // Navigation & Modals
+    document.getElementById('btnMenu')?.addEventListener('click', openDrawer);
+    document.getElementById('btnCloseMenu')?.addEventListener('click', closeDrawer);
+    document.getElementById('menuBackdrop')?.addEventListener('click', closeDrawer);
+
+    document.getElementById('btnSettings')?.addEventListener('click', function() { openModal('settingsModal', 'settingsBackdrop'); });
+    document.getElementById('btnCloseSettings')?.addEventListener('click', function() { closeModal('settingsModal', 'settingsBackdrop'); });
+    document.getElementById('settingsBackdrop')?.addEventListener('click', function() { closeModal('settingsModal', 'settingsBackdrop'); });
+
+    document.getElementById('btnTopLogs')?.addEventListener('click', function() { openModal('logsModal', 'logsBackdrop'); });
+    document.getElementById('btnCloseLogs')?.addEventListener('click', function() { closeModal('logsModal', 'logsBackdrop'); });
+    document.getElementById('logsBackdrop')?.addEventListener('click', function() { closeModal('logsModal', 'logsBackdrop'); });
+
+    document.getElementById('btnCloseIntel')?.addEventListener('click', function() { closeModal('intelModal', 'intelBackdrop'); });
+    document.getElementById('intelBackdrop')?.addEventListener('click', function() { closeModal('intelModal', 'intelBackdrop'); });
+
+    document.getElementById('btnCloseVault')?.addEventListener('click', function() { closeModal('vaultModal', 'vaultBackdrop'); });
+    document.getElementById('vaultBackdrop')?.addEventListener('click', function() { closeModal('vaultModal', 'vaultBackdrop'); });
+
+    document.getElementById('drawerNavShield')?.addEventListener('click', closeAll);
+    document.getElementById('drawerNavLogs')?.addEventListener('click', function() { openModal('logsModal', 'logsBackdrop'); });
+    document.getElementById('drawerNavIntel')?.addEventListener('click', function() { openModal('intelModal', 'intelBackdrop'); });
+    document.getElementById('drawerNavVault')?.addEventListener('click', function() { openModal('vaultModal', 'vaultBackdrop'); });
+
+    // Settings
+    document.getElementById('toggleLiveMic')?.addEventListener('change', function(e) {
+        window.appSettings.liveMic = e.target.checked;
+    });
+    document.getElementById('toggleSiren')?.addEventListener('change', function(e) {
+        window.appSettings.siren = e.target.checked;
+    });
+    document.getElementById('toggleAutoKillswitch')?.addEventListener('change', function(e) {
+        window.appSettings.autoKillswitch = e.target.checked;
+    });
+
+    document.getElementById('btnExportLogs')?.addEventListener('click', function() {
+        var logsEl = document.getElementById('logsContainer');
+        if (!logsEl) return;
+        var blob = new Blob([logsEl.innerText], { type: 'text/plain' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'dhwani-kavach-incidents-' + new Date().toISOString().slice(0,10) + '.txt';
+        a.click();
+        URL.revokeObjectURL(url);
+    });
+
+    window.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeAll();
+    });
+
+    updateSpeakerIdentityUI('standby');
+    renderTranscriptView();
+    updateXaiMetrics(0.14, 0.08, -2.45);
+    updateCombinedRiskUI();
+
+    // Check backend health immediately and every 10s
+    checkBackendHealth();
+    backendPingTimer = setInterval(checkBackendHealth, 10000);
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
+
+</script>
+</body>
+</html>

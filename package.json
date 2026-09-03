@@ -1,0 +1,28 @@
+{
+  "name": "dhwani-kavach",
+  "version": "2.4.0",
+  "description": "DHWANI-KAVACH - Real-Time AI Voice Clone & Fraud Defense Android Application",
+  "main": "static/index.html",
+  "scripts": {
+    "cap:add": "npx cap add android",
+    "cap:sync": "npx cap sync",
+    "cap:open": "npx cap open android",
+    "cap:build": "npx cap sync android && cd android && gradlew.bat assembleDebug",
+    "build:apk": "npx cap sync android && cd android && gradlew.bat assembleDebug",
+    "server": ".venv\\Scripts\\python.exe demo_server.py || python demo_server.py"
+  },
+  "keywords": [
+    "voice-clone-detection",
+    "ai-security",
+    "capacitor",
+    "android",
+    "deepfake-defense"
+  ],
+  "author": "Dhwani-Kavach Team",
+  "license": "MIT",
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/cli": "^6.2.0",
+    "@capacitor/core": "^6.2.0"
+  }
+}
