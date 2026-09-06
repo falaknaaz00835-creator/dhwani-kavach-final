@@ -2,3 +2,7 @@
 data/
 results/
 __pycache_/
+dist/
+build/
+*.zip
+

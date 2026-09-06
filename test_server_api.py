@@ -47,5 +47,32 @@ class TestDhwaniKavachAPI(unittest.TestCase):
         data_report = res_report.get_json()
         self.assertEqual(data_report.get("status"), "DISPATCHED")
 
+    def test_demo_audio(self):
+        for kind in ["real", "fake", "my_voice"]:
+            res = self.client.get(f'/api/demo_audio/{kind}')
+            self.assertEqual(res.status_code, 200, f"Failed for {kind}")
+            self.assertTrue(len(res.data) > 1000)
+
+    def test_score_audio_bonafide(self):
+        # Reset engine first
+        self.client.post('/api/reset')
+        with open("results/demo/demo_real_studio.wav", "rb") as fh:
+            res = self.client.post('/api/score', data=fh.read(), headers={'Content-Type': 'audio/wav'})
+        self.assertEqual(res.status_code, 200)
+        data = res.get_json()
+        self.assertNotIn("error", data)
+        self.assertLess(data.get("window_p", 1.0), 0.50)
+        self.assertIn(data.get("tier"), ["SAFE", "INSUFFICIENT_AUDIO"])
+
+    def test_score_audio_spoof(self):
+        # Reset engine first
+        self.client.post('/api/reset')
+        with open("results/demo/demo_fake_studio.wav", "rb") as fh:
+            res = self.client.post('/api/score', data=fh.read(), headers={'Content-Type': 'audio/wav'})
+        self.assertEqual(res.status_code, 200)
+        data = res.get_json()
+        self.assertNotIn("error", data)
+        self.assertGreater(data.get("window_p", 0.0), 0.70)
+
 if __name__ == '__main__':
     unittest.main()

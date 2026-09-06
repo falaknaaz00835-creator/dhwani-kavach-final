@@ -15,19 +15,20 @@ SAFE, SUSPICIOUS, HIGH_RISK, INSUFFICIENT = "SAFE", "SUSPICIOUS", "HIGH_RISK", "
 
 @dataclass
 class EngineConfig:
-    theta_lo: float = 0.5          # suspicious threshold (later: set from validation data)
-    theta_hi: float = 0.8          # high-risk threshold
+    theta_lo: float = 0.78         # suspicious threshold
+    theta_hi: float = 0.90         # high-risk threshold
+    theta_neutral: float = 0.70    # calibrated decision boundary for neutral evidence
     ema_alpha: float = 0.35        # smoothing for the number shown on screen
     min_voiced_seconds: float = 2.0   # refuse to judge before this much speech
     dwell_windows: int = 2         # consecutive agreeing windows needed to change tier
-    llr_clip: float = 4.0          # one window can add at most this much evidence
-    llr_decay: float = 0.97        # old evidence slowly forgotten (calls change topic)
+    llr_clip: float = 3.5          # one window can add at most this much evidence
+    llr_decay: float = 0.95        # old evidence slowly forgotten
 
 
 @dataclass
 class EngineState:
     ema: float = 0.0
-    llr: float = 0.0
+    llr: float = -1.5              # default to safe baseline
     n_windows: int = 0
     voiced_seconds: float = 0.0
     tier: str = INSUFFICIENT
@@ -45,17 +46,26 @@ class TemporalEngine:
         self.s = EngineState()
 
     @staticmethod
-    def _llr(p, eps=1e-6):
+    def _llr(p, theta_ref=0.5, eps=1e-6):
         p = min(max(p, eps), 1 - eps)
-        return math.log(p / (1 - p))
+        theta_ref = min(max(theta_ref, eps), 1 - eps)
+        # Log-odds ratio relative to calibrated decision threshold
+        return math.log(p / (1 - p)) - math.log(theta_ref / (1 - theta_ref))
 
     def update(self, p_spoof, voiced_seconds, t=None):
         c, s = self.cfg, self.s
         s.n_windows += 1
         s.voiced_seconds += voiced_seconds
         s.ema = p_spoof if s.n_windows == 1 else c.ema_alpha * p_spoof + (1 - c.ema_alpha) * s.ema
-        step = max(-c.llr_clip, min(c.llr_clip, self._llr(p_spoof)))
-        s.llr = s.llr * c.llr_decay + step * min(voiced_seconds, 1.0)  # evidence meter
+        
+        # If window is mostly silent/unvoiced (<0.6s), do not accumulate fake evidence
+        if voiced_seconds >= 0.6:
+            step = max(-c.llr_clip, min(c.llr_clip, self._llr(p_spoof, c.theta_neutral)))
+            s.llr = s.llr * c.llr_decay + step * min(voiced_seconds, 1.0)  # evidence meter
+        else:
+            # Gentle decay towards safe baseline during pauses
+            s.llr = s.llr * c.llr_decay - 0.15
+
         call_p = 1 / (1 + math.exp(-s.llr))
 
         if s.voiced_seconds < c.min_voiced_seconds:
