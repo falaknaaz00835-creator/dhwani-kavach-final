@@ -78,7 +78,7 @@ if os.path.exists(cal_file):
         print(f"calibration notice: could not load {cal_file} ({ex})")
 
 engine = TemporalEngine(EngineConfig(theta_lo=theta_lo, theta_hi=theta_hi, theta_neutral=theta_neutral))
-SECONDS = 4.0
+SECONDS = 1.0
 
 app = Flask(__name__, static_folder="static")
 
@@ -91,7 +91,6 @@ def score_audio(y):
     with torch.no_grad():
         p = float(torch.sigmoid(model(torch.from_numpy(x[None, None, ...]))))
     return p
-
 
 def decode_to_wav(raw_bytes, suffix):
     """Any browser audio format -> 16 kHz mono wav via real ffmpeg."""
