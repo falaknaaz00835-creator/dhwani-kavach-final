@@ -1,0 +1,15 @@
+{
+  "vad_min": 0.25,
+  "date": "2026-09-09",
+  "model": "CNN v2",
+  "n_silent": 0,
+  "n_voiced": 29,
+  "source": [
+    "falak.wav"
+  ],
+  "logit_bias": -3.677,
+  "theta_lo": 0.62,
+  "theta_hi": 0.9,
+  "real_voiced_mean_raw": 0.891,
+  "real_voiced_mean_calibrated": 0.332
+}
