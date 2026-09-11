@@ -1,5 +1,5 @@
 ﻿import unittest
-from ml.engine.voiceprint import scan
+from ml.engine.voiceprint_falak import scan
 
 class TestVoiceprintPillars(unittest.TestCase):
     def test_single_isolated_keyword_never_triggers_high_risk(self):

@@ -11,7 +11,7 @@ import glob
 
 from ml.audio.io import load
 from ml.engine.scam_radar import scan
-from ml.engine.voiceprint import enrol, verify, enrolled_names
+from ml.engine.voiceprint_falak import enrol, verify, enrolled_names
 
 print("=" * 70)
 print("PART 1 - SCAM-SCRIPT RADAR")

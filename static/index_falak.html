@@ -2963,7 +2963,7 @@ async function checkBackendHealth() {
     isBackendOnline = false;
     if (dot) dot.className = "w-2.5 h-2.5 rounded-full bg-[var(--text-muted)]";
     if (text) {
-        text.textContent = "ENGINE OFFLINE - SIMULATION ONLY";
+        text.textContent = "AI BACKEND: STANDALONE (CLIENT DSP)";
         text.className = "text-[12px] font-mono font-extrabold tracking-wider text-[var(--text-muted)] uppercase whitespace-nowrap";
     }
     return false;
@@ -2986,7 +2986,6 @@ async function sendAudioChunkToBackend(blob) {
 
                 if (data.tier === 'HIGH_RISK') {
                     syntheticVoiceHangover = Date.now() + 5000;
-                    dkBeep();
                     latchedSpeakerIdentity = 'ai';
                     liveVoiceRisk = Math.min(92, Math.max(88, cnnRisk));
                     smoothedVoiceRisk = liveVoiceRisk;
@@ -3747,26 +3746,5 @@ if (document.readyState === 'loading') {
 }
 
 </script>
-<script>fetch('/api/reset',{method:'POST'});</script>
-<script>
-/* mentor add: fresh call memory per visitor */
-fetch('/api/reset',{method:'POST'});
-
-/* mentor add: warning tone on HIGH RISK */
-var dkAudioCtx=null, dkLastBeep=0;
-function dkBeep(){
-  var now=Date.now(); if(now-dkLastBeep<2000) return; dkLastBeep=now;
-  try{
-    dkAudioCtx = dkAudioCtx || new (window.AudioContext||window.webkitAudioContext)();
-    var o=dkAudioCtx.createOscillator(), g=dkAudioCtx.createGain();
-    o.type='sine'; o.frequency.value=620;
-    g.gain.setValueAtTime(0.0001,dkAudioCtx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.12,dkAudioCtx.currentTime+0.05);
-    g.gain.exponentialRampToValueAtTime(0.0001,dkAudioCtx.currentTime+0.7);
-    o.connect(g); g.connect(dkAudioCtx.destination); o.start(); o.stop(dkAudioCtx.currentTime+0.75);
-  }catch(e){}
-}
-</script>
-
 </body>
 </html>

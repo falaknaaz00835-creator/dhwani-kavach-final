@@ -1,45 +1,33 @@
-# demo_server.py
+# demo_server.py  (v2 - full demo: call screen, context card, voiceprint, radar)
 # DHWANI-KAVACH LIVE DEMO SERVER
-#   browser mic -> 4-second chunks -> our CNN -> risk engine -> tier + action
-# Also accepts a .wav file upload (for demo machines with no mic).
-# Run: click Run, then open  http://127.0.0.1:8000  in your browser.
-# Stop: click the trash-can icon on the terminal panel in VS Code.
+# Run with the OLD trusted venv (OneDrive one) or any venv with the libs.
 
+import math
 import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
-import sys
+import json
 import tempfile
-import shutil
 
-# Auto-detect and relaunch via .venv if dependencies are not available in current interpreter
 try:
     from flask import Flask, request, jsonify, send_file
-    import numpy as np
-    import torch
 except ImportError:
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    venv_py = os.path.join(base_dir, ".venv", "Scripts", "python.exe")
-    if not os.path.exists(venv_py):
-        venv_py = os.path.join(base_dir, ".venv", "bin", "python")
-    if os.path.exists(venv_py) and os.path.abspath(sys.executable) != os.path.abspath(venv_py) and __name__ == "__main__":
-        import subprocess
-        print(f"[*] Relaunching Dhwani-Kavach server using virtual environment: {venv_py}")
-        sys.exit(subprocess.call([venv_py, os.path.abspath(__file__)] + sys.argv[1:]))
-    else:
-        print("[!] Required dependencies (flask/torch/numpy) are missing. Please run in .venv.")
-        raise
+    print("flask is not installed. Run 0c_install_flask.py once, then run this.")
+    raise SystemExit(0)
 
+import numpy as np
+import torch
 
 from ml.audio.io import load, SR, fix_length, energy_vad
 from ml.features.dsp import logmel
 from ml.models.cnn import MelCNN
-from ml.engine.temporal import TemporalEngine, policy_for
+from ml.engine.temporal import TemporalEngine, EngineConfig, policy_for
+from ml.engine.scam_radar import scan
+from ml.engine import voiceprint_falak
 from ml.augment.codecs import FFMPEG, run_quiet
 
 torch.set_num_threads(1)
 
-# ---- load the newest trained model we have ----
 MODEL_PATH, MODEL_NAME = None, None
 for cand, name in [("results/cnn_v2/model.pt", "CNN v2 (codec-hardened)"),
                    ("results/cnn_v1/model.pt", "CNN v1 (clean-trained)")]:
@@ -56,35 +44,41 @@ model.load_state_dict(torch.load(MODEL_PATH, map_location="cpu"))
 model.eval()
 print("demo model:", MODEL_NAME, "<-", MODEL_PATH)
 
-from ml.engine.temporal import EngineConfig, TemporalEngine, policy_for
-import json
-
-cal_file = "results/calibration.json"
-theta_lo = 0.78
-theta_hi = 0.90
-theta_neutral = 0.70
-vad_min = 0.25
-
-if os.path.exists(cal_file):
-    try:
-        with open(cal_file, "r") as fh:
-            cal = json.load(fh)
-            theta_lo = float(cal.get("theta_lo", theta_lo))
-            theta_hi = float(cal.get("theta_hi", theta_hi))
-            vad_min = float(cal.get("vad_min", vad_min))
-            theta_neutral = max(0.50, min(theta_lo - 0.08, (theta_lo + 0.50) / 2.0))
-            print(f"calibration: loaded {cal_file} (theta_lo={theta_lo:.2f}, theta_hi={theta_hi:.2f}, neutral={theta_neutral:.2f})")
-    except Exception as ex:
-        print(f"calibration notice: could not load {cal_file} ({ex})")
-
-engine = TemporalEngine(EngineConfig(theta_lo=theta_lo, theta_hi=theta_hi, theta_neutral=theta_neutral))
+# ---- Block 10 calibration: thresholds + silence gate ----
+_CAL_PATH = os.path.join("results", "calibration.json")
+CAL = json.load(open(_CAL_PATH)) if os.path.exists(_CAL_PATH) else {}
+engine = TemporalEngine(EngineConfig(
+    theta_lo=float(CAL.get("theta_lo", 0.62)),
+    theta_hi=float(CAL.get("theta_hi", 0.90)),
+))
+if CAL:
+    print(f"calibration: loaded {_CAL_PATH} "
+          f"(vad_min={CAL.get('vad_min')}, bias={CAL.get('logit_bias')}, "
+          f"theta {CAL.get('theta_lo')}/{CAL.get('theta_hi')})")
+else:
+    print("calibration: none found - DEFAULTS (run 14_block10_calibrate.py)")
 SECONDS = 4.0
+
+# ---- demo whitelist of OFFICIAL helpline numbers ----
+OFFICIAL_NUMBERS = {
+    "1930": "National Cyber Crime Helpline",
+    "112":  "National Emergency Number",
+    "100":  "Police",
+    "1800111109": "SBI Credit Card (example entry)",
+    "18602667766": "HDFC Bank (example entry)",
+}
 
 app = Flask(__name__, static_folder="static")
 
+try:
+    from flask_cors import CORS
+    CORS(app)
+    print("CORS: on")
+except ImportError:
+    print("CORS: flask-cors not installed - other devices may be blocked")
+
 
 def score_audio(y):
-    """y = 16 kHz mono numpy -> spoof probability for the last 4 s window."""
     piece = fix_length(np.asarray(y, dtype=np.float32), int(SECONDS * SR))
     x = logmel(piece)
     x = (x - x.mean()) / (x.std() + 1e-6)
@@ -94,29 +88,19 @@ def score_audio(y):
 
 
 def decode_to_wav(raw_bytes, suffix):
-    """Any browser audio format -> 16 kHz mono wav via real ffmpeg."""
     tmp = tempfile.mkdtemp(prefix="dk_demo_")
-    try:
-        inp = os.path.join(tmp, "in" + suffix)
-        out = os.path.join(tmp, "out.wav")
-        with open(inp, "wb") as fh:
-            fh.write(raw_bytes)
-        run_quiet([FFMPEG, "-hide_banner", "-y", "-i", inp,
-                   "-ar", str(SR), "-ac", "1", out])
-        y = load(out)
-        return y
-    finally:
-        shutil.rmtree(tmp, ignore_errors=True)
+    inp = os.path.join(tmp, "in" + suffix)
+    out = os.path.join(tmp, "out.wav")
+    with open(inp, "wb") as fh:
+        fh.write(raw_bytes)
+    run_quiet([FFMPEG, "-hide_banner", "-y", "-i", inp,
+               "-ar", str(SR), "-ac", "1", out])
+    return load(out)
 
 
 @app.route("/")
-@app.route("/index.html")
 def index():
-    if os.path.exists("static/index.html"):
-        return send_file("static/index.html")
-    if os.path.exists("index.html"):
-        return send_file("index.html")
-    return "Dhwani-Kavach index.html not found", 404
+    return send_file("static/index.html")
 
 
 @app.route("/api/reset", methods=["POST"])
@@ -125,74 +109,124 @@ def reset():
     return jsonify({"ok": True})
 
 
+@app.route("/api/context", methods=["POST"])
+@app.route("/api/ping", methods=["GET", "POST"])
+def ping():
+    return jsonify({"ok": True, "status": "ok", "online": True, "alive": True,
+                    "backend": "online", "model": "CNN v1"})
+def context():
+    d = request.get_json(force=True) if request.is_json else {}
+    number = str(d.get("number", "")).replace(" ", "")
+    notes = []
+    level = "neutral"
+    if number.startswith("140"):
+        notes.append("Number is in the TRAI 140 telemarketing series")
+        level = "warning"
+    if number in OFFICIAL_NUMBERS:
+        notes.append(f"Matches official listing: {OFFICIAL_NUMBERS[number]}")
+        level = "safe" if level == "neutral" else level
+    else:
+        if len(number) >= 10 and number[0] == "1":
+            notes.append("NOT in the official helpline list (bank/police numbers are published)")
+            level = "warning" if level == "neutral" else level
+    if d.get("claims_bank"):
+        notes.append("Caller claims to be from a bank but the number is not the bank's "
+                     "official helpline - classic impersonation pattern")
+        level = "danger"
+    return jsonify({"number": number, "level": level, "notes": notes})
+
+
+@app.route("/api/radar", methods=["POST"])
+def radar():
+    d = request.get_json(force=True) if request.is_json else {}
+    return jsonify(scan(d.get("text", "")))
+
+
+@app.route("/api/enrol", methods=["POST"])
+def enrol():
+    try:
+        name = "".join(c for c in request.form.get("name", "") if c.isalnum() or c in " _-").strip()
+        if not name:
+            return jsonify({"error": "name required"})
+        f = request.files.get("audio")
+        suffix = os.path.splitext(f.filename)[1] or ".wav"
+        y = decode_to_wav(f.read(), suffix)
+        voiceprint_falak.enrol(name, [y])
+        return jsonify({"ok": True, "name": name,
+                        "enrolled": voiceprint_falak.enrolled_names()})
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+
+@app.route("/api/verify", methods=["POST"])
+def verify():
+    try:
+        name = request.form.get("name", "").strip()
+        f = request.files.get("audio")
+        suffix = os.path.splitext(f.filename)[1] or ".wav"
+        y = decode_to_wav(f.read(), suffix)
+        return jsonify(voiceprint_falak.verify(name, y))
+    except Exception as e:
+        return jsonify({"error": str(e)})
+
+
+@app.route("/api/voiceprints", methods=["GET"])
+def voiceprints():
+    return jsonify({"enrolled": voiceprint_falak.enrolled_names()})
+
+
 @app.route("/api/score", methods=["POST"])
 def api_score():
     try:
-        raw_bytes = None
-        suffix = ".wav"
-        
-        # Check if multipart file upload
-        if "file" in request.files:
-            f = request.files["file"]
-            raw_bytes = f.read()
-            fname = f.filename.lower()
-            if fname.endswith(".webm"):
-                suffix = ".webm"
-            elif fname.endswith(".ogg"):
-                suffix = ".ogg"
-            elif fname.endswith(".mp3"):
-                suffix = ".mp3"
-            elif fname.endswith(".m4a"):
-                suffix = ".m4a"
-            else:
-                suffix = ".wav"
+        ctype = request.headers.get("Content-Type", "")
+        if "webm" in ctype or "ogg" in ctype:
+            suffix = ".webm"
+        elif "wav" in ctype:
+            suffix = ".wav"
+        elif "mpeg" in ctype or "mp3" in ctype:
+            suffix = ".mp3"
+        elif "mp4" in ctype or "m4a" in ctype:
+            suffix = ".m4a"
+        else:
+            suffix = ".bin"
+        if "multipart/form-data" in ctype:
+            f = next(iter(request.files.values()), None)
+            raw_bytes = f.read() if f is not None else b""
+            if f is not None and f.filename and "." in f.filename:
+                suffix = "." + f.filename.rsplit(".", 1)[-1].lower()
+        elif "json" in ctype:
+            import base64 as _b64
+            raw_bytes = b""
+            try:
+                d = request.get_json(force=True, silent=True) or {}
+                s = d.get("audio") or d.get("data") or d.get("blob") or d.get("file") or ""
+                if isinstance(s, str) and s:
+                    raw_bytes = _b64.b64decode(s.split(",")[-1])
+            except Exception:
+                raw_bytes = b""
+            if not raw_bytes:
+                raw_bytes = request.get_data()
         else:
             raw_bytes = request.get_data()
-            ctype = request.headers.get("Content-Type", "").lower()
-            if "webm" in ctype:
-                suffix = ".webm"
-            elif "ogg" in ctype:
-                suffix = ".ogg"
-            elif "mp3" in ctype:
-                suffix = ".mp3"
-            elif "m4a" in ctype or "mp4" in ctype:
-                suffix = ".m4a"
-            elif "wav" in ctype:
-                suffix = ".wav"
-            else:
-                suffix = ".bin"
-
-        if not raw_bytes or len(raw_bytes) == 0:
-            return jsonify({"error": "empty audio payload"})
-
-        y = decode_to_wav(raw_bytes, suffix)
-        if len(y) < SR:            # less than 1 second of audio
-            return jsonify({"error": "too short (minimum 1 second of audio required)"})
-            
+        print(f"[score] in: ctype={ctype}, bytes={len(raw_bytes)}, suffix={suffix}")
+        if not raw_bytes:
+            return jsonify({"error": "no audio received"})
+        y = decode_to_wav(raw_bytes, suffix)       
+        if len(y) < SR:
+            return jsonify({"error": "too short"})
         vfrac = float(energy_vad(y[-int(SECONDS * SR):]).mean())
-        voiced = vfrac * SECONDS
-
-        # Pause gate: If mostly silent, don't let normalized background hiss score as fake
-        if vfrac < vad_min:
-            p = 0.05
-            r = engine.update(p, voiced)
-            acoustic = {"synthetic_score": 8, "is_synthetic": False, "vocoder_artifacts": "CLEAN / BIOLOGICAL", "jitter": 4.8, "verdict": "AUTHENTIC HUMAN SPEECH"}
+        if vfrac < float(CAL.get("vad_min", 0.0)):
+            r = engine.update(0.5, 0.0)
         else:
-            p = score_audio(y)
-            from ml.engine.voiceprint import analyze_acoustic_synthetics
-            acoustic = analyze_acoustic_synthetics(y)
-            if acoustic.get("is_synthetic", False):
-                p = max(p, 0.88)
-            elif p < 0.65 and acoustic.get("jitter", 0) > 4.0:
-                p = min(p, 0.08)
-            r = engine.update(p, voiced)
-
+            raw = score_audio(y)
+            bias = float(CAL.get("logit_bias", 0.0))
+            q = min(max(raw, 1e-4), 1 - 1e-4)
+            p = 1.0 / (1.0 + math.exp(-(math.log(q / (1.0 - q)) + bias)))
+            r = engine.update(p, vfrac * SECONDS)
         pol = policy_for(r["tier"])
         return jsonify({
             "window_p": round(r["window_p"], 4),
             "call_p": round(r["call_p"], 4),
-            "llr": round(r.get("llr", 0.0), 3),
-            "ema": round(r.get("ema", 0.0), 4),
             "tier": r["tier"],
             "voiced_seconds": r["voiced_seconds"],
             "n_windows": r["n_windows"],
@@ -201,133 +235,22 @@ def api_score():
             "step_up": pol["step_up"],
             "allow_sensitive": pol["allow_sensitive_action"],
             "model": MODEL_NAME,
-            "acoustic": acoustic,
         })
     except Exception as e:
         return jsonify({"error": str(e)})
 
 
-@app.route("/api/demo_audio/<name>")
-def api_demo_audio(name):
-    allowed = {
-        "real": "results/demo/demo_real_studio.wav",
-        "fake": "results/demo/demo_fake_studio.wav",
-        "my_voice": "data/my_voice.wav"
-    }
-    target = allowed.get(name.lower())
-    if target and os.path.exists(target):
-        return send_file(target, mimetype="audio/wav")
-    return jsonify({"error": "demo file not found"}), 404
-
-
-from ml.engine.voiceprint import scan as scan_radar
-import time
-import uuid
-
-@app.route("/api/context", methods=["POST"])
-def api_context():
-    data = request.get_json(silent=True) or {}
-    number = data.get("number", "+91-140-987654")
-    claims_bank = data.get("claims_bank", False)
-    
-    notes = []
-    level = "normal"
-    
-    if "+91-140" in number or "140" in number:
-        notes.append("Caller prefix +91-140 indicates commercial telemarketer / unverified SIP trunk.")
-        level = "warning"
-    else:
-        notes.append("Carrier: VoLTE Encrypted Ingestion Active.")
-        
-    if claims_bank:
-        notes.append("MISMATCH: Financial institutions never initiate outbound customer verification from generic numbers.")
-        level = "danger"
-        
-    notes.append("Real-Time Neural Spectral Defense & Vocoder Phase Analyzer Active.")
-    
-    return jsonify({
-        "number": number,
-        "level": level,
-        "notes": notes,
-        "verified_registry": False,
-        "trust_score": 38 if level == "danger" else (62 if level == "warning" else 94)
-    })
-
-
-@app.route("/api/radar", methods=["POST"])
-def api_radar():
-    data = request.get_json(silent=True) or {}
-    text = data.get("text", "")
-    res = scan_radar(text)
-    return jsonify(res)
-
-
-@app.route("/api/action/oob", methods=["POST"])
-def api_oob():
-    data = request.get_json(silent=True) or {}
-    target_number = data.get("number", "+91-98765-XXXXX")
-    return jsonify({
-        "status": "INITIATED",
-        "action": "OUT_OF_BAND_CALLBACK",
-        "target": target_number,
-        "auth_pin": "582914",
-        "expires_in_sec": 60,
-        "timestamp": time.strftime("%H:%M:%S")
-    })
-
-
-@app.route("/api/action/report", methods=["POST"])
-def api_report():
-    data = request.get_json(silent=True) or {}
-    incident_id = f"I4C-DK-{uuid.uuid4().hex[:8].upper()}"
-    return jsonify({
-        "status": "DISPATCHED",
-        "incident_id": incident_id,
-        "recipient": "1930 Cyber Fraud / I4C National Helpline",
-        "severity": data.get("tier", "HIGH_RISK"),
-        "telemetry_attached": True,
-        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S")
-    })
-
-
-@app.after_request
-def add_cors_headers(response):
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-Requested-With"
-    return response
-
-
-@app.route("/api/ping", methods=["GET", "POST", "OPTIONS"])
-@app.route("/api/health", methods=["GET", "POST", "OPTIONS"])
-def api_ping():
-    return jsonify({
-        "status": "ONLINE",
-        "app": "DHWANI-KAVACH",
-        "model": MODEL_NAME,
-        "timestamp": time.time()
-    })
-
-
 if __name__ == "__main__":
     import socket
-    local_ip = "127.0.0.1"
     try:
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("8.8.8.8", 80))
-        local_ip = s.getsockname()[0]
-        s.close()
+        _s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        _s.connect(("8.8.8.8", 80))
+        _lan_ip = _s.getsockname()[0]
+        _s.close()
     except Exception:
-        pass
-
+        _lan_ip = "(run ipconfig to find it)"
     print()
-    print("=" * 60)
-    print("  [+]  DHWANI-KAVACH LIVE INFERENCE & DEFENSE SERVER  [+]")
-    print("=" * 60)
-    print(f"  Local Browser URL:   http://127.0.0.1:8000")
-    print(f"  Android Device URL: http://{local_ip}:8000")
-    print(f"  Android Emulator:   http://10.0.2.2:8000")
-    print("=" * 60)
-    print("(To stop server: Ctrl+C or kill terminal)")
-    print()
+    print("DHWANI-KAVACH demo v2. Open in your browser (Chrome recommended):")
+    print("       http://127.0.0.1:8000")
+    print(f"phones on the same Wi-Fi:  http://{_lan_ip}:8000")
     app.run(host="0.0.0.0", port=8000, debug=False)
