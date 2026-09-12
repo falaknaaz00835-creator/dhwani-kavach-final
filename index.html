@@ -3746,5 +3746,338 @@ if (document.readyState === 'loading') {
 }
 
 </script>
+<!-- ===== DK SPOKEN WARNING (safe-add: delete block to remove) ===== -->
+<script>
+(function(){
+  var spoken=0;
+  var of=window.fetch;
+  window.fetch=function(u,o){
+    return of.apply(this,arguments).then(function(r){
+      try{
+        var url=String((u&&u.url)||u);
+        if(url.indexOf('/api/score')>-1){
+          r.clone().json().then(function(j){
+            if(j&&j.tier==='HIGH_RISK'&&(Date.now()-spoken)>12000){
+              spoken=Date.now();
+              if(window.speechSynthesis){
+                var t=new SpeechSynthesisUtterance('Warning. This voice is not human. Do not share any information.');
+                t.rate=0.95;
+                window.speechSynthesis.speak(t);
+              }
+            }
+          }).catch(function(){});
+        }
+      }catch(e){}
+      return r;
+    });
+  };
+})();
+</script>
+<!-- ===== END DK SPOKEN WARNING ===== -->
+<!-- ===== DK TRUSTED CIRCLE — IDENTITY NET (safe-add: delete block to remove) ===== -->
+<style>
+  #dkcircle{position:fixed;left:14px;bottom:14px;width:290px;background:#0d1520;color:#e8eef7;
+    font-family:system-ui,'Segoe UI',sans-serif;border:1px solid #27405e;border-radius:12px;
+    box-shadow:0 8px 30px rgba(0,0,0,.45);z-index:99998;font-size:12px}
+  #dkcircle .bar{padding:9px 12px;cursor:pointer;font-weight:600;font-size:12.5px;
+    letter-spacing:.4px;color:#9fc3ff;user-select:none}
+  #dkcircle .body{display:none;padding:0 12px 12px}
+  #dkcircle.open .body{display:block}
+  #dkcircle .sec{margin:8px 0 4px;font-size:10.5px;letter-spacing:.8px;color:#6f93bd;font-weight:700}
+  #dkcircle input,#dkcircle select{width:100%;padding:6px 8px;margin:3px 0;border-radius:8px;
+    border:1px solid #2b4560;background:#0a1017;color:#e8eef7;font-size:12px;box-sizing:border-box}
+  #dkcircle button{width:100%;padding:7px;margin:3px 0;border:0;border-radius:8px;cursor:pointer;
+    font-weight:700;font-size:12px;background:#1d4ed8;color:#fff}
+  #dkcircle button:disabled{opacity:.6;cursor:default}
+  #dkcircle .vres{margin-top:6px;padding:7px 9px;border-radius:8px;font-weight:700;text-align:center}
+  #dkcircle .vmatch{background:#12351f;color:#7dff9e}
+  #dkcircle .vwrong{background:#3d1520;color:#ff8fa3}
+  #dkcircle .vunc{background:#3a3012;color:#ffd166}
+  #dkcircle .muted{margin-top:7px;color:#6f93bd;font-size:10.5px}
+</style>
+<div id="dkcircle">
+  <div class="bar" onclick="dkToggleC()">🧑‍🤝‍🧑 TRUSTED CIRCLE — IDENTITY NET <span id="dkcarw">▸</span></div>
+  <div class="body">
+    <div class="sec">ENROL (once, with consent)</div>
+    <input id="dkname" placeholder="name (e.g. yashika)" maxlength="20">
+    <button id="dkEnrolBtn" onclick="dkEnrol()">🎙 enrol this voice (8 s)</button>
+    <div class="sec">VERIFY CALLER</div>
+    <select id="dkwho"></select>
+    <button id="dkVerBtn" onclick="dkVerify()">🎙 verify caller (6 s)</button>
+    <div id="dkvres" class="vres vunc">—</div>
+    <div class="muted" id="dklist">enrolled: —</div>
+    <div class="muted">prints stay on this device only</div>
+  </div>
+</div>
+<script>
+function dkToggleC(){
+  var p=document.getElementById('dkcircle');
+  p.classList.toggle('open');
+  document.getElementById('dkcarw').textContent=p.classList.contains('open')?'▾':'▸';
+}
+async function dkRefresh(){
+  try{
+    var r=await fetch('/api/voiceprints'),j=await r.json(),s=document.getElementById('dkwho');
+    s.innerHTML='';
+    (j.enrolled||[]).forEach(function(n){var o=document.createElement('option');o.value=n;o.textContent=n;s.appendChild(o);});
+    document.getElementById('dklist').textContent='enrolled: '+((j.enrolled&&j.enrolled.length)?j.enrolled.join(', '):'none yet');
+  }catch(e){document.getElementById('dklist').textContent='enrolled: (engine offline)';}
+}
+function dkRec(btn,sec,cb){
+  btn.disabled=true;
+  navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
+    var mr=new MediaRecorder(stream),chunks=[];
+    mr.ondataavailable=function(e){chunks.push(e.data);};
+    mr.onstop=function(){
+      stream.getTracks().forEach(function(t){t.stop();});
+      btn.disabled=false;btn.textContent=btn.dataset.orig||'🎙 record';
+      cb(new Blob(chunks,{type:mr.mimeType||'audio/webm'}));
+    };
+    mr.start();
+    btn.dataset.orig=btn.textContent;
+    var left=sec;btn.textContent='● recording… '+left;
+    var iv=setInterval(function(){
+      left--;
+      if(left<=0){clearInterval(iv);try{mr.stop();}catch(e){}}
+      else btn.textContent='● recording… '+left;
+    },1000);
+  }).catch(function(e){btn.disabled=false;alert('Mic error: '+e.name);});
+}
+function dkEnrol(){
+  var name=document.getElementById('dkname').value.trim();
+  if(!name){alert('Type a name first (e.g. yashika)');return;}
+  dkRec(document.getElementById('dkEnrolBtn'),8,function(blob){
+    var fd=new FormData();fd.append('name',name);fd.append('audio',blob,'clip.webm');
+    document.getElementById('dkEnrolBtn').textContent='saving…';
+    fetch('/api/enrol',{method:'POST',body:fd}).then(function(r){return r.json();}).then(function(j){
+      var el=document.getElementById('dkvres');
+      if(j.ok){el.className='vres vmatch';el.textContent='✅ '+j.name+' enrolled';}
+      else{el.className='vres vunc';el.textContent='⚠ '+(j.error||'enrol failed');}
+      dkRefresh();
+    }).catch(function(){var el=document.getElementById('dkvres');el.className='vres vunc';el.textContent='⚠ engine offline';});
+  });
+}
+function dkVerify(){
+  var name=document.getElementById('dkwho').value;
+  if(!name){alert('Enrol someone first, then verify.');return;}
+  dkRec(document.getElementById('dkVerBtn'),6,function(blob){
+    var fd=new FormData();fd.append('name',name);fd.append('audio',blob,'clip.webm');
+    fetch('/api/verify',{method:'POST',body:fd}).then(function(r){return r.json();}).then(function(j){
+      var el=document.getElementById('dkvres');
+      if(j.error){el.className='vres vunc';el.textContent='⚠ '+j.error;return;}
+      var v=j.verdict||'';
+      el.className='vres '+(v==='MATCH'?'vmatch':(v.indexOf('WRONG')>-1?'vwrong':'vunc'));
+      el.textContent=v+'  (sim '+j.sim_claimed+', margin '+j.margin+')';
+    }).catch(function(){var el=document.getElementById('dkvres');el.className='vres vunc';el.textContent='⚠ engine offline';});
+  });
+}
+dkRefresh();
+</script>
+<!-- ===== END DK TRUSTED CIRCLE ===== -->
+<!-- ===== DK STAGE MODE — PROJECTOR VERDICT (safe-add: delete block to remove) ===== -->
+<style>
+  #dkstage{position:fixed;inset:0;display:none;z-index:100000;align-items:center;justify-content:center;
+    flex-direction:column;background:radial-gradient(ellipse at center,rgba(130,0,30,.55),rgba(25,0,10,.9));
+    color:#fff;font-family:system-ui,'Segoe UI',sans-serif;cursor:pointer;text-align:center}
+  #dkstage.on{display:flex}
+  #dkstage.amber{background:radial-gradient(ellipse at center,rgba(130,90,0,.5),rgba(30,22,0,.9))}
+  #dkstage .big{font-size:min(9vw,110px);font-weight:900;letter-spacing:2px;
+    text-shadow:0 6px 40px rgba(255,0,60,.55);animation:dkpulse 1.1s ease-in-out infinite}
+  #dkstage .sub{font-size:min(2.6vw,26px);margin-top:14px;color:#ffe0e6;max-width:85%}
+  #dkstage .tag{margin-top:26px;font-size:14px;color:#c9d8ec;border:1px solid rgba(255,255,255,.3);
+    padding:8px 18px;border-radius:20px}
+  @keyframes dkpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+  body.dkflash{box-shadow:inset 0 0 0 6px #ff4d6d,inset 0 0 140px rgba(255,77,109,.35)}
+</style>
+<div id="dkstage" onclick="dkStageClear()">
+  <div class="big">🚨 HIGH RISK</div>
+  <div class="sub" id="dkstagesub">SYNTHETIC / FRAUD VOICE DETECTED — DO NOT SHARE ANY INFORMATION</div>
+  <div class="tag">click anywhere to clear</div>
+</div>
+<script>
+function dkStageClear(){
+  document.getElementById('dkstage').classList.remove('on');
+  document.body.classList.remove('dkflash');
+}
+(function(){
+  var lastTier=null,lastShow=0;
+  var SUB={HIGH_RISK:'SYNTHETIC / FRAUD VOICE DETECTED — DO NOT SHARE ANY INFORMATION',
+           SUSPICIOUS:'SUSPICIOUS CALL — VERIFY WHO IS SPEAKING BEFORE YOU ACT'};
+  var of=window.fetch;
+  window.fetch=function(u,o){
+    return of.apply(this,arguments).then(function(r){
+      try{
+        var url=String((u&&u.url)||u);
+        if(url.indexOf('/api/score')>-1){
+          r.clone().json().then(function(j){
+            if(!j||!j.tier)return;
+            var t=j.tier;
+            if(t==='HIGH_RISK'||t==='SUSPICIOUS'){
+              if(lastTier!==t||Date.now()-lastShow>8000){
+                lastShow=Date.now();
+                var el=document.getElementById('dkstage');
+                el.classList.toggle('amber',t==='SUSPICIOUS');
+                var s=SUB[t];if(j.action)s+='  |  '+j.action;
+                document.getElementById('dkstagesub').textContent=s;
+                el.classList.add('on');
+                document.body.classList.add('dkflash');
+              }
+            }else if(t==='SAFE'&&(j.call_p||0)<0.4){
+              document.body.classList.remove('dkflash');
+            }
+            lastTier=t;
+          }).catch(function(){});
+        }
+      }catch(e){}
+      return r;
+    });
+  };
+  document.addEventListener('click',function(e){
+    var txt=((e.target&&(e.target.textContent||''))+'').trim();
+    if(/new call|reset/i.test(txt))dkStageClear();
+  },true);
+})();
+</script>
+<!-- ===== END DK STAGE MODE ===== -->
+<!-- ===== DK THREAT INTEL — NUMBER CHECK (safe-add: delete block to remove) ===== -->
+<style>
+  #dkintel{position:fixed;top:14px;left:14px;width:290px;background:#0d1520;color:#e8eef7;
+    font-family:system-ui,'Segoe UI',sans-serif;border:1px solid #27405e;border-radius:12px;
+    box-shadow:0 8px 30px rgba(0,0,0,.45);z-index:99997;font-size:12px}
+  #dkintel .bar{padding:9px 12px;cursor:pointer;font-weight:600;font-size:12.5px;
+    letter-spacing:.4px;color:#9fc3ff;user-select:none}
+  #dkintel .body{display:none;padding:0 12px 12px}
+  #dkintel.open .body{display:block}
+  #dkintel input[type=text]{width:100%;padding:6px 8px;margin:3px 0;border-radius:8px;
+    border:1px solid #2b4560;background:#0a1017;color:#e8eef7;font-size:12px;box-sizing:border-box}
+  #dkintel label{display:flex;align-items:center;gap:6px;margin:6px 0;color:#bcd0ea;font-size:11.5px}
+  #dkintel button{width:100%;padding:7px;border:0;border-radius:8px;cursor:pointer;
+    font-weight:700;font-size:12px;background:#1d4ed8;color:#fff;margin-top:4px}
+  #dkintel .res{margin-top:8px;border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5;display:none}
+  #dkintel .ok{background:#12351f;color:#9dffbb}
+  #dkintel .warn{background:#3a3012;color:#ffd166}
+  #dkintel .bad{background:#3d1520;color:#ff9fb0}
+</style>
+<div id="dkintel">
+  <div class="bar" onclick="var p=document.getElementById('dkintel');p.classList.toggle('open')">📞 THREAT INTEL — CHECK BEFORE ANSWERING ▸</div>
+  <div class="body">
+    <input id="dknum" type="text" value="+91-140-9876543" placeholder="caller number">
+    <label><input type="checkbox" id="dkbank"> caller claims to be from a bank</label>
+    <button onclick="dkCheckNum()">CHECK NUMBER</button>
+    <div class="res" id="dkres"></div>
+  </div>
+</div>
+<script>
+function dkCheckNum(){
+  var num=(document.getElementById('dknum').value||'').replace(/[^0-9]/g,'');
+  if(num.length===12&&num.substring(0,2)==='91')num=num.substring(2);
+  var bank=document.getElementById('dkbank').checked;
+  fetch('/api/context',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({number:num,claims_bank:bank})})
+  .then(function(r){return r.json();})
+  .then(function(j){
+    var el=document.getElementById('dkres');
+    el.style.display='block';
+    el.className='res '+(j.level==='danger'?'bad':(j.level==='safe'?'ok':'warn'));
+    var ttl={danger:'🚨 DANGER — IMPERSONATION PATTERN',warning:'⚠ WARNING',
+             safe:'✅ OFFICIAL NUMBER',neutral:'ℹ NO RECORD'}[j.level]||'ℹ INFO';
+    el.innerHTML='<b>'+ttl+'</b><br>'+(j.notes||[]).map(function(n){return '• '+n;}).join('<br>');
+  }).catch(function(){
+    var el=document.getElementById('dkres');el.style.display='block';el.className='res warn';
+    el.innerHTML='⚠ engine offline — start server';
+  });
+}
+</script>
+<!-- ===== END DK THREAT INTEL ===== -->
+<!-- ===== DK SECURITY EXTRAS — LIVENESS CHALLENGE + HASH-STAMPED REPORT ===== -->
+<style>
+  #dksec{position:fixed;top:14px;right:14px;width:300px;background:#0d1520;color:#e8eef7;
+    font-family:system-ui,'Segoe UI',sans-serif;border:1px solid #27405e;border-radius:12px;
+    box-shadow:0 8px 30px rgba(0,0,0,.45);z-index:99996;font-size:12px}
+  #dksec .bar{padding:9px 12px;cursor:pointer;font-weight:600;font-size:12.5px;
+    letter-spacing:.4px;color:#9fc3ff;user-select:none}
+  #dksec .body{display:none;padding:0 12px 12px}
+  #dksec.open .body{display:block}
+  #dksec .sec{margin:8px 0 4px;font-size:10.5px;letter-spacing:.8px;color:#6f93bd;font-weight:700}
+  #dksec .code{background:#0a1017;border:1px dashed #2b4560;border-radius:8px;padding:10px;
+    text-align:center;font-family:Consolas,monospace;font-size:16px;font-weight:700;color:#9fd8ff;
+    letter-spacing:2px;margin:4px 0}
+  #dksec button{width:100%;padding:7px;margin:3px 0;border:0;border-radius:8px;cursor:pointer;
+    font-weight:700;font-size:12px;background:#1d4ed8;color:#fff}
+  #dksec .row2{display:flex;gap:6px}
+  #dksec .row2 button{margin:0}
+  #dksec .g{background:#156d3b}#dksec .r{background:#9b1c34}
+  #dksec .lres{margin-top:6px;padding:7px 9px;border-radius:8px;font-weight:700;text-align:center;font-size:11.5px}
+  #dksec .ok{background:#12351f;color:#7dff9e}
+  #dksec .bad{background:#3d1520;color:#ff8fa3}
+  #dksec .unc{background:#3a3012;color:#ffd166}
+  #dksec .hint{color:#6f93bd;font-size:10.5px;margin:2px 0 6px}
+  #dksec .hash{display:none;background:#0a1017;border:1px solid #1d2f47;border-radius:8px;
+    padding:7px;font-family:Consolas,monospace;font-size:10px;color:#8fe3b0;word-break:break-all;margin-top:6px}
+  #dksec .muted{margin-top:7px;color:#6f93bd;font-size:10.5px}
+</style>
+<div id="dksec">
+  <div class="bar" onclick="var p=document.getElementById('dksec');p.classList.toggle('open')">🔐 SECURITY EXTRAS — ANTI-REPLAY ▸</div>
+  <div class="body">
+    <div class="sec">LIVENESS CHALLENGE (defeats replay / clone)</div>
+    <div class="code" id="dkcode">—</div>
+    <button onclick="dkNewChallenge()">🎲 generate code word</button>
+    <div class="hint">read it to the caller • ask them to repeat it back</div>
+    <div class="row2">
+      <button class="g" onclick="dkLive(true)">caller repeated ✓</button>
+      <button class="r" onclick="dkLive(false)">failed / refused ✗</button>
+    </div>
+    <div class="lres unc" id="dkliveres">—</div>
+    <div class="sec">EVIDENCE-GRADE REPORT</div>
+    <button onclick="dkStamp()">🧾 hash-stamp call report (SHA-256)</button>
+    <div class="hash" id="dkhash">—</div>
+    <button onclick="dkCopyStamp()">📋 copy stamped report</button>
+    <div class="muted">tamper-evident evidence • attach to 1930 / cybercrime.gov.in</div>
+  </div>
+</div>
+<script>
+var dkLiveState=null,dkLastStamp=null;
+var DKW=['NEEL','SURAJ','MOR','KAGAZ','BADAL','DIYA','PEEPAL','RAVI','CHAND','MOTI','KAMAL','BHAAV'];
+function dkNewChallenge(){
+  var a=DKW[Math.floor(Math.random()*DKW.length)],b=DKW[Math.floor(Math.random()*DKW.length)];
+  var n=Math.floor(10+Math.random()*90);
+  document.getElementById('dkcode').textContent=a+'-'+b+'-'+n;
+  var el=document.getElementById('dkliveres');
+  el.className='lres unc';el.textContent='challenge issued — awaiting caller';
+  dkLiveState=null;
+}
+function dkLive(ok){
+  if(document.getElementById('dkcode').textContent==='—'){alert('Generate a code word first');return;}
+  dkLiveState=ok;
+  var el=document.getElementById('dkliveres');
+  el.className='lres '+(ok?'ok':'bad');
+  el.textContent=ok?'✅ LIVENESS PASSED — live human on the line'
+                   :'🚨 REPLAY / CLONE SUSPECTED — do not trust this call';
+}
+async function dkSha(s){
+  if(window.crypto&&crypto.subtle){
+    var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));
+    return Array.from(new Uint8Array(b)).map(function(x){return ('0'+x.toString(16)).slice(-2);}).join('');
+  }
+  var h=0x811c9dc5;
+  for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)>>>0;}
+  return 'fnv1a-'+h.toString(16);
+}
+async function dkStamp(){
+  if(window.dkReport)window.dkReport();
+  var txt=window.__dkReportText||('DHWANI KAVACH — CALL REPORT\n'+new Date().toLocaleString());
+  txt+='\nLiveness challenge: '+(dkLiveState===null?'not performed':
+        (dkLiveState?'PASSED (caller repeated the code word)':'FAILED (replay / clone suspected)'));
+  var h=await dkSha(txt);
+  dkLastStamp=txt+'\n\nIntegrity (SHA-256): '+h;
+  var el=document.getElementById('dkhash');
+  el.style.display='block';el.textContent='SHA-256: '+h;
+}
+async function dkCopyStamp(){
+  if(!dkLastStamp)await dkStamp();
+  if(dkLastStamp&&navigator.clipboard)navigator.clipboard.writeText(dkLastStamp);
+}
+</script>
+<!-- ===== END DK SECURITY EXTRAS ===== -->
 </body>
 </html>
