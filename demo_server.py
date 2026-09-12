@@ -1,6 +1,5 @@
 # demo_server.py  (v2 - full demo: call screen, context card, voiceprint, radar)
 # DHWANI-KAVACH LIVE DEMO SERVER
-# Run with the OLD trusted venv (OneDrive one) or any venv with the libs.
 
 import math
 import os
