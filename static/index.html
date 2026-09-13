@@ -4331,7 +4331,7 @@ async function dkCopyStamp(){
     d.textContent+='  (duration '+dur()+')';
     c.classList.add('on');
     if(timer)clearTimeout(timer);
-    timer=setTimeout(dkReset,5000);
+    timer=setTimeout(dkReset,12000);
   }
   function dkReset(){
     if(timer)clearTimeout(timer);timer=null;

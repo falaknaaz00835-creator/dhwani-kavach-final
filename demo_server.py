@@ -60,11 +60,32 @@ SECONDS = 4.0
 
 # ---- demo whitelist of OFFICIAL helpline numbers ----
 OFFICIAL_NUMBERS = {
+    # national helplines (publicly published)
     "1930": "National Cyber Crime Helpline",
     "112":  "National Emergency Number",
     "100":  "Police",
-    "1800111109": "SBI Credit Card (example entry)",
-    "18602667766": "HDFC Bank (example entry)",
+    "108":  "Ambulance Service",
+    "1091": "Women Helpline",
+    "1098": "Child Helpline (Childline)",
+    "139":  "Rail Madad - Indian Railways",
+    "1906": "LPG Emergency Helpline",
+    "1909": "TRAI DND / Telemarketing Complaints",
+    "1947": "UIDAI / Aadhaar Helpline",
+    "14567": "Elder Line - Senior Citizens",
+    "198":  "Telecom Customer Care (all operators)",
+    # major banks - officially published customer-care numbers
+    "1800112211": "State Bank of India - customer care",
+    "1800227222": "HDFC Bank - customer care",
+    "18001024242": "ICICI Bank - customer care",
+    "18004195000": "Axis Bank - customer care",
+    "18602662666": "Kotak Mahindra Bank - customer care",
+    "18001802222": "Punjab National Bank - customer care",
+    "1800223344": "Bank of Baroda - customer care",
+    "1800222244": "Union Bank of India - customer care",
+    "18004250018": "Canara Bank - customer care",
+    "18605001111": "IDFC FIRST Bank - customer care",
+    "18602677777": "IndusInd Bank - customer care",
+    "18001200": "Yes Bank - customer care",
 }
 
 app = Flask(__name__, static_folder="static")
@@ -107,15 +128,23 @@ def reset():
     engine.reset()
     return jsonify({"ok": True})
 
-
-@app.route("/api/context", methods=["POST"])
 @app.route("/api/ping", methods=["GET", "POST"])
 def ping():
-    return jsonify({"ok": True, "status": "ok", "online": True, "alive": True,
-                    "backend": "online", "model": "CNN v1"})
+    return jsonify({"ok": True, "status": "ok", "online": True,
+                    "backend": "online", "model": MODEL_NAME})
+
+@app.route("/api/context", methods=["POST"])
 def context():
+    """What do we know about this number? TRAI numbering rules +
+    local curated registry (live Sanchar Saathi API is the roadmap)."""
     d = request.get_json(force=True) if request.is_json else {}
-    number = str(d.get("number", "")).replace(" ", "")
+    number = str(d.get("number", ""))
+    for ch in "+-() ":
+        number = number.replace(ch, "")
+    if number.startswith("91") and len(number) == 12:
+        number = number[2:]
+    elif number.startswith("0") and len(number) == 11:
+        number = number[1:]
     notes = []
     level = "neutral"
     if number.startswith("140"):
@@ -124,21 +153,21 @@ def context():
     if number in OFFICIAL_NUMBERS:
         notes.append(f"Matches official listing: {OFFICIAL_NUMBERS[number]}")
         level = "safe" if level == "neutral" else level
+    elif len(number) == 10 and number[0] in "6789":
+        notes.append("Mobile number - registries cannot verify individuals; "
+                     "judge the call by what the caller says and asks for")
+    elif number.startswith("1800") or number.startswith("1860"):
+        notes.append("Toll-free number not in our local registry - if it claims "
+                     "to be your bank, verify on the bank's official website")
     else:
-        if len(number) >= 10 and number[0] == "1":
-            notes.append("NOT in the official helpline list (bank/police numbers are published)")
-            level = "warning" if level == "neutral" else level
-    if d.get("claims_bank"):
-        notes.append("Caller claims to be from a bank but the number is not the bank's "
-                     "official helpline - classic impersonation pattern")
+        notes.append("Not in our local registry of official helplines")
+    if d.get("claims_bank") and number not in OFFICIAL_NUMBERS:
+        notes.append("Caller claims to be from a bank but the number is not the "
+                     "bank's official helpline - classic impersonation pattern")
         level = "danger"
     return jsonify({"number": number, "level": level, "notes": notes})
 
 
-@app.route("/api/radar", methods=["POST"])
-def radar():
-    d = request.get_json(force=True) if request.is_json else {}
-    return jsonify(scan(d.get("text", "")))
 
 
 @app.route("/api/enrol", methods=["POST"])
