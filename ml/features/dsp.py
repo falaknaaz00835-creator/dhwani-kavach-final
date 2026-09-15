@@ -28,11 +28,44 @@ def _fft_bands(y, sr):
     freqs = np.fft.rfftfreq(len(y), 1.0 / sr)
     return freqs, Y
 
+def _np_pitch(y, sr, fmin=65, fmax=400, frame=1024, hop=160):
+    """Standalone numpy autocorrelation F0 (no librosa.yin = no numba DLL)."""
+    y = np.asarray(y, dtype=np.float64)
+    if len(y) < frame:
+        return np.array([])
+    lag_min = max(2, int(sr / fmax))
+    lag_max = min(int(sr / fmin), frame - 1)
+    if lag_max <= lag_min:
+        return np.array([])
+    n = 1 + (len(y) - frame) // hop
+    sz = 1
+    while sz < 2 * frame:
+        sz *= 2
+    out = []
+    for i in range(n):
+        seg = y[i * hop:i * hop + frame]
+        seg = seg - seg.mean()
+        if float(np.dot(seg, seg)) < 1e-7:
+            continue
+        F = np.fft.rfft(seg, sz)
+        ac = np.fft.irfft(F * np.conj(F))[:lag_max + 1]
+        if ac[0] <= 0:
+            continue
+        ac = ac / ac[0]
+        lag = lag_min + int(np.argmax(ac[lag_min:lag_max + 1]))
+        if ac[lag] > 0.30:
+            out.append(sr / lag)
+    return np.array(out)
 
 def _pitch(y, sr):
     """Track the voice pitch (F0) and return (f0_track, voiced_mask)."""
-    # hop_length=HOP keeps the pitch frames aligned with the energy frames below
-    f0 = librosa.yin(y, fmin=65, fmax=400, sr=sr, frame_length=1024, hop_length=HOP)
+    f0 = _np_pitch(y, sr)
+    rms = librosa.feature.rms(y=y, frame_length=N_FFT, hop_length=HOP)[0]
+    n = min(len(f0), len(rms))
+    f0, rms = f0[:n], rms[:n]
+    voiced = rms > (0.10 * (rms.max() + 1e-9))
+    return f0, voiced
+
     rms = librosa.feature.rms(y=y, frame_length=N_FFT, hop_length=HOP)[0]
     # 'voiced' = frames that are loud enough (simple but works)
     n = min(len(f0), len(rms))
