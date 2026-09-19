@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" class="dark theme-cyber">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
-<title>Dhwani-Kavach — Real-Time AI Voice Clone & Multi-Category Vishing Defense Interceptor (SIH26104)</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
-
-<script id="tailwind-config">
-if (typeof tailwind !== 'undefined') {
+<!DOCTYPE html><html lang="en" class="dark theme-cyber"><head><meta charset="utf-8"><meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"><title>Dhwani-Kavach — Real-Time AI Voice Clone & Multi-Category Vishing Defense Interceptor (SIH26104)</title><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"><script id="tailwind-config">if (typeof tailwind !== 'undefined') {
     tailwind.config = {
         darkMode: "class",
         theme: {
@@ -33,11 +20,7 @@ if (typeof tailwind !== 'undefined') {
             }
         }
     };
-}
-</script>
-
-<style>
-/* ==========================================================================
+}</script><style>/* ==========================================================================
    OFFLINE CDN FALLBACKS & ICON STYLING
    ========================================================================== */
 .material-symbols-outlined {
@@ -370,676 +353,7 @@ html.theme-cyber .kw-inline-lottery, html.theme-oled .kw-inline-lottery { color:
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
-</style>
-</head>
-
-<body class="flex flex-col min-h-screen">
-
-<!-- ==========================================================================
-     TOP COMMAND CENTER BAR (STICKY HEADER)
-     ========================================================================== -->
-<header class="w-full bg-[var(--bg-card)]/95 backdrop-blur-md border-b border-[var(--border-card)] sticky top-0 z-50 px-4 sm:px-8 py-3.5 flex items-center justify-between shadow-sm">
-    <!-- Left: Brand & Threat Defense Indicator -->
-    <div class="flex items-center gap-3.5">
-        <button id="btnMenu" type="button" class="text-[var(--text-muted)] hover:text-[var(--accent-cyan)] p-1.5 rounded-lg hover:bg-[var(--accent-cyan)]/10 transition-all cursor-pointer flex items-center justify-center active:scale-95" aria-label="Open Navigation Menu">
-            <span class="material-symbols-outlined text-[28px]">menu</span>
-        </button>
-
-        <div class="flex items-center gap-2.5">
-            <span class="material-symbols-outlined text-[var(--accent-cyan)] text-3xl sm:text-4xl animate-pulse">security</span>
-            <div class="flex flex-col">
-                <span class="font-mono font-extrabold text-[22px] sm:text-[24px] tracking-[0.16em] text-[var(--text-primary)] uppercase leading-tight">DHWANI-KAVACH</span>
-                <span class="text-[13px] font-mono text-[var(--text-muted)] hidden sm:inline font-bold">Real-Time AI Voice Clone &amp; Multi-Vector Vishing Defense • SIH26104</span>
-            </div>
-        </div>
-
-        <!-- Live Status Badge -->
-        <div id="headerStatusBadge" class="hidden md:flex items-center gap-2 ml-4 px-4 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)]">
-            <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span>
-            <span id="headerStatusText" class="text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--header-badge-text)] uppercase whitespace-nowrap">SYSTEM SECURE</span>
-        </div>
-
-        <!-- AI Neural Model Backend Status Badge -->
-        <div id="backendStatusBadge" class="hidden lg:flex items-center gap-2 ml-2 px-3.5 py-1.5 rounded-full bg-[var(--bg-card-sub)] border border-[var(--border-card)]" title="PyTorch CNN v1/v2 Inference Engine Status">
-            <span id="backendStatusDot" class="w-2.5 h-2.5 rounded-full bg-[var(--accent-cyan)] animate-pulse"></span>
-            <span id="backendStatusText" class="text-[12.5px] font-mono font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase whitespace-nowrap">BACKEND: CHECKING...</span>
-        </div>
-    </div>
-
-    <!-- Center: Live Registry Meta Ticker (Desktop) -->
-    <div class="hidden xl:flex items-center gap-4 text-[13.5px] font-mono text-[var(--text-muted)] font-bold">
-        <span class="flex items-center gap-1.5 text-[var(--accent-cyan)] whitespace-nowrap">
-            <span class="w-2 h-2 rounded-full bg-[var(--accent-cyan)]"></span>
-            I4C 1930 ACTIVE DEFENSE
-        </span>
-        <span>•</span>
-        <span class="whitespace-nowrap">LATENCY: &lt; 160ms</span>
-        <span>•</span>
-        <span class="whitespace-nowrap">DSP: TEMPORAL-ADAPTIVE V5.0</span>
-    </div>
-
-    <!-- Right: Theme Switcher Pills & Modal Actions -->
-    <div class="flex items-center gap-3">
-        <!-- 3-Mode Theme Toggle Pill: [ CYBER ] [ OLED ] [ LIGHT ] -->
-        <div class="flex items-center bg-[var(--bg-card-sub)] p-1 rounded-full border border-[var(--border-card)] shadow-inner" title="Switch Interface Theme">
-            <button id="contrastBtnCyber" type="button" class="px-3.5 py-1.5 rounded-full text-[13px] font-mono transition-all font-extrabold bg-[var(--pill-active-bg)] text-[var(--pill-active-text)] cursor-pointer" onclick="setThemeMode('cyber')">
-                CYBER
-            </button>
-            <button id="contrastBtnOled" type="button" class="px-3.5 py-1.5 rounded-full text-[13px] font-mono transition-all text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer font-bold" onclick="setThemeMode('oled')">
-                OLED
-            </button>
-            <button id="contrastBtnLight" type="button" class="px-3.5 py-1.5 rounded-full text-[13px] font-mono transition-all text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer font-bold" onclick="setThemeMode('light')">
-                LIGHT
-            </button>
-        </div>
-
-        <!-- Quick Incident Logs Button -->
-        <button id="btnTopLogs" type="button" class="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[var(--bg-card-sub)] border border-[var(--border-card)] hover:border-[var(--accent-cyan)] text-[13px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-all cursor-pointer font-bold whitespace-nowrap">
-            <span class="material-symbols-outlined text-[19px]">history</span>
-            <span>LOGS</span>
-        </button>
-
-        <!-- Settings Button -->
-        <button id="btnSettings" type="button" class="text-[var(--text-muted)] hover:text-[var(--accent-cyan)] p-1.5 rounded-lg hover:bg-[var(--accent-cyan)]/10 transition-all cursor-pointer flex items-center justify-center active:scale-95" aria-label="Settings">
-            <span class="material-symbols-outlined text-[24px]">settings</span>
-        </button>
-    </div>
-</header>
-
-<!-- ==========================================================================
-     MAIN SOC COMMAND CENTER DASHBOARD (MODERN SPACED DUAL-PANEL LAYOUT)
-     ========================================================================== -->
-<div class="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-5 sm:py-6 flex flex-col gap-6">
-
-    <!-- Top Notice / Mobile Status Indicator (Shown on small screens) -->
-    <div class="md:hidden flex items-center justify-between px-4 py-2.5 rounded-xl bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)]">
-        <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span>
-            <span id="mobileStatusText" class="text-[13px] font-mono font-extrabold tracking-wider text-[var(--header-badge-text)] uppercase">SYSTEM SECURE • I4C 1930 READY</span>
-        </div>
-        <span class="text-[13px] font-mono text-[var(--accent-cyan)] font-extrabold">&lt; 160ms</span>
-    </div>
-
-    <!-- Dual-Column Grid System with Ample Breathing Room -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-
-        <!-- ==================================================================
-             LEFT COLUMN (5 COLS / ~40%): CLEAN SMARTPHONE FRAME & TEST SUITE
-             ================================================================== -->
-        <div class="lg:col-span-5 flex flex-col gap-5 items-center">
-
-            <!-- MODERN SMARTPHONE CHASSIS -->
-            <div id="phoneChassis" class="w-full max-w-[430px] rounded-[38px] p-3 sm:p-3.5 bg-gradient-to-b from-[var(--phone-bezel-top)] to-[var(--phone-bezel-bottom)] shadow-[var(--phone-chassis-shadow)] border-2 border-[var(--phone-rim)] relative transition-all duration-300">
-                
-                <!-- Dynamic Island / Speaker Pill -->
-                <div class="w-full flex justify-center items-center pt-0.5 pb-2.5">
-                    <div class="w-[98px] h-[20px] bg-black rounded-full flex items-center justify-between px-3.5 shadow-inner border border-white/10">
-                        <div class="w-2.5 h-2.5 rounded-full bg-[#151515] border border-[#333] flex items-center justify-center">
-                            <div class="w-0.5 h-0.5 rounded-full bg-[#0284C7]/40"></div>
-                        </div>
-                        <div class="w-2 h-2 rounded-full bg-[#111] border border-[#222]"></div>
-                    </div>
-                </div>
-
-                <!-- Phone Display Area -->
-                <div id="callerCard" class="w-full rounded-[28px] p-4 sm:p-5 flex flex-col items-center relative overflow-hidden bg-[var(--bg-phone-screen)] border border-[var(--border-card)] transition-all duration-300">
-                    <!-- Subtle Radial Glow -->
-                    <div class="absolute inset-0 bg-radial from-[var(--accent-cyan)]/5 to-transparent pointer-events-none opacity-50"></div>
-
-                    <!-- Header Status Row -->
-                    <div class="w-full flex items-center justify-between pb-2.5 mb-1.5 border-b border-[var(--border-card)]/60">
-                        <div class="flex items-center gap-2">
-                            <span class="material-symbols-outlined text-[var(--accent-cyan)] text-[20px]">phonelink_ring</span>
-                            <span class="text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase whitespace-nowrap">CLIENT INTERCEPTOR</span>
-                        </div>
-                        <span id="callStatusBadge" class="text-[12.5px] font-mono px-3 py-1 rounded-full bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/35 text-[var(--accent-cyan)] font-extrabold whitespace-nowrap">
-                            STANDBY
-                        </span>
-                    </div>
-
-                    <!-- PROMINENT SPEAKER IDENTITY BADGE (HUMAN VS AI REAL-TIME VERDICT) -->
-                    <div class="w-full my-1.5 flex justify-center">
-                        <div id="speakerIdentityBadge" class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)] transition-all duration-300">
-                            <span id="speakerIdentityDot" class="w-2.5 h-2.5 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span>
-                            <span id="speakerIdentityText" class="text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--header-badge-text)] uppercase whitespace-nowrap">
-                                SPEAKER: STANDBY / LISTENING
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Call State & Caller Info -->
-                    <div class="text-center my-2">
-                        <p id="callStateLabel" class="text-[15.5px] font-mono text-[var(--accent-cyan)] tracking-widest uppercase font-extrabold">
-                            INCOMING CALL INTERCEPTION
-                        </p>
-                        <h2 id="callerName" class="text-[26px] sm:text-[28px] font-extrabold tracking-tight text-[var(--text-primary)] mt-1">
-                            Unknown Caller
-                        </h2>
-                        <p id="callerNumber" class="text-[16px] font-mono text-[var(--text-muted)] mt-1 font-bold">
-                            +91 98765 43210 (VoLTE)
-                        </p>
-                    </div>
-
-                    <!-- Avatar / Active Waveform Centerpiece -->
-                    <div class="relative w-32 h-32 my-2.5 flex justify-center items-center">
-                        <!-- Ringing State Visualizer (Avatar & Pulse Rings) -->
-                        <div id="ringingVisual" class="absolute inset-0 flex justify-center items-center transition-opacity duration-300">
-                            <div id="mainPulseRing" class="pulse-ring"></div>
-                            <div class="pulse-ring" style="animation-delay: 0.7s"></div>
-                            <div class="w-22 h-22 rounded-full bg-[var(--avatar-bg)] border-[var(--avatar-border)] flex items-center justify-center relative z-10 shadow-lg">
-                                <span class="material-symbols-outlined text-5xl text-[var(--avatar-icon)]">person</span>
-                            </div>
-                        </div>
-
-                        <!-- Active Call Real-Time Waveform (Multi-Bar High Dynamic Visualizer) -->
-                        <div id="activeVisual" class="absolute inset-0 hidden flex justify-center items-center gap-1.5 opacity-0 transition-opacity duration-300 bg-[var(--wave-container-bg)] rounded-full border border-[var(--border-card)] px-3">
-                            <div class="wave-bar" style="height: 12px;"></div>
-                            <div class="wave-bar" style="height: 24px;"></div>
-                            <div class="wave-bar" style="height: 38px;"></div>
-                            <div class="wave-bar" style="height: 54px;"></div>
-                            <div class="wave-bar" style="height: 62px;"></div>
-                            <div class="wave-bar" style="height: 48px;"></div>
-                            <div class="wave-bar" style="height: 34px;"></div>
-                            <div class="wave-bar" style="height: 22px;"></div>
-                            <div class="wave-bar" style="height: 12px;"></div>
-                        </div>
-                    </div>
-
-                    <!-- Specific Fraud & Threat Alert Box (Dynamic Multi-Vector Interceptor) -->
-                    <div id="threatBanner" class="w-full bg-[var(--accent-crimson)]/20 border border-[var(--accent-crimson)]/60 rounded-xl p-3.5 my-2 hidden opacity-0 flex flex-col items-center justify-center transition-all duration-300 shadow-md">
-                        <div class="flex items-center gap-2 text-[var(--accent-crimson)] font-extrabold text-[14.5px] sm:text-[15.5px] font-mono tracking-wider text-center">
-                            <span class="material-symbols-outlined text-[22px]">warning</span>
-                            <span id="threatBannerTitle">🚨 FRAUD THREAT DETECTED</span>
-                        </div>
-                        <p id="threatBannerDetail" class="text-[13px] font-mono text-[var(--accent-crimson)] text-center mt-1 font-bold">
-                            Coercion extortion pattern identified
-                        </p>
-                        <!-- Dynamic Vector Tags Container -->
-                        <div id="threatVectorsChips" class="flex flex-wrap items-center justify-center gap-1.5 mt-2"></div>
-                    </div>
-
-                    <!-- Call Action Controls (Answer / Decline) -->
-                    <div id="incomingActions" class="flex justify-around w-full max-w-[280px] mt-2 relative z-20">
-                        <button id="btnDecline" type="button" onclick="resetCall()" class="flex flex-col items-center gap-2 group cursor-pointer transition-transform active:scale-95" aria-label="Decline Call">
-                            <div class="w-14 h-14 rounded-full bg-[var(--btn-decline-bg)] border-[var(--btn-decline-border)] flex items-center justify-center text-[var(--btn-decline-icon)] transition-all group-hover:scale-105 shadow-md">
-                                <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">call_end</span>
-                            </div>
-                            <span class="text-[14px] font-mono text-[var(--text-muted)] font-bold">Decline</span>
-                        </button>
-
-                        <button id="btnAnswer" type="button" onclick="acceptCall()" class="flex flex-col items-center gap-2 group cursor-pointer transition-transform active:scale-95" aria-label="Answer Call">
-                            <div class="w-14 h-14 rounded-full bg-[var(--btn-answer-bg)] border-[var(--btn-answer-border)] flex items-center justify-center text-[var(--btn-answer-icon)] transition-all group-hover:scale-105 shadow-[var(--btn-answer-shadow)] animate-bounce">
-                                <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">call</span>
-                            </div>
-                            <span class="text-[14px] font-mono text-[var(--accent-emerald)] font-extrabold">Answer</span>
-                        </button>
-                    </div>
-
-                    <!-- Terminate Call Button (Active State) -->
-                    <div id="activeControls" class="w-full hidden justify-center items-center mt-2 opacity-0 transition-all duration-300 relative z-20">
-                        <button id="btnEndCall" type="button" onclick="resetCall()" class="flex items-center gap-2 px-8 py-3.5 rounded-full bg-[var(--accent-crimson)] text-white font-mono text-[14.5px] font-extrabold tracking-wider hover:opacity-95 active:scale-95 transition-all shadow-lg cursor-pointer">
-                            <span class="material-symbols-outlined text-[22px]">call_end</span>
-                            TERMINATE CALL
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Demo Overrides & Multi-Fraud Test Suite Card -->
-            <section class="w-full max-w-[430px] glass-panel rounded-2xl p-5 flex flex-col gap-3">
-                <div class="flex items-center justify-between">
-                    <span class="text-[13px] font-mono font-extrabold tracking-wider text-[var(--text-muted)] uppercase whitespace-nowrap">SIMULATE CALL SCENARIO</span>
-                    <span id="activeScenarioIndicator" class="text-[12px] font-mono text-[var(--accent-cyan)] font-extrabold whitespace-nowrap">MODE: LIVE</span>
-                </div>
-
-                <!-- Scenario Dropdown (Offline Fail-Safe) -->
-                <div class="flex flex-col gap-1.5">
-                    <div class="relative">
-                        <select id="scenarioSelect" onchange="if(this.value){ triggerScenario(this.value); this.value=''; }" class="w-full bg-[var(--bg-card-sub)] border border-[var(--border-card)] rounded-xl px-3.5 py-2.5 text-[13px] font-mono text-[var(--text-primary)] font-bold focus:outline-none focus:border-[var(--accent-cyan)] cursor-pointer appearance-none shadow-sm">
-                            <option value="">▼ Select Simulation Scenario (3 Presets)</option>
-                            <option value="safe">🟢 1. Safe Call (Family member checking dinner)</option>
-                            <option value="digital_arrest">⚖️ 2. Digital Arrest Scam (CBI narcotics parcel + UPI)</option>
-                            <option value="clone_extortion">🚨 3. Cloned Emergency Call (Son's accident money)</option>
-                        </select>
-                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-[var(--accent-cyan)]">
-                            <span class="material-symbols-outlined text-[18px]">expand_more</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3 One-Click Primary Presets -->
-                <div class="grid grid-cols-3 gap-2">
-                    <button type="button" onclick="triggerScenario('safe')" class="flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-xl bg-[var(--accent-emerald)]/15 border border-[var(--accent-emerald)]/35 text-[var(--accent-emerald)] hover:bg-[var(--accent-emerald)]/25 text-[11.5px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm text-center">
-                        <span class="text-[15px]">🟢</span>
-                        <span class="font-extrabold">1. Safe Call</span>
-                        <span class="text-[10px] text-[var(--text-muted)]">Family Dinner</span>
-                    </button>
-                    <button type="button" onclick="triggerScenario('digital_arrest')" class="flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-xl bg-[var(--accent-amber)]/15 border border-[var(--accent-amber)]/35 text-[var(--accent-amber)] hover:bg-[var(--accent-amber)]/25 text-[11.5px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm text-center">
-                        <span class="text-[15px]">⚖️</span>
-                        <span class="font-extrabold">2. Digital Arrest</span>
-                        <span class="text-[10px] text-[var(--text-muted)]">CBI Parcel</span>
-                    </button>
-                    <button type="button" onclick="triggerScenario('clone_extortion')" class="flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-xl bg-[var(--accent-crimson)]/20 border border-[var(--accent-crimson)]/50 text-[var(--accent-crimson)] hover:bg-[var(--accent-crimson)]/30 text-[11.5px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm text-center">
-                        <span class="text-[15px]">🚨</span>
-                        <span class="font-extrabold">3. Cloned Call</span>
-                        <span class="text-[10px] text-[var(--text-muted)]">Accident Ransom</span>
-                    </button>
-                </div>
-
-                <!-- Citizen Flow: Inspect WhatsApp / Audio File -->
-                <div class="p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] flex flex-col gap-1.5">
-                    <div class="flex items-center justify-between text-[12px] font-mono">
-                        <span class="text-[var(--accent-cyan)] font-extrabold flex items-center gap-1">
-                            <span class="material-symbols-outlined text-[16px]">upload_file</span>
-                            CITIZEN AUDIO INSPECTOR
-                        </span>
-                        <span class="text-[var(--text-muted)] text-[11px] font-semibold">.wav, .mp3, .ogg, .m4a</span>
-                    </div>
-                    <label class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-[var(--bg-card)] border border-dashed border-[var(--border-card)] hover:border-[var(--accent-cyan)] text-[12px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer transition-all">
-                        <span class="material-symbols-outlined text-[17px] text-[var(--accent-cyan)]">audio_file</span>
-                        <span id="citizenUploadLabel">Upload Voice Note to Inspect</span>
-                        <input type="file" id="citizenAudioUpload" accept=".wav,.mp3,.ogg,.webm,.m4a" class="hidden">
-                    </label>
-                    <!-- Quick Neural Benchmark Verification Buttons -->
-                    <div class="grid grid-cols-2 gap-1.5 pt-1.5 border-t border-[var(--border-card)]">
-                        <button type="button" onclick="testDemoAudio('real')" class="py-1 px-2 rounded-lg bg-[var(--accent-emerald)]/15 border border-[var(--accent-emerald)]/35 text-[var(--accent-emerald)] hover:bg-[var(--accent-emerald)]/25 text-[11px] font-mono font-bold cursor-pointer transition-all truncate" title="Verify Real Human Audio">
-                            🟢 Real Voice Test
-                        </button>
-                        <button type="button" onclick="testDemoAudio('fake')" class="py-1 px-2 rounded-lg bg-[var(--accent-crimson)]/15 border border-[var(--accent-crimson)]/35 text-[var(--accent-crimson)] hover:bg-[var(--accent-crimson)]/25 text-[11px] font-mono font-bold cursor-pointer transition-all truncate" title="Verify AI Voice Clone Audio">
-                            🔴 AI Clone Test
-                        </button>
-                    </div>
-                </div>
-
-                <button type="button" onclick="resetCall()" class="w-full py-2.5 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[13px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent-cyan)] active:scale-95 transition-all flex items-center justify-center gap-2 mt-0.5 cursor-pointer font-bold whitespace-nowrap">
-                    <span class="material-symbols-outlined text-[18px]">restart_alt</span>
-                    Reset Interceptor Session
-                </button>
-            </section>
-
-        </div>
-
-        <!-- ==================================================================
-             RIGHT COLUMN (7 COLS / ~60%): MODERN DECLUTTERED SOC XAI PANELS
-             ================================================================== -->
-        <div class="lg:col-span-7 flex flex-col gap-5">
-
-            <!-- Panel 1: Sleek 2-Row Explainable AI Telemetry Card -->
-            <section class="glass-panel rounded-2xl p-5 sm:p-6 flex flex-col gap-4">
-                <div class="flex items-center justify-between pb-3 border-b border-[var(--border-card)]">
-                    <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-[var(--accent-cyan)] text-[24px]">radar</span>
-                        <span class="text-[15px] font-mono font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase whitespace-nowrap">EXPLAINABLE AI RISK TELEMETRY</span>
-                    </div>
-                    <span id="telemetryStatusPill" class="text-[13px] font-mono px-3.5 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)] text-[var(--header-badge-text)] font-extrabold whitespace-nowrap">
-                        STANDBY / LISTENING
-                    </span>
-                </div>
-
-                <!-- Top Row (Visual Core): Prominent Risk Circle + Sleek Mel-Spectrogram Canvas -->
-                <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
-                    
-                    <!-- Left: Large 52px Risk Circle & Dynamic Label -->
-                    <div class="sm:col-span-5 flex flex-col items-center justify-center p-4 rounded-2xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
-                        <div class="relative w-40 h-40 flex items-center justify-center">
-                            <!-- Circular SVG Gauge -->
-                            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                                <path class="text-[var(--gauge-bg)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="2.8"></path>
-                                <path id="svgGaugeCircle" class="text-[var(--accent-emerald)] transition-all duration-700 ease-out" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="0, 100" stroke-linecap="round" stroke-width="3.2"></path>
-                            </svg>
-                            <!-- Center Live Percentage & Risk Level -->
-                            <div class="absolute inset-0 flex flex-col items-center justify-center text-center select-none">
-                                <span id="riskScoreNumber" class="text-[50px] sm:text-[54px] font-mono font-extrabold text-[var(--accent-emerald)] leading-none">0%</span>
-                                <span id="riskScoreLabel" class="text-[16px] sm:text-[17px] font-mono font-extrabold text-[var(--accent-emerald)] uppercase tracking-wider mt-1">SAFE</span>
-                            </div>
-                        </div>
-
-                        <!-- Dynamic State Label -->
-                        <div id="vocalProsodyLabel" class="mt-3 text-center text-[13.5px] font-mono font-extrabold text-[var(--accent-emerald)] bg-[var(--header-badge-bg)] px-4 py-1.5 rounded-full border border-[var(--header-badge-border)] tracking-wider whitespace-nowrap">
-                            STANDBY / MONITORING
-                        </div>
-                    </div>
-
-                    <!-- Right: Vibrant Mel-Spectrogram Canvas & Grid Markers -->
-                    <div class="sm:col-span-7 flex flex-col p-4 rounded-2xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
-                        <div class="flex justify-between items-center pb-2 text-[13.5px] font-mono font-bold text-[var(--text-muted)]">
-                            <span class="flex items-center gap-2 text-[var(--accent-cyan)] whitespace-nowrap">
-                                <span class="material-symbols-outlined text-[18px]">graphic_eq</span>
-                                LIVE ACOUSTIC SPECTRAL MATRIX
-                            </span>
-                            <span id="spectralStatusTag" class="text-[12px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap">60 FPS FFT</span>
-                        </div>
-                        
-                        <!-- Heatmap Waterfall Canvas -->
-                        <div class="relative w-full h-34 sm:h-38 mt-1 rounded-xl overflow-hidden border border-[var(--border-card)]" style="background: var(--spec-canvas-bg);">
-                            <canvas id="spectralMatrixCanvas" class="w-full h-full block"></canvas>
-                            <!-- Frequency Grid Markings -->
-                            <div class="absolute top-1 left-2 text-[12px] font-mono text-[var(--accent-cyan)] font-bold pointer-events-none">8kHz</div>
-                            <div class="absolute top-1/2 -translate-y-1/2 left-2 text-[11px] font-mono text-white/70 font-bold pointer-events-none">4kHz</div>
-                            <div class="absolute bottom-1 left-2 text-[12px] font-mono text-[var(--accent-cyan)] font-bold pointer-events-none">0kHz</div>
-                        </div>
-
-                        <div class="flex justify-between items-center mt-2.5 text-[13px] font-mono text-[var(--text-sublabel)] font-semibold">
-                            <span>RMS Energy: <span id="audioLevelDisplay" class="font-bold text-[var(--text-primary)]">0</span>%</span>
-                            <span id="noiseGateNotice" class="whitespace-nowrap">Adaptive Silence Gate</span>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- Bottom Row: Unified 4-Column Secondary Metrics Strip (Single-Line Titles) -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 pt-3.5 border-t border-[var(--border-card)]/60 font-mono">
-                    <!-- Metric 1: Acoustic Synthetics -->
-                    <div class="flex flex-col gap-1.5 p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0">
-                        <div class="flex justify-between items-center text-[13.5px] text-[var(--text-muted)] font-bold whitespace-nowrap">
-                            <span class="truncate">Acoustic Synthetics</span>
-                            <span id="voiceBadge" class="text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1">10% (HUMAN)</span>
-                        </div>
-                        <div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5">
-                            <div id="barVoiceAuth" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 10%;"></div>
-                        </div>
-                    </div>
-
-                    <!-- Metric 2: Vocoder Artifacts -->
-                    <div class="flex flex-col gap-1.5 p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0">
-                        <div class="flex justify-between items-center text-[13.5px] text-[var(--text-muted)] font-bold whitespace-nowrap">
-                            <span class="truncate">Vocoder Artifacts</span>
-                            <span id="vocoderBadge" class="text-[14px] text-[var(--accent-emerald)] font-extrabold ml-1 truncate">CLEAN / BIOLOGICAL</span>
-                        </div>
-                        <div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5">
-                            <div id="barVocoder" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 8%;"></div>
-                        </div>
-                    </div>
-
-                    <!-- Metric 3: Coercion Intent -->
-                    <div class="flex flex-col gap-1.5 p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0">
-                        <div class="flex justify-between items-center text-[13.5px] text-[var(--text-muted)] font-bold whitespace-nowrap">
-                            <span class="truncate">Coercion Intent</span>
-                            <span id="scriptBadge" class="text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1">CLEAN</span>
-                        </div>
-                        <div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5">
-                            <div id="barScriptNlp" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 5%;"></div>
-                        </div>
-                    </div>
-
-                    <!-- Metric 4: Evidence LLR -->
-                    <div class="flex flex-col gap-1.5 p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0">
-                        <div class="flex justify-between items-center text-[13.5px] text-[var(--text-muted)] font-bold whitespace-nowrap">
-                            <span class="truncate">Evidence LLR</span>
-                            <span id="xaiLlrVal" class="text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1">-2.45 dB</span>
-                        </div>
-                        <div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5">
-                            <div id="xaiLlrBar" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 12%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Panel 2: Multi-Vector Threat Defense & Autonomous Protection Banner -->
-            <section id="bankingDefenseCard" class="glass-panel rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-300" style="background: var(--defense-safe-bg); border-color: var(--defense-safe-border);">
-                <!-- Left: Big Status Indicator -->
-                <div class="flex items-center gap-3 flex-wrap sm:flex-nowrap">
-                    <div id="bankingPolicyBadge" class="flex items-center gap-2.5 px-4 py-2 rounded-full border text-[15px] sm:text-[15.5px] font-mono font-extrabold tracking-wider whitespace-nowrap" style="background: var(--defense-safe-bg); border-color: var(--defense-safe-border); color: var(--defense-safe-text);">
-                        <span id="defenseStatusDot" class="w-3 h-3 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span>
-                        <span id="bankingPolicyText">AUTONOMOUS DEFENSE: ACTIVE &amp; MONITORING</span>
-                    </div>
-
-                    <!-- Biometric Override Action Button (Revealed on Critical Freeze) -->
-                    <button id="btnBiometricOverride" type="button" onclick="openBiometricModal()" class="hidden flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[var(--accent-crimson)] text-white text-[13px] font-mono font-extrabold hover:opacity-90 active:scale-95 transition-all shadow-md animate-pulse cursor-pointer whitespace-nowrap">
-                        <span class="material-symbols-outlined text-[18px]">fingerprint</span>
-                        BIOMETRIC OVERRIDE (UNLOCK)
-                    </button>
-                </div>
-
-                <!-- Center: Clean Single-Line SHA-256 Evidence Seal (NO WRAPPING) -->
-                <div class="flex items-center gap-2 overflow-hidden max-w-full md:max-w-[320px] whitespace-nowrap font-mono text-[13px]">
-                    <span class="font-bold text-[var(--text-sublabel)] whitespace-nowrap">SEAL:</span>
-                    <span id="evidenceHashDisplay" class="text-[var(--accent-cyan)] font-semibold truncate select-all">
-                        SHA256-e3b0c442...991b855
-                    </span>
-                </div>
-
-                <!-- Right: Action Buttons -->
-                <div class="flex items-center gap-2.5 whitespace-nowrap">
-                    <button id="btnDispatch1930" type="button" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/35 text-[14px] font-mono text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/25 font-extrabold transition-all whitespace-nowrap shadow-sm cursor-pointer" title="Dispatch Live Telemetry to I4C Cyber Crime 1930">
-                        <span class="material-symbols-outlined text-[19px]">call</span>
-                        1930 DISPATCH (I4C)
-                    </button>
-                    <button id="btnManualLock" type="button" class="p-2.5 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent-cyan)] transition-all cursor-pointer font-bold" title="Toggle Emergency Shield / Out-of-Band Callback">
-                        <span class="material-symbols-outlined text-[20px]">lock</span>
-                    </button>
-                </div>
-            </section>
-
-
-            <!-- Panel 3: Clean Live Speech Recognition & Multi-Vector Extortion Interceptor -->
-            <section class="glass-panel rounded-2xl p-5 sm:p-6 flex flex-col gap-3.5">
-                <div class="flex items-center justify-between pb-2.5 border-b border-[var(--border-card)]">
-                    <div class="flex items-center gap-2">
-                        <span class="w-3 h-3 rounded-full bg-[var(--accent-cyan)] animate-pulse"></span>
-                        <span class="text-[14.5px] sm:text-[15px] font-mono font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase whitespace-nowrap">MULTI-VECTOR EXTORTION INTERCEPTOR STREAM</span>
-                    </div>
-                    <span id="speechStateTag" class="text-[13px] font-mono text-[var(--accent-cyan)] uppercase font-extrabold whitespace-nowrap">
-                        MIC READY
-                    </span>
-                </div>
-
-                <!-- Detected Threat Category Chips Row (Above Transcript) -->
-                <div id="detectedKeywordsBox" class="flex flex-wrap gap-2.5 hidden"></div>
-
-                <!-- Scrollable Real-Time Transcription Feed (Comfortable 16px with line-height 1.75) -->
-                <div id="transcriptFeed" class="h-40 sm:h-48 overflow-y-auto bg-[var(--bg-card-sub)] p-4 sm:p-5 rounded-xl border border-[var(--border-card)] flex flex-col gap-3 font-mono text-[16px] font-bold leading-[1.75] pr-2">
-                    <p class="text-[var(--text-muted)] italic text-[14.5px] animate-pulse font-medium">
-                        &gt; Interceptor active. Monitoring audio stream for synthetic AI vocals &amp; extortion keywords...
-                    </p>
-                </div>
-
-                <!-- Quick Script Test Bar -->
-                <div class="flex items-center gap-2 mt-0.5">
-                    <input type="text" id="quickScriptInput" placeholder="Test script phrase (e.g. 'cbi arrest warrant', 'urgent hospital bail', or normal chat)..." class="flex-1 px-3.5 py-2 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[13px] font-mono text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent-cyan)]">
-                    <button id="btnTestScript" type="button" class="px-3.5 py-2 rounded-xl bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/40 text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/25 font-mono text-[12.5px] font-bold cursor-pointer whitespace-nowrap">
-                        Scan Script
-                    </button>
-                </div>
-            </section>
-
-        </div>
-
-    </div>
-
-</div>
-
-<!-- ==========================================================================
-     DRAWER & MODAL OVERLAYS (INCIDENT LOGS, INTEL, VAULT, SETTINGS)
-     ========================================================================== -->
-
-<!-- Menu Drawer Overlay -->
-<div id="menuBackdrop" class="fixed inset-0 bg-[var(--backdrop-dim)] backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div>
-<aside id="menuDrawer" class="fixed top-0 left-0 bottom-0 w-[320px] max-w-[85vw] bg-[var(--bg-card)] border-r border-[var(--border-card)] shadow-2xl z-[80] transform -translate-x-full transition-transform duration-300 flex flex-col justify-between p-5">
-    <div>
-        <div class="flex items-center justify-between pb-4 border-b border-[var(--border-card)] mb-5">
-            <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">security</span>
-                <span class="font-mono font-extrabold text-base tracking-wider text-[var(--text-primary)]">DHWANI-KAVACH</span>
-            </div>
-            <button id="btnCloseMenu" type="button" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded-full hover:bg-[var(--accent-cyan)]/10 cursor-pointer">
-                <span class="material-symbols-outlined text-xl">close</span>
-            </button>
-        </div>
-        <nav class="flex flex-col gap-2">
-            <button id="drawerNavShield" type="button" class="flex items-center gap-3 px-3.5 py-3 rounded-xl bg-[var(--accent-cyan)]/15 text-[var(--accent-cyan)] font-mono text-[13.5px] border border-[var(--accent-cyan)]/30 text-left cursor-pointer font-bold">
-                <span class="material-symbols-outlined text-xl">shield</span>
-                <span>Command SOC Dashboard</span>
-            </button>
-            <button id="drawerNavLogs" type="button" class="flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-[var(--accent-cyan)]/10 text-[var(--text-primary)] font-mono text-[13.5px] text-left cursor-pointer font-bold">
-                <span class="material-symbols-outlined text-xl text-[var(--accent-cyan)]">history</span>
-                <span>Call Incident Logs</span>
-            </button>
-            <button id="drawerNavIntel" type="button" class="flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-[var(--accent-cyan)]/10 text-[var(--text-primary)] font-mono text-[13.5px] text-left cursor-pointer font-bold">
-                <span class="material-symbols-outlined text-xl text-[var(--accent-cyan)]">analytics</span>
-                <span>Threat Intelligence</span>
-            </button>
-            <button id="drawerNavVault" type="button" class="flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-[var(--accent-cyan)]/10 text-[var(--text-primary)] font-mono text-[13.5px] text-left cursor-pointer font-bold">
-                <span class="material-symbols-outlined text-xl text-[var(--accent-cyan)]">fingerprint</span>
-                <span>Biometric Voice Vault</span>
-            </button>
-        </nav>
-    </div>
-    <div class="pt-4 border-t border-[var(--border-card)] text-[13px] font-mono text-[var(--text-muted)] flex flex-col gap-1.5 font-bold">
-        <div class="flex justify-between"><span>Engine Build:</span><span class="text-[var(--accent-cyan)]">v5.0 Multi-Vector Interceptor</span></div>
-        <div class="flex justify-between"><span>I4C Gateway:</span><span class="text-[var(--accent-emerald)]">1930 Active</span></div>
-    </div>
-</aside>
-
-<!-- Settings Modal -->
-<div id="settingsBackdrop" class="fixed inset-0 bg-[var(--backdrop-dim)] backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div>
-<div id="settingsModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[460px] bg-[var(--bg-card)] border border-[var(--border-card)] rounded-2xl shadow-2xl z-[80] p-6 hidden opacity-0 transition-all duration-300 max-h-[85vh] overflow-y-auto">
-    <div class="flex items-center justify-between pb-3.5 border-b border-[var(--border-card)] mb-4">
-        <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">settings</span>
-            <h3 class="font-mono font-bold text-base tracking-wider text-[var(--accent-cyan)] uppercase">SYSTEM SETTINGS</h3>
-        </div>
-        <button id="btnCloseSettings" type="button" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded-full hover:bg-[var(--accent-cyan)]/10 cursor-pointer">
-            <span class="material-symbols-outlined text-xl">close</span>
-        </button>
-    </div>
-    <div class="flex flex-col gap-4 text-[13.5px] font-mono">
-        <div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
-            <div>
-                <div class="font-bold text-[var(--text-primary)]">Live Mic Capture</div>
-                <div class="text-[12px] text-[var(--text-muted)] font-semibold">Real-time temporal acoustic DSP analysis</div>
-            </div>
-            <input type="checkbox" id="toggleLiveMic" class="w-4 h-4 accent-[var(--accent-cyan)] cursor-pointer" checked>
-        </div>
-        <div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
-            <div>
-                <div class="font-bold text-[var(--text-primary)]">Hardware Siren Alarm</div>
-                <div class="text-[12px] text-[var(--text-muted)] font-semibold">Synthesize 700Hz-1200Hz sweep on AI Clone</div>
-            </div>
-            <input type="checkbox" id="toggleSiren" class="w-4 h-4 accent-[var(--accent-cyan)] cursor-pointer" checked>
-        </div>
-        <div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
-            <div>
-                <div class="font-bold text-[var(--text-primary)]">Auto Banking Killswitch</div>
-                <div class="text-[12px] text-[var(--text-muted)] font-semibold">Freeze transactions immediately if Risk &gt; 70%</div>
-            </div>
-            <input type="checkbox" id="toggleAutoKillswitch" class="w-4 h-4 accent-[var(--accent-cyan)] cursor-pointer" checked>
-        </div>
-    </div>
-</div>
-
-<!-- Logs Modal -->
-<div id="logsBackdrop" class="fixed inset-0 bg-[var(--backdrop-dim)] backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div>
-<div id="logsModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[480px] bg-[var(--bg-card)] border border-[var(--border-card)] rounded-2xl shadow-2xl z-[80] p-6 hidden opacity-0 transition-all duration-300 max-h-[85vh] overflow-y-auto">
-    <div class="flex items-center justify-between pb-3.5 border-b border-[var(--border-card)] mb-4">
-        <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">history</span>
-            <h3 class="font-mono font-bold text-base tracking-wider text-[var(--accent-cyan)] uppercase">INCIDENT LOGS</h3>
-        </div>
-        <div class="flex items-center gap-2">
-            <button id="btnExportLogs" type="button" class="text-[12px] font-mono px-3 py-1 rounded border border-[var(--accent-cyan)]/40 text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/10 font-bold cursor-pointer">EXPORT</button>
-            <button id="btnCloseLogs" type="button" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded-full hover:bg-[var(--accent-cyan)]/10 cursor-pointer">
-                <span class="material-symbols-outlined text-xl">close</span>
-            </button>
-        </div>
-    </div>
-    <div class="flex flex-col gap-2.5 font-mono text-xs" id="logsContainer">
-        <div class="text-center text-[var(--text-muted)] py-6 text-[13.5px] font-bold">No call incidents recorded in this session.</div>
-    </div>
-</div>
-
-<!-- Threat Intel Modal -->
-<div id="intelBackdrop" class="fixed inset-0 bg-[var(--backdrop-dim)] backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div>
-<div id="intelModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[480px] bg-[var(--bg-card)] border border-[var(--border-card)] rounded-2xl shadow-2xl z-[80] p-6 hidden opacity-0 transition-all duration-300 max-h-[85vh] overflow-y-auto">
-    <div class="flex items-center justify-between pb-3.5 border-b border-[var(--border-card)] mb-4">
-        <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">analytics</span>
-            <h3 class="font-mono font-bold text-base tracking-wider text-[var(--accent-cyan)] uppercase">THREAT INTELLIGENCE</h3>
-        </div>
-        <button id="btnCloseIntel" type="button" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded-full hover:bg-[var(--accent-cyan)]/10 cursor-pointer">
-            <span class="material-symbols-outlined text-xl">close</span>
-        </button>
-    </div>
-    <div class="flex flex-col gap-3.5 font-mono text-[13px] text-[var(--text-muted)]">
-        <div class="p-4 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
-            <span class="text-[var(--accent-cyan)] font-bold block mb-1">1. Adaptive Noise Gate &amp; Smoothing</span>
-            <p class="text-[12.5px] leading-relaxed text-[var(--text-muted)] font-semibold">Temporal EMA filtering eliminates mic initialization pops and prevents erratic score jumping.</p>
-        </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
-            <span class="text-[var(--accent-cyan)] font-bold block mb-1">2. Multi-Vector Fraud Detection</span>
-            <p class="text-[12.5px] leading-relaxed text-[var(--text-muted)] font-semibold">Detects Digital Arrest, Courier/Customs extortion, Emergency kidnapping scams, Job Ponzi, and OTP harvest.</p>
-        </div>
-        <div class="p-4 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
-            <span class="text-[var(--accent-cyan)] font-bold block mb-1">3. Automated Regulatory Telemetry</span>
-            <p class="text-[12.5px] leading-relaxed text-[var(--text-muted)] font-semibold">Integrates with National Cyber Crime Reporting Portal (1930) with SHA-256 evidence chain.</p>
-        </div>
-    </div>
-</div>
-
-<!-- Biometric Vault Modal -->
-<div id="vaultBackdrop" class="fixed inset-0 bg-[var(--backdrop-dim)] backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div>
-<div id="vaultModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[480px] bg-[var(--bg-card)] border border-[var(--border-card)] rounded-2xl shadow-2xl z-[80] p-6 hidden opacity-0 transition-all duration-300 max-h-[85vh] overflow-y-auto">
-    <div class="flex items-center justify-between pb-3.5 border-b border-[var(--border-card)] mb-4">
-        <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">fingerprint</span>
-            <h3 class="font-mono font-bold text-base tracking-wider text-[var(--accent-cyan)] uppercase">BIOMETRIC VOICE VAULT</h3>
-        </div>
-        <button id="btnCloseVault" type="button" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded-full hover:bg-[var(--accent-cyan)]/10 cursor-pointer">
-            <span class="material-symbols-outlined text-xl">close</span>
-        </button>
-    </div>
-    <div class="flex flex-col gap-3 font-mono text-[13.5px]">
-        <div class="p-4 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] flex flex-col gap-2.5">
-            <div class="text-[var(--text-primary)] font-bold text-[14px]">Enrolled Familial Voiceprints</div>
-            <div class="flex items-center justify-between py-2 border-b border-[var(--border-card)] text-[13px]">
-                <span class="text-[var(--text-muted)] font-semibold">Family Contact #1 (Mom)</span>
-                <span class="text-[var(--accent-emerald)] font-bold">VERIFIED</span>
-            </div>
-            <div class="flex items-center justify-between py-2 text-[13px]">
-                <span class="text-[var(--text-muted)] font-semibold">Family Contact #2 (Spouse)</span>
-                <span class="text-[var(--accent-emerald)] font-bold">VERIFIED</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Biometric Safeguard Override Modal -->
-<div id="biometricBackdrop" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[85] hidden opacity-0 transition-opacity duration-300"></div>
-<div id="biometricModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[440px] bg-[var(--bg-card)] border-2 border-[var(--accent-crimson)] rounded-3xl shadow-2xl z-[90] p-6 hidden opacity-0 transition-all duration-300 flex flex-col items-center text-center gap-4">
-    <div class="relative w-24 h-24 rounded-full bg-[var(--accent-crimson)]/15 border-2 border-[var(--accent-crimson)] flex items-center justify-center text-[var(--accent-crimson)] shadow-lg overflow-hidden">
-        <span id="biometricScanIcon" class="material-symbols-outlined text-6xl">fingerprint</span>
-        <div id="biometricLaser" class="hidden biometric-laser"></div>
-    </div>
-    <div>
-        <h3 id="biometricTitle" class="font-mono font-extrabold text-[18.5px] tracking-wider text-[var(--accent-crimson)] uppercase">AUTONOMOUS BANKING FREEZE</h3>
-        <p id="biometricSubtitle" class="font-mono text-[13px] text-[var(--text-muted)] mt-1 leading-relaxed">High Coercion/Spoof Threshold Exceeded (&gt;75%). Outbound UPI &amp; Card transfers locked. Scan biometric fingerprint to authorize override.</p>
-    </div>
-    <div id="biometricUserCard" class="w-full p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] flex items-center justify-between font-mono text-[12.5px]">
-        <div class="flex items-center gap-2 text-left">
-            <span class="material-symbols-outlined text-[var(--accent-cyan)] text-[22px]">verified_user</span>
-            <div>
-                <div class="font-bold text-[var(--text-primary)]">Rohit Sharma</div>
-                <div class="text-[11px] text-[var(--text-muted)]">Aadhaar Linked Device ID #8841</div>
-            </div>
-        </div>
-        <span id="biometricStatusTag" class="px-2.5 py-1 rounded-md bg-[var(--accent-crimson)]/20 text-[var(--accent-crimson)] font-bold text-[11.5px] border border-[var(--accent-crimson)]/40">FROZEN</span>
-    </div>
-    <button id="btnExecuteBiometric" type="button" onclick="executeBiometricScan()" class="w-full py-3.5 rounded-xl bg-[var(--accent-emerald)] hover:bg-[var(--accent-emerald)]/90 active:scale-95 text-black font-mono font-extrabold text-[14px] transition-all shadow-lg cursor-pointer flex items-center justify-center gap-2">
-        <span class="material-symbols-outlined text-[20px]">fingerprint</span>
-        <span id="btnBiometricText">TAP TO SCAN BIOMETRIC FINGERPRINT</span>
-    </button>
-    <button type="button" onclick="closeBiometricModal()" class="text-[12.5px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer">
-        Dismiss (Maintain Security Freeze)
-    </button>
-</div>
-
-
-<!-- ==========================================================================
-     JAVASCRIPT: SMOOTHED TEMPORAL DSP & MULTI-VECTOR FRAUD CLASSIFIER
-     ========================================================================== -->
-<script>
-// ============================================================================
+::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }</style></head><body class="flex flex-col min-h-screen"><header class="w-full bg-[var(--bg-card)]/95 backdrop-blur-md border-b border-[var(--border-card)] sticky top-0 z-50 px-4 sm:px-8 py-3.5 flex items-center justify-between shadow-sm"><div class="flex items-center gap-3.5"><button id="btnMenu" type="button" class="text-[var(--text-muted)] hover:text-[var(--accent-cyan)] p-1.5 rounded-lg hover:bg-[var(--accent-cyan)]/10 transition-all cursor-pointer flex items-center justify-center active:scale-95" aria-label="Open Navigation Menu"><span class="material-symbols-outlined text-[28px]">menu</span></button><div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-[var(--accent-cyan)] text-3xl sm:text-4xl animate-pulse">security</span><div class="flex flex-col"><span class="font-mono font-extrabold text-[22px] sm:text-[24px] tracking-[0.16em] text-[var(--text-primary)] uppercase leading-tight">DHWANI-KAVACH</span> <span class="text-[13px] font-mono text-[var(--text-muted)] hidden sm:inline font-bold">Real-Time AI Voice Clone &amp; Multi-Vector Vishing Defense • SIH26104</span></div></div><div id="headerStatusBadge" class="hidden md:flex items-center gap-2 ml-4 px-4 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)]"><span class="w-2.5 h-2.5 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span> <span id="headerStatusText" class="text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--header-badge-text)] uppercase whitespace-nowrap">SYSTEM SECURE</span></div><div id="backendStatusBadge" class="hidden lg:flex items-center gap-2 ml-2 px-3.5 py-1.5 rounded-full bg-[var(--bg-card-sub)] border border-[var(--border-card)]" title="PyTorch CNN v1/v2 Inference Engine Status"><span id="backendStatusDot" class="w-2.5 h-2.5 rounded-full bg-[var(--accent-cyan)] animate-pulse"></span> <span id="backendStatusText" class="text-[12.5px] font-mono font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase whitespace-nowrap">BACKEND: CHECKING...</span></div></div><div class="hidden xl:flex items-center gap-4 text-[13.5px] font-mono text-[var(--text-muted)] font-bold"><span class="flex items-center gap-1.5 text-[var(--accent-cyan)] whitespace-nowrap"><span class="w-2 h-2 rounded-full bg-[var(--accent-cyan)]"></span> I4C 1930 ACTIVE DEFENSE </span><span>•</span> <span class="whitespace-nowrap">LATENCY: &lt; 160ms</span> <span>•</span> <span class="whitespace-nowrap">DSP: TEMPORAL-ADAPTIVE V5.0</span></div><div class="flex items-center gap-3"><div class="flex items-center bg-[var(--bg-card-sub)] p-1 rounded-full border border-[var(--border-card)] shadow-inner" title="Switch Interface Theme"><button id="contrastBtnCyber" type="button" class="px-3.5 py-1.5 rounded-full text-[13px] font-mono transition-all font-extrabold bg-[var(--pill-active-bg)] text-[var(--pill-active-text)] cursor-pointer" onclick="setThemeMode('cyber')">CYBER</button> <button id="contrastBtnOled" type="button" class="px-3.5 py-1.5 rounded-full text-[13px] font-mono transition-all text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer font-bold" onclick="setThemeMode('oled')">OLED</button> <button id="contrastBtnLight" type="button" class="px-3.5 py-1.5 rounded-full text-[13px] font-mono transition-all text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer font-bold" onclick="setThemeMode('light')">LIGHT</button></div><button id="btnTopLogs" type="button" class="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[var(--bg-card-sub)] border border-[var(--border-card)] hover:border-[var(--accent-cyan)] text-[13px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] transition-all cursor-pointer font-bold whitespace-nowrap"><span class="material-symbols-outlined text-[19px]">history</span> <span>LOGS</span></button> <button id="btnSettings" type="button" class="text-[var(--text-muted)] hover:text-[var(--accent-cyan)] p-1.5 rounded-lg hover:bg-[var(--accent-cyan)]/10 transition-all cursor-pointer flex items-center justify-center active:scale-95" aria-label="Settings"><span class="material-symbols-outlined text-[24px]">settings</span></button></div></header><div class="flex-1 w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-5 sm:py-6 flex flex-col gap-6"><div class="md:hidden flex items-center justify-between px-4 py-2.5 rounded-xl bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)]"><div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span> <span id="mobileStatusText" class="text-[13px] font-mono font-extrabold tracking-wider text-[var(--header-badge-text)] uppercase">SYSTEM SECURE • I4C 1930 READY</span></div><span class="text-[13px] font-mono text-[var(--accent-cyan)] font-extrabold">&lt; 160ms</span></div><div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start"><div class="lg:col-span-5 flex flex-col gap-5 items-center"><div id="phoneChassis" class="w-full max-w-[430px] rounded-[38px] p-3 sm:p-3.5 bg-gradient-to-b from-[var(--phone-bezel-top)] to-[var(--phone-bezel-bottom)] shadow-[var(--phone-chassis-shadow)] border-2 border-[var(--phone-rim)] relative transition-all duration-300"><div class="w-full flex justify-center items-center pt-0.5 pb-2.5"><div class="w-[98px] h-[20px] bg-black rounded-full flex items-center justify-between px-3.5 shadow-inner border border-white/10"><div class="w-2.5 h-2.5 rounded-full bg-[#151515] border border-[#333] flex items-center justify-center"><div class="w-0.5 h-0.5 rounded-full bg-[#0284C7]/40"></div></div><div class="w-2 h-2 rounded-full bg-[#111] border border-[#222]"></div></div></div><div id="callerCard" class="w-full rounded-[28px] p-4 sm:p-5 flex flex-col items-center relative overflow-hidden bg-[var(--bg-phone-screen)] border border-[var(--border-card)] transition-all duration-300"><div class="absolute inset-0 bg-radial from-[var(--accent-cyan)]/5 to-transparent pointer-events-none opacity-50"></div><div class="w-full flex items-center justify-between pb-2.5 mb-1.5 border-b border-[var(--border-card)]/60"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[var(--accent-cyan)] text-[20px]">phonelink_ring</span> <span class="text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase whitespace-nowrap">CLIENT INTERCEPTOR</span></div><span id="callStatusBadge" class="text-[12.5px] font-mono px-3 py-1 rounded-full bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/35 text-[var(--accent-cyan)] font-extrabold whitespace-nowrap">STANDBY</span></div><div class="w-full my-1.5 flex justify-center"><div id="speakerIdentityBadge" class="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)] transition-all duration-300"><span id="speakerIdentityDot" class="w-2.5 h-2.5 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span> <span id="speakerIdentityText" class="text-[13.5px] font-mono font-extrabold tracking-wider text-[var(--header-badge-text)] uppercase whitespace-nowrap">SPEAKER: STANDBY / LISTENING</span></div></div><div class="text-center my-2"><p id="callStateLabel" class="text-[15.5px] font-mono text-[var(--accent-cyan)] tracking-widest uppercase font-extrabold">INCOMING CALL INTERCEPTION</p><h2 id="callerName" class="text-[26px] sm:text-[28px] font-extrabold tracking-tight text-[var(--text-primary)] mt-1">Unknown Caller</h2><p id="callerNumber" class="text-[16px] font-mono text-[var(--text-muted)] mt-1 font-bold">+91 98765 43210 (VoLTE)</p></div><div class="relative w-32 h-32 my-2.5 flex justify-center items-center"><div id="ringingVisual" class="absolute inset-0 flex justify-center items-center transition-opacity duration-300"><div id="mainPulseRing" class="pulse-ring"></div><div class="pulse-ring" style="animation-delay: 0.7s"></div><div class="w-22 h-22 rounded-full bg-[var(--avatar-bg)] border-[var(--avatar-border)] flex items-center justify-center relative z-10 shadow-lg"><span class="material-symbols-outlined text-5xl text-[var(--avatar-icon)]">person</span></div></div><div id="activeVisual" class="absolute inset-0 hidden flex justify-center items-center gap-1.5 opacity-0 transition-opacity duration-300 bg-[var(--wave-container-bg)] rounded-full border border-[var(--border-card)] px-3"><div class="wave-bar" style="height: 12px;"></div><div class="wave-bar" style="height: 24px;"></div><div class="wave-bar" style="height: 38px;"></div><div class="wave-bar" style="height: 54px;"></div><div class="wave-bar" style="height: 62px;"></div><div class="wave-bar" style="height: 48px;"></div><div class="wave-bar" style="height: 34px;"></div><div class="wave-bar" style="height: 22px;"></div><div class="wave-bar" style="height: 12px;"></div></div></div><div id="threatBanner" class="w-full bg-[var(--accent-crimson)]/20 border border-[var(--accent-crimson)]/60 rounded-xl p-3.5 my-2 hidden opacity-0 flex flex-col items-center justify-center transition-all duration-300 shadow-md"><div class="flex items-center gap-2 text-[var(--accent-crimson)] font-extrabold text-[14.5px] sm:text-[15.5px] font-mono tracking-wider text-center"><span class="material-symbols-outlined text-[22px]">warning</span> <span id="threatBannerTitle">🚨 FRAUD THREAT DETECTED</span></div><p id="threatBannerDetail" class="text-[13px] font-mono text-[var(--accent-crimson)] text-center mt-1 font-bold">Coercion extortion pattern identified</p><div id="threatVectorsChips" class="flex flex-wrap items-center justify-center gap-1.5 mt-2"></div></div><div id="incomingActions" class="flex justify-around w-full max-w-[280px] mt-2 relative z-20"><button id="btnDecline" type="button" onclick="resetCall()" class="flex flex-col items-center gap-2 group cursor-pointer transition-transform active:scale-95" aria-label="Decline Call"><div class="w-14 h-14 rounded-full bg-[var(--btn-decline-bg)] border-[var(--btn-decline-border)] flex items-center justify-center text-[var(--btn-decline-icon)] transition-all group-hover:scale-105 shadow-md"><span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">call_end</span></div><span class="text-[14px] font-mono text-[var(--text-muted)] font-bold">Decline</span></button> <button id="btnAnswer" type="button" onclick="acceptCall()" class="flex flex-col items-center gap-2 group cursor-pointer transition-transform active:scale-95" aria-label="Answer Call"><div class="w-14 h-14 rounded-full bg-[var(--btn-answer-bg)] border-[var(--btn-answer-border)] flex items-center justify-center text-[var(--btn-answer-icon)] transition-all group-hover:scale-105 shadow-[var(--btn-answer-shadow)] animate-bounce"><span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">call</span></div><span class="text-[14px] font-mono text-[var(--accent-emerald)] font-extrabold">Answer</span></button></div><div id="activeControls" class="w-full hidden justify-center items-center mt-2 opacity-0 transition-all duration-300 relative z-20"><button id="btnEndCall" type="button" onclick="resetCall()" class="flex items-center gap-2 px-8 py-3.5 rounded-full bg-[var(--accent-crimson)] text-white font-mono text-[14.5px] font-extrabold tracking-wider hover:opacity-95 active:scale-95 transition-all shadow-lg cursor-pointer"><span class="material-symbols-outlined text-[22px]">call_end</span> TERMINATE CALL</button></div></div></div><section class="w-full max-w-[430px] glass-panel rounded-2xl p-5 flex flex-col gap-3"><div class="flex items-center justify-between"><span class="text-[13px] font-mono font-extrabold tracking-wider text-[var(--text-muted)] uppercase whitespace-nowrap">SIMULATE CALL SCENARIO</span> <span id="activeScenarioIndicator" class="text-[12px] font-mono text-[var(--accent-cyan)] font-extrabold whitespace-nowrap">MODE: LIVE</span></div><div class="flex flex-col gap-1.5"><div class="relative"><select id="scenarioSelect" onchange="if(this.value){ triggerScenario(this.value); this.value=''; }" class="w-full bg-[var(--bg-card-sub)] border border-[var(--border-card)] rounded-xl px-3.5 py-2.5 text-[13px] font-mono text-[var(--text-primary)] font-bold focus:outline-none focus:border-[var(--accent-cyan)] cursor-pointer appearance-none shadow-sm"><option value="">▼ Select Simulation Scenario (3 Presets)</option><option value="safe">🟢 1. Safe Call (Family member checking dinner)</option><option value="digital_arrest">⚖️ 2. Digital Arrest Scam (CBI narcotics parcel + UPI)</option><option value="clone_extortion">🚨 3. Cloned Emergency Call (Son's accident money)</option></select><div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-[var(--accent-cyan)]"><span class="material-symbols-outlined text-[18px]">expand_more</span></div></div></div><div class="grid grid-cols-3 gap-2"><button type="button" onclick="triggerScenario('safe')" class="flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-xl bg-[var(--accent-emerald)]/15 border border-[var(--accent-emerald)]/35 text-[var(--accent-emerald)] hover:bg-[var(--accent-emerald)]/25 text-[11.5px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm text-center"><span class="text-[15px]">🟢</span> <span class="font-extrabold">1. Safe Call</span> <span class="text-[10px] text-[var(--text-muted)]">Family Dinner</span></button> <button type="button" onclick="triggerScenario('digital_arrest')" class="flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-xl bg-[var(--accent-amber)]/15 border border-[var(--accent-amber)]/35 text-[var(--accent-amber)] hover:bg-[var(--accent-amber)]/25 text-[11.5px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm text-center"><span class="text-[15px]">⚖️</span> <span class="font-extrabold">2. Digital Arrest</span> <span class="text-[10px] text-[var(--text-muted)]">CBI Parcel</span></button> <button type="button" onclick="triggerScenario('clone_extortion')" class="flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-xl bg-[var(--accent-crimson)]/20 border border-[var(--accent-crimson)]/50 text-[var(--accent-crimson)] hover:bg-[var(--accent-crimson)]/30 text-[11.5px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm text-center"><span class="text-[15px]">🚨</span> <span class="font-extrabold">3. Cloned Call</span> <span class="text-[10px] text-[var(--text-muted)]">Accident Ransom</span></button></div><div class="p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] flex flex-col gap-1.5"><div class="flex items-center justify-between text-[12px] font-mono"><span class="text-[var(--accent-cyan)] font-extrabold flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">upload_file</span> CITIZEN AUDIO INSPECTOR </span><span class="text-[var(--text-muted)] text-[11px] font-semibold">.wav, .mp3, .ogg, .m4a</span></div><label class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-[var(--bg-card)] border border-dashed border-[var(--border-card)] hover:border-[var(--accent-cyan)] text-[12px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer transition-all"><span class="material-symbols-outlined text-[17px] text-[var(--accent-cyan)]">audio_file</span> <span id="citizenUploadLabel">Upload Voice Note to Inspect</span> <input type="file" id="citizenAudioUpload" accept=".wav,.mp3,.ogg,.webm,.m4a" class="hidden"></label><div class="grid grid-cols-2 gap-1.5 pt-1.5 border-t border-[var(--border-card)]"><button type="button" onclick="testDemoAudio('real')" class="py-1 px-2 rounded-lg bg-[var(--accent-emerald)]/15 border border-[var(--accent-emerald)]/35 text-[var(--accent-emerald)] hover:bg-[var(--accent-emerald)]/25 text-[11px] font-mono font-bold cursor-pointer transition-all truncate" title="Verify Real Human Audio">🟢 Real Voice Test</button> <button type="button" onclick="testDemoAudio('fake')" class="py-1 px-2 rounded-lg bg-[var(--accent-crimson)]/15 border border-[var(--accent-crimson)]/35 text-[var(--accent-crimson)] hover:bg-[var(--accent-crimson)]/25 text-[11px] font-mono font-bold cursor-pointer transition-all truncate" title="Verify AI Voice Clone Audio">🔴 AI Clone Test</button></div></div><button type="button" onclick="resetCall()" class="w-full py-2.5 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[13px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent-cyan)] active:scale-95 transition-all flex items-center justify-center gap-2 mt-0.5 cursor-pointer font-bold whitespace-nowrap"><span class="material-symbols-outlined text-[18px]">restart_alt</span> Reset Interceptor Session</button></section></div><div class="lg:col-span-7 flex flex-col gap-5"><section class="glass-panel rounded-2xl p-5 sm:p-6 flex flex-col gap-4"><div class="flex items-center justify-between pb-3 border-b border-[var(--border-card)]"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[var(--accent-cyan)] text-[24px]">radar</span> <span class="text-[15px] font-mono font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase whitespace-nowrap">EXPLAINABLE AI RISK TELEMETRY</span></div><span id="telemetryStatusPill" class="text-[13px] font-mono px-3.5 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)] text-[var(--header-badge-text)] font-extrabold whitespace-nowrap">STANDBY / LISTENING</span></div><div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center"><div class="sm:col-span-5 flex flex-col items-center justify-center p-4 rounded-2xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]"><div class="relative w-40 h-40 flex items-center justify-center"><svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36"><path class="text-[var(--gauge-bg)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="2.8"></path><path id="svgGaugeCircle" class="text-[var(--accent-emerald)] transition-all duration-700 ease-out" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="0, 100" stroke-linecap="round" stroke-width="3.2"></path></svg><div class="absolute inset-0 flex flex-col items-center justify-center text-center select-none"><span id="riskScoreNumber" class="text-[50px] sm:text-[54px] font-mono font-extrabold text-[var(--accent-emerald)] leading-none">0%</span> <span id="riskScoreLabel" class="text-[16px] sm:text-[17px] font-mono font-extrabold text-[var(--accent-emerald)] uppercase tracking-wider mt-1">SAFE</span></div></div><div id="vocalProsodyLabel" class="mt-3 text-center text-[13.5px] font-mono font-extrabold text-[var(--accent-emerald)] bg-[var(--header-badge-bg)] px-4 py-1.5 rounded-full border border-[var(--header-badge-border)] tracking-wider whitespace-nowrap">STANDBY / MONITORING</div></div><div class="sm:col-span-7 flex flex-col p-4 rounded-2xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]"><div class="flex justify-between items-center pb-2 text-[13.5px] font-mono font-bold text-[var(--text-muted)]"><span class="flex items-center gap-2 text-[var(--accent-cyan)] whitespace-nowrap"><span class="material-symbols-outlined text-[18px]">graphic_eq</span> LIVE ACOUSTIC SPECTRAL MATRIX </span><span id="spectralStatusTag" class="text-[12px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap">60 FPS FFT</span></div><div class="relative w-full h-34 sm:h-38 mt-1 rounded-xl overflow-hidden border border-[var(--border-card)]" style="background: var(--spec-canvas-bg);"><canvas id="spectralMatrixCanvas" class="w-full h-full block"></canvas><div class="absolute top-1 left-2 text-[12px] font-mono text-[var(--accent-cyan)] font-bold pointer-events-none">8kHz</div><div class="absolute top-1/2 -translate-y-1/2 left-2 text-[11px] font-mono text-white/70 font-bold pointer-events-none">4kHz</div><div class="absolute bottom-1 left-2 text-[12px] font-mono text-[var(--accent-cyan)] font-bold pointer-events-none">0kHz</div></div><div class="flex justify-between items-center mt-2.5 text-[13px] font-mono text-[var(--text-sublabel)] font-semibold"><span>RMS Energy: <span id="audioLevelDisplay" class="font-bold text-[var(--text-primary)]">0</span>%</span> <span id="noiseGateNotice" class="whitespace-nowrap">Adaptive Silence Gate</span></div></div></div><div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 pt-3.5 border-t border-[var(--border-card)]/60 font-mono"><div class="flex flex-col gap-1.5 p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0"><div class="flex justify-between items-center text-[13.5px] text-[var(--text-muted)] font-bold whitespace-nowrap"><span class="truncate">Acoustic Synthetics</span> <span id="voiceBadge" class="text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1">10% (HUMAN)</span></div><div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5"><div id="barVoiceAuth" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 10%;"></div></div></div><div class="flex flex-col gap-1.5 p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0"><div class="flex justify-between items-center text-[13.5px] text-[var(--text-muted)] font-bold whitespace-nowrap"><span class="truncate">Vocoder Artifacts</span> <span id="vocoderBadge" class="text-[14px] text-[var(--accent-emerald)] font-extrabold ml-1 truncate">CLEAN / BIOLOGICAL</span></div><div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5"><div id="barVocoder" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 8%;"></div></div></div><div class="flex flex-col gap-1.5 p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0"><div class="flex justify-between items-center text-[13.5px] text-[var(--text-muted)] font-bold whitespace-nowrap"><span class="truncate">Coercion Intent</span> <span id="scriptBadge" class="text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1">CLEAN</span></div><div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5"><div id="barScriptNlp" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 5%;"></div></div></div><div class="flex flex-col gap-1.5 p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0"><div class="flex justify-between items-center text-[13.5px] text-[var(--text-muted)] font-bold whitespace-nowrap"><span class="truncate">Evidence LLR</span> <span id="xaiLlrVal" class="text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1">-2.45 dB</span></div><div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5"><div id="xaiLlrBar" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 12%;"></div></div></div></div></section><section id="bankingDefenseCard" class="glass-panel rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row items-center justify-between gap-4 transition-all duration-300" style="background: var(--defense-safe-bg); border-color: var(--defense-safe-border);"><div class="flex items-center gap-3 flex-wrap sm:flex-nowrap"><div id="bankingPolicyBadge" class="flex items-center gap-2.5 px-4 py-2 rounded-full border text-[15px] sm:text-[15.5px] font-mono font-extrabold tracking-wider whitespace-nowrap" style="background: var(--defense-safe-bg); border-color: var(--defense-safe-border); color: var(--defense-safe-text);"><span id="defenseStatusDot" class="w-3 h-3 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span> <span id="bankingPolicyText">AUTONOMOUS DEFENSE: ACTIVE &amp; MONITORING</span></div><button id="btnBiometricOverride" type="button" onclick="openBiometricModal()" class="hidden flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[var(--accent-crimson)] text-white text-[13px] font-mono font-extrabold hover:opacity-90 active:scale-95 transition-all shadow-md animate-pulse cursor-pointer whitespace-nowrap"><span class="material-symbols-outlined text-[18px]">fingerprint</span> BIOMETRIC OVERRIDE (UNLOCK)</button></div><div class="flex items-center gap-2 overflow-hidden max-w-full md:max-w-[320px] whitespace-nowrap font-mono text-[13px]"><span class="font-bold text-[var(--text-sublabel)] whitespace-nowrap">SEAL:</span> <span id="evidenceHashDisplay" class="text-[var(--accent-cyan)] font-semibold truncate select-all">SHA256-e3b0c442...991b855</span></div><div class="flex items-center gap-2.5 whitespace-nowrap"><button id="btnDispatch1930" type="button" class="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/35 text-[14px] font-mono text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/25 font-extrabold transition-all whitespace-nowrap shadow-sm cursor-pointer" title="Dispatch Live Telemetry to I4C Cyber Crime 1930"><span class="material-symbols-outlined text-[19px]">call</span> 1930 DISPATCH (I4C)</button> <button id="btnManualLock" type="button" class="p-2.5 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent-cyan)] transition-all cursor-pointer font-bold" title="Toggle Emergency Shield / Out-of-Band Callback"><span class="material-symbols-outlined text-[20px]">lock</span></button></div></section><section class="glass-panel rounded-2xl p-5 sm:p-6 flex flex-col gap-3.5"><div class="flex items-center justify-between pb-2.5 border-b border-[var(--border-card)]"><div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-[var(--accent-cyan)] animate-pulse"></span> <span class="text-[14.5px] sm:text-[15px] font-mono font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase whitespace-nowrap">MULTI-VECTOR EXTORTION INTERCEPTOR STREAM</span></div><span id="speechStateTag" class="text-[13px] font-mono text-[var(--accent-cyan)] uppercase font-extrabold whitespace-nowrap">MIC READY</span></div><div id="detectedKeywordsBox" class="flex flex-wrap gap-2.5 hidden"></div><div id="transcriptFeed" class="h-40 sm:h-48 overflow-y-auto bg-[var(--bg-card-sub)] p-4 sm:p-5 rounded-xl border border-[var(--border-card)] flex flex-col gap-3 font-mono text-[16px] font-bold leading-[1.75] pr-2"><p class="text-[var(--text-muted)] italic text-[14.5px] animate-pulse font-medium">&gt; Interceptor active. Monitoring audio stream for synthetic AI vocals &amp; extortion keywords...</p></div><div class="flex items-center gap-2 mt-0.5"><input type="text" id="quickScriptInput" placeholder="Test script phrase (e.g. 'cbi arrest warrant', 'urgent hospital bail', or normal chat)..." class="flex-1 px-3.5 py-2 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[13px] font-mono text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent-cyan)]"> <button id="btnTestScript" type="button" class="px-3.5 py-2 rounded-xl bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/40 text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/25 font-mono text-[12.5px] font-bold cursor-pointer whitespace-nowrap">Scan Script</button></div></section></div></div></div><div id="menuBackdrop" class="fixed inset-0 bg-[var(--backdrop-dim)] backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div><aside id="menuDrawer" class="fixed top-0 left-0 bottom-0 w-[320px] max-w-[85vw] bg-[var(--bg-card)] border-r border-[var(--border-card)] shadow-2xl z-[80] transform -translate-x-full transition-transform duration-300 flex flex-col justify-between p-5"><div><div class="flex items-center justify-between pb-4 border-b border-[var(--border-card)] mb-5"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">security</span> <span class="font-mono font-extrabold text-base tracking-wider text-[var(--text-primary)]">DHWANI-KAVACH</span></div><button id="btnCloseMenu" type="button" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded-full hover:bg-[var(--accent-cyan)]/10 cursor-pointer"><span class="material-symbols-outlined text-xl">close</span></button></div><nav class="flex flex-col gap-2"><button id="drawerNavShield" type="button" class="flex items-center gap-3 px-3.5 py-3 rounded-xl bg-[var(--accent-cyan)]/15 text-[var(--accent-cyan)] font-mono text-[13.5px] border border-[var(--accent-cyan)]/30 text-left cursor-pointer font-bold"><span class="material-symbols-outlined text-xl">shield</span> <span>Command SOC Dashboard</span></button> <button id="drawerNavLogs" type="button" class="flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-[var(--accent-cyan)]/10 text-[var(--text-primary)] font-mono text-[13.5px] text-left cursor-pointer font-bold"><span class="material-symbols-outlined text-xl text-[var(--accent-cyan)]">history</span> <span>Call Incident Logs</span></button> <button id="drawerNavIntel" type="button" class="flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-[var(--accent-cyan)]/10 text-[var(--text-primary)] font-mono text-[13.5px] text-left cursor-pointer font-bold"><span class="material-symbols-outlined text-xl text-[var(--accent-cyan)]">analytics</span> <span>Threat Intelligence</span></button> <button id="drawerNavVault" type="button" class="flex items-center gap-3 px-3.5 py-3 rounded-xl hover:bg-[var(--accent-cyan)]/10 text-[var(--text-primary)] font-mono text-[13.5px] text-left cursor-pointer font-bold"><span class="material-symbols-outlined text-xl text-[var(--accent-cyan)]">fingerprint</span> <span>Biometric Voice Vault</span></button></nav></div><div class="pt-4 border-t border-[var(--border-card)] text-[13px] font-mono text-[var(--text-muted)] flex flex-col gap-1.5 font-bold"><div class="flex justify-between"><span>Engine Build:</span><span class="text-[var(--accent-cyan)]">v5.0 Multi-Vector Interceptor</span></div><div class="flex justify-between"><span>I4C Gateway:</span><span class="text-[var(--accent-emerald)]">1930 Active</span></div></div></aside><div id="settingsBackdrop" class="fixed inset-0 bg-[var(--backdrop-dim)] backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div><div id="settingsModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[460px] bg-[var(--bg-card)] border border-[var(--border-card)] rounded-2xl shadow-2xl z-[80] p-6 hidden opacity-0 transition-all duration-300 max-h-[85vh] overflow-y-auto"><div class="flex items-center justify-between pb-3.5 border-b border-[var(--border-card)] mb-4"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">settings</span><h3 class="font-mono font-bold text-base tracking-wider text-[var(--accent-cyan)] uppercase">SYSTEM SETTINGS</h3></div><button id="btnCloseSettings" type="button" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded-full hover:bg-[var(--accent-cyan)]/10 cursor-pointer"><span class="material-symbols-outlined text-xl">close</span></button></div><div class="flex flex-col gap-4 text-[13.5px] font-mono"><div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]"><div><div class="font-bold text-[var(--text-primary)]">Live Mic Capture</div><div class="text-[12px] text-[var(--text-muted)] font-semibold">Real-time temporal acoustic DSP analysis</div></div><input type="checkbox" id="toggleLiveMic" class="w-4 h-4 accent-[var(--accent-cyan)] cursor-pointer" checked="checked"></div><div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]"><div><div class="font-bold text-[var(--text-primary)]">Hardware Siren Alarm</div><div class="text-[12px] text-[var(--text-muted)] font-semibold">Synthesize 700Hz-1200Hz sweep on AI Clone</div></div><input type="checkbox" id="toggleSiren" class="w-4 h-4 accent-[var(--accent-cyan)] cursor-pointer" checked="checked"></div><div class="flex items-center justify-between p-3.5 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]"><div><div class="font-bold text-[var(--text-primary)]">Auto Banking Killswitch</div><div class="text-[12px] text-[var(--text-muted)] font-semibold">Freeze transactions immediately if Risk &gt; 70%</div></div><input type="checkbox" id="toggleAutoKillswitch" class="w-4 h-4 accent-[var(--accent-cyan)] cursor-pointer" checked="checked"></div></div></div><div id="logsBackdrop" class="fixed inset-0 bg-[var(--backdrop-dim)] backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div><div id="logsModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[480px] bg-[var(--bg-card)] border border-[var(--border-card)] rounded-2xl shadow-2xl z-[80] p-6 hidden opacity-0 transition-all duration-300 max-h-[85vh] overflow-y-auto"><div class="flex items-center justify-between pb-3.5 border-b border-[var(--border-card)] mb-4"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">history</span><h3 class="font-mono font-bold text-base tracking-wider text-[var(--accent-cyan)] uppercase">INCIDENT LOGS</h3></div><div class="flex items-center gap-2"><button id="btnExportLogs" type="button" class="text-[12px] font-mono px-3 py-1 rounded border border-[var(--accent-cyan)]/40 text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/10 font-bold cursor-pointer">EXPORT</button> <button id="btnCloseLogs" type="button" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded-full hover:bg-[var(--accent-cyan)]/10 cursor-pointer"><span class="material-symbols-outlined text-xl">close</span></button></div></div><div class="flex flex-col gap-2.5 font-mono text-xs" id="logsContainer"><div class="text-center text-[var(--text-muted)] py-6 text-[13.5px] font-bold">No call incidents recorded in this session.</div></div></div><div id="intelBackdrop" class="fixed inset-0 bg-[var(--backdrop-dim)] backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div><div id="intelModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[480px] bg-[var(--bg-card)] border border-[var(--border-card)] rounded-2xl shadow-2xl z-[80] p-6 hidden opacity-0 transition-all duration-300 max-h-[85vh] overflow-y-auto"><div class="flex items-center justify-between pb-3.5 border-b border-[var(--border-card)] mb-4"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">analytics</span><h3 class="font-mono font-bold text-base tracking-wider text-[var(--accent-cyan)] uppercase">THREAT INTELLIGENCE</h3></div><button id="btnCloseIntel" type="button" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded-full hover:bg-[var(--accent-cyan)]/10 cursor-pointer"><span class="material-symbols-outlined text-xl">close</span></button></div><div class="flex flex-col gap-3.5 font-mono text-[13px] text-[var(--text-muted)]"><div class="p-4 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]"><span class="text-[var(--accent-cyan)] font-bold block mb-1">1. Adaptive Noise Gate &amp; Smoothing</span><p class="text-[12.5px] leading-relaxed text-[var(--text-muted)] font-semibold">Temporal EMA filtering eliminates mic initialization pops and prevents erratic score jumping.</p></div><div class="p-4 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]"><span class="text-[var(--accent-cyan)] font-bold block mb-1">2. Multi-Vector Fraud Detection</span><p class="text-[12.5px] leading-relaxed text-[var(--text-muted)] font-semibold">Detects Digital Arrest, Courier/Customs extortion, Emergency kidnapping scams, Job Ponzi, and OTP harvest.</p></div><div class="p-4 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]"><span class="text-[var(--accent-cyan)] font-bold block mb-1">3. Automated Regulatory Telemetry</span><p class="text-[12.5px] leading-relaxed text-[var(--text-muted)] font-semibold">Integrates with National Cyber Crime Reporting Portal (1930) with SHA-256 evidence chain.</p></div></div></div><div id="vaultBackdrop" class="fixed inset-0 bg-[var(--backdrop-dim)] backdrop-blur-sm z-[70] hidden opacity-0 transition-opacity duration-300"></div><div id="vaultModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[480px] bg-[var(--bg-card)] border border-[var(--border-card)] rounded-2xl shadow-2xl z-[80] p-6 hidden opacity-0 transition-all duration-300 max-h-[85vh] overflow-y-auto"><div class="flex items-center justify-between pb-3.5 border-b border-[var(--border-card)] mb-4"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[var(--accent-cyan)] text-2xl">fingerprint</span><h3 class="font-mono font-bold text-base tracking-wider text-[var(--accent-cyan)] uppercase">BIOMETRIC VOICE VAULT</h3></div><button id="btnCloseVault" type="button" class="text-[var(--text-muted)] hover:text-[var(--text-primary)] p-1 rounded-full hover:bg-[var(--accent-cyan)]/10 cursor-pointer"><span class="material-symbols-outlined text-xl">close</span></button></div><div class="flex flex-col gap-3 font-mono text-[13.5px]"><div class="p-4 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] flex flex-col gap-2.5"><div class="text-[var(--text-primary)] font-bold text-[14px]">Enrolled Familial Voiceprints</div><div class="flex items-center justify-between py-2 border-b border-[var(--border-card)] text-[13px]"><span class="text-[var(--text-muted)] font-semibold">Family Contact #1 (Mom)</span> <span class="text-[var(--accent-emerald)] font-bold">VERIFIED</span></div><div class="flex items-center justify-between py-2 text-[13px]"><span class="text-[var(--text-muted)] font-semibold">Family Contact #2 (Spouse)</span> <span class="text-[var(--accent-emerald)] font-bold">VERIFIED</span></div></div></div></div><div id="biometricBackdrop" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[85] hidden opacity-0 transition-opacity duration-300"></div><div id="biometricModal" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[440px] bg-[var(--bg-card)] border-2 border-[var(--accent-crimson)] rounded-3xl shadow-2xl z-[90] p-6 hidden opacity-0 transition-all duration-300 flex flex-col items-center text-center gap-4"><div class="relative w-24 h-24 rounded-full bg-[var(--accent-crimson)]/15 border-2 border-[var(--accent-crimson)] flex items-center justify-center text-[var(--accent-crimson)] shadow-lg overflow-hidden"><span id="biometricScanIcon" class="material-symbols-outlined text-6xl">fingerprint</span><div id="biometricLaser" class="hidden biometric-laser"></div></div><div><h3 id="biometricTitle" class="font-mono font-extrabold text-[18.5px] tracking-wider text-[var(--accent-crimson)] uppercase">AUTONOMOUS BANKING FREEZE</h3><p id="biometricSubtitle" class="font-mono text-[13px] text-[var(--text-muted)] mt-1 leading-relaxed">High Coercion/Spoof Threshold Exceeded (&gt;75%). Outbound UPI &amp; Card transfers locked. Scan biometric fingerprint to authorize override.</p></div><div id="biometricUserCard" class="w-full p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] flex items-center justify-between font-mono text-[12.5px]"><div class="flex items-center gap-2 text-left"><span class="material-symbols-outlined text-[var(--accent-cyan)] text-[22px]">verified_user</span><div><div class="font-bold text-[var(--text-primary)]">Rohit Sharma</div><div class="text-[11px] text-[var(--text-muted)]">Aadhaar Linked Device ID #8841</div></div></div><span id="biometricStatusTag" class="px-2.5 py-1 rounded-md bg-[var(--accent-crimson)]/20 text-[var(--accent-crimson)] font-bold text-[11.5px] border border-[var(--accent-crimson)]/40">FROZEN</span></div><button id="btnExecuteBiometric" type="button" onclick="executeBiometricScan()" class="w-full py-3.5 rounded-xl bg-[var(--accent-emerald)] hover:bg-[var(--accent-emerald)]/90 active:scale-95 text-black font-mono font-extrabold text-[14px] transition-all shadow-lg cursor-pointer flex items-center justify-center gap-2"><span class="material-symbols-outlined text-[20px]">fingerprint</span> <span id="btnBiometricText">TAP TO SCAN BIOMETRIC FINGERPRINT</span></button> <button type="button" onclick="closeBiometricModal()" class="text-[12.5px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer">Dismiss (Maintain Security Freeze)</button></div><script>// ============================================================================
 // 1. GLOBAL STATE & BACKEND INTEGRATION
 // ============================================================================
 var callActive = false;
@@ -3744,12 +3058,7 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initApp);
 } else {
     initApp();
-}
-
-</script>
-<script>fetch('/api/reset',{method:'POST'});</script>
-<script>
-/* mentor add: fresh call memory per visitor */
+}</script><script>fetch('/api/reset',{method:'POST'});</script><script>/* mentor add: fresh call memory per visitor */
 fetch('/api/reset',{method:'POST'});
 
 /* mentor add: warning tone on HIGH RISK */
@@ -3765,12 +3074,7 @@ function dkBeep(){
     g.gain.exponentialRampToValueAtTime(0.0001,dkAudioCtx.currentTime+0.7);
     o.connect(g); g.connect(dkAudioCtx.destination); o.start(); o.stop(dkAudioCtx.currentTime+0.75);
   }catch(e){}
-}
-</script>
-
-<!-- ===== DHWANI KAVACH EVIDENCE PACK (safe-add: delete this block to remove) ===== -->
-<style>
-  #dkpack{position:fixed;right:14px;bottom:14px;width:300px;background:#0d1520;color:#e8eef7;
+}</script><style>#dkpack{position:fixed;right:14px;bottom:14px;width:300px;background:#0d1520;color:#e8eef7;
     font-family:system-ui,'Segoe UI',sans-serif;border:1px solid #27405e;border-radius:12px;
     box-shadow:0 8px 30px rgba(0,0,0,.45);z-index:99999;padding:10px 12px;font-size:12px}
   #dkpack h4{margin:2px 0 8px;font-size:12.5px;letter-spacing:.4px;color:#9fc3ff;font-weight:600}
@@ -3784,20 +3088,7 @@ function dkBeep(){
   #dkpack button.ghost{background:#22304a;color:#bcd0ea;margin-top:6px}
   #dkpack .rep{display:none;margin-top:8px;background:#0a1017;border:1px solid #1d2f47;border-radius:8px;
     padding:8px;white-space:pre-wrap;font-family:Consolas,monospace;font-size:10.5px;line-height:1.45;
-    max-height:170px;overflow:auto;color:#c9d8ec}
-</style>
-<div id="dkpack">
-  <h4>🛡️ DHWANI KAVACH — EVIDENCE TIMELINE</h4>
-  <canvas id="dkcv" width="276" height="46"></canvas>
-  <div class="row"><span>live verdict</span><span id="dkverdict" class="pill ok">—</span></div>
-  <div class="row"><span>engine round-trip</span><span id="dkrt" style="color:#8fb7e8">— ms</span></div>
-  <div class="row"><span>call time</span><span id="dktime">0:00</span></div>
-  <button onclick="dkReport()">📋 CALL REPORT</button>
-  <button class="ghost" onclick="dkCopyReport()">copy report text</button>
-  <div class="rep" id="dkrep"></div>
-</div>
-<script>
-(function(){
+    max-height:170px;overflow:auto;color:#c9d8ec}</style><div id="dkpack"><h4>🛡️ DHWANI KAVACH — EVIDENCE TIMELINE</h4><canvas id="dkcv" width="276" height="46"></canvas><div class="row"><span>live verdict</span><span id="dkverdict" class="pill ok">—</span></div><div class="row"><span>engine round-trip</span><span id="dkrt" style="color:#8fb7e8">— ms</span></div><div class="row"><span>call time</span><span id="dktime">0:00</span></div><button onclick="dkReport()">📋 CALL REPORT</button> <button class="ghost" onclick="dkCopyReport()">copy report text</button><div class="rep" id="dkrep"></div></div><script>(function(){
   var S={t0:Date.now(),pts:[],peak:0,peakTier:'—',nWin:0,nBad:0,nSus:0,radar:[],lastRT:null,advisory:null};
   var TIER={SAFE:{v:0.15},SUSPICIOUS:{v:0.5},HIGH_RISK:{v:0.9}};
   var of=window.fetch;
@@ -3875,13 +3166,7 @@ function dkBeep(){
     var t=((e.target&&(e.target.textContent||''))+'').trim();
     if(/new call|reset/i.test(t))window.dkResetPack();
   },true);
-})();
-</script>
-<!-- ===== END EVIDENCE PACK ===== -->
-
-<!-- ===== DK SPOKEN WARNING (safe-add: delete block to remove) ===== -->
-<script>
-(function(){
+})();</script><script>(function(){
   var spoken=0;
   var of=window.fetch;
   window.fetch=function(u,o){
@@ -3904,12 +3189,7 @@ function dkBeep(){
       return r;
     });
   };
-})();
-</script>
-<!-- ===== END DK SPOKEN WARNING ===== -->
-<!-- ===== DK TRUSTED CIRCLE — IDENTITY NET (safe-add: delete block to remove) ===== -->
-<style>
-  #dkcircle{position:fixed;left:14px;bottom:14px;width:290px;background:#0d1520;color:#e8eef7;
+})();</script><style>#dkcircle{position:fixed;left:14px;bottom:14px;width:290px;background:#0d1520;color:#e8eef7;
     font-family:system-ui,'Segoe UI',sans-serif;border:1px solid #27405e;border-radius:12px;
     box-shadow:0 8px 30px rgba(0,0,0,.45);z-index:99998;font-size:12px}
   #dkcircle .bar{padding:9px 12px;cursor:pointer;font-weight:600;font-size:12.5px;
@@ -3926,24 +3206,7 @@ function dkBeep(){
   #dkcircle .vmatch{background:#12351f;color:#7dff9e}
   #dkcircle .vwrong{background:#3d1520;color:#ff8fa3}
   #dkcircle .vunc{background:#3a3012;color:#ffd166}
-  #dkcircle .muted{margin-top:7px;color:#6f93bd;font-size:10.5px}
-</style>
-<div id="dkcircle">
-  <div class="bar" onclick="dkToggleC()">🧑‍🤝‍🧑 TRUSTED CIRCLE — IDENTITY NET <span id="dkcarw">▸</span></div>
-  <div class="body">
-    <div class="sec">ENROL (once, with consent)</div>
-    <input id="dkname" placeholder="name (e.g. yashika)" maxlength="20">
-    <button id="dkEnrolBtn" onclick="dkEnrol()">🎙 enrol this voice (8 s)</button>
-    <div class="sec">VERIFY CALLER</div>
-    <select id="dkwho"></select>
-    <button id="dkVerBtn" onclick="dkVerify()">🎙 verify caller (6 s)</button>
-    <div id="dkvres" class="vres vunc">—</div>
-    <div class="muted" id="dklist">enrolled: —</div>
-    <div class="muted">prints stay on this device only</div>
-  </div>
-</div>
-<script>
-function dkToggleC(){
+  #dkcircle .muted{margin-top:7px;color:#6f93bd;font-size:10.5px}</style><div id="dkcircle"><div class="bar" onclick="dkToggleC()">🧑‍🤝‍🧑 TRUSTED CIRCLE — IDENTITY NET <span id="dkcarw">▸</span></div><div class="body"><div class="sec">ENROL (once, with consent)</div><input id="dkname" placeholder="name (e.g. yashika)" maxlength="20"> <button id="dkEnrolBtn" onclick="dkEnrol()">🎙 enrol this voice (8 s)</button><div class="sec">VERIFY CALLER</div><select id="dkwho"></select> <button id="dkVerBtn" onclick="dkVerify()">🎙 verify caller (6 s)</button><div id="dkvres" class="vres vunc">—</div><div class="muted" id="dklist">enrolled: —</div><div class="muted">prints stay on this device only</div></div></div><script>function dkToggleC(){
   var p=document.getElementById('dkcircle');
   p.classList.toggle('open');
   document.getElementById('dkcarw').textContent=p.classList.contains('open')?'▾':'▸';
@@ -4004,12 +3267,7 @@ function dkVerify(){
     }).catch(function(){var el=document.getElementById('dkvres');el.className='vres vunc';el.textContent='⚠ engine offline';});
   });
 }
-dkRefresh();
-</script>
-<!-- ===== END DK TRUSTED CIRCLE ===== -->
-<!-- ===== DK STAGE MODE — PROJECTOR VERDICT (safe-add: delete block to remove) ===== -->
-<style>
-  #dkstage{position:fixed;inset:0;display:none;z-index:100000;align-items:center;justify-content:center;
+dkRefresh();</script><style>#dkstage{position:fixed;inset:0;display:none;z-index:100000;align-items:center;justify-content:center;
     flex-direction:column;background:radial-gradient(ellipse at center,rgba(130,0,30,.55),rgba(25,0,10,.9));
     color:#fff;font-family:system-ui,'Segoe UI',sans-serif;cursor:pointer;text-align:center}
   #dkstage.on{display:flex}
@@ -4020,15 +3278,7 @@ dkRefresh();
   #dkstage .tag{margin-top:26px;font-size:14px;color:#c9d8ec;border:1px solid rgba(255,255,255,.3);
     padding:8px 18px;border-radius:20px}
   @keyframes dkpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
-  body.dkflash{box-shadow:inset 0 0 0 6px #ff4d6d,inset 0 0 140px rgba(255,77,109,.35)}
-</style>
-<div id="dkstage" onclick="dkStageClear()">
-  <div class="big">🚨 HIGH RISK</div>
-  <div class="sub" id="dkstagesub">SYNTHETIC / FRAUD VOICE DETECTED — DO NOT SHARE ANY INFORMATION</div>
-  <div class="tag">click anywhere to clear</div>
-</div>
-<script>
-function dkStageClear(){
+  body.dkflash{box-shadow:inset 0 0 0 6px #ff4d6d,inset 0 0 140px rgba(255,77,109,.35)}</style><div id="dkstage" onclick="dkStageClear()"><div class="big">🚨 HIGH RISK</div><div class="sub" id="dkstagesub">SYNTHETIC / FRAUD VOICE DETECTED — DO NOT SHARE ANY INFORMATION</div><div class="tag">click anywhere to clear</div></div><script>function dkStageClear(){
   document.getElementById('dkstage').classList.remove('on');
   document.body.classList.remove('dkflash');
 }
@@ -4069,12 +3319,7 @@ function dkStageClear(){
     var txt=((e.target&&(e.target.textContent||''))+'').trim();
     if(/new call|reset/i.test(txt))dkStageClear();
   },true);
-})();
-</script>
-<!-- ===== END DK STAGE MODE ===== -->
-<!-- ===== DK THREAT INTEL — NUMBER CHECK (safe-add: delete block to remove) ===== -->
-<style>
-  #dkintel{position:fixed;top:14px;left:14px;width:290px;background:#0d1520;color:#e8eef7;
+})();</script><style>#dkintel{position:fixed;top:14px;left:14px;width:290px;background:#0d1520;color:#e8eef7;
     font-family:system-ui,'Segoe UI',sans-serif;border:1px solid #27405e;border-radius:12px;
     box-shadow:0 8px 30px rgba(0,0,0,.45);z-index:99997;font-size:12px}
   #dkintel .bar{padding:9px 12px;cursor:pointer;font-weight:600;font-size:12.5px;
@@ -4089,19 +3334,7 @@ function dkStageClear(){
   #dkintel .res{margin-top:8px;border-radius:8px;padding:8px 10px;font-size:11.5px;line-height:1.5;display:none}
   #dkintel .ok{background:#12351f;color:#9dffbb}
   #dkintel .warn{background:#3a3012;color:#ffd166}
-  #dkintel .bad{background:#3d1520;color:#ff9fb0}
-</style>
-<div id="dkintel">
-  <div class="bar" onclick="var p=document.getElementById('dkintel');p.classList.toggle('open')">📞 THREAT INTEL — CHECK BEFORE ANSWERING ▸</div>
-  <div class="body">
-    <input id="dknum" type="text" value="+91-140-9876543" placeholder="caller number">
-    <label><input type="checkbox" id="dkbank"> caller claims to be from a bank</label>
-    <button onclick="dkCheckNum()">CHECK NUMBER</button>
-    <div class="res" id="dkres"></div>
-  </div>
-</div>
-<script>
-function dkCheckNum(){
+  #dkintel .bad{background:#3d1520;color:#ff9fb0}</style><div id="dkintel"><div class="bar" onclick="var p=document.getElementById('dkintel');p.classList.toggle('open')">📞 THREAT INTEL — CHECK BEFORE ANSWERING ▸</div><div class="body"><input id="dknum" type="text" value="+91-140-9876543" placeholder="caller number"> <label><input type="checkbox" id="dkbank"> caller claims to be from a bank</label> <button onclick="dkCheckNum()">CHECK NUMBER</button><div class="res" id="dkres"></div></div></div><script>function dkCheckNum(){
   var num=(document.getElementById('dknum').value||'').replace(/[^0-9]/g,'');
   if(num.length===12&&num.substring(0,2)==='91')num=num.substring(2);
   var bank=document.getElementById('dkbank').checked;
@@ -4119,12 +3352,7 @@ function dkCheckNum(){
     var el=document.getElementById('dkres');el.style.display='block';el.className='res warn';
     el.innerHTML='⚠ engine offline — start server';
   });
-}
-</script>
-<!-- ===== END DK THREAT INTEL ===== -->
-<!-- ===== DK SECURITY EXTRAS — LIVENESS CHALLENGE + HASH-STAMPED REPORT ===== -->
-<style>
-  #dksec{position:fixed;top:14px;right:14px;width:300px;background:#0d1520;color:#e8eef7;
+}</script><style>#dksec{position:fixed;top:14px;right:14px;width:300px;background:#0d1520;color:#e8eef7;
     font-family:system-ui,'Segoe UI',sans-serif;border:1px solid #27405e;border-radius:12px;
     box-shadow:0 8px 30px rgba(0,0,0,.45);z-index:99996;font-size:12px}
   #dksec .bar{padding:9px 12px;cursor:pointer;font-weight:600;font-size:12.5px;
@@ -4147,29 +3375,7 @@ function dkCheckNum(){
   #dksec .hint{color:#6f93bd;font-size:10.5px;margin:2px 0 6px}
   #dksec .hash{display:none;background:#0a1017;border:1px solid #1d2f47;border-radius:8px;
     padding:7px;font-family:Consolas,monospace;font-size:10px;color:#8fe3b0;word-break:break-all;margin-top:6px}
-  #dksec .muted{margin-top:7px;color:#6f93bd;font-size:10.5px}
-</style>
-<div id="dksec">
-  <div class="bar" onclick="var p=document.getElementById('dksec');p.classList.toggle('open')">🔐 SECURITY EXTRAS — ANTI-REPLAY ▸</div>
-  <div class="body">
-    <div class="sec">LIVENESS CHALLENGE (defeats replay / clone)</div>
-    <div class="code" id="dkcode">—</div>
-    <button onclick="dkNewChallenge()">🎲 generate code word</button>
-    <div class="hint">read it to the caller • ask them to repeat it back</div>
-    <div class="row2">
-      <button class="g" onclick="dkLive(true)">caller repeated ✓</button>
-      <button class="r" onclick="dkLive(false)">failed / refused ✗</button>
-    </div>
-    <div class="lres unc" id="dkliveres">—</div>
-    <div class="sec">EVIDENCE-GRADE REPORT</div>
-    <button onclick="dkStamp()">🧾 hash-stamp call report (SHA-256)</button>
-    <div class="hash" id="dkhash">—</div>
-    <button onclick="dkCopyStamp()">📋 copy stamped report</button>
-    <div class="muted">tamper-evident evidence • attach to 1930 / cybercrime.gov.in</div>
-  </div>
-</div>
-<script>
-var dkLiveState=null,dkLastStamp=null;
+  #dksec .muted{margin-top:7px;color:#6f93bd;font-size:10.5px}</style><div id="dksec"><div class="bar" onclick="var p=document.getElementById('dksec');p.classList.toggle('open')">🔐 SECURITY EXTRAS — ANTI-REPLAY ▸</div><div class="body"><div class="sec">LIVENESS CHALLENGE (defeats replay / clone)</div><div class="code" id="dkcode">—</div><button onclick="dkNewChallenge()">🎲 generate code word</button><div class="hint">read it to the caller • ask them to repeat it back</div><div class="row2"><button class="g" onclick="dkLive(true)">caller repeated ✓</button> <button class="r" onclick="dkLive(false)">failed / refused ✗</button></div><div class="lres unc" id="dkliveres">—</div><div class="sec">EVIDENCE-GRADE REPORT</div><button onclick="dkStamp()">🧾 hash-stamp call report (SHA-256)</button><div class="hash" id="dkhash">—</div><button onclick="dkCopyStamp()">📋 copy stamped report</button><div class="muted">tamper-evident evidence • attach to 1930 / cybercrime.gov.in</div></div></div><script>var dkLiveState=null,dkLastStamp=null;
 var DKW=['NEEL','SURAJ','MOR','KAGAZ','BADAL','DIYA','PEEPAL','RAVI','CHAND','MOTI','KAMAL','BHAAV'];
 function dkNewChallenge(){
   var a=DKW[Math.floor(Math.random()*DKW.length)],b=DKW[Math.floor(Math.random()*DKW.length)];
@@ -4209,12 +3415,7 @@ async function dkStamp(){
 async function dkCopyStamp(){
   if(!dkLastStamp)await dkStamp();
   if(dkLastStamp&&navigator.clipboard)navigator.clipboard.writeText(dkLastStamp);
-}
-</script>
-<!-- ===== END DK SECURITY EXTRAS ===== -->
-<!-- ===== DK HIDE MOCK VAULT (safe-add: delete block to restore) ===== -->
-<script>
-(function(){
+}</script><script>(function(){
   function dkHideVault(){
     var els=document.querySelectorAll('body *');
     for(var i=0;i<els.length;i++){
@@ -4231,12 +3432,7 @@ async function dkCopyStamp(){
   }
   var tries=0;
   var iv=setInterval(function(){tries++;if(dkHideVault()||tries>40)clearInterval(iv);},250);
-})();
-</script>
-<!-- ===== END DK HIDE MOCK VAULT ===== -->
-<!-- ===== DK MOBILE LAYOUT (safe-add: delete block to remove) ===== -->
-<style>
-  @media (max-width:820px){
+})();</script><style>@media (max-width:820px){
     #dkpack,#dkcircle,#dkintel,#dksec{width:calc(100vw - 20px)!important;
       left:10px!important;right:10px!important;box-sizing:border-box;font-size:11.5px}
     #dkintel{top:10px!important}
@@ -4247,34 +3443,16 @@ async function dkCopyStamp(){
     #dkpack h4{cursor:pointer}
     #dkstage .big{font-size:15vw}
     #dkstage .sub{font-size:4.2vw}
-  }
-</style>
-<script>
-(function(){
+  }</style><script>(function(){
   var h=document.querySelector('#dkpack h4');
   if(h)h.addEventListener('click',function(){
     if(window.innerWidth<=820)document.getElementById('dkpack').classList.toggle('dkmini');
   });
   if(window.innerWidth<=820&&document.getElementById('dkpack'))
     document.getElementById('dkpack').classList.add('dkmini');
-})();
-</script>
-<!-- ===== END DK MOBILE LAYOUT ===== -->
- <!-- ===== DK PANEL POSITION FIX (safe-add: delete block to remove) ===== -->
-<style>
-  #dkintel{top:74px}
-  @media (max-width:820px){#dkintel{top:64px}#dksec{top:10px}}
-</style>
-<!-- ===== END DK PANEL POSITION FIX ===== -->
- <!-- ===== DK SEC PANEL POSITION FIX (safe-add: delete block to remove) ===== -->
-<style>
-  #dksec{top:74px}
-  @media (max-width:820px){#dksec{top:64px}}
-</style>
-<!-- ===== END DK SEC PANEL POSITION FIX ===== -->
- <!-- ===== DK CALL-END SUMMARY + AUTO RESET (safe-add: delete block to remove) ===== -->
-<style>
-  #dkend{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:100001;
+})();</script><style>#dkintel{top:74px}
+  @media (max-width:820px){#dkintel{top:64px}#dksec{top:10px}}</style><style>#dksec{top:74px}
+  @media (max-width:820px){#dksec{top:64px}}</style><style>#dkend{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:100001;
     background:#0d1520;color:#e8eef7;border:1px solid #27405e;border-radius:14px;padding:20px 24px;
     box-shadow:0 12px 50px rgba(0,0,0,.65);font-family:system-ui,'Segoe UI',sans-serif;
     display:none;text-align:center;min-width:270px;cursor:pointer}
@@ -4282,15 +3460,7 @@ async function dkCopyStamp(){
   #dkend .t{font-size:22px;font-weight:900;letter-spacing:.5px}
   #dkend .d{margin-top:8px;color:#bcd0ea;font-size:13px;line-height:1.5}
   #dkend.ok .t{color:#7dff9e}#dkend.bad .t{color:#ff8fa3}
-  #dkend .foot{margin-top:12px;font-size:10.5px;color:#6f93bd}
-</style>
-<div id="dkend">
-  <div class="t" id="dkendt"></div>
-  <div class="d" id="dkendd"></div>
-  <div class="foot">click to dismiss &amp; reset now</div>
-</div>
-<script>
-(function(){
+  #dkend .foot{margin-top:12px;font-size:10.5px;color:#6f93bd}</style><div id="dkend"><div class="t" id="dkendt"></div><div class="d" id="dkendd"></div><div class="foot">click to dismiss &amp; reset now</div></div><script>(function(){
   var n=0,sawHigh=false,sawSus=false,first=0,last=0,ended=false,timer=null;
   var of=window.fetch;
   window.fetch=function(u,o){
@@ -4348,12 +3518,7 @@ async function dkCopyStamp(){
     if(/\b(end|decline|hang|cut|stop|terminate)\b/i.test(txt)){ if(n>0)setTimeout(dkEnd,600); }
     else if(/new call|reset/i.test(txt)){ if(n>0)dkReset(); }
   },true);
-})();
-</script>
-<!-- ===== END DK CALL-END SUMMARY ===== -->
- <!-- ===== DK AUTO-TERMINATE + UPLOAD AUTO-RESET (safe-add: delete block to remove) ===== -->
-<script>
-(function(){
+})();</script><script>(function(){
   var DK_IDS=['dkpack','dksec','dkcircle','dkintel','dkstage','dkend'];
   var lastScore=0,scoreSeen=0,consecHigh=0,autoTerm=false,endAt=0;
   try{autoTerm=localStorage.getItem('dkAutoTerm')==='1';}catch(e){}
@@ -4423,21 +3588,11 @@ async function dkCopyStamp(){
     body.appendChild(lab);
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',buildToggle);else buildToggle();
-})();
-</script>
-<!-- ===== END DK AUTO-TERMINATE ===== -->
- <!-- ===== DK ALARM GUARD (block auto-clicks, keep real user clicks) ===== -->
-<script>
-document.addEventListener('click',function(e){
+})();</script><script>document.addEventListener('click',function(e){
   if(e.isTrusted)return;
   var t=((e.target&&(e.target.textContent||''))+'').trim();
   if(/new call|reset/i.test(t)){e.stopPropagation();e.preventDefault();}
-},true);
-</script>
-<!-- ===== END DK ALARM GUARD ===== -->
- <!-- ===== DK LINK GUARD — PHISHING & MESSAGE CHECK (safe-add: delete block to remove) ===== -->
-<style>
-  #dklink{position:fixed;top:10px;left:calc(50% - 150px);width:300px;background:#0d1520;color:#e8eef7;
+},true);</script><style>#dklink{position:fixed;top:10px;left:calc(50% - 150px);width:300px;background:#0d1520;color:#e8eef7;
     font-family:system-ui,'Segoe UI',sans-serif;border:1px solid #27405e;border-radius:12px;
     box-shadow:0 8px 30px rgba(0,0,0,.45);z-index:99995;font-size:12px}
   #dklink .bar{padding:9px 12px;cursor:pointer;font-weight:600;font-size:12.5px;
@@ -4460,20 +3615,7 @@ document.addEventListener('click',function(e){
   @media (max-width:820px){
     #dklink{left:10px;right:10px;width:auto;top:98px}
     #dksec{top:10px}#dkintel{top:54px}
-  }
-</style>
-<div id="dklink">
-  <div class="bar" onclick="var p=document.getElementById('dklink');p.classList.toggle('open')">🔗 LINK GUARD — SMS / WHATSAPP / URL CHECK ▸</div>
-  <div class="body">
-    <div class="sec" style="margin:8px 0 4px;font-size:10.5px;letter-spacing:.8px;color:#6f93bd;font-weight:700">PASTE SUSPICIOUS MESSAGE OR LINK</div>
-    <textarea id="dkmsg" rows="3" placeholder="e.g. Congratulations! You won a prize. Claim: bit.ly/win-now"></textarea>
-    <button onclick="dkLinkCheck()">🔍 CHECK LINK &amp; MESSAGE</button>
-    <div class="res" id="dklres"></div>
-    <div class="muted">explainable on-device heuristics • nothing is uploaded</div>
-  </div>
-</div>
-<script>
-var DKSHORT=['bit.ly','tinyurl.com','t.co','goo.gl','is.gd','cutt.ly','rb.gy','rebrand.ly','ow.ly','shorturl.at'];
+  }</style><div id="dklink"><div class="bar" onclick="var p=document.getElementById('dklink');p.classList.toggle('open')">🔗 LINK GUARD — SMS / WHATSAPP / URL CHECK ▸</div><div class="body"><div class="sec" style="margin:8px 0 4px;font-size:10.5px;letter-spacing:.8px;color:#6f93bd;font-weight:700">PASTE SUSPICIOUS MESSAGE OR LINK</div><textarea id="dkmsg" rows="3" placeholder="e.g. Congratulations! You won a prize. Claim: bit.ly/win-now"></textarea> <button onclick="dkLinkCheck()">🔍 CHECK LINK &amp; MESSAGE</button><div class="res" id="dklres"></div><div class="muted">explainable on-device heuristics • nothing is uploaded</div></div></div><script>var DKSHORT=['bit.ly','tinyurl.com','t.co','goo.gl','is.gd','cutt.ly','rb.gy','rebrand.ly','ow.ly','shorturl.at'];
 var DKBADTLD=['xyz','top','club','click','info','biz','online','site','live','store','icu','rest','zip','mov','cam','quest','monster','cheap'];
 var DKSAFE={};['google.com','youtube.com','whatsapp.com','github.com','wikipedia.org','cybercrime.gov.in','india.gov.in','uidai.gov.in','paytm.com','phonepe.com','amazon.in','flipkart.com','irctc.co.in','hdfcbank.com','icicibank.com','axisbank.com','onlinesbi.sbi','netflix.com'].forEach(function(d){DKSAFE[d]=1;});
 var DKBRAND={google:'google.com',youtube:'youtube.com',whatsapp:'whatsapp.com',paytm:'paytm.com',
@@ -4536,12 +3678,7 @@ function dkLinkCheck(){
   }).catch(function(){
     el.innerHTML='<div class="verdict vwarn">⚠ engine offline for words — link check shown</div>'+parts.join('');
   });
-}
-</script>
-<!-- ===== END DK LINK GUARD ===== -->
- <!-- ===== DK CHILD-SCENARIO TEST BENCH + AUTO-SNIFFER (safe-add: delete block to remove) ===== -->
-<style>
-  #dkbench{position:fixed;inset:0;background:rgba(5,10,20,.92);z-index:100002;display:none;
+}</script><style>#dkbench{position:fixed;inset:0;background:rgba(5,10,20,.92);z-index:100002;display:none;
     align-items:center;justify-content:center;font-family:system-ui,'Segoe UI',sans-serif}
   #dkbench.on{display:flex}
   #dkchat{width:340px;max-width:92vw;background:#111b2b;border-radius:14px;overflow:hidden;
@@ -4570,34 +3707,7 @@ function dkLinkCheck(){
   #dkmini.on{display:block}
   #dkmini .in2{padding:8px 11px;display:flex;gap:8px;align-items:flex-start}
   #dkmini .x{margin-left:auto;cursor:pointer;color:#6f93bd;font-weight:900}
-  #dkmini .bad{color:#ff8fa3}#dkmini .ok{color:#7dff9e}
-</style>
-<div id="dkbench" class="">
-  <span class="clo" onclick="document.getElementById('dkbench').classList.remove('on')">✕</span>
-  <div id="dkchat">
-    <div class="hd">💬 GameZone (unknown number)</div>
-    <div class="msgs">
-      <div class="m in">Hi beta! 🎮 New game update is out! Install the new LEVEL PACK and get 999 free coins!</div>
-      <div class="m in">⚡ Hurry! Only today: <a href="javascript:void(0)" onclick="dkChildTap()">http://free-game-coins.xyz/claim-otp</a></div>
-      <div class="m out">ok let me try!! 🎮</div>
-    </div>
-    <div class="hint">⚠ demo simulation — this is how the shield would behave on the phone</div>
-  </div>
-  <div id="dkblock">
-    <div class="t">🛡️ DHWANI KAVACH<br>BLOCKED THIS LINK</div>
-    <div class="fl" id="dkblockfl"></div>
-    <div style="font-size:11px;color:#c9a3ae;margin-bottom:12px">This link is trying to steal money or OTP.</div>
-    <div class="btns">
-      <button class="back" onclick="dkBackSafety()">← Back to safety</button>
-      <button class="anyway" onclick="dkAnyway()">Open anyway (18+)</button>
-    </div>
-  </div>
-</div>
-<div id="dkmini">
-  <div class="in2"><span id="dkminiic">🛡️</span><span id="dkminitx">Link checked</span><span class="x" onclick="document.getElementById('dkmini').classList.remove('on')">✕</span></div>
-</div>
-<script>
-var dkBenchOn=false;
+  #dkmini .bad{color:#ff8fa3}#dkmini .ok{color:#7dff9e}</style><div id="dkbench" class=""><span class="clo" onclick="document.getElementById('dkbench').classList.remove('on')">✕</span><div id="dkchat"><div class="hd">💬 GameZone (unknown number)</div><div class="msgs"><div class="m in">Hi beta! 🎮 New game update is out! Install the new LEVEL PACK and get 999 free coins!</div><div class="m in">⚡ Hurry! Only today: <a href="javascript:void(0)" onclick="dkChildTap()">http://free-game-coins.xyz/claim-otp</a></div><div class="m out">ok let me try!! 🎮</div></div><div class="hint">⚠ demo simulation — this is how the shield would behave on the phone</div></div><div id="dkblock"><div class="t">🛡️ DHWANI KAVACH<br>BLOCKED THIS LINK</div><div class="fl" id="dkblockfl"></div><div style="font-size:11px;color:#c9a3ae;margin-bottom:12px">This link is trying to steal money or OTP.</div><div class="btns"><button class="back" onclick="dkBackSafety()">← Back to safety</button> <button class="anyway" onclick="dkAnyway()">Open anyway (18+)</button></div></div></div><div id="dkmini"><div class="in2"><span id="dkminiic">🛡️</span><span id="dkminitx">Link checked</span><span class="x" onclick="document.getElementById('dkmini').classList.remove('on')">✕</span></div></div><script>var dkBenchOn=false;
 function dkChildTap(){
   var r=dkCheckUrl('http://free-game-coins.xyz/claim-otp');
   var fl=document.getElementById('dkblockfl');
@@ -4651,12 +3761,7 @@ function dkBench(){dkBenchOn=true;document.getElementById('dkbench').classList.a
     var v=el.value;
     t=setTimeout(function(){sniff(v);},700);
   },true);
-})();
-</script>
-<!-- ===== END DK CHILD TEST BENCH ===== -->
- <!-- ===== DK COMMAND DECK — all panels, one home (safe-add: delete block to restore corners) ===== -->
-<style>
-  body.dkdeck #dklink,body.dkdeck #dkintel,body.dkdeck #dksec,body.dkdeck #dkcircle{
+})();</script><style>body.dkdeck #dklink,body.dkdeck #dkintel,body.dkdeck #dksec,body.dkdeck #dkcircle{
     left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;
     transform:translate(-50%,-50%);width:340px!important;max-width:94vw;max-height:76vh;
     overflow:auto;display:none}
@@ -4678,18 +3783,7 @@ function dkBench(){dkBenchOn=true;document.getElementById('dkbench').classList.a
     #dkdock button{padding:8px 8px;font-size:10.5px}
     body.dkdeck #dklink,body.dkdeck #dkintel,body.dkdeck #dksec,body.dkdeck #dkcircle{
       top:auto!important;bottom:66px!important;transform:translate(-50%,0);max-height:58vh}
-  }
-</style>
-<div id="dkdock">
-  <button id="dkdb0" onclick="dkDeckToggle('dkpack')">📊 Evidence</button>
-  <button id="dkdb1" onclick="dkDeckToggle('dklink')">🔗 Link Guard</button>
-  <button id="dkdb2" onclick="dkDeckToggle('dkintel')">📞 Number</button>
-  <button id="dkdb3" onclick="dkDeckToggle('dksec')">🔐 Security</button>
-  <button id="dkdb4" onclick="dkDeckToggle('dkcircle')">🧑‍🤝‍🧑 Identity</button>
-  <button onclick="dkBench()">🧒 Child Demo</button>
-</div>
-<script>
-function dkDeckToggle(id){
+  }</style><div id="dkdock"><button id="dkdb0" onclick="dkDeckToggle('dkpack')">📊 Evidence</button> <button id="dkdb1" onclick="dkDeckToggle('dklink')">🔗 Link Guard</button> <button id="dkdb2" onclick="dkDeckToggle('dkintel')">📞 Number</button> <button id="dkdb3" onclick="dkDeckToggle('dksec')">🔐 Security</button> <button id="dkdb4" onclick="dkDeckToggle('dkcircle')">🧑‍🤝‍🧑 Identity</button> <button onclick="dkBench()">🧒 Child Demo</button></div><script>function dkDeckToggle(id){
   var ids=['dkpack','dklink','dkintel','dksec','dkcircle'];
   var target=document.getElementById(id);
   var was=(id==='dkpack')?target.classList.contains('dkoff')===false
@@ -4716,12 +3810,7 @@ function dkDeckToggle(id){
       if(b)b.classList.remove('on');
     }
   },false);
-})();
-</script>
-<!-- ===== END DK COMMAND DECK ===== -->
- <!-- ===== DK DECK v2 — vertical left, one-at-a-time, no default open (overrides v1) ===== -->
-<style>
-  #dkdock{display:none!important}   /* old horizontal dock off */
+})();</script><style>#dkdock{display:none!important}   /* old horizontal dock off */
   #dkdockv{position:fixed;left:12px;top:50%;transform:translateY(-50%);z-index:99990;
     background:rgba(10,17,28,.97);border:1px solid #27405e;border-radius:14px;padding:7px 6px;
     display:flex;flex-direction:column;gap:5px;box-shadow:0 10px 40px rgba(0,0,0,.6);
@@ -4739,17 +3828,7 @@ function dkDeckToggle(id){
     #dkdockv button{padding:7px 6px;font-size:9.5px;min-width:52px}
     body.dkdeck #dkpack,body.dkdeck #dklink,body.dkdeck #dkintel,body.dkdeck #dksec,
     body.dkdeck #dkcircle{top:auto!important;bottom:8px!important;transform:translate(-50%,0);max-height:62vh}
-  }
-</style>
-<div id="dkdockv">
-  <button id="dkdv0" onclick="dkDeck2('dkpack')">📊<br>Evidence</button>
-  <button id="dkdv1" onclick="dkDeck2('dklink')">🔗<br>Link</button>
-  <button id="dkdv2" onclick="dkDeck2('dkintel')">📞<br>Number</button>
-  <button id="dkdv3" onclick="dkDeck2('dksec')">🔐<br>Security</button>
-  <button id="dkdv4" onclick="dkDeck2('dkcircle')">🧑‍🤝‍🧑<br>Identity</button>
-</div>
-<script>
-var DKP2=['dkpack','dklink','dkintel','dksec','dkcircle'];
+  }</style><div id="dkdockv"><button id="dkdv0" onclick="dkDeck2('dkpack')">📊<br>Evidence</button> <button id="dkdv1" onclick="dkDeck2('dklink')">🔗<br>Link</button> <button id="dkdv2" onclick="dkDeck2('dkintel')">📞<br>Number</button> <button id="dkdv3" onclick="dkDeck2('dksec')">🔐<br>Security</button> <button id="dkdv4" onclick="dkDeck2('dkcircle')">🧑‍🤝‍🧑<br>Identity</button></div><script>var DKP2=['dkpack','dklink','dkintel','dksec','dkcircle'];
 function dkDeck2(id){
   var target=document.getElementById(id);
   var was=target.classList.contains('dkon');
@@ -4775,6 +3854,1015 @@ document.addEventListener('click',function(e){
   if(h&&document.getElementById('dkpack').classList.contains('dkon'))dkDeck2('dkpack');
 },false);
 </script>
-<!-- ===== END DK DECK v2 ===== -->
+<!-- ═══ DHWANI KAVACH — PACK 1 (Step 1 of 8) ═══ -->
+<style>
+.dk1ui{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif}
+#dk1Bar{position:fixed;right:14px;bottom:14px;z-index:99990;display:flex;flex-direction:column;gap:10px}
+.dk1Btn{cursor:pointer;border:0;border-radius:14px;padding:14px 18px;font-size:16px;font-weight:800;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35);display:flex;align-items:center;gap:10px;min-width:200px;justify-content:center;font-family:inherit;transition:transform .12s}
+.dk1Btn:hover{transform:translateY(-2px)}
+#dk1ElderBtn{background:linear-gradient(135deg,#7c3aed,#4f46e5)}
+#dk1ElderBtn.on{background:linear-gradient(135deg,#047857,#10b981)}
+#dk1TestBtn{background:linear-gradient(135deg,#b45309,#f59e0b)}
+#dk1FamBtn{background:linear-gradient(135deg,#b91c1c,#ef4444)}
+#dk1Strip{position:fixed;top:0;left:0;right:0;z-index:99991;padding:16px 70px 14px 20px;text-align:center;box-shadow:0 6px 26px rgba(0,0,0,.45)}
+#dk1Strip .dk1Main{font-size:clamp(30px,6vw,64px);font-weight:900;line-height:1.08;letter-spacing:.5px;color:#fff}
+#dk1Strip .dk1Sub{font-size:clamp(14px,2vw,22px);font-weight:700;margin-top:6px;color:#fff}
+#dk1Strip .dk1Stats{display:flex;gap:12px;justify-content:center;margin-top:10px;flex-wrap:wrap}
+#dk1Strip .dk1Chip{font-size:13px;font-weight:800;padding:4px 12px;border-radius:999px;background:rgba(0,0,0,.28);color:#fff}
+#dk1Strip.dk1-green{background:linear-gradient(180deg,#065f46,#10b981)}
+#dk1Strip.dk1-amber{background:linear-gradient(180deg,#92400e,#f59e0b)}
+#dk1Strip.dk1-red{background:linear-gradient(180deg,#7f1d1d,#ef4444);animation:dk1shake .5s infinite}
+#dk1Strip .dk1X{position:absolute;top:10px;right:12px;background:rgba(0,0,0,.3);border:0;color:#fff;font-size:14px;font-weight:800;border-radius:8px;padding:5px 10px;cursor:pointer;font-family:inherit}
+@keyframes dk1shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+#dk1Combined{position:fixed;top:0;left:0;right:0;z-index:99992;text-align:center;padding:30px 16px;background:linear-gradient(135deg,#000 0%,#7f1d1d 55%,#000 100%);animation:dk1pulse 1s infinite}
+#dk1Combined .dk1cT{font-size:clamp(26px,5vw,54px);font-weight:900;letter-spacing:1px;color:#fff}
+#dk1Combined .dk1cS{font-size:clamp(14px,2vw,22px);font-weight:700;margin-top:8px;color:#fecaca}
+@keyframes dk1pulse{0%,100%{box-shadow:0 0 30px rgba(239,68,68,.55)}50%{box-shadow:0 0 80px rgba(239,68,68,1)}}
+#dk1Modal,#dk1Family{position:fixed;inset:0;z-index:99995;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center}
+.dk1Card{background:#fff;border-radius:20px;max-width:640px;width:92%;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.5);text-align:center}
+.dk1Card.dk1Small{max-width:440px}
+.dk1Head{font-size:24px;font-weight:900;color:#111827}
+.dk1Note{color:#4b5563;font-size:15px;margin-top:8px;line-height:1.5}
+.dk1Tw{font-size:clamp(22px,3.4vw,34px);font-weight:900;color:#111827;margin:20px 0;line-height:1.35}
+.dk1Row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.dk1Mbtn{padding:12px 22px;border-radius:12px;border:0;color:#fff;font-weight:800;font-size:16px;cursor:pointer;font-family:inherit}
+.dk1Green{background:#059669}.dk1Red{background:#dc2626}.dk1Grey{background:#4b5563}
+.dk1Input{width:100%;box-sizing:border-box;padding:13px 14px;border-radius:12px;border:2px solid #d1d5db;font-size:18px;font-weight:800;text-align:center;margin-top:14px;font-family:inherit}
+.dk1Link{background:none;border:0;color:#6b7280;cursor:pointer;font-weight:700;margin-top:10px;font-size:14px;font-family:inherit}
+#dk1Toast{position:fixed;bottom:225px;left:50%;transform:translateX(-50%);z-index:99997;background:#111827;color:#fff;padding:12px 22px;border-radius:12px;font-weight:800;font-size:15px;box-shadow:0 12px 30px rgba(0,0,0,.4);opacity:0;transition:opacity .3s;pointer-events:none;max-width:90vw;text-align:center}
+</style>
+
+<div id="dk1Bar" class="dk1ui">
+  <button id="dk1ElderBtn" class="dk1Btn">👵 ELDER MODE</button>
+  <button id="dk1TestBtn" class="dk1Btn">🎙️ TEST CALLER</button>
+  <button id="dk1FamBtn" class="dk1Btn">🚨 ALERT FAMILY</button>
+</div>
+
+<div id="dk1Strip" class="dk1ui" style="display:none"></div>
+<div id="dk1Combined" class="dk1ui" style="display:none"></div>
+
+<div id="dk1Modal" class="dk1ui" style="display:none">
+  <div class="dk1Card">
+    <div class="dk1Head">🎙️ TEST CALLER — live insaan test</div>
+    <div class="dk1Note">Caller se ye bolne ko kaho — <b>fast aur saaf, 1 try</b>. Real insaan turant attempt karega, AI proxy atak jaata hai.</div>
+    <div class="dk1Tw" id="dk1Tw"></div>
+    <div class="dk1Row"><button id="dk1Roll" class="dk1Mbtn dk1Grey">🎲 Naya twister</button></div>
+    <div class="dk1Row">
+      <button id="dk1Pass" class="dk1Mbtn dk1Green">✅ PASS — bol gaya</button>
+      <button id="dk1Fail" class="dk1Mbtn dk1Red">❌ FAIL — atak gaya</button>
+    </div>
+    <div class="dk1Row"><button id="dk1CloseM" class="dk1Link">band karo</button></div>
+  </div>
+</div>
+
+<div id="dk1Family" class="dk1ui" style="display:none">
+  <div class="dk1Card dk1Small">
+    <div class="dk1Head">🚨 ALERT FAMILY</div>
+    <div class="dk1Note">Family member ka WhatsApp number — click-to-chat message ready milega. Number save ho jayega.</div>
+    <input id="dk1Num" class="dk1Input" placeholder="10-digit mobile number" inputmode="numeric" />
+    <div class="dk1Row">
+      <button id="dk1Send" class="dk1Mbtn dk1Green">📲 WhatsApp bhejo</button>
+      <button id="dk1Copy" class="dk1Mbtn dk1Grey">📋 Copy message</button>
+    </div>
+    <div class="dk1Row"><button id="dk1CloseF" class="dk1Link">band karo</button></div>
+  </div>
+</div>
+
+<div id="dk1Toast" class="dk1ui"></div>
+
+<script>
+(function(){
+  'use strict';
+  /* self-heal: agar ye block galti se 2 baar paste ho jaye */
+  ['dk1Bar','dk1Strip','dk1Combined','dk1Modal','dk1Family','dk1Toast'].forEach(function(id){
+    var e=document.getElementById(id); if(e&&e.parentNode) e.parentNode.removeChild(e);
+  });
+
+  var S={elder:false,tier:'LOW',radar:0,challenge:'none',prevLevel:0};
+  var TW=[
+    'Kacha papad, paka papad — 3 baar, full speed!',
+    'Chandu ke chacha ne Chandu ki chachi ko chandni raat mein chaandni chowk se chandi ki chamcham chai laayi',
+    'She sells sea-shells by the sea-shore — 2 baar, fast!',
+    'Bhaiya ne bhabhi ko bye-bye bola, bhabhi boli bye-bye bhaiya',
+    'Irish wristwatch, Swiss wristwatch — 3 baar, full speed!'
+  ];
+  function $(id){return document.getElementById(id);}
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+
+  /* ---------- 1) API observer: fetch + XHR dono ---------- */
+  function deepFind(o,keys,d){
+    d=d||0;
+    if(!o||typeof o!=='object'||d>3) return undefined;
+    for(var i=0;i<keys.length;i++){ if(o[keys[i]]!==undefined&&o[keys[i]]!==null) return o[keys[i]]; }
+    for(var k in o){ var v=deepFind(o[k],keys,d+1); if(v!==undefined) return v; }
+    return undefined;
+  }
+  function normTier(v){
+    if(v===undefined||v===null) return null;
+    var s=String(v).toUpperCase();
+    if(/LOW|SAFE|REAL|BONA|GENUINE|NATURAL|CLEAN|HUMAN/.test(s)) return 'LOW';
+    if(/MED|MODERATE|BORDER|CAUTION|WARN/.test(s)) return 'MED';
+    if(/HIGH|FAKE|SUSP|SPOOF|PSEUDO|DEEP|ALERT|DANGER|FRAUD|SCAM|BOT|CLONE|SYNTH|TTS/.test(s)) return 'HIGH';
+    if(s.split(/[^A-Z0-9]+/).indexOf('AI')>-1) return 'HIGH';
+    return null;
+  }
+  function handle(url,text){
+    if(!url||!text) return;
+    var j=null; try{j=JSON.parse(text);}catch(e){return;}
+    if(url.indexOf('/api/score')>-1){
+      var t=normTier(deepFind(j,['tier','risk_tier','riskTier','verdict','label','level','result']));
+      if(!t){ /* fallback: probability se tier (theta=0.62 calibration) */
+        var p=Number(deepFind(j,['p_fake','prob_fake','ai_prob','p_ai','fake_prob','prob','probability','confidence','score']));
+        if(!isNaN(p)){ var q=(p<=1)?p*100:p; t=q>=62?'HIGH':(q>=35?'MED':'LOW'); }
+      }
+      if(t){S.tier=t;render();}
+    }else if(url.indexOf('/api/radar')>-1){
+      var n=Number(deepFind(j,['score','risk_score','riskScore','total','combined','value','risk']));
+      if(!isNaN(n)){ S.radar=Math.round(n); render(); }
+    }
+  }
+  if(window.fetch){
+    var FF=window.fetch;
+    window.fetch=function(){
+      var a=arguments;
+      return FF.apply(window,a).then(function(r){
+        try{
+          if(r&&r.url&&/\/api\/(score|radar)/.test(r.url)){
+            r.clone().text().then(function(t){handle(r.url,t);}).catch(function(){});
+          }
+        }catch(e){}
+        return r;
+      });
+    };
+  }
+  var XO=XMLHttpRequest.prototype.open,XS=XMLHttpRequest.prototype.send;
+  XMLHttpRequest.prototype.open=function(m,u){this._dk1u=String(u);return XO.apply(this,arguments);};
+  XMLHttpRequest.prototype.send=function(){
+    var x=this;
+    x.addEventListener('load',function(){try{handle(x._dk1u,x.responseText);}catch(e){}});
+    return XS.apply(this,arguments);
+  };
+
+  /* ---------- 2) state machine (combination law: no false alarms) ---------- */
+  function level(){
+    if(S.tier==='HIGH'&&S.radar>=70) return 3;
+    if(S.tier==='HIGH'||S.challenge==='fail') return 2;
+    if(S.tier==='MED'||S.radar>=70) return 1;
+    return 0;
+  }
+  var MAIN=['🟢 SAB THEEK HAI','⚠️ DHYAAN DO!','🔴 KHATRA! CALL KAAT DO!','⚔️ COMBINED ATTACK — CALL KAAT DO!'];
+  var SUB=[
+    'Aaram se baat karo — abhi koi khatra nahi dikha.',
+    'Dhyaan se suno — paisa, OTP, ya bank details MAT do.',
+    'Ye awaaz AI ki lag rahi hai — pehchaan confirm nahi hui!',
+    'AI voice + scam script DONO ek saath — ye 100% scam hai!'
+  ];
+  function render(){
+    var L=level(),st=$('dk1Strip');
+    var comb=(L===3);
+    if(S.elder&&!comb){
+      st.style.display='block';
+      st.className='dk1ui dk1-'+(L===2?'red':(L===1?'amber':'green'));
+      st.innerHTML='<button class="dk1X" id="dk1Off">✕ OFF</button>'
+        +'<div class="dk1Main">'+MAIN[L]+'</div><div class="dk1Sub">'+SUB[L]+'</div>'
+        +'<div class="dk1Stats">'
+        +'<span class="dk1Chip">AI voice: '+esc(S.tier)+'</span>'
+        +'<span class="dk1Chip">Scam radar: '+S.radar+'/100</span>'
+        +'<span class="dk1Chip">Challenge: '+(S.challenge==='pass'?'✅ PASS':(S.challenge==='fail'?'❌ FAIL':'— not done'))+'</span>'
+        +'</div>';
+      $('dk1Off').onclick=toggleElder;
+    }else{ st.style.display='none'; }
+    var cb=$('dk1Combined');
+    cb.style.display=comb?'block':'none';
+    if(comb){ cb.innerHTML='<div class="dk1cT">⚔️ COMBINED ATTACK DETECTED</div><div class="dk1cS">AI VOICE + SCAM PATTERN — dono ek saath! Call KAAT do, family ko batao, 1930 pe report karo.</div>'; }
+    var eb=$('dk1ElderBtn');
+    eb.className='dk1Btn'+(S.elder?' on':'');
+    eb.innerHTML=S.elder?'👵 ELDER MODE: ON':'👵 ELDER MODE';
+    if(L>S.prevLevel&&(S.elder||comb)) beep(comb?6:3);
+    S.prevLevel=L;
+  }
+  function toggleElder(){
+    S.elder=!S.elder;
+    if(S.elder) beep(1);
+    render();
+  }
+
+  /* ---------- 3) beep (WebAudio — koi external file nahi) ---------- */
+  var AC=null;
+  function beep(n){
+    try{
+      AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+      if(AC.state==='suspended') AC.resume();
+      for(var i=0;i<n;i++){
+        var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime+i*0.28;
+        o.type='square';o.frequency.value=880;o.connect(g);g.connect(AC.destination);
+        g.gain.setValueAtTime(0.0001,t);
+        g.gain.exponentialRampToValueAtTime(0.25,t+0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001,t+0.22);
+        o.start(t);o.stop(t+0.24);
+      }
+    }catch(e){}
+  }
+
+  /* ---------- 4) TEST CALLER (twister challenge) ---------- */
+  var twi=Math.floor(Math.random()*TW.length);
+  function openModal(){
+    twi=Math.floor(Math.random()*TW.length);
+    $('dk1Tw').textContent='\u201C'+TW[twi]+'\u201D';
+    $('dk1Modal').style.display='flex';
+  }
+  function setChallenge(ok){
+    S.challenge=ok?'pass':'fail';
+    $('dk1Modal').style.display='none';
+    toast(ok?'✅ Human verified — live challenge PASS!':'❌ Challenge FAIL — caller bahut suspicious hai!');
+    render();
+  }
+
+  /* ---------- 5) ALERT FAMILY (WhatsApp click-to-chat) ---------- */
+  function alertText(){
+    var L=level();
+    var st=['SAB THEEK','DHYAAN DO','KHATRA — CALL KAAT DO'][Math.min(L,2)];
+    return '🛡️ *DHWANI KAVACH — FAMILY ALERT*\n'
+      +'Status: '+st+(L===3?' (COMBINED ATTACK!)':'')+'\n'
+      +'• AI voice check: '+S.tier+'\n'
+      +'• Scam radar: '+S.radar+'/100\n'
+      +'• Twister challenge: '+(S.challenge==='pass'?'PASS ✅':(S.challenge==='fail'?'FAIL ❌':'not done'))+'\n'
+      +'• Time: '+new Date().toLocaleString('en-IN')+'\n\n'
+      +'Please mujhe turant call karke check karo. Agar phone pe paisa ya OTP ki baat ho rahi hai — RUKO, report karo: 1930 / cybercrime.gov.in';
+  }
+  function openFamily(){
+    var saved=''; try{saved=localStorage.getItem('dk1Family')||'';}catch(e){}
+    $('dk1Num').value=saved;
+    $('dk1Family').style.display='flex';
+  }
+  function sendWA(){
+    var num=($('dk1Num').value||'').replace(/\D/g,'');
+    if(num.length<10){toast('⚠️ Poora number daalo (10 digits)');return;}
+    if(num.length===10) num='91'+num;
+    try{localStorage.setItem('dk1Family',num);}catch(e){}
+    $('dk1Family').style.display='none';
+    var url='https://wa.me/'+num+'?text='+encodeURIComponent(alertText());
+    var w=window.open(url,'_blank');
+    if(!w) window.location.href=url;
+  }
+
+  /* ---------- 6) toast ---------- */
+  var tT=null;
+  function toast(m){
+    var t=$('dk1Toast');t.textContent=m;t.style.opacity='1';
+    if(tT) clearTimeout(tT);
+    tT=setTimeout(function(){t.style.opacity='0';},2800);
+  }
+
+  /* ---------- 7) wiring ---------- */
+  $('dk1ElderBtn').onclick=toggleElder;
+  $('dk1TestBtn').onclick=openModal;
+  $('dk1FamBtn').onclick=openFamily;
+  $('dk1CloseM').onclick=function(){$('dk1Modal').style.display='none';};
+  $('dk1Roll').onclick=function(){twi=(twi+1+Math.floor(Math.random()*(TW.length-1)))%TW.length;$('dk1Tw').textContent='\u201C'+TW[twi]+'\u201D';};
+  $('dk1Pass').onclick=function(){setChallenge(true);};
+  $('dk1Fail').onclick=function(){setChallenge(false);};
+  $('dk1CloseF').onclick=function(){$('dk1Family').style.display='none';};
+  $('dk1Send').onclick=sendWA;
+  $('dk1Copy').onclick=function(){
+    var tx=alertText();
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(tx).then(function(){toast('📋 Message copied!');});
+    }else{
+      var ta=document.createElement('textarea');ta.value=tx;document.body.appendChild(ta);ta.select();
+      try{document.execCommand('copy');toast('📋 Message copied!');}catch(e){}
+      ta.remove();
+    }
+  };
+  render();
+})();
+</script>
+<!-- ════════ PACK 1 END ════════ -->
+<!-- ═══════════════════════════════════════════════════════════════
+     ⚡ DHWANI KAVACH — PACK 1 RESCUE (self-building) · 2026-09-19
+     Ye block UI KHUD banata hai — file mein kitne bhi purane/broken
+     copies hon, sab clean karke ek fresh working UI banata hai.
+     PASTE: file ke SABSE END mein — last </body> ke UPAR
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  'use strict';
+
+  function $(id){return document.getElementById(id);}
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+
+  var CSS=`
+.dk1ui{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif}
+#dk1Bar{position:fixed;right:14px;bottom:14px;z-index:99990;display:flex;flex-direction:column;gap:10px}
+.dk1Btn{cursor:pointer;border:0;border-radius:14px;padding:14px 18px;font-size:16px;font-weight:800;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35);display:flex;align-items:center;gap:10px;min-width:200px;justify-content:center;font-family:inherit;transition:transform .12s}
+.dk1Btn:hover{transform:translateY(-2px)}
+#dk1ElderBtn{background:linear-gradient(135deg,#7c3aed,#4f46e5)}
+#dk1ElderBtn.on{background:linear-gradient(135deg,#047857,#10b981)}
+#dk1TestBtn{background:linear-gradient(135deg,#b45309,#f59e0b)}
+#dk1FamBtn{background:linear-gradient(135deg,#b91c1c,#ef4444)}
+#dk1Strip{position:fixed;top:0;left:0;right:0;z-index:99991;padding:16px 70px 14px 20px;text-align:center;box-shadow:0 6px 26px rgba(0,0,0,.45)}
+#dk1Strip .dk1Main{font-size:clamp(30px,6vw,64px);font-weight:900;line-height:1.08;letter-spacing:.5px;color:#fff}
+#dk1Strip .dk1Sub{font-size:clamp(14px,2vw,22px);font-weight:700;margin-top:6px;color:#fff}
+#dk1Strip .dk1Stats{display:flex;gap:12px;justify-content:center;margin-top:10px;flex-wrap:wrap}
+#dk1Strip .dk1Chip{font-size:13px;font-weight:800;padding:4px 12px;border-radius:999px;background:rgba(0,0,0,.28);color:#fff}
+#dk1Strip.dk1-green{background:linear-gradient(180deg,#065f46,#10b981)}
+#dk1Strip.dk1-amber{background:linear-gradient(180deg,#92400e,#f59e0b)}
+#dk1Strip.dk1-red{background:linear-gradient(180deg,#7f1d1d,#ef4444);animation:dk1shake .5s infinite}
+#dk1Strip .dk1X{position:absolute;top:10px;right:12px;background:rgba(0,0,0,.3);border:0;color:#fff;font-size:14px;font-weight:800;border-radius:8px;padding:5px 10px;cursor:pointer;font-family:inherit}
+@keyframes dk1shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+#dk1Combined{position:fixed;top:0;left:0;right:0;z-index:99992;text-align:center;padding:30px 16px;background:linear-gradient(135deg,#000 0%,#7f1d1d 55%,#000 100%);animation:dk1pulse 1s infinite}
+#dk1Combined .dk1cT{font-size:clamp(26px,5vw,54px);font-weight:900;letter-spacing:1px;color:#fff}
+#dk1Combined .dk1cS{font-size:clamp(14px,2vw,22px);font-weight:700;margin-top:8px;color:#fecaca}
+@keyframes dk1pulse{0%,100%{box-shadow:0 0 30px rgba(239,68,68,.55)}50%{box-shadow:0 0 80px rgba(239,68,68,1)}}
+#dk1Modal,#dk1Family{position:fixed;inset:0;z-index:99995;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center}
+.dk1Card{background:#fff;border-radius:20px;max-width:640px;width:92%;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.5);text-align:center}
+.dk1Card.dk1Small{max-width:440px}
+.dk1Head{font-size:24px;font-weight:900;color:#111827}
+.dk1Note{color:#4b5563;font-size:15px;margin-top:8px;line-height:1.5}
+.dk1Tw{font-size:clamp(22px,3.4vw,34px);font-weight:900;color:#111827;margin:20px 0;line-height:1.35}
+.dk1Row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.dk1Mbtn{padding:12px 22px;border-radius:12px;border:0;color:#fff;font-weight:800;font-size:16px;cursor:pointer;font-family:inherit}
+.dk1Green{background:#059669}.dk1Red{background:#dc2626}.dk1Grey{background:#4b5563}
+.dk1Input{width:100%;box-sizing:border-box;padding:13px 14px;border-radius:12px;border:2px solid #d1d5db;font-size:18px;font-weight:800;text-align:center;margin-top:14px;font-family:inherit}
+.dk1Link{background:none;border:0;color:#6b7280;cursor:pointer;font-weight:700;margin-top:10px;font-size:14px;font-family:inherit}
+#dk1Toast{position:fixed;bottom:225px;left:50%;transform:translateX(-50%);z-index:99997;background:#111827;color:#fff;padding:12px 22px;border-radius:12px;font-weight:800;font-size:15px;box-shadow:0 12px 30px rgba(0,0,0,.4);opacity:0;transition:opacity .3s;pointer-events:none;max-width:90vw;text-align:center}
+  `;
+
+  var HTML=`
+<div id="dk1Bar">
+  <button id="dk1ElderBtn" class="dk1Btn">&#128117; ELDER MODE</button>
+  <button id="dk1TestBtn" class="dk1Btn">&#127908; TEST CALLER</button>
+  <button id="dk1FamBtn" class="dk1Btn">&#128680; ALERT FAMILY</button>
+</div>
+<div id="dk1Strip" style="display:none"></div>
+<div id="dk1Combined" style="display:none"></div>
+<div id="dk1Modal" style="display:none">
+  <div class="dk1Card">
+    <div class="dk1Head">&#127908; TEST CALLER — live insaan test</div>
+    <div class="dk1Note">Caller se ye bolne ko kaho — <b>fast aur saaf, 1 try</b>. Real insaan turant attempt karega, AI proxy atak jaata hai.</div>
+    <div class="dk1Tw" id="dk1Tw"></div>
+    <div class="dk1Row"><button id="dk1Roll" class="dk1Mbtn dk1Grey">&#127922; Naya twister</button></div>
+    <div class="dk1Row">
+      <button id="dk1Pass" class="dk1Mbtn dk1Green">&#9989; PASS — bol gaya</button>
+      <button id="dk1Fail" class="dk1Mbtn dk1Red">&#10060; FAIL — atak gaya</button>
+    </div>
+    <div class="dk1Row"><button id="dk1CloseM" class="dk1Link">band karo</button></div>
+  </div>
+</div>
+<div id="dk1Family" style="display:none">
+  <div class="dk1Card dk1Small">
+    <div class="dk1Head">&#128680; ALERT FAMILY</div>
+    <div class="dk1Note">Family member ka WhatsApp number — click-to-chat message ready milega. Number save ho jayega.</div>
+    <input id="dk1Num" class="dk1Input" placeholder="10-digit mobile number" inputmode="numeric" />
+    <div class="dk1Row">
+      <button id="dk1Send" class="dk1Mbtn dk1Green">&#128242; WhatsApp bhejo</button>
+      <button id="dk1Copy" class="dk1Mbtn dk1Grey">&#128203; Copy message</button>
+    </div>
+    <div class="dk1Row"><button id="dk1CloseF" class="dk1Link">band karo</button></div>
+  </div>
+</div>
+<div id="dk1Toast"></div>
+  `;
+
+  function init(){
+    /* 1) NUKE: HAR purana dk1 element delete (saare duplicates, saare copies) */
+    var IDS=['dk1Bar','dk1Strip','dk1Combined','dk1Modal','dk1Family','dk1Toast','dk1Style','dk1Root'];
+    for(var i=0;i<IDS.length;i++){
+      var l=document.querySelectorAll('[id="'+IDS[i]+'"]');
+      for(var k=0;k<l.length;k++){ if(l[k].parentNode) l[k].parentNode.removeChild(l[k]); }
+    }
+    /* 2) CSS inject */
+    var st=document.createElement('style'); st.id='dk1Style'; st.textContent=CSS;
+    (document.head||document.getElementsByTagName('head')[0]).appendChild(st);
+    /* 3) UI build (JavaScript se — paste accidents impossible) */
+    var root=document.createElement('div'); root.id='dk1Root'; root.className='dk1ui'; root.innerHTML=HTML;
+    document.body.appendChild(root);
+    start();
+  }
+
+  function start(){
+    var S={elder:false,tier:'LOW',radar:0,challenge:'none',prevLevel:0};
+    var TW=[
+      'Kacha papad, paka papad — 3 baar, full speed!',
+      'Chandu ke chacha ne Chandu ki chachi ko chandni raat mein chaandni chowk se chandi ki chamcham chai laayi',
+      'She sells sea-shells by the sea-shore — 2 baar, fast!',
+      'Bhaiya ne bhabhi ko bye-bye bola, bhabhi boli bye-bye bhaiya',
+      'Irish wristwatch, Swiss wristwatch — 3 baar, full speed!'
+    ];
+
+    /* ---- API observer (fetch + XHR) ---- */
+    function deepFind(o,keys,d){
+      d=d||0;
+      if(!o||typeof o!=='object'||d>3) return undefined;
+      for(var i=0;i<keys.length;i++){ if(o[keys[i]]!==undefined&&o[keys[i]]!==null) return o[keys[i]]; }
+      for(var k in o){ var v=deepFind(o[k],keys,d+1); if(v!==undefined) return v; }
+      return undefined;
+    }
+    function normTier(v){
+      if(v===undefined||v===null) return null;
+      var s=String(v).toUpperCase();
+      if(/LOW|SAFE|REAL|BONA|GENUINE|NATURAL|CLEAN|HUMAN/.test(s)) return 'LOW';
+      if(/MED|MODERATE|BORDER|CAUTION|WARN/.test(s)) return 'MED';
+      if(/HIGH|FAKE|SUSP|SPOOF|PSEUDO|DEEP|ALERT|DANGER|FRAUD|SCAM|BOT|CLONE|SYNTH|TTS/.test(s)) return 'HIGH';
+      if(s.split(/[^A-Z0-9]+/).indexOf('AI')>-1) return 'HIGH';
+      return null;
+    }
+    function handle(url,text){
+      if(!url||!text) return;
+      var j=null; try{j=JSON.parse(text);}catch(e){return;}
+      if(url.indexOf('/api/score')>-1){
+        var t=normTier(deepFind(j,['tier','risk_tier','riskTier','verdict','label','level','result']));
+        if(!t){
+          var p=Number(deepFind(j,['p_fake','prob_fake','ai_prob','p_ai','fake_prob','prob','probability','confidence','score']));
+          if(!isNaN(p)){ var q=(p<=1)?p*100:p; t=q>=62?'HIGH':(q>=35?'MED':'LOW'); }
+        }
+        if(t){S.tier=t;render();}
+      }else if(url.indexOf('/api/radar')>-1){
+        var n=Number(deepFind(j,['score','risk_score','riskScore','total','combined','value','risk']));
+        if(!isNaN(n)){ S.radar=Math.round(n); render(); }
+      }
+    }
+    try{
+      if(window.fetch){
+        var FF=window.fetch;
+        window.fetch=function(){
+          var a=arguments;
+          return FF.apply(window,a).then(function(r){
+            try{
+              if(r&&r.url&&/\/api\/(score|radar)/.test(r.url)){
+                r.clone().text().then(function(t){handle(r.url,t);}).catch(function(){});
+              }
+            }catch(e){}
+            return r;
+          });
+        };
+      }
+    }catch(e){}
+    try{
+      var XO=XMLHttpRequest.prototype.open,XS=XMLHttpRequest.prototype.send;
+      XMLHttpRequest.prototype.open=function(m,u){this._dk1u=String(u);return XO.apply(this,arguments);};
+      XMLHttpRequest.prototype.send=function(){
+        var x=this;
+        x.addEventListener('load',function(){try{handle(x._dk1u,x.responseText);}catch(e){}});
+        return XS.apply(this,arguments);
+      };
+    }catch(e){}
+
+    /* ---- state machine (no false alarms) ---- */
+    function level(){
+      if(S.tier==='HIGH'&&S.radar>=70) return 3;
+      if(S.tier==='HIGH'||S.challenge==='fail') return 2;
+      if(S.tier==='MED'||S.radar>=70) return 1;
+      return 0;
+    }
+    var MAIN=['\uD83D\uDFE2 SAB THEEK HAI','\u26A0\uFE0F DHYAAN DO!','\uD83D\uDD34 KHATRA! CALL KAAT DO!','\u2694\uFE0F COMBINED ATTACK — CALL KAAT DO!'];
+    var SUB=[
+      'Aaram se baat karo — abhi koi khatra nahi dikha.',
+      'Dhyaan se suno — paisa, OTP, ya bank details MAT do.',
+      'Ye awaaz AI ki lag rahi hai — pehchaan confirm nahi hui!',
+      'AI voice + scam script DONO ek saath — ye 100% scam hai!'
+    ];
+    function render(){
+      var st=$('dk1Strip'); if(!st) return;
+      var L=level(), comb=(L===3);
+      if(S.elder&&!comb){
+        st.style.display='block';
+        st.className='dk1-'+(L===2?'red':(L===1?'amber':'green'));
+        st.innerHTML='<button class="dk1X" id="dk1Off">\u2715 OFF</button>'
+          +'<div class="dk1Main">'+MAIN[L]+'</div><div class="dk1Sub">'+SUB[L]+'</div>'
+          +'<div class="dk1Stats">'
+          +'<span class="dk1Chip">AI voice: '+esc(S.tier)+'</span>'
+          +'<span class="dk1Chip">Scam radar: '+S.radar+'/100</span>'
+          +'<span class="dk1Chip">Challenge: '+(S.challenge==='pass'?'\u2705 PASS':(S.challenge==='fail'?'\u274C FAIL':'— not done'))+'</span>'
+          +'</div>';
+        var off=$('dk1Off'); if(off) off.onclick=toggleElder;
+      }else{ st.style.display='none'; }
+      var cb=$('dk1Combined');
+      if(cb){
+        cb.style.display=comb?'block':'none';
+        if(comb){ cb.innerHTML='<div class="dk1cT">\u2694\uFE0F COMBINED ATTACK DETECTED</div><div class="dk1cS">AI VOICE + SCAM PATTERN — dono ek saath! Call KAAT do, family ko batao, 1930 pe report karo.</div>'; }
+      }
+      var eb=$('dk1ElderBtn');
+      if(eb){
+        eb.className='dk1Btn'+(S.elder?' on':'');
+        eb.innerHTML=S.elder?'\uD83D\uDC75 ELDER MODE: ON':'\uD83D\uDC75 ELDER MODE';
+      }
+      if(L>S.prevLevel&&(S.elder||comb)) beep(comb?6:3);
+      S.prevLevel=L;
+    }
+    function toggleElder(){
+      S.elder=!S.elder;
+      if(S.elder) beep(1);
+      render();
+    }
+
+    /* ---- beep ---- */
+    var AC=null;
+    function beep(n){
+      try{
+        AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+        if(AC.state==='suspended') AC.resume();
+        for(var i=0;i<n;i++){
+          var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime+i*0.28;
+          o.type='square';o.frequency.value=880;o.connect(g);g.connect(AC.destination);
+          g.gain.setValueAtTime(0.0001,t);
+          g.gain.exponentialRampToValueAtTime(0.25,t+0.02);
+          g.gain.exponentialRampToValueAtTime(0.0001,t+0.22);
+          o.start(t);o.stop(t+0.24);
+        }
+      }catch(e){}
+    }
+
+    /* ---- TEST CALLER ---- */
+    var twi=Math.floor(Math.random()*TW.length);
+    function openModal(){
+      twi=Math.floor(Math.random()*TW.length);
+      var el=$('dk1Tw'); if(el) el.textContent='\u201C'+TW[twi]+'\u201D';
+      var m=$('dk1Modal'); if(m) m.style.display='flex';
+    }
+    function setChallenge(ok){
+      S.challenge=ok?'pass':'fail';
+      var m=$('dk1Modal'); if(m) m.style.display='none';
+      toast(ok?'\u2705 Human verified — live challenge PASS!':'\u274C Challenge FAIL — caller bahut suspicious hai!');
+      render();
+    }
+
+    /* ---- ALERT FAMILY ---- */
+    function alertText(){
+      var L=level();
+      var st=['SAB THEEK','DHYAAN DO','KHATRA — CALL KAAT DO'][Math.min(L,2)];
+      return '\uD83D\uDEE1\uFE0F *DHWANI KAVACH — FAMILY ALERT*\n'
+        +'Status: '+st+(L===3?' (COMBINED ATTACK!)':'')+'\n'
+        +'\u2022 AI voice check: '+S.tier+'\n'
+        +'\u2022 Scam radar: '+S.radar+'/100\n'
+        +'\u2022 Twister challenge: '+(S.challenge==='pass'?'PASS \u2705':(S.challenge==='fail'?'FAIL \u274C':'not done'))+'\n'
+        +'\u2022 Time: '+new Date().toLocaleString('en-IN')+'\n\n'
+        +'Please mujhe turant call karke check karo. Agar phone pe paisa ya OTP ki baat ho rahi hai — RUKO, report karo: 1930 / cybercrime.gov.in';
+    }
+    function openFamily(){
+      var saved=''; try{saved=localStorage.getItem('dk1Family')||'';}catch(e){}
+      var n=$('dk1Num'); if(n) n.value=saved;
+      var f=$('dk1Family'); if(f) f.style.display='flex';
+    }
+    function sendWA(){
+      var el=$('dk1Num'); if(!el) return;
+      var num=(el.value||'').replace(/\D/g,'');
+      if(num.length<10){toast('\u26A0\uFE0F Poora number daalo (10 digits)');return;}
+      if(num.length===10) num='91'+num;
+      try{localStorage.setItem('dk1Family',num);}catch(e){}
+      var f=$('dk1Family'); if(f) f.style.display='none';
+      var url='https://wa.me/'+num+'?text='+encodeURIComponent(alertText());
+      var w=window.open(url,'_blank');
+      if(!w) window.location.href=url;
+    }
+
+    /* ---- toast ---- */
+    var tT=null;
+    function toast(m){
+      var t=$('dk1Toast'); if(!t) return;
+      t.textContent=m;t.style.opacity='1';
+      if(tT) clearTimeout(tT);
+      tT=setTimeout(function(){t.style.opacity='0';},2800);
+    }
+
+    /* ---- wiring (guarded — kabhi crash nahi hoga) ---- */
+    var b;
+    b=$('dk1ElderBtn'); if(b) b.onclick=toggleElder;
+    b=$('dk1TestBtn');  if(b) b.onclick=openModal;
+    b=$('dk1FamBtn');   if(b) b.onclick=openFamily;
+    b=$('dk1CloseM');   if(b) b.onclick=function(){var m=$('dk1Modal'); if(m) m.style.display='none';};
+    b=$('dk1Roll');     if(b) b.onclick=function(){twi=(twi+1+Math.floor(Math.random()*(TW.length-1)))%TW.length;var el=$('dk1Tw'); if(el) el.textContent='\u201C'+TW[twi]+'\u201D';};
+    b=$('dk1Pass');     if(b) b.onclick=function(){setChallenge(true);};
+    b=$('dk1Fail');     if(b) b.onclick=function(){setChallenge(false);};
+    b=$('dk1CloseF');   if(b) b.onclick=function(){var f=$('dk1Family'); if(f) f.style.display='none';};
+    b=$('dk1Send');     if(b) b.onclick=sendWA;
+    b=$('dk1Copy');     if(b) b.onclick=function(){
+      var tx=alertText();
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(tx).then(function(){toast('\uD83D\uDCCB Message copied!');});
+      }else{
+        var ta=document.createElement('textarea');ta.value=tx;document.body.appendChild(ta);ta.select();
+        try{document.execCommand('copy');toast('\uD83D\uDCCB Message copied!');}catch(e){}
+        ta.remove();
+      }
+    };
+    render();
+  }
+
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',init); }
+  else{ init(); }
+})();
+</script>
+<!-- ═════════ PACK 1 RESCUE END ═════════ -->
+<!-- ═══════════════════════════════════════════════════════════════
+     ⚡ DHWANI KAVACH — PACK 2: FORENSIC VITALS + LATENCY TRAP (Step 2 of 8)
+     • 🔬 FORENSIC VITALS button → 6s record → 10 DSP metrics (local compute)
+     • ⏱ RESPONSE LATENCY test injects into TEST CALLER modal
+     • ZERO Python edits — no server restart needed
+     TARGET FILE : static\new_falak.html (playground)
+     PASTE       : Pack 1 rescue block ke NEECHE, last </body> ke UPAR
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  'use strict';
+
+  function $(id){return document.getElementById(id);}
+
+  var CSS=`
+#dk2VitBtn{cursor:pointer;border:0;border-radius:14px;padding:14px 18px;font-size:16px;font-weight:800;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35);display:flex;align-items:center;gap:10px;min-width:200px;justify-content:center;font-family:'Segoe UI',system-ui,Arial,sans-serif;transition:transform .12s;background:linear-gradient(135deg,#0e7490,#06b6d4)}
+#dk2VitBtn:hover{transform:translateY(-2px)}
+#dk2VitBtn:disabled{opacity:.7;cursor:wait}
+#dk2OwnBar{position:fixed;right:14px;bottom:14px;z-index:99989;display:flex;flex-direction:column;gap:10px;font-family:'Segoe UI',system-ui,Arial,sans-serif}
+.dk2Overlay{position:fixed;inset:0;z-index:99996;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;font-family:'Segoe UI',system-ui,Arial,sans-serif}
+.dk2Card{position:relative;background:#fff;border-radius:20px;max-width:560px;width:92%;max-height:88vh;overflow:auto;padding:24px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.dk2X{position:absolute;top:12px;right:12px;background:#f1f5f9;border:0;color:#334155;font-size:13px;font-weight:800;border-radius:8px;padding:6px 10px;cursor:pointer;font-family:inherit}
+.dk2Title{font-size:22px;font-weight:900;color:#0f172a;padding-right:40px}
+.dk2Disc{background:#ecfeff;border:1px solid #a5f3fc;color:#0e7490;font-size:13px;font-weight:700;padding:10px 12px;border-radius:12px;margin-top:10px;line-height:1.45}
+.dk2RecBtn{cursor:pointer;border:0;border-radius:14px;padding:14px 26px;font-size:17px;font-weight:900;color:#fff;background:linear-gradient(135deg,#0e7490,#06b6d4);box-shadow:0 8px 24px rgba(14,116,144,.35);font-family:inherit}
+.dk2RecBtn:disabled{opacity:.7;cursor:wait}
+.dk2Count{font-size:15px;font-weight:800;color:#dc2626;margin-top:10px;text-align:center}
+.dk2Err{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c;border-radius:12px;padding:10px 12px;font-size:13.5px;font-weight:700;text-align:left}
+.dk2Grid{margin-top:16px}
+.dk2Item{padding:9px 2px;border-bottom:1px solid #f1f5f9}
+.dk2ItemTop{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.dk2Lab{font-size:14px;font-weight:700;color:#334155}
+.dk2Val{font-size:16px;font-weight:900;color:#0f172a;font-family:Consolas,'Courier New',monospace;white-space:nowrap}
+.dk2Hint{font-size:12px;color:#64748b;margin-top:3px;line-height:1.4}
+.dk2Flag{display:inline-block;margin:10px 6px 0 0;background:#fffbeb;border:1px solid #fde68a;color:#92400e;font-size:12.5px;font-weight:700;padding:6px 10px;border-radius:10px}
+.dk2Audio{width:100%;margin-top:14px}
+.dk2RowBtns{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.dk2Btn2{cursor:pointer;border:0;border-radius:12px;padding:11px 20px;font-size:15px;font-weight:800;color:#fff;font-family:inherit}
+.dk2Teal{background:#0e7490}.dk2GreyB{background:#475569}
+#dk2Latency{margin-top:16px;border-top:2px dashed #e2e8f0;padding-top:12px;text-align:center;font-family:'Segoe UI',system-ui,Arial,sans-serif}
+#dk2Latency .dk2LatHead{font-size:15px;font-weight:900;color:#0f172a}
+#dk2Latency .dk2LatNote{font-size:12.5px;color:#64748b;margin-top:4px;line-height:1.45}
+#dk2LatTime{font-size:30px;font-weight:900;font-family:Consolas,'Courier New',monospace;color:#0f172a;margin:8px 0 6px}
+.dk2LatBtns{display:flex;gap:8px;justify-content:center}
+.dk2LatB{cursor:pointer;padding:9px 18px;border-radius:10px;border:0;color:#fff;font-weight:800;font-size:14px;font-family:inherit}
+#dk2LatStart{background:#0e7490}
+#dk2LatStop{background:#475569}
+#dk2LatRes{font-size:14px;font-weight:800;margin-top:8px;min-height:20px;line-height:1.4}
+.dk2LatOk{color:#059669}.dk2LatMid{color:#b45309}.dk2LatBad{color:#dc2626}
+  `;
+
+  var PANEL=`
+<div class="dk2Card">
+  <button id="dk2Close" class="dk2X">&#10005;</button>
+  <div class="dk2Title">&#128300; Forensic Vitals</div>
+  <div class="dk2Disc">&#128274; Sab kuch LOCAL browser mein compute hota hai &mdash; audio upload NAHI hota. Ye read-only research telemetry hai: AI verdict ko <b>support</b> karti hai, replace nahi karti.</div>
+  <div style="text-align:center;margin-top:16px">
+    <button id="dk2RecBtn" class="dk2RecBtn">&#127908; RECORD 6s &mdash; bolo kuch bhi</button>
+    <div id="dk2Status" class="dk2Count" style="display:none"></div>
+    <div class="dk2Hint" style="margin-top:8px">Tip: twister bol do &mdash; evidence clip ban jayegi. Raw mic (koi filter nahi).</div>
+  </div>
+  <div id="dk2Results"></div>
+</div>
+  `;
+
+  var LAT=`
+<div class="dk2LatHead">&#9201; RESPONSE LATENCY TEST</div>
+<div class="dk2LatNote">Caller ko twister dikhao &rarr; START dabao &rarr; caller bolna shuru kare to STOP. Live human usually &lt;1s; STT&rarr;LLM&rarr;TTS proxy typically 1.2&ndash;1.8s.</div>
+<div id="dk2LatTime">0.00 s</div>
+<div class="dk2LatBtns">
+  <button id="dk2LatStart" class="dk2LatB">&#9654; START</button>
+  <button id="dk2LatStop" class="dk2LatB">&#9995; STOP</button>
+</div>
+<div id="dk2LatRes"></div>
+  `;
+
+  function nuke(sel){
+    var l=document.querySelectorAll(sel);
+    for(var i=0;i<l.length;i++){ if(l[i].parentNode) l[i].parentNode.removeChild(l[i]); }
+  }
+
+  function init(){
+    nuke('#dk2Style,#dk2Root,#dk2OwnBar,#dk2Panel,#dk2Latency,#dk2VitBtn');
+    var st=document.createElement('style'); st.id='dk2Style'; st.textContent=CSS;
+    (document.head||document.getElementsByTagName('head')[0]).appendChild(st);
+
+    /* button: Pack 1 ke bar mein (agar hai), warna apna bar */
+    var btn=document.createElement('button'); btn.id='dk2VitBtn';
+    btn.innerHTML='&#128300; FORENSIC VITALS';
+    var bar=document.getElementById('dk1Bar');
+    if(bar){ bar.appendChild(btn); }
+    else{ var ob=document.createElement('div'); ob.id='dk2OwnBar'; ob.appendChild(btn); document.body.appendChild(ob); }
+    btn.onclick=function(){ var p=$('dk2Panel'); if(p) p.style.display='flex'; };
+
+    /* vitals panel */
+    var ov=document.createElement('div'); ov.id='dk2Panel'; ov.className='dk2Overlay'; ov.style.display='none';
+    ov.innerHTML=PANEL; document.body.appendChild(ov);
+    $('dk2Close').onclick=function(){ ov.style.display='none'; };
+    ov.addEventListener('click',function(e){ if(e.target===ov) ov.style.display='none'; });
+    $('dk2RecBtn').onclick=doRecord;
+
+    injectLatency();
+  }
+
+  /* ============ DSP ENGINE (sab local, 16 kHz) ============ */
+  function resample(x,srIn,srOut){
+    if(srIn===srOut) return x;
+    var ratio=srIn/srOut, nOut=Math.floor(x.length/ratio), out=new Array(nOut);
+    for(var i=0;i<nOut;i++){
+      var p=i*ratio, i0=Math.floor(p), fr=p-i0;
+      var a=x[i0]||0, b=(i0+1<x.length)?x[i0+1]:a;
+      out[i]=a*(1-fr)+b*fr;
+    }
+    return out;
+  }
+  function avg(a){ if(!a||!a.length) return 0; var s=0; for(var i=0;i<a.length;i++)s+=a[i]; return s/a.length; }
+  function fft(re,im){
+    var n=re.length,i,j,k,len;
+    for(i=1,j=0;i<n;i++){
+      var bit=n>>1;
+      for(;j&bit;bit>>=1) j^=bit;
+      j^=bit;
+      if(i<j){ var tr=re[i];re[i]=re[j];re[j]=tr; var ti=im[i];im[i]=im[j];im[j]=ti; }
+    }
+    for(len=2;len<=n;len<<=1){
+      var ang=-2*Math.PI/len, wr=Math.cos(ang), wi=Math.sin(ang);
+      for(i=0;i<n;i+=len){
+        var cwr=1,cwi=0;
+        for(k=0;k<len/2;k++){
+          var i1=i+k,i2=i+k+len/2;
+          var vr=re[i2]*cwr-im[i2]*cwi, vi=re[i2]*cwi+im[i2]*cwr;
+          var ur=re[i1], ui=im[i1];
+          re[i1]=ur+vr; im[i1]=ui+vi; re[i2]=ur-vr; im[i2]=ui-vi;
+          var t=cwr*wr-cwi*wi; cwi=cwr*wi+cwi*wr; cwr=t;
+        }
+      }
+    }
+  }
+  function computeVitals(input,srIn){
+    var SR=16000;
+    var x=resample(input,srIn,SR), n=x.length;
+    if(n<3200) return null;
+    var FL=480, HOP=160, i,j,k;
+    var NF=Math.floor((n-FL)/HOP)+1;
+    if(NF<10) return null;
+    var rms=new Array(NF), zcrs=new Array(NF), voiced=new Array(NF);
+    for(i=0;i<NF;i++){
+      var s0=i*HOP, sum=0, z=0, prev=(x[s0]>=0)?1:-1;
+      for(j=0;j<FL;j++){
+        var v=x[s0+j]; sum+=v*v;
+        var cur=(v>=0)?1:-1; if(cur!==prev){z++;prev=cur;}
+      }
+      rms[i]=Math.sqrt(sum/FL); zcrs[i]=z*(SR/FL);
+    }
+    var sorted=rms.slice().sort(function(a,b){return a-b;});
+    var p95=sorted[Math.min(NF-1,Math.floor(NF*0.95))];
+    var thr=Math.max(1e-4,p95*0.10), vCount=0;
+    for(i=0;i<NF;i++){ voiced[i]=rms[i]>thr; if(voiced[i])vCount++; }
+    if(vCount<5) return {silent:true,dur:n/SR};
+    /* pitch (autocorrelation, 60-400 Hz) */
+    var LMIN=Math.round(SR/400), LMAX=Math.round(SR/60);
+    var f0f=new Array(NF); for(i=0;i<NF;i++) f0f[i]=null;
+    var harms=[];
+    for(i=0;i<NF;i++){
+      if(!voiced[i]) continue;
+      var s1=i*HOP, mn=0;
+      for(j=0;j<FL;j++) mn+=x[s1+j]; mn/=FL;
+      var c0=0;
+      for(j=0;j<FL;j++){ var d=x[s1+j]-mn; c0+=d*d; }
+      if(c0<1e-10) continue;
+      var bestR=0,bestL=0;
+      for(var l=LMIN;l<=LMAX;l++){
+        var c=0;
+        for(j=0;j<FL-l;j++) c+=(x[s1+j]-mn)*(x[s1+j+l]-mn);
+        var r=c/c0;
+        if(r>bestR){bestR=r;bestL=l;}
+      }
+      if(bestR>0.30&&bestL>0){ f0f[i]=SR/bestL; harms.push(bestR); }
+    }
+    var df0=[],f0list=[],drms=[],rmsV=[];
+    for(i=0;i<NF;i++){
+      if(voiced[i]){ rmsV.push(rms[i]); if(f0f[i]!=null) f0list.push(f0f[i]); }
+    }
+    for(i=0;i<NF-1;i++){
+      if(voiced[i]&&voiced[i+1]){
+        drms.push(Math.abs(rms[i]-rms[i+1]));
+        if(f0f[i]!=null&&f0f[i+1]!=null) df0.push(Math.abs(f0f[i]-f0f[i+1]));
+      }
+    }
+    var meanF0=avg(f0list), meanR=avg(rmsV);
+    var run=0,best=0;
+    for(i=0;i<NF;i++){ if(voiced[i]){run++; if(run>best)best=run;} else run=0; }
+    /* spectral (512-pt FFT, Hann, hop 160 — same framing family as engine) */
+    var NF2=Math.floor((n-512)/HOP)+1;
+    var hann=new Array(512);
+    for(k=0;k<512;k++) hann[k]=0.5-0.5*Math.cos(2*Math.PI*k/511);
+    var prevMag=null, cents=[], rolls=[], fluxs=[];
+    for(i=0;i<NF2;i++){
+      if(!voiced[i]){ prevMag=null; continue; }
+      var re=new Array(512), im=new Array(512);
+      for(k=0;k<512;k++){ re[k]=x[i*HOP+k]*hann[k]; im[k]=0; }
+      fft(re,im);
+      var mags=new Array(256), tot=0;
+      for(k=1;k<256;k++){ var m=Math.sqrt(re[k]*re[k]+im[k]*im[k]); mags[k]=m; tot+=m; }
+      if(tot<1e-8){ prevMag=null; continue; }
+      var num=0;
+      for(k=1;k<256;k++) num+=(k*SR/512)*mags[k];
+      cents.push(num/tot);
+      var cum=0, roll=255*SR/512;
+      for(k=1;k<256;k++){ cum+=mags[k]; if(cum>=0.85*tot){ roll=k*SR/512; break; } }
+      rolls.push(roll);
+      if(prevMag){
+        var fx=0;
+        for(k=1;k<256;k++){ var dd=mags[k]-prevMag[k]; if(dd>0) fx+=dd; }
+        fluxs.push(fx/tot*100);
+      }
+      prevMag=mags;
+    }
+    var zv=[];
+    for(i=0;i<NF;i++){ if(voiced[i]) zv.push(zcrs[i]); }
+    return {
+      dur:n/SR,
+      pausePct:(1-vCount/NF)*100,
+      longRun:best*HOP/SR,
+      f0:meanF0,
+      jitter:(meanF0>0)?(avg(df0)/meanF0*100):0,
+      shimmer:(meanR>0)?(avg(drms)/meanR*100):0,
+      harm:avg(harms),
+      zcr:avg(zv),
+      centroid:avg(cents),
+      rolloff:avg(rolls),
+      flux:avg(fluxs)
+    };
+  }
+
+  /* ============ RECORD FLOW ============ */
+  var recState={ctx:null,url:null};
+  function doRecord(){
+    var stat=$('dk2Status'), resEl=$('dk2Results'), rb=$('dk2RecBtn');
+    if(!stat||!rb) return;
+    function fail(m){
+      stat.style.display='block'; stat.className='dk2Err';
+      stat.innerHTML='&#9888;&#65039; '+m;
+      rb.disabled=false; rb.innerHTML='&#127908; RECORD 6s &mdash; bolo kuch bhi';
+    }
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+      fail('Mic API available nahi &mdash; 127.0.0.1 URL ya HTTPS use karo.'); return;
+    }
+    rb.disabled=true; rb.innerHTML='&#9209; recording&hellip;';
+    resEl.innerHTML='';
+    stat.style.display='block'; stat.className='dk2Count';
+    stat.innerHTML='&#9679; REC 6.0s&hellip;';
+    try{
+      recState.ctx=recState.ctx||new (window.AudioContext||window.webkitAudioContext)();
+      if(recState.ctx.state==='suspended') recState.ctx.resume();
+    }catch(e){}
+    navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}}).then(function(stream){
+      var rec;
+      try{ rec=new MediaRecorder(stream); }
+      catch(e){ fail('MediaRecorder supported nahi: '+e.message); stream.getTracks().forEach(function(t){t.stop();}); return; }
+      var chunks=[];
+      rec.ondataavailable=function(e){ if(e.data&&e.data.size>0) chunks.push(e.data); };
+      rec.onstop=function(){
+        stream.getTracks().forEach(function(t){t.stop();});
+        var blob=new Blob(chunks,{type:rec.mimeType||'audio/webm'});
+        if(blob.size<1000){ fail('Recording empty &mdash; mic se awaaz nahi aayi, dobara try karo.'); return; }
+        if(recState.url){ try{URL.revokeObjectURL(recState.url);}catch(e2){} }
+        recState.url=URL.createObjectURL(blob);
+        stat.innerHTML='&#8987; Computing DSP (pitch + spectral)&hellip;';
+        var p;
+        try{ p=blob.arrayBuffer(); }catch(e){ fail('Blob fail.'); return; }
+        p.then(function(ab){
+          var d;
+          try{ d=recState.ctx.decodeAudioData(ab); }
+          catch(e){ fail('Decode fail (old browser).'); return; }
+          if(d&&d.then){ return d; }
+          return new Promise(function(res2,rej){ /* callback-style fallback */
+            recState.ctx.decodeAudioData(ab,res2,rej);
+          });
+        }).then(function(buf){
+          setTimeout(function(){
+            var v;
+            try{ v=computeVitals(buf.getChannelData(0),buf.sampleRate); }
+            catch(e){ fail('DSP error: '+e.message); return; }
+            rb.disabled=false; rb.innerHTML='&#127908; RECORD 6s &mdash; bolo kuch bhi';
+            if(!v){ fail('Recording bahut chhoti &mdash; 6s tak bolo.'); return; }
+            if(v.silent){ fail('Koi speech detect nahi hui &mdash; mic ke paas bolo.'); return; }
+            stat.style.display='none';
+            renderResults(v);
+          },30);
+        }).catch(function(e){
+          fail('Audio decode fail: '+((e&&e.message)?e.message:e));
+        });
+      };
+      try{ rec.start(); }catch(e){ fail('Record start fail: '+e.message); return; }
+      var t0=performance.now();
+      var iv=setInterval(function(){
+        var el2=(6000-(performance.now()-t0))/1000;
+        stat.innerHTML='&#9679; REC '+Math.max(0,el2).toFixed(1)+'s&hellip;';
+      },100);
+      setTimeout(function(){ clearInterval(iv); try{ rec.stop(); }catch(e){} },6000);
+    }).catch(function(e){
+      fail('Mic blocked/denied: '+((e&&e.message)?e.message:e)+' &mdash; Chrome permission ALLOW karo, 127.0.0.1 URL use karo.');
+    });
+  }
+
+  /* ============ RESULTS ============ */
+  function renderResults(v){
+    var el=$('dk2Results'); if(!el) return;
+    var items=[
+      ['Pause ratio',v.pausePct.toFixed(1)+'%','Natural speech breathes &mdash; phrases ke beech pause normal hai.'],
+      ['Longest voiced run',v.longRun.toFixed(1)+' s','Bohat lambe speech bina pause ke unusual hai.'],
+      ['Pitch F0 (mean)',Math.round(v.f0)+' Hz','Typical adult speech: ~85&ndash;255 Hz.'],
+      ['Pitch jitter',v.jitter.toFixed(2)+'%','Cycle-to-cycle F0 variation; natural ~0.3&ndash;2%. Near-zero synthetic hint ho sakta hai.'],
+      ['Shimmer',v.shimmer.toFixed(1)+'%','Frame-to-frame amplitude variation.'],
+      ['Harmonicity',v.harm.toFixed(2),'Voiced frames ki periodicity (0&ndash;1).'],
+      ['Zero-crossing rate',Math.round(v.zcr)+' /s','Noisiness / brightness indicator.'],
+      ['Spectral centroid',Math.round(v.centroid)+' Hz','Perceived brightness.'],
+      ['Rolloff 85%',Math.round(v.rolloff)+' Hz','Jiske neeche 85% energy hai.'],
+      ['Spectral flux',v.flux.toFixed(1)+'%','Frame-to-frame spectral change &mdash; TTS aksar over-smooth hota hai.']
+    ];
+    var h='<div class="dk2Hint" style="margin-top:14px;font-weight:700">Evidence clip: '+v.dur.toFixed(1)+' s &bull; 16 kHz mono &bull; raw mic (no filters)</div>';
+    h+='<div class="dk2Grid">';
+    for(var i=0;i<items.length;i++){
+      h+='<div class="dk2Item"><div class="dk2ItemTop"><span class="dk2Lab">'+items[i][0]+'</span><span class="dk2Val">'+items[i][1]+'</span></div><div class="dk2Hint">'+items[i][2]+'</div></div>';
+    }
+    h+='</div>';
+    var flags=[];
+    if(v.longRun>8) flags.push('&#9888;&#65039; 8s+ speech without any pause &mdash; unnatural breathing pattern');
+    if(v.jitter>0&&v.jitter<0.3) flags.push('&#9888;&#65039; Very low pitch jitter &mdash; synthetic sources often near 0%');
+    if(v.pausePct<8) flags.push('&#9888;&#65039; Almost no pauses &mdash; natural speech breathes');
+    if(flags.length){
+      h+='<div>';
+      for(var f=0;f<flags.length;f++) h+='<span class="dk2Flag">'+flags[f]+'</span>';
+      h+='</div>';
+    }
+    h+='<div id="dk2AudioWrap"></div>';
+    h+='<div class="dk2RowBtns"><button id="dk2Copy" class="dk2Btn2 dk2Teal">&#128203; Copy vitals</button><button id="dk2Again" class="dk2Btn2 dk2GreyB">&#128260; Re-record</button></div>';
+    h+='<div class="dk2Hint" style="margin-top:10px;text-align:center">Telemetry only &mdash; single numbers never a verdict. AI verdict = /api/score.</div>';
+    el.innerHTML=h;
+    try{
+      var au=document.createElement('audio');
+      au.controls=true; au.className='dk2Audio'; au.src=recState.url;
+      $('dk2AudioWrap').appendChild(au);
+    }catch(e){}
+    $('dk2Again').onclick=doRecord;
+    $('dk2Copy').onclick=function(){
+      var tx=summaryText(v);
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(tx);
+      }else{
+        var ta=document.createElement('textarea'); ta.value=tx; document.body.appendChild(ta); ta.select();
+        try{document.execCommand('copy');}catch(e){}
+        ta.remove();
+      }
+      $('dk2Copy').innerHTML='&#9989; Copied!';
+      setTimeout(function(){ var c=$('dk2Copy'); if(c) c.innerHTML='&#128203; Copy vitals'; },1800);
+    };
+  }
+  function summaryText(v){
+    return '\uD83D\uDD2C DHWANI KAVACH — FORENSIC VITALS\n'
+      +'(read-only research telemetry, computed locally)\n'
+      +'• Pause ratio: '+v.pausePct.toFixed(1)+'%\n'
+      +'• Longest voiced run: '+v.longRun.toFixed(1)+' s\n'
+      +'• Pitch F0 mean: '+Math.round(v.f0)+' Hz\n'
+      +'• Pitch jitter: '+v.jitter.toFixed(2)+'%\n'
+      +'• Shimmer: '+v.shimmer.toFixed(1)+'%\n'
+      +'• Harmonicity: '+v.harm.toFixed(2)+'\n'
+      +'• ZCR: '+Math.round(v.zcr)+' /s\n'
+      +'• Spectral centroid: '+Math.round(v.centroid)+' Hz\n'
+      +'• Rolloff85: '+Math.round(v.rolloff)+' Hz\n'
+      +'• Spectral flux: '+v.flux.toFixed(1)+'%\n'
+      +'\nTelemetry supports the AI verdict — never replaces it.';
+  }
+
+  /* ============ LATENCY TRAP (TEST CALLER modal mein inject) ============ */
+  function injectLatency(){
+    var card=document.querySelector('#dk1Modal .dk1Card');
+    if(!card) return;
+    var lat=document.createElement('div'); lat.id='dk2Latency'; lat.innerHTML=LAT;
+    var rows=card.querySelectorAll('.dk1Row');
+    if(rows&&rows.length>0) card.insertBefore(lat,rows[rows.length-1]);
+    else card.appendChild(lat);
+    var running=false,t0=0,iv=null;
+    var tm=$('dk2LatTime'), rs=$('dk2LatRes');
+    if(!tm||!rs) return;
+    function fmt(s){ return s.toFixed(2)+' s'; }
+    $('dk2LatStart').onclick=function(){
+      if(iv) clearInterval(iv);
+      running=true; t0=performance.now();
+      rs.textContent=''; tm.textContent='0.00 s';
+      iv=setInterval(function(){ tm.textContent=fmt((performance.now()-t0)/1000); },40);
+    };
+    $('dk2LatStop').onclick=function(){
+      if(!running) return;
+      running=false;
+      if(iv){ clearInterval(iv); iv=null; }
+      var s=(performance.now()-t0)/1000;
+      tm.textContent=fmt(s);
+      if(s<1.0){ rs.className='dk2LatOk'; rs.innerHTML='&#9989; Human-fast response ('+fmt(s)+') &mdash; live insaan aise hi bolta hai'; }
+      else if(s<=1.6){ rs.className='dk2LatMid'; rs.innerHTML='&#9888;&#65039; Borderline ('+fmt(s)+') &mdash; dhyaan se suno'; }
+      else{ rs.className='dk2LatBad'; rs.innerHTML='&#128680; Proxy-signature delay ('+fmt(s)+') &mdash; STT&rarr;LLM&rarr;TTS loop typically 1.2&ndash;1.8s'; }
+    };
+  }
+
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',init); }
+  else{ init(); }
+})();
+</script>
+<!-- ═════════ PACK 2 END ═════════ -->
 </body>
 </html>
