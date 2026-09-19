@@ -111,14 +111,3 @@ def scan(text):
         "matched": {c: hits[c] for c in hits},
         "advisory": ADVISORY.get(top, None),
     }
-    -+
-
-    ++++
-
-    -+
-
-
-
-
-
-    aq
