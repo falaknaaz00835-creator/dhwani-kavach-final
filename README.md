@@ -56,13 +56,15 @@ Live audio → Decode/Resample 16 kHz → Energy VAD → 4 s sliding windows
 
 | Metric | Value | Protocol |
 |---|---|---|
-| EER (seen attacks) | 1.2% | ASVspoof 2019 LA dev split |
-| EER (unseen attacks) | 8.5% | ASVspoof 2019 LA eval split (attack-disjoint) |
-| TPR @ 1% false alarm | 98.5% | Calibrated on real team-recorded voices |
-| Corpus | 121,461 clips | ASVspoof 2019 LA (25,380 train / 24,844 dev / 71,237 eval) |
+| EER (seen attacks) | 1.25% | ASVspoof 2019 LA dev subset (n=800) |
+| EER (unseen attacks) | 8.5% | ASVspoof 2019 LA eval subset (n=1,200, attack-disjoint) |
+| TPR @ 1% false alarm | 98.5% | dev subset; thresholds calibrated on real team-recorded voices |
+| Accuracy | 98.75% dev / 91.08% eval | same subsets (see `results/cnn_v1/metrics.json`) |
+| Corpus | ASVspoof 2019 LA — 121,461 clips total | Headline metrics on capped subsets: 4,000 train / 800 dev / 1,200 eval; full-corpus runs on roadmap |
 | Model | 236,141 params | 80 log-mel, 4 s windows, Adam, 10 epochs, CPU-only training |
 | ONNX parity (PyTorch vs ONNX logits) | max Δ 2.4e-06 | `17_export_onnx.py` self-test |
 | ONNX artifact | ≈ 1.0 MB (graph + weights) | SHA-256: `c4134066…d97d539c5` |
+Hardest attack class: **A17 (EER 42.3%)** — exactly why Dhwani Kavach is a layered defense (radar + challenge + voiceprint), not a single detector.
 
 Reproduce the ONNX evidence:
 ```
