@@ -3854,290 +3854,7 @@ document.addEventListener('click',function(e){
   if(h&&document.getElementById('dkpack').classList.contains('dkon'))dkDeck2('dkpack');
 },false);
 </script>
-<!-- ═══ DHWANI KAVACH — PACK 1 (Step 1 of 8) ═══ -->
-<style>
-.dk1ui{font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif}
-#dk1Bar{position:fixed;right:14px;bottom:14px;z-index:99990;display:flex;flex-direction:column;gap:10px}
-.dk1Btn{cursor:pointer;border:0;border-radius:14px;padding:14px 18px;font-size:16px;font-weight:800;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35);display:flex;align-items:center;gap:10px;min-width:200px;justify-content:center;font-family:inherit;transition:transform .12s}
-.dk1Btn:hover{transform:translateY(-2px)}
-#dk1ElderBtn{background:linear-gradient(135deg,#7c3aed,#4f46e5)}
-#dk1ElderBtn.on{background:linear-gradient(135deg,#047857,#10b981)}
-#dk1TestBtn{background:linear-gradient(135deg,#b45309,#f59e0b)}
-#dk1FamBtn{background:linear-gradient(135deg,#b91c1c,#ef4444)}
-#dk1Strip{position:fixed;top:0;left:0;right:0;z-index:99991;padding:16px 70px 14px 20px;text-align:center;box-shadow:0 6px 26px rgba(0,0,0,.45)}
-#dk1Strip .dk1Main{font-size:clamp(30px,6vw,64px);font-weight:900;line-height:1.08;letter-spacing:.5px;color:#fff}
-#dk1Strip .dk1Sub{font-size:clamp(14px,2vw,22px);font-weight:700;margin-top:6px;color:#fff}
-#dk1Strip .dk1Stats{display:flex;gap:12px;justify-content:center;margin-top:10px;flex-wrap:wrap}
-#dk1Strip .dk1Chip{font-size:13px;font-weight:800;padding:4px 12px;border-radius:999px;background:rgba(0,0,0,.28);color:#fff}
-#dk1Strip.dk1-green{background:linear-gradient(180deg,#065f46,#10b981)}
-#dk1Strip.dk1-amber{background:linear-gradient(180deg,#92400e,#f59e0b)}
-#dk1Strip.dk1-red{background:linear-gradient(180deg,#7f1d1d,#ef4444);animation:dk1shake .5s infinite}
-#dk1Strip .dk1X{position:absolute;top:10px;right:12px;background:rgba(0,0,0,.3);border:0;color:#fff;font-size:14px;font-weight:800;border-radius:8px;padding:5px 10px;cursor:pointer;font-family:inherit}
-@keyframes dk1shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-#dk1Combined{position:fixed;top:0;left:0;right:0;z-index:99992;text-align:center;padding:30px 16px;background:linear-gradient(135deg,#000 0%,#7f1d1d 55%,#000 100%);animation:dk1pulse 1s infinite}
-#dk1Combined .dk1cT{font-size:clamp(26px,5vw,54px);font-weight:900;letter-spacing:1px;color:#fff}
-#dk1Combined .dk1cS{font-size:clamp(14px,2vw,22px);font-weight:700;margin-top:8px;color:#fecaca}
-@keyframes dk1pulse{0%,100%{box-shadow:0 0 30px rgba(239,68,68,.55)}50%{box-shadow:0 0 80px rgba(239,68,68,1)}}
-#dk1Modal,#dk1Family{position:fixed;inset:0;z-index:99995;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center}
-.dk1Card{background:#fff;border-radius:20px;max-width:640px;width:92%;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.5);text-align:center}
-.dk1Card.dk1Small{max-width:440px}
-.dk1Head{font-size:24px;font-weight:900;color:#111827}
-.dk1Note{color:#4b5563;font-size:15px;margin-top:8px;line-height:1.5}
-.dk1Tw{font-size:clamp(22px,3.4vw,34px);font-weight:900;color:#111827;margin:20px 0;line-height:1.35}
-.dk1Row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:14px}
-.dk1Mbtn{padding:12px 22px;border-radius:12px;border:0;color:#fff;font-weight:800;font-size:16px;cursor:pointer;font-family:inherit}
-.dk1Green{background:#059669}.dk1Red{background:#dc2626}.dk1Grey{background:#4b5563}
-.dk1Input{width:100%;box-sizing:border-box;padding:13px 14px;border-radius:12px;border:2px solid #d1d5db;font-size:18px;font-weight:800;text-align:center;margin-top:14px;font-family:inherit}
-.dk1Link{background:none;border:0;color:#6b7280;cursor:pointer;font-weight:700;margin-top:10px;font-size:14px;font-family:inherit}
-#dk1Toast{position:fixed;bottom:225px;left:50%;transform:translateX(-50%);z-index:99997;background:#111827;color:#fff;padding:12px 22px;border-radius:12px;font-weight:800;font-size:15px;box-shadow:0 12px 30px rgba(0,0,0,.4);opacity:0;transition:opacity .3s;pointer-events:none;max-width:90vw;text-align:center}
-</style>
 
-<div id="dk1Bar" class="dk1ui">
-  <button id="dk1ElderBtn" class="dk1Btn">👵 ELDER MODE</button>
-  <button id="dk1TestBtn" class="dk1Btn">🎙️ TEST CALLER</button>
-  <button id="dk1FamBtn" class="dk1Btn">🚨 ALERT FAMILY</button>
-</div>
-
-<div id="dk1Strip" class="dk1ui" style="display:none"></div>
-<div id="dk1Combined" class="dk1ui" style="display:none"></div>
-
-<div id="dk1Modal" class="dk1ui" style="display:none">
-  <div class="dk1Card">
-    <div class="dk1Head">🎙️ TEST CALLER — live insaan test</div>
-    <div class="dk1Note">Caller se ye bolne ko kaho — <b>fast aur saaf, 1 try</b>. Real insaan turant attempt karega, AI proxy atak jaata hai.</div>
-    <div class="dk1Tw" id="dk1Tw"></div>
-    <div class="dk1Row"><button id="dk1Roll" class="dk1Mbtn dk1Grey">🎲 Naya twister</button></div>
-    <div class="dk1Row">
-      <button id="dk1Pass" class="dk1Mbtn dk1Green">✅ PASS — bol gaya</button>
-      <button id="dk1Fail" class="dk1Mbtn dk1Red">❌ FAIL — atak gaya</button>
-    </div>
-    <div class="dk1Row"><button id="dk1CloseM" class="dk1Link">band karo</button></div>
-  </div>
-</div>
-
-<div id="dk1Family" class="dk1ui" style="display:none">
-  <div class="dk1Card dk1Small">
-    <div class="dk1Head">🚨 ALERT FAMILY</div>
-    <div class="dk1Note">Family member ka WhatsApp number — click-to-chat message ready milega. Number save ho jayega.</div>
-    <input id="dk1Num" class="dk1Input" placeholder="10-digit mobile number" inputmode="numeric" />
-    <div class="dk1Row">
-      <button id="dk1Send" class="dk1Mbtn dk1Green">📲 WhatsApp bhejo</button>
-      <button id="dk1Copy" class="dk1Mbtn dk1Grey">📋 Copy message</button>
-    </div>
-    <div class="dk1Row"><button id="dk1CloseF" class="dk1Link">band karo</button></div>
-  </div>
-</div>
-
-<div id="dk1Toast" class="dk1ui"></div>
-
-<script>
-(function(){
-  'use strict';
-  /* self-heal: agar ye block galti se 2 baar paste ho jaye */
-  ['dk1Bar','dk1Strip','dk1Combined','dk1Modal','dk1Family','dk1Toast'].forEach(function(id){
-    var e=document.getElementById(id); if(e&&e.parentNode) e.parentNode.removeChild(e);
-  });
-
-  var S={elder:false,tier:'LOW',radar:0,challenge:'none',prevLevel:0};
-  var TW=[
-    'Kacha papad, paka papad — 3 baar, full speed!',
-    'Chandu ke chacha ne Chandu ki chachi ko chandni raat mein chaandni chowk se chandi ki chamcham chai laayi',
-    'She sells sea-shells by the sea-shore — 2 baar, fast!',
-    'Bhaiya ne bhabhi ko bye-bye bola, bhabhi boli bye-bye bhaiya',
-    'Irish wristwatch, Swiss wristwatch — 3 baar, full speed!'
-  ];
-  function $(id){return document.getElementById(id);}
-  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
-
-  /* ---------- 1) API observer: fetch + XHR dono ---------- */
-  function deepFind(o,keys,d){
-    d=d||0;
-    if(!o||typeof o!=='object'||d>3) return undefined;
-    for(var i=0;i<keys.length;i++){ if(o[keys[i]]!==undefined&&o[keys[i]]!==null) return o[keys[i]]; }
-    for(var k in o){ var v=deepFind(o[k],keys,d+1); if(v!==undefined) return v; }
-    return undefined;
-  }
-  function normTier(v){
-    if(v===undefined||v===null) return null;
-    var s=String(v).toUpperCase();
-    if(/LOW|SAFE|REAL|BONA|GENUINE|NATURAL|CLEAN|HUMAN/.test(s)) return 'LOW';
-    if(/MED|MODERATE|BORDER|CAUTION|WARN/.test(s)) return 'MED';
-    if(/HIGH|FAKE|SUSP|SPOOF|PSEUDO|DEEP|ALERT|DANGER|FRAUD|SCAM|BOT|CLONE|SYNTH|TTS/.test(s)) return 'HIGH';
-    if(s.split(/[^A-Z0-9]+/).indexOf('AI')>-1) return 'HIGH';
-    return null;
-  }
-  function handle(url,text){
-    if(!url||!text) return;
-    var j=null; try{j=JSON.parse(text);}catch(e){return;}
-    if(url.indexOf('/api/score')>-1){
-      var t=normTier(deepFind(j,['tier','risk_tier','riskTier','verdict','label','level','result']));
-      if(!t){ /* fallback: probability se tier (theta=0.62 calibration) */
-        var p=Number(deepFind(j,['p_fake','prob_fake','ai_prob','p_ai','fake_prob','prob','probability','confidence','score']));
-        if(!isNaN(p)){ var q=(p<=1)?p*100:p; t=q>=62?'HIGH':(q>=35?'MED':'LOW'); }
-      }
-      if(t){S.tier=t;render();}
-    }else if(url.indexOf('/api/radar')>-1){
-      var n=Number(deepFind(j,['score','risk_score','riskScore','total','combined','value','risk']));
-      if(!isNaN(n)){ S.radar=Math.round(n); render(); }
-    }
-  }
-  if(window.fetch){
-    var FF=window.fetch;
-    window.fetch=function(){
-      var a=arguments;
-      return FF.apply(window,a).then(function(r){
-        try{
-          if(r&&r.url&&/\/api\/(score|radar)/.test(r.url)){
-            r.clone().text().then(function(t){handle(r.url,t);}).catch(function(){});
-          }
-        }catch(e){}
-        return r;
-      });
-    };
-  }
-  var XO=XMLHttpRequest.prototype.open,XS=XMLHttpRequest.prototype.send;
-  XMLHttpRequest.prototype.open=function(m,u){this._dk1u=String(u);return XO.apply(this,arguments);};
-  XMLHttpRequest.prototype.send=function(){
-    var x=this;
-    x.addEventListener('load',function(){try{handle(x._dk1u,x.responseText);}catch(e){}});
-    return XS.apply(this,arguments);
-  };
-
-  /* ---------- 2) state machine (combination law: no false alarms) ---------- */
-  function level(){
-    if(S.tier==='HIGH'&&S.radar>=70) return 3;
-    if(S.tier==='HIGH'||S.challenge==='fail') return 2;
-    if(S.tier==='MED'||S.radar>=70) return 1;
-    return 0;
-  }
-  var MAIN=['🟢 SAB THEEK HAI','⚠️ DHYAAN DO!','🔴 KHATRA! CALL KAAT DO!','⚔️ COMBINED ATTACK — CALL KAAT DO!'];
-  var SUB=[
-    'Aaram se baat karo — abhi koi khatra nahi dikha.',
-    'Dhyaan se suno — paisa, OTP, ya bank details MAT do.',
-    'Ye awaaz AI ki lag rahi hai — pehchaan confirm nahi hui!',
-    'AI voice + scam script DONO ek saath — ye 100% scam hai!'
-  ];
-  function render(){
-    var L=level(),st=$('dk1Strip');
-    var comb=(L===3);
-    if(S.elder&&!comb){
-      st.style.display='block';
-      st.className='dk1ui dk1-'+(L===2?'red':(L===1?'amber':'green'));
-      st.innerHTML='<button class="dk1X" id="dk1Off">✕ OFF</button>'
-        +'<div class="dk1Main">'+MAIN[L]+'</div><div class="dk1Sub">'+SUB[L]+'</div>'
-        +'<div class="dk1Stats">'
-        +'<span class="dk1Chip">AI voice: '+esc(S.tier)+'</span>'
-        +'<span class="dk1Chip">Scam radar: '+S.radar+'/100</span>'
-        +'<span class="dk1Chip">Challenge: '+(S.challenge==='pass'?'✅ PASS':(S.challenge==='fail'?'❌ FAIL':'— not done'))+'</span>'
-        +'</div>';
-      $('dk1Off').onclick=toggleElder;
-    }else{ st.style.display='none'; }
-    var cb=$('dk1Combined');
-    cb.style.display=comb?'block':'none';
-    if(comb){ cb.innerHTML='<div class="dk1cT">⚔️ COMBINED ATTACK DETECTED</div><div class="dk1cS">AI VOICE + SCAM PATTERN — dono ek saath! Call KAAT do, family ko batao, 1930 pe report karo.</div>'; }
-    var eb=$('dk1ElderBtn');
-    eb.className='dk1Btn'+(S.elder?' on':'');
-    eb.innerHTML=S.elder?'👵 ELDER MODE: ON':'👵 ELDER MODE';
-    if(L>S.prevLevel&&(S.elder||comb)) beep(comb?6:3);
-    S.prevLevel=L;
-  }
-  function toggleElder(){
-    S.elder=!S.elder;
-    if(S.elder) beep(1);
-    render();
-  }
-
-  /* ---------- 3) beep (WebAudio — koi external file nahi) ---------- */
-  var AC=null;
-  function beep(n){
-    try{
-      AC=AC||new (window.AudioContext||window.webkitAudioContext)();
-      if(AC.state==='suspended') AC.resume();
-      for(var i=0;i<n;i++){
-        var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime+i*0.28;
-        o.type='square';o.frequency.value=880;o.connect(g);g.connect(AC.destination);
-        g.gain.setValueAtTime(0.0001,t);
-        g.gain.exponentialRampToValueAtTime(0.25,t+0.02);
-        g.gain.exponentialRampToValueAtTime(0.0001,t+0.22);
-        o.start(t);o.stop(t+0.24);
-      }
-    }catch(e){}
-  }
-
-  /* ---------- 4) TEST CALLER (twister challenge) ---------- */
-  var twi=Math.floor(Math.random()*TW.length);
-  function openModal(){
-    twi=Math.floor(Math.random()*TW.length);
-    $('dk1Tw').textContent='\u201C'+TW[twi]+'\u201D';
-    $('dk1Modal').style.display='flex';
-  }
-  function setChallenge(ok){
-    S.challenge=ok?'pass':'fail';
-    $('dk1Modal').style.display='none';
-    toast(ok?'✅ Human verified — live challenge PASS!':'❌ Challenge FAIL — caller bahut suspicious hai!');
-    render();
-  }
-
-  /* ---------- 5) ALERT FAMILY (WhatsApp click-to-chat) ---------- */
-  function alertText(){
-    var L=level();
-    var st=['SAB THEEK','DHYAAN DO','KHATRA — CALL KAAT DO'][Math.min(L,2)];
-    return '🛡️ *DHWANI KAVACH — FAMILY ALERT*\n'
-      +'Status: '+st+(L===3?' (COMBINED ATTACK!)':'')+'\n'
-      +'• AI voice check: '+S.tier+'\n'
-      +'• Scam radar: '+S.radar+'/100\n'
-      +'• Twister challenge: '+(S.challenge==='pass'?'PASS ✅':(S.challenge==='fail'?'FAIL ❌':'not done'))+'\n'
-      +'• Time: '+new Date().toLocaleString('en-IN')+'\n\n'
-      +'Please mujhe turant call karke check karo. Agar phone pe paisa ya OTP ki baat ho rahi hai — RUKO, report karo: 1930 / cybercrime.gov.in';
-  }
-  function openFamily(){
-    var saved=''; try{saved=localStorage.getItem('dk1Family')||'';}catch(e){}
-    $('dk1Num').value=saved;
-    $('dk1Family').style.display='flex';
-  }
-  function sendWA(){
-    var num=($('dk1Num').value||'').replace(/\D/g,'');
-    if(num.length<10){toast('⚠️ Poora number daalo (10 digits)');return;}
-    if(num.length===10) num='91'+num;
-    try{localStorage.setItem('dk1Family',num);}catch(e){}
-    $('dk1Family').style.display='none';
-    var url='https://wa.me/'+num+'?text='+encodeURIComponent(alertText());
-    var w=window.open(url,'_blank');
-    if(!w) window.location.href=url;
-  }
-
-  /* ---------- 6) toast ---------- */
-  var tT=null;
-  function toast(m){
-    var t=$('dk1Toast');t.textContent=m;t.style.opacity='1';
-    if(tT) clearTimeout(tT);
-    tT=setTimeout(function(){t.style.opacity='0';},2800);
-  }
-
-  /* ---------- 7) wiring ---------- */
-  $('dk1ElderBtn').onclick=toggleElder;
-  $('dk1TestBtn').onclick=openModal;
-  $('dk1FamBtn').onclick=openFamily;
-  $('dk1CloseM').onclick=function(){$('dk1Modal').style.display='none';};
-  $('dk1Roll').onclick=function(){twi=(twi+1+Math.floor(Math.random()*(TW.length-1)))%TW.length;$('dk1Tw').textContent='\u201C'+TW[twi]+'\u201D';};
-  $('dk1Pass').onclick=function(){setChallenge(true);};
-  $('dk1Fail').onclick=function(){setChallenge(false);};
-  $('dk1CloseF').onclick=function(){$('dk1Family').style.display='none';};
-  $('dk1Send').onclick=sendWA;
-  $('dk1Copy').onclick=function(){
-    var tx=alertText();
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(tx).then(function(){toast('📋 Message copied!');});
-    }else{
-      var ta=document.createElement('textarea');ta.value=tx;document.body.appendChild(ta);ta.select();
-      try{document.execCommand('copy');toast('📋 Message copied!');}catch(e){}
-      ta.remove();
-    }
-  };
-  render();
-})();
-</script>
-<!-- ════════ PACK 1 END ════════ -->
 <!-- ═══════════════════════════════════════════════════════════════
      ⚡ DHWANI KAVACH — PACK 1 RESCUE (self-building) · 2026-09-19
      Ye block UI KHUD banata hai — file mein kitne bhi purane/broken
@@ -4864,5 +4581,913 @@ document.addEventListener('click',function(e){
 })();
 </script>
 <!-- ═════════ PACK 2 END ═════════ -->
+<!-- ═══════════════════════════════════════════════════════════════
+     ⚡ DHWANI KAVACH — PACK 3: SAFE WORD + BANK CHECK + GLOBAL PATTERN
+     LIBRARY + CHAKSHU/1930 REPORT
+     ZERO Python edits — client-side only. Paste: last </body> ke UPAR,
+     Pack 2 block ke NEECHE.
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  'use strict';
+
+  function $(id){return document.getElementById(id);}
+  function nuke(sel){
+    var l=document.querySelectorAll(sel);
+    for(var i=0;i<l.length;i++){ if(l[i].parentNode) l[i].parentNode.removeChild(l[i]); }
+  }
+
+  var CSS=`
+.dk3Btn{cursor:pointer;border:0;border-radius:14px;padding:14px 18px;font-size:16px;font-weight:800;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35);display:flex;align-items:center;gap:10px;min-width:200px;justify-content:center;font-family:'Segoe UI',system-ui,Arial,sans-serif;transition:transform .12s}
+.dk3Btn:hover{transform:translateY(-2px)}
+#dk3SafeBtn{background:linear-gradient(135deg,#4338ca,#6366f1)}
+#dk3BankBtn{background:linear-gradient(135deg,#0369a1,#0284c7)}
+#dk3PatBtn{background:linear-gradient(135deg,#065f46,#059669)}
+#dk3RepBtn{background:linear-gradient(135deg,#be123c,#f43f5e)}
+#dk3OwnBar{position:fixed;right:14px;bottom:14px;z-index:99989;display:flex;flex-direction:column;gap:10px}
+.dk3Overlay{position:fixed;inset:0;z-index:99996;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;font-family:'Segoe UI',system-ui,Arial,sans-serif}
+.dk3Card{position:relative;background:#fff;border-radius:20px;max-width:620px;width:92%;max-height:88vh;overflow:auto;padding:24px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.dk3Card.dk3Narrow{max-width:480px}
+.dk3X{position:absolute;top:12px;right:12px;background:#f1f5f9;border:0;color:#334155;font-size:13px;font-weight:800;border-radius:8px;padding:6px 10px;cursor:pointer;font-family:inherit}
+.dk3Title{font-size:22px;font-weight:900;color:#0f172a;padding-right:40px}
+.dk3Sub{color:#475569;font-size:13.5px;margin-top:8px;line-height:1.5}
+.dk3Input{width:100%;box-sizing:border-box;padding:13px 14px;border-radius:12px;border:2px solid #d1d5db;font-size:18px;font-weight:800;text-align:center;margin-top:12px;font-family:inherit}
+.dk3RowB{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}
+.dk3B{cursor:pointer;border:0;border-radius:12px;padding:12px 22px;font-size:15px;font-weight:800;color:#fff;font-family:inherit}
+.dk3Green{background:#059669}.dk3Red{background:#dc2626}.dk3Grey{background:#475569}.dk3Indigo{background:#4338ca}.dk3Teal{background:#0e7490}
+.dk3Link{background:none;border:0;color:#64748b;cursor:pointer;font-weight:700;margin-top:12px;font-size:13px;font-family:inherit}
+.dk3V{border-radius:14px;padding:14px;margin-top:14px;font-weight:800;font-size:15px;line-height:1.45;text-align:left}
+.dk3Vg{background:#ecfdf5;border:2px solid #6ee7b7;color:#065f46}
+.dk3Va{background:#fffbeb;border:2px solid #fde68a;color:#92400e}
+.dk3Vr{background:#fef2f2;border:2px solid #fecaca;color:#b91c1c}
+.dk3Vn{background:#f8fafc;border:2px solid #e2e8f0;color:#334155}
+.dk3Small{font-size:12.5px;color:#64748b;margin-top:6px;line-height:1.45}
+.dk3StatBar{background:#0f172a;color:#e2e8f0;border-radius:12px;padding:10px 14px;font-size:12.5px;font-weight:700;line-height:1.5;margin-top:12px}
+.dk3Dna{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.dk3DnaI{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:10px}
+.dk3DnaT{font-size:13.5px;font-weight:900;color:#0f172a}
+.dk3DnaD{font-size:12px;color:#475569;margin-top:3px;line-height:1.4}
+.dk3Sec{font-size:15px;font-weight:900;color:#0f172a;margin-top:16px}
+.dk3Pat{padding:9px 2px;border-bottom:1px solid #f1f5f9}
+.dk3PatTop{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.dk3Name{font-size:13.5px;font-weight:800;color:#0f172a}
+.dk3Tag{font-size:10.5px;font-weight:900;padding:2px 8px;border-radius:999px;background:#eef2ff;color:#4338ca;white-space:nowrap}
+.dk3Tell{font-size:11.5px;color:#64748b;margin-top:2px;font-style:italic}
+.dk3Stat{font-size:10.5px;font-weight:900;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.dk3Sg{background:#ecfdf5;color:#065f46}.dk3Sa{background:#fffbeb;color:#92400e}.dk3Sb{background:#eff6ff;color:#1d4ed8}.dk3Sk{background:#fdf4ff;color:#a21caf}
+#dk3Toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:99997;background:#111827;color:#fff;padding:12px 22px;border-radius:12px;font-weight:800;font-size:15px;box-shadow:0 12px 30px rgba(0,0,0,.4);opacity:0;transition:opacity .3s;pointer-events:none;max-width:90vw;text-align:center;font-family:'Segoe UI',system-ui,Arial,sans-serif}
+  `;
+
+  function safeModalHTML(){
+    return '<div class="dk3Card dk3Narrow">'
+      +'<button class="dk3X" data-dk3close="dk3Safe">&#10005;</button>'
+      +'<div class="dk3Title">&#128274; Family Safe Word</div>'
+      +'<div class="dk3Sub">Research-backed #1 defense: <b>AI can clone the voice, but it cannot know the word.</b> Ek secret word family ke saath set karo — suspicious call pe poochho.</div>'
+      +'<div id="dk3SafeBody"></div>'
+      +'</div>';
+  }
+  function bankModalHTML(){
+    return '<div class="dk3Card dk3Narrow">'
+      +'<button class="dk3X" data-dk3close="dk3Bank">&#10005;</button>'
+      +'<div class="dk3Title">&#128222; 1600-Series Bank Check</div>'
+      +'<div class="dk3Sub">TRAI mandate (Jan&ndash;Mar 2026): banks / insurance / pension ke <b>service calls 1600-series</b> se hi aate hain. Caller ka number daalo:</div>'
+      +'<input id="dk3BankNum" class="dk3Input" placeholder="Caller ka number (e.g. 9876543210)" inputmode="numeric" />'
+      +'<label style="display:flex;gap:8px;align-items:center;margin-top:12px;font-size:14px;font-weight:700;color:#334155;justify-content:center"><input type="checkbox" id="dk3BankClaim" style="width:18px;height:18px" /> Caller ne BANK / insurance / pension / govt bola</label>'
+      +'<div class="dk3RowB"><button id="dk3BankGo" class="dk3B dk3Indigo">CHECK KARO</button></div>'
+      +'<div id="dk3BankRes"></div>'
+      +'</div>';
+  }
+  function patModalHTML(){
+    return '<div class="dk3Card">'
+      +'<button class="dk3X" data-dk3close="dk3Pat">&#10005;</button>'
+      +'<div class="dk3Title">&#127757; Global Scam Pattern Library</div>'
+      +'<div class="dk3Sub"><b>v3.2 &middot; Sep 2026</b> &mdash; India se US/UK tak, 18 tracked patterns. Library versioned hai, monthly revise hoti hai (antivirus signatures jaise). Community reports (Chakshu-style) se naye presets suggest honge &mdash; human-reviewed, no auto-push.</div>'
+      +'<div class="dk3StatBar">&#127756; US: $3.5B imposter-scam losses 2025 (FTC) &bull; India: &#8377;22,495 Cr cyber fraud (I4C) &bull; Arup HK: $25.6M deepfake CFO &bull; Caller-ID spoof costs $0.003/call &mdash; isliye voice analysis zaroori hai</div>'
+      +'<div class="dk3Sec">&#129516; FRAUD DNA &mdash; har scam call mein &ge;2 yeh signs (duniya mein kahin bhi)</div>'
+      +'<div id="dk3DnaGrid"></div>'
+      +'<div class="dk3Sec">&#128269; PATTERN TRACKER &mdash; 18 patterns</div>'
+      +'<div id="dk3PatList"></div>'
+      +'<div class="dk3Small" style="margin-top:10px">Sources: FTC Consumer Sentinel &middot; I4C/MHA advisories &middot; TRAI/DoT &middot; Action Fraud/NCSC UK &middot; Pindrop. Status: <b style="color:#065f46">&#9679; Radar-tracked</b> = engine pakadta hai &middot; <b style="color:#92400e">&#9679; queued</b> = v3.2 pattern pack &middot; <b style="color:#1d4ed8">&#9679; global pack v3.3</b> = roadmap. Language-agnostic CNN + fraud-DNA logic = patterns keyword lists se aage scale karte hain.</div>'
+      +'</div>';
+  }
+  function repModalHTML(){
+    return '<div class="dk3Card dk3Narrow">'
+      +'<button class="dk3X" data-dk3close="dk3Rep">&#10005;</button>'
+      +'<div class="dk3Title">&#128680; Report Scam</div>'
+      +'<div class="dk3Sub">Sahi channel pe report = fast action. Pehle ye decide karo:</div>'
+      +'<div class="dk3V dk3Vr" style="margin-top:12px"><b>&#128176; Paisa chala gaya? (money lost)</b><div class="dk3Small" style="color:#7f1d1d">First hour mein report = money freeze ka best chance. Helpline + portal dono:</div>'
+      +'<div class="dk3RowB"><a href="tel:1930" class="dk3B dk3Red" style="text-decoration:none">&#128222; Call 1930</a><a href="https://cybercrime.gov.in" target="_blank" rel="noopener" class="dk3B dk3Red" style="text-decoration:none">&#127760; cybercrime.gov.in</a></div></div>'
+      +'<div class="dk3V dk3Va"><b>&#128064; Sirf suspicious call/SMS? (no loss)</b><div class="dk3Small" style="color:#78350f">DoT Chakshu pe report karo (30-day window, OTP-verified) &mdash; DoT unke analytics mein number use karega:</div>'
+      +'<div class="dk3RowB"><a href="https://sancharsaathi.gov.in" target="_blank" rel="noopener" class="dk3B dk3Teal" style="text-decoration:none">&#127760; Chakshu (Sanchar Saathi)</a></div></div>'
+      +'<div class="dk3V dk3Vn"><b>&#128179; Aapke naam pe kitne SIM?</b><div class="dk3Small">TAFCOP check (Sanchar Saathi) &mdash; unknown SIMs report karo:</div>'
+      +'<div class="dk3RowB"><a href="https://sancharsaathi.gov.in" target="_blank" rel="noopener" class="dk3B dk3Grey" style="text-decoration:none">TAFCOP check</a></div></div>'
+      +'</div>';
+  }
+
+  var DNA=[
+    ['&#9201; URGENCY','&ldquo;Turant karo / abhi karo&rdquo; &mdash; panic = control'],
+    ['&#128081; AUTHORITY','Police, bank, judge, boss, &ldquo;CFO&rdquo;'],
+    ['&#129323; ISOLATION','&ldquo;Kisi ko mat batao&rdquo;'],
+    ['&#128176; IRREVERSIBLE','Gift card, crypto, wire, courier cash']
+  ];
+
+  var PATTERNS=[
+    ['Digital arrest (fake police/CBI/ED)','IN','&ldquo;digital arrest&rdquo;, &ldquo;case registered&rdquo;, video-call judge','a'],
+    ['SIM deactivation / KYC expiry','IN','&ldquo;SIM band&rdquo;, &ldquo;KYC expire&rdquo;, &ldquo;Aadhaar link&rdquo;','g'],
+    ['OTP / bank verification code','IN','&ldquo;OTP do&rdquo;, &ldquo;verification code&rdquo;','g'],
+    ['Relative in emergency (accident/bail/kidnap)','IN','&ldquo;hospital&rdquo;, &ldquo;bail money&rdquo;, &ldquo;accident&rdquo;','g'],
+    ['Bank account block / EMI default','IN','&ldquo;account block&rdquo;, &ldquo;EMI pending&rdquo;','g'],
+    ['Insurance policy lapse / renewal','IN','&ldquo;policy band&rdquo;, &ldquo;renewal fee&rdquo;','a'],
+    ['Courier-drug parcel (FedEx/customs)','IN','&ldquo;parcel mein drugs&rdquo;, &ldquo;customs case&rdquo;','a'],
+    ['Income-tax refund / PAN-Aadhaar','IN','&ldquo;refund&rdquo;, &ldquo;PAN suspend&rdquo;','a'],
+    ['Grandparent scam (broken phone excuse)','US','Unknown number + &ldquo;phone toot gaya&rdquo; + money','g'],
+    ['IRS / SSA / Medicare impersonation','US','&ldquo;back taxes&rdquo;, &ldquo;SSN suspended&rdquo;','b'],
+    ['Bank &ldquo;fraud team&rdquo; safe-account transfer','US/UK','&ldquo;Move money to a safe account&rdquo;','b'],
+    ['Courier cash/card/gold collection','UK','Bank NEVER sends couriers &mdash; ever','b'],
+    ['HMRC / DWP impersonation','UK','&ldquo;tax fraud&rdquo;, &ldquo;benefits stopped&rdquo;','b'],
+    ['CEO wire fraud / deepfake CFO (Arup $25.6M)','B2B','Urgent transfer + cloned exec voice','k'],
+    ['Tech-support refund scam','US','Remote access + &ldquo;refund by mistake&rdquo;','b'],
+    ['Wangiri one-ring callback','GLOBAL','Missed call &rarr; premium-rate callback','b'],
+    ['Romance &rarr; investment (&ldquo;pig butchering&rdquo;)','GLOBAL','Voice trust-building &rarr; &ldquo;investment tips&rdquo;','b'],
+    ['Fake recruiter / job offer','UK','Deposit-to-unlock earnings','b']
+  ];
+
+  var SW_KEY='dk3SafeWord';
+
+  function toast(m){
+    var t=$('dk3Toast'); if(!t) return;
+    t.textContent=m; t.style.opacity='1';
+    setTimeout(function(){ t.style.opacity='0'; },2600);
+  }
+
+  /* ---------- SAFE WORD ---------- */
+  function swRender(){
+    var body=$('dk3SafeBody'); if(!body) return;
+    var sw='';
+    try{ sw=localStorage.getItem(SW_KEY)||''; }catch(e){}
+    if(!sw){
+      body.innerHTML='<input id="dk3Sw1" class="dk3Input" placeholder="Naya safe word (min 3 letters)" />'
+        +'<input id="dk3Sw2" class="dk3Input" placeholder="Dobara likho (confirm)" />'
+        +'<div class="dk3RowB"><button id="dk3SwSave" class="dk3B dk3Green">SAVE SAFE WORD</button></div>'
+        +'<div class="dk3Small" style="text-align:center">Tip: simple rakho &mdash; &ldquo;chai&rdquo;, &ldquo;mumbai&rdquo;, &ldquo;1984&rdquo;. Bolna easy hona chahiye.</div>';
+      $('dk3SwSave').onclick=function(){
+        var a=($('dk3Sw1').value||'').trim(), b=($('dk3Sw2').value||'').trim();
+        if(a.length<3){ toast('Kam se kam 3 letters ka word daalo'); return; }
+        if(a!==b){ toast('Dono words match nahi kar rahe'); return; }
+        try{ localStorage.setItem(SW_KEY,a); }catch(e){}
+        toast('Safe Word set! Ab family ko batao (share button)');
+        swRender();
+      };
+    }else{
+      body.innerHTML='<div class="dk3V dk3Vn" style="text-align:center">Set word: <b id="dk3SwVal">&bull;&bull;&bull;&bull;&bull;</b> <button id="dk3SwEye" class="dk3Link" style="margin:0 0 0 8px;font-size:12px">dikhao</button></div>'
+        +'<div class="dk3Sub" style="text-align:center">Suspicious call aaye to caller se poochho: <b>&ldquo;Family safe word bolo&rdquo;</b> &mdash; phir niche button dabao:</div>'
+        +'<div class="dk3RowB">'
+        +'<button id="dk3SwPass" class="dk3B dk3Green">&#9989; bola &mdash; MATCH</button>'
+        +'<button id="dk3SwFail" class="dk3B dk3Red">&#10060; nahi bola / galat</button>'
+        +'</div>'
+        +'<div id="dk3SwRes"></div>'
+        +'<div class="dk3RowB">'
+        +'<button id="dk3SwShare" class="dk3B dk3Teal">&#128242; Family ko bhejo</button>'
+        +'<button id="dk3SwChange" class="dk3B dk3Grey">Change</button>'
+        +'</div>';
+      var eye=$('dk3SwEye'), shown=false;
+      eye.onclick=function(){
+        shown=!shown;
+        $('dk3SwVal').textContent=shown?sw:'\u2022\u2022\u2022\u2022\u2022';
+        eye.textContent=shown?'chhupao':'dikhao';
+      };
+      $('dk3SwPass').onclick=function(){
+        $('dk3SwRes').innerHTML='<div class="dk3V dk3Vg">&#9989; SAFE WORD MATCH &mdash; genuine family member. (Phir bhi transaction ki baat ho to callback karo known number pe.)</div>';
+        toast('Safe word verified');
+      };
+      $('dk3SwFail').onclick=function(){
+        $('dk3SwRes').innerHTML='<div class="dk3V dk3Vr">&#10060; SAFE WORD FAIL &mdash; ye caller FAKE hai. AI ne awaaz clone ki, word nahi jaanta. <b>Call KAAT do, family ko alert karo, 1930/Chakshu pe report karo.</b></div>';
+        toast('SAFE WORD FAIL &mdash; fake caller!');
+      };
+      $('dk3SwShare').onclick=function(){
+        var tx='\uD83D\uDD10 *DHWANI KAVACH — FAMILY SAFE WORD*\n\nHamara family safe word set ho gaya hai. Yaad rakho:\n\nRule: Phone pe koi bhi paisa/OTP/emergency maange — PEHLE poochho "Safe word bolo".\n\n\u2022 Word bola = genuine (phir bhi paisa ki baat ho to known number pe callback karo)\n\u2022 Nahi bola / galat = AWAAZ CLONE — call KAAT do, report karo: 1930 / sancharsaathi.gov.in';
+        window.open('https://wa.me/?text='+encodeURIComponent(tx),'_blank');
+      };
+      $('dk3SwChange').onclick=function(){
+        try{ localStorage.removeItem(SW_KEY); }catch(e){}
+        swRender();
+      };
+    }
+  }
+
+  /* ---------- BANK CHECK ---------- */
+  function bankGo(){
+    var el=$('dk3BankNum'), res=$('dk3BankRes'); if(!el||!res) return;
+    var claims=$('dk3BankClaim').checked;
+    var n=(el.value||'').replace(/\D/g,'');
+    if(n.indexOf('91')===0&&n.length>10) n=n.slice(2);
+    if(n.indexOf('0')===0) n=n.slice(1);
+    var h='';
+    if(!n){ h='<div class="dk3V dk3Va">&#9888;&#65039; Number daalo pehle.</div>'; }
+    else if(n.indexOf('160')===0){
+      h='<div class="dk3V dk3Vg">&#9989; <b>1600-SERIES (TRAI BFSI range)</b> &mdash; banks/insurance/pension ke official service calls yahin se aate hain (TRAI mandate Jan&ndash;Mar 2026). Genuine number range.<div class="dk3Small" style="color:#065f46">Phir bhi: voice-clone check + safe word ON rakho &mdash; number genuine ho sakta hai, caller us number ka nahi.</div></div>';
+    }else if(n.indexOf('140')===0){
+      h='<div class="dk3V dk3Va">&#9888;&#65039; <b>140-SERIES = telemarketing.</b> Sales/promo calls yahan se aate hain &mdash; <b>bank transactional call KABHI nahi.</div>';
+    }else if(claims){
+      h='<div class="dk3V dk3Vr">&#128680; <b>HIGH RISK: BANK IMPERSONATION PATTERN.</b> Bank/insurance/pension ke service calls <b>normal mobile/landline se AA HI NAHI SAKTE</b> (TRAI 1600-series mandate, Jan&ndash;Mar 2026). Ye classic impersonation sign hai.<div class="dk3Small" style="color:#7f1d1d">Action: paisa/OTP MAT do. Known number pe callback karo. Chakshu/1930 pe report.</div></div>';
+    }else{
+      h='<div class="dk3V dk3Vn">&#8505;&#65039; Normal number (1600-series nahi). Abhi koi bank-claim nahi &mdash; agar caller baad mein &ldquo;bank&rdquo; bole to <b>turant red flag</b> (TRAI rule). Voice-clone check chalu rakho.</div>';
+    }
+    res.innerHTML=h;
+  }
+
+  /* ---------- PATTERNS ---------- */
+  function patRender(){
+    var g=$('dk3DnaGrid'), pl=$('dk3PatList'); if(!g||!pl) return;
+    var h='';
+    for(var i=0;i<DNA.length;i++){
+      h+='<div class="dk3DnaI"><div class="dk3DnaT">'+DNA[i][0]+'</div><div class="dk3DnaD">'+DNA[i][1]+'</div></div>';
+    }
+    g.innerHTML=h;
+    var STAT={g:['&#9679; Radar-tracked','dk3Sg'],a:['&#9679; queued v3.2','dk3Sa'],b:['&#9679; global v3.3','dk3Sb'],k:['&#128273; Safe Word covers','dk3Sk']};
+    var r='';
+    for(var j=0;j<PATTERNS.length;j++){
+      var p=PATTERNS[j], s=STAT[p[3]];
+      r+='<div class="dk3Pat"><div class="dk3PatTop"><span class="dk3Name">'+p[0]+'</span><span style="display:flex;gap:6px;align-items:baseline"><span class="dk3Tag">'+p[1]+'</span><span class="dk3Stat '+s[1]+'">'+s[0]+'</span></span></div><div class="dk3Tell">'+p[2]+'</div></div>';
+    }
+    pl.innerHTML=r;
+  }
+
+  /* ---------- INIT ---------- */
+  function init(){
+    nuke('#dk3Style,#dk3Root,#dk3OwnBar,#dk3Safe,#dk3Bank,#dk3Pat,#dk3Rep,#dk3Toast');
+    var st=document.createElement('style'); st.id='dk3Style'; st.textContent=CSS;
+    (document.head||document.getElementsByTagName('head')[0]).appendChild(st);
+
+    var root=document.createElement('div'); root.id='dk3Root';
+    var bar=document.getElementById('dk1Bar');
+    var holder;
+    if(bar){ holder=bar; } else { holder=document.createElement('div'); holder.id='dk3OwnBar'; document.body.appendChild(holder); }
+
+    var b1=document.createElement('button'); b1.id='dk3SafeBtn'; b1.className='dk3Btn'; b1.innerHTML='&#128274; SAFE WORD';
+    var b2=document.createElement('button'); b2.id='dk3BankBtn'; b2.className='dk3Btn'; b2.innerHTML='&#128222; BANK CHECK';
+    var b3=document.createElement('button'); b3.id='dk3PatBtn'; b3.className='dk3Btn'; b3.innerHTML='&#127757; PATTERNS';
+    var b4=document.createElement('button'); b4.id='dk3RepBtn'; b4.className='dk3Btn'; b4.innerHTML='&#128680; REPORT';
+    holder.appendChild(b1); holder.appendChild(b2); holder.appendChild(b3); holder.appendChild(b4);
+
+    function makeModal(id,html){
+      var ov=document.createElement('div'); ov.id=id; ov.className='dk3Overlay'; ov.style.display='none';
+      ov.innerHTML=html; root.appendChild(ov);
+      ov.addEventListener('click',function(e){ if(e.target===ov) ov.style.display='none'; });
+      var x=ov.querySelector('[data-dk3close]');
+      if(x) x.onclick=function(){ ov.style.display='none'; };
+      return ov;
+    }
+    var mSafe=makeModal('dk3Safe',safeModalHTML());
+    var mBank=makeModal('dk3Bank',bankModalHTML());
+    var mPat=makeModal('dk3Pat',patModalHTML());
+    var mRep=makeModal('dk3Rep',repModalHTML());
+
+    document.body.appendChild(root);
+    var tst=document.createElement('div'); tst.id='dk3Toast'; document.body.appendChild(tst);
+
+    b1.onclick=function(){ mSafe.style.display='flex'; swRender(); };
+    b2.onclick=function(){ mBank.style.display='flex'; $('dk3BankRes').innerHTML=''; };
+    b3.onclick=function(){ mPat.style.display='flex'; patRender(); };
+    b4.onclick=function(){ mRep.style.display='flex'; };
+
+    function wireBank(){
+      var el=$('dk3BankNum'); if(!el) return;
+      el.onkeydown=function(ev){ if(ev.key==='Enter') bankGo(); };
+      var gb=$('dk3BankGo'); if(gb) gb.onclick=bankGo;
+    }
+    b2.addEventListener('click',function(){ setTimeout(wireBank,0); });
+  }
+
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',init); }
+  else{ init(); }
+})();
+</script>
+<!-- ═════════ PACK 3 END ═════════ -->
+<!-- ═══════════════════════════════════════════════════════════════
+     ⚡ DHWANI KAVACH — PACK 4: THE DEMO PACK
+     • 🎬 CALL SIMULATOR • 🧬 DNA TEST • 🥊 SCAM DRILL
+     ZERO Python edits. Paste: last </body> ke UPAR, Pack 3 ke NEECHE.
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  'use strict';
+
+  function $(id){return document.getElementById(id);}
+  function nuke(sel){
+    var l=document.querySelectorAll(sel);
+    for(var i=0;i<l.length;i++){ if(l[i].parentNode) l[i].parentNode.removeChild(l[i]); }
+  }
+
+  var CSS=`
+.dk4Btn{cursor:pointer;border:0;border-radius:14px;padding:14px 18px;font-size:16px;font-weight:800;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35);display:flex;align-items:center;gap:10px;min-width:200px;justify-content:center;font-family:'Segoe UI',system-ui,Arial,sans-serif;transition:transform .12s}
+.dk4Btn:hover{transform:translateY(-2px)}
+#dk4SimBtn{background:linear-gradient(135deg,#6d28d9,#a855f7)}
+#dk4DrillBtn{background:linear-gradient(135deg,#c2410c,#f97316)}
+#dk4OwnBar{position:fixed;right:14px;bottom:14px;z-index:99989;display:flex;flex-direction:column;gap:10px}
+.dk4Overlay{position:fixed;inset:0;z-index:99996;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;font-family:'Segoe UI',system-ui,Arial,sans-serif}
+.dk4Card{position:relative;background:#fff;border-radius:20px;max-width:640px;width:92%;max-height:88vh;overflow:auto;padding:24px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.dk4X{position:absolute;top:12px;right:12px;background:#f1f5f9;border:0;color:#334155;font-size:13px;font-weight:800;border-radius:8px;padding:6px 10px;cursor:pointer;font-family:inherit}
+.dk4Title{font-size:22px;font-weight:900;color:#0f172a;padding-right:40px}
+.dk4Sub{color:#475569;font-size:13.5px;margin-top:8px;line-height:1.5}
+.dk4Disc{background:#fdf4ff;border:1px solid #f5d0fe;color:#a21caf;font-size:12.5px;font-weight:800;padding:8px 12px;border-radius:12px;margin-top:10px}
+.dk4Sec{font-size:15px;font-weight:900;color:#0f172a;margin-top:18px}
+.dk4Scen{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:12px 14px;margin-top:8px}
+.dk4ScenTop{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.dk4ScenT{font-size:14.5px;font-weight:900;color:#0f172a}
+.dk4ScenD{font-size:12px;color:#64748b;margin-top:2px}
+.dk4Play{cursor:pointer;border:0;border-radius:10px;padding:8px 16px;font-size:13px;font-weight:900;color:#fff;background:#7c3aed;font-family:inherit;white-space:nowrap}
+.dk4StopB{background:#dc2626}
+.dk4Phone{display:none;background:#0f172a;color:#fff;border-radius:16px;padding:16px;margin-top:12px}
+.dk4PNum{font-size:17px;font-weight:900}
+.dk4PStat{font-size:12.5px;color:#a5b4fc;margin-top:3px;font-weight:700}
+.dk4Chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.dk4Chip{font-size:11.5px;font-weight:900;padding:4px 10px;border-radius:999px;background:#1e293b;color:#94a3b8;border:1px solid #334155}
+.dk4Chip.on{background:#7f1d1d;color:#fecaca;border-color:#ef4444;animation:dk4pop .4s}
+@keyframes dk4pop{0%{transform:scale(.6)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+.dk4Script{font-size:13px;color:#e2e8f0;margin-top:10px;line-height:1.55;font-style:italic}
+.dk4Verdict{display:none;border-radius:14px;padding:14px;margin-top:12px;font-size:14px;font-weight:800;line-height:1.5}
+.dk4Vr{background:#fef2f2;border:2px solid #fecaca;color:#b91c1c}
+.dk4RowB{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+.dk4B{cursor:pointer;border:0;border-radius:12px;padding:11px 20px;font-size:14.5px;font-weight:800;color:#fff;font-family:inherit}
+.dk4Grey{background:#475569}.dk4Teal{background:#0e7490}.dk4Green{background:#059669}.dk4Purple{background:#7c3aed}
+.dk4Ta{width:100%;box-sizing:border-box;padding:12px;border-radius:12px;border:2px solid #d1d5db;font-size:14px;font-family:inherit;margin-top:8px;min-height:80px}
+.dk4Q{background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin-top:12px}
+.dk4QNum{font-size:11.5px;font-weight:900;color:#7c3aed;letter-spacing:.5px}
+.dk4QT{font-size:16px;font-weight:900;color:#0f172a;margin-top:6px;line-height:1.45}
+.dk4Opt{display:block;width:100%;box-sizing:border-box;text-align:left;cursor:pointer;border:2px solid #e2e8f0;background:#fff;color:#0f172a;border-radius:12px;padding:12px 14px;font-size:14px;font-weight:700;margin-top:8px;font-family:inherit;transition:border-color .15s}
+.dk4Opt:hover{border-color:#a78bfa}
+.dk4Ok{border-color:#10b981!important;background:#ecfdf5!important}
+.dk4No{border-color:#ef4444!important;background:#fef2f2!important}
+.dk4Exp{display:none;background:#eef2ff;border:1px solid #c7d2fe;border-radius:12px;padding:12px;font-size:13px;color:#3730a3;font-weight:700;margin-top:10px;line-height:1.5}
+.dk4Score{font-size:44px;font-weight:900;color:#0f172a;text-align:center;margin-top:8px}
+.dk4Grade{text-align:center;font-size:17px;font-weight:900;margin-top:4px}
+.dk4Bar{height:8px;background:#e2e8f0;border-radius:99px;margin-top:10px;overflow:hidden}
+.dk4Fill{height:100%;background:linear-gradient(90deg,#7c3aed,#a855f7);border-radius:99px;transition:width .3s}
+.dk4Hint{font-size:12px;color:#64748b;margin-top:8px;line-height:1.45}
+  `;
+
+  /* ---------- DATA ---------- */
+  var DNA_KEYS={
+    urg:['turant','abhi','jaldi','urgently','immediately','urgent','minute mein','time kam'],
+    auth:['bank','sbi','hdfc','icici','axis','police','cbi','trai','judge','officer','customs','kyc','aadhaar','pan card','income tax','fraud team','bank manager','department','verification'],
+    iso:['kisi ko mat batao','mat batana','batana mat','secret','tell no one','akele','chup'],
+    irr:['otp','pin','cvv','password','transfer','bhejo','bhej do','gift card','bitcoin','crypto','upi','qr','safe account','account number','rupaye','rupees','paise','hazaar']
+  };
+  var DNA_META=[
+    ['urg','&#9201; URGENCY','turant / abhi / jaldi'],
+    ['auth','&#128081; AUTHORITY','bank, police, CBI, TRAI'],
+    ['iso','&#129323; ISOLATION','"kisi ko mat batao"'],
+    ['irr','&#128176; IRREVERSIBLE','OTP, transfer, crypto']
+  ];
+  var SCEN=[
+    {t:'&#127974; BANK &ldquo;FRAUD TEAM&rdquo;',d:'Safe-account transfer + OTP',num:'+91 98XX XXX 4471',
+     s:'Namaste, main aapke bank ke fraud team se bol raha hoon. Aapke account se ek suspicious transaction hui hai. Aapko turant apna paisa ek safe account mein transfer karna hoga. Iske liye jo OTP aaya hai, wo mujhe bata dijiye. Jaldi kijiye, warna account band ho jayega.'},
+    {t:'&#128680; &ldquo;DIGITAL ARREST&rdquo;',d:'Fake CBI officer + video-call judge',num:'+91 70XX XXX 8834',
+     s:'Main CBI officer bol raha hoon. Aapke naam par money laundering ka case register ho gaya hai. Judge aapse video call par baat karenge. Verification ke liye aapko turant paise transfer karne honge. Aur kisi ko mat batana ki maine aapko call kiya hai.'},
+    {t:'&#128102; GRANDSON EMERGENCY',d:'Cloned family voice + hospital drama',num:'Unknown +91 85XX XXX 2190',
+     s:'Dadi, main ro raha hoon. Mera phone toot gaya, isliye naye number se bol raha hoon. Mujhe hospital mein admit kiya gaya hai. Operation ke liye turant pachaas hazaar rupaye bhej do. Please jaldi karo, aur kisi ko batana mat.'},
+    {t:'&#128241; SIM DEACTIVATION',d:'Fake TRAI call + KYC-OTP',num:'+91 63XX XXX 9902',
+     s:'Namaste, main TRAI department se bol raha hoon. Aapka SIM card aaj raat band ho jayega. KYC update ke liye jo OTP aaya hai, wo turant bata dijiye. Jaldi kijiye, time bahut kam hai.'}
+  ];
+  var DRILL=[
+    {q:'Phone pe &ldquo;beta&rdquo; ro raha hai &mdash; &ldquo;hospital mein hoon, turant &#8377;30,000 bhejo&rdquo; &mdash; number unknown hai. Kya karoge?',
+     o:['Turant paisa bhej do &mdash; emergency hai','Pehle SAFE WORD poochho, phir uske known number pe callback karo','Thoda paisa bhej do, baad mein check kar lenge'],c:1,
+     e:'Awaaz clone ho sakti hai &mdash; 3 second audio kaafi hai. Safe Word wo cheez hai jo AI nahi jaan sakta. Unknown number + urgency = classic grandparent pattern (US mein avg loss $11,000).'},
+    {q:'&ldquo;Bank fraud team&rdquo; call pe OTP maang raha hai:',
+     o:['OTP de do &mdash; bank hi to hai','OTP ka aadha number bata do','OTP mat do &mdash; bank KABHI phone pe OTP nahi maangta; official number pe callback karo'],c:2,
+     e:'Bank impersonators = #1 imposter scam (US $1B losses, FTC 2025). OTP dena = account ka darwaza khula dena.'},
+    {q:'&ldquo;CBI officer&rdquo; video-call pe DIGITAL ARREST bol raha hai:',
+     o:['Call KAAT do &mdash; &ldquo;digital arrest&rdquo; exist hi nahi karta (I4C advisory); 1930 pe report karo','Video call pe verification paisa transfer karo','Judge se baat karo, samjhao'],c:0,
+     e:'I4C advisory: &ldquo;Police, CBI, customs, ED, judges video call pe arrest NAHI karte.&rdquo; Digital arrest naam ki koi cheez nahi hai &mdash; phrase khud giveaway hai. India mein ~&#8377;2,000 Cr/year ka loss is pattern se.'},
+    {q:'&ldquo;TRAI se bol raha hoon, aapka SIM band ho jayega, KYC ke liye OTP batao&rdquo;:',
+     o:['OTP bata do, SIM band nahi hona chahiye','OTP mat do &mdash; telecom OTP phone pe nahi maangta; ye classic SIM-scam hai','Do OTP mein se ek bata do'],c:1,
+     e:'SIM-deactivation scam = hamare radar v3.1 ka sabse pehla preset. Real telecom offices OTP phone pe nahi maangte.'},
+    {q:'Caller ki awaaz thodi ajeeb / fake lag rahi hai:',
+     o:['Awaaz theek lag rahi hai, baat karo','TWISTER CHALLENGE do (&ldquo;kacha papad paka papad&rdquo;) ya Safe Word poochho','Paisa de kar awaaz test karo'],c:1,
+     e:'Research (PITCH, 2025): challenge-response se detection 84.5% tak pahunchta hai. AI proxy twister pe atak jaata hai &mdash; STT&rarr;LLM&rarr;TTS loop 1.2&ndash;1.8s leta hai (hamara latency trap).'}
+  ];
+
+  function chipsHTML(){
+    var h='<div class="dk4Chips">';
+    for(var i=0;i<DNA_META.length;i++){
+      h+='<span class="dk4Chip" id="dk4c_'+DNA_META[i][0]+'">'+DNA_META[i][1]+'</span>';
+    }
+    return h+'</div>';
+  }
+  function dnaHits(txt){
+    var s=(txt||'').toLowerCase(), hits={};
+    for(var k in DNA_KEYS){
+      for(var i=0;i<DNA_KEYS[k].length;i++){
+        if(s.indexOf(DNA_KEYS[k][i])>-1){ hits[k]=DNA_KEYS[k][i]; break; }
+      }
+    }
+    return hits;
+  }
+  function countHits(h){ var c=0; for(var k in h) c++; return c; }
+  function lightChips(h){
+    for(var i=0;i<DNA_META.length;i++){
+      var el=$('dk4c_'+DNA_META[i][0]);
+      if(el){ if(h[DNA_META[i][0]]) el.className='dk4Chip on'; else el.className='dk4Chip'; }
+    }
+  }
+
+  function simModalHTML(){
+    var h='<div class="dk4Card">'
+      +'<button class="dk4X" data-dk4x="dk4Sim">&#10005;</button>'
+      +'<div class="dk4Title">&#128246; Call Simulator</div>'
+      +'<div class="dk4Sub">Ek click mein poora scam call &mdash; browser TTS bolta hai, Fraud-DNA live detect hota hai, verdict + sahi actions milte hain. Judges aur video demo ke liye.</div>'
+      +'<div class="dk4Disc">&#9888;&#65039; SIMULATION &mdash; ye real call nahi hai. Training/demo ke liye scripted scenario.</div>'
+      +'<div class="dk4Sec">&#127916; SCENARIO CHUNO</div>';
+    for(var i=0;i<SCEN.length;i++){
+      h+='<div class="dk4Scen"><div class="dk4ScenTop"><div><div class="dk4ScenT">'+SCEN[i].t+'</div><div class="dk4ScenD">'+SCEN[i].d+' &bull; '+SCEN[i].num+'</div></div>'
+        +'<button class="dk4Play" data-dk4play="'+i+'">&#9654; PLAY</button></div></div>';
+    }
+    h+='<div class="dk4Phone" id="dk4Phone">'
+      +'<div class="dk4PNum" id="dk4PNum"></div>'
+      +'<div class="dk4PStat" id="dk4PStat">connecting&hellip;</div>'
+      +chipsHTML()
+      +'<div class="dk4Script" id="dk4Script"></div>'
+      +'<div class="dk4RowB"><button class="dk4B" style="background:#dc2626" id="dk4StopBtn">&#9209; STOP</button></div>'
+      +'</div>'
+      +'<div class="dk4Verdict dk4Vr" id="dk4Verdict"></div>'
+      +'<div class="dk4RowB" id="dk4AfterPlay" style="display:none">'
+      +'<button class="dk4B dk4Teal" id="dk4CopyScript">&#128203; Script copy karo (real radar test)</button>'
+      +'</div>'
+      +'<div class="dk4Sec">&#129516; DNA TEST &mdash; apna transcript paste karo</div>'
+      +'<textarea id="dk4DnaTxt" class="dk4Ta" placeholder="Call ki baat-cheet type/paste karo (Hinglish/English)&hellip;"></textarea>'
+      +'<div class="dk4RowB"><button class="dk4B dk4Purple" id="dk4DnaGo">&#129516; ANALYZE</button></div>'
+      +'<div id="dk4DnaRes"></div>'
+      +'</div>';
+    return h;
+  }
+
+  function drillModalHTML(){
+    return '<div class="dk4Card">'
+      +'<button class="dk4X" data-dk4x="dk4Drill">&#10005;</button>'
+      +'<div class="dk4Title">&#129354; Scam Drill</div>'
+      +'<div class="dk4Sub">Elders ke liye practice mode &mdash; 5 real-world scenarios, har ek mein sahi defence chuno. Scam se bachne ka sabse strong tareeka: rehearsed insaan.</div>'
+      +'<div class="dk4Bar"><div class="dk4Fill" id="dk4Fill" style="width:0%"></div></div>'
+      +'<div id="dk4QBox"></div>'
+      +'</div>';
+  }
+
+  /* ---------- SIMULATOR ---------- */
+  var simTimers=[], curScen=-1;
+  function clearTimers(){ for(var i=0;i<simTimers.length;i++){ clearTimeout(simTimers[i]); clearInterval(simTimers[i]); } simTimers=[]; }
+  function stopTTS(){ try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch(e){} }
+  function pickVoice(){
+    try{
+      var vs=speechSynthesis.getVoices()||[];
+      for(var i=0;i<vs.length;i++){ if(vs[i].lang&&vs[i].lang.indexOf('hi')===0) return vs[i]; }
+      for(var j=0;j<vs.length;j++){ if(vs[j].lang&&vs[j].lang.indexOf('en-IN')===0) return vs[j]; }
+    }catch(e){}
+    return null;
+  }
+  function playScen(i){
+    clearTimers(); stopTTS();
+    curScen=i;
+    var ph=$('dk4Phone'), vd=$('dk4Verdict'), ap=$('dk4AfterPlay');
+    if(!ph) return;
+    ph.style.display='block'; vd.style.display='none'; ap.style.display='none';
+    $('dk4PNum').textContent='\uD83D\uDCDE '+SCEN[i].num;
+    $('dk4Script').textContent='\u201C'+SCEN[i].s+'\u201D';
+    $('dk4PStat').textContent='line connected\u2026 caller bol raha hai';
+    lightChips({});
+    var hits=dnaHits(SCEN[i].s);
+    var keys=[]; for(var k in hits) keys.push(k);
+    for(var m=0;m<keys.length;m++){
+      (function(kk,delay){
+        simTimers.push(setTimeout(function(){ var el=$('dk4c_'+kk); if(el) el.className='dk4Chip on'; },delay));
+      })(keys[m], 900+m*800);
+    }
+    var ended=false;
+    function finish(){
+      if(ended) return; ended=true;
+      $('dk4PStat').textContent='call ended';
+      var n=countHits(hits);
+      vd.innerHTML='&#128680; <b>SCAM PATTERN DETECTED &mdash; '+n+'/4 Fraud-DNA signs</b><br>'
+        +(hits.urg?'&bull; URGENCY &bull; ':'')+(hits.auth?'&bull; AUTHORITY &bull; ':'')+(hits.iso?'&bull; ISOLATION &bull; ':'')+(hits.irr?'&bull; IRREVERSIBLE &bull; ':'')
+        +'<br><b>Dhwani Kavach ke actions:</b> (1) Safe Word poochho (2) Twister challenge (3) Call KAATO (4) Family alert (5) 1930/Chakshu report';
+      vd.style.display='block'; ap.style.display='flex';
+    }
+    if(window.speechSynthesis){
+      try{
+        var u=new SpeechSynthesisUtterance(SCEN[i].s);
+        var v=pickVoice(); if(v) u.voice=v;
+        u.lang='hi-IN'; u.rate=0.95; u.pitch=1.0;
+        u.onend=finish; u.onerror=finish;
+        speechSynthesis.speak(u);
+        simTimers.push(setTimeout(finish, Math.max(12000, SCEN[i].s.split(' ').length*550)+6000));
+      }catch(e){ finish(); }
+    }else{
+      $('dk4PStat').textContent='browser TTS nahi &mdash; script neeche padho';
+      simTimers.push(setTimeout(finish, 4000));
+    }
+  }
+  function stopScen(){
+    clearTimers(); stopTTS();
+    var ph=$('dk4Phone'); if(ph) ph.style.display='none';
+  }
+  function dnaAnalyze(){
+    var t=$('dk4DnaTxt').value||'';
+    var res=$('dk4DnaRes'); if(!res) return;
+    if(t.trim().length<10){ res.innerHTML='<div class="dk4Verdict dk4Vr" style="display:block">&#9888;&#65039; Thoda lamba text daalo (min 10 characters).</div>'; return; }
+    var h=dnaHits(t), n=countHits(h);
+    var lvl=(n>=3)?'&#128680; HIGH-RISK PATTERN ('+n+'/4 signs)':(n===2)?'&#9888;&#65039; SUSPICIOUS ('+n+'/4 signs)':'&#128994; Koi strong pattern nahi ('+n+'/4 signs)';
+    var found=[];
+    for(var i=0;i<DNA_META.length;i++){ var k=DNA_META[i][0]; if(h[k]) found.push(DNA_META[i][1]+' <i>(&ldquo;'+h[k]+'&rdquo;)</i>'); }
+    res.innerHTML='<div class="dk4Verdict dk4Vr" style="display:block">'+lvl
+      +(found.length?'<br>Detected: '+found.join(' &bull; '):'')
+      +'<div class="dk4Hint" style="color:#64748b">DNA test = pattern indicator (educational). Final verdict hamesha AI voice engine + radar + challenge milakar banta hai &mdash; combination law.</div></div>';
+  }
+
+  /* ---------- DRILL ---------- */
+  var dQ=0, dScore=0;
+  function drillStart(){
+    dQ=0; dScore=0; drillRender();
+  }
+  function drillRender(){
+    var box=$('dk4QBox'); if(!box) return;
+    $('dk4Fill').style.width=(dQ/DRILL.length*100)+'%';
+    if(dQ>=DRILL.length){ return drillEnd(); }
+    var q=DRILL[dQ];
+    var h='<div class="dk4Q"><div class="dk4QNum">SAWAL '+(dQ+1)+' / '+DRILL.length+'</div><div class="dk4QT">'+q.q+'</div>';
+    for(var i=0;i<q.o.length;i++){
+      h+='<button class="dk4Opt" data-dk4opt="'+i+'">'+String.fromCharCode(65+i)+'. '+q.o[i]+'</button>';
+    }
+    h+='<div class="dk4Exp" id="dk4Exp"></div><div class="dk4RowB" id="dk4NextRow" style="display:none"><button class="dk4B dk4Purple" id="dk4NextBtn">'+(dQ===DRILL.length-1?'RESULT DEKHO &#127942;':'AGLA SAWAAL &#10145;')+'</button></div></div>';
+    box.innerHTML=h;
+    var opts=box.querySelectorAll('[data-dk4opt]');
+    for(var j=0;j<opts.length;j++){
+      opts[j].onclick=function(){
+        var idx=parseInt(this.getAttribute('data-dk4opt'),10);
+        var ok=(idx===q.c);
+        if(ok) dScore++;
+        for(var m=0;m<opts.length;m++){
+          opts[m].disabled=true;
+          if(m===q.c) opts[m].classList.add('dk4Ok');
+          else if(m===idx) opts[m].classList.add('dk4No');
+        }
+        $('dk4Exp').innerHTML=(ok?'&#9989; <b>SAHI!</b> ':'&#10060; <b>GALAT</b> &mdash; sahi jawab: '+String.fromCharCode(65+q.c)+'. ')+q.e;
+        $('dk4Exp').style.display='block';
+        $('dk4NextRow').style.display='flex';
+      };
+    }
+    $('dk4NextBtn').onclick=function(){ dQ++; drillRender(); };
+  }
+  function drillEnd(){
+    $('dk4Fill').style.width='100%';
+    var best=0; try{ best=parseInt(localStorage.getItem('dk4DrillBest')||'0',10); }catch(e){}
+    if(dScore>best){ try{ localStorage.setItem('dk4DrillBest',String(dScore)); }catch(e){} best=dScore; }
+    var grade=(dScore===5)?['&#128737;&#65039; SCAM-PROOF HO!','#065f46']:(dScore>=4)?['&#128994; Bahut badhiya!','#065f46']:(dScore>=3)?['&#9888;&#65039; Thoda aur practice karo','#92400e']:['&#128308; Family ke saath practice karo','#b91c1c'];
+    var h='<div style="text-align:center">'
+      +'<div class="dk4Score">'+dScore+'/5</div>'
+      +'<div class="dk4Grade" style="color:'+grade[1]+'">'+grade[0]+'</div>'
+      +'<div class="dk4Hint">Best score: '+best+'/5 &bull; Family ko bhejo &mdash; sab practice karein</div>'
+      +'<div class="dk4RowB"><button class="dk4B dk4Teal" id="dk4ShareDrill">&#128242; Share score</button><button class="dk4B dk4Grey" id="dk4Retry">&#128260; Dubara khelo</button></div>'
+      +'</div>';
+    $('dk4QBox').innerHTML=h;
+    $('dk4ShareDrill').onclick=function(){
+      var tx='\uD83E\uDD4A *DHWANI KAVACH — SCAM DRILL*\n\nMera score: '+dScore+'/5 '+grade[0]+'\n\nTum bhi khelo — 5 real scam scenarios, apni family ke saath practice karo. Yaad rakho:\n\u2022 Safe Word poochho\n\u2022 OTP KABHI mat do\n\u2022 "Digital arrest" = 100% scam\n\u2022 Twister challenge do\n\u2022 Report: 1930 / sancharsaathi.gov.in';
+      window.open('https://wa.me/?text='+encodeURIComponent(tx),'_blank');
+    };
+    $('dk4Retry').onclick=drillStart;
+  }
+
+  /* ---------- INIT ---------- */
+  function init(){
+    nuke('#dk4Style,#dk4Root,#dk4OwnBar,#dk4Sim,#dk4Drill');
+    var st=document.createElement('style'); st.id='dk4Style'; st.textContent=CSS;
+    (document.head||document.getElementsByTagName('head')[0]).appendChild(st);
+
+    var root=document.createElement('div'); root.id='dk4Root';
+    var bar=document.getElementById('dk1Bar');
+    var holder;
+    if(bar){ holder=bar; } else { holder=document.createElement('div'); holder.id='dk4OwnBar'; document.body.appendChild(holder); }
+
+    var b1=document.createElement('button'); b1.id='dk4SimBtn'; b1.className='dk4Btn'; b1.innerHTML='&#127916; SIMULATE CALL';
+    var b2=document.createElement('button'); b2.id='dk4DrillBtn'; b2.className='dk4Btn'; b2.innerHTML='&#129354; SCAM DRILL';
+    holder.appendChild(b1); holder.appendChild(b2);
+
+    function makeModal(id,html){
+      var ov=document.createElement('div'); ov.id=id; ov.className='dk4Overlay'; ov.style.display='none';
+      ov.innerHTML=html; root.appendChild(ov);
+      ov.addEventListener('click',function(e){ if(e.target===ov){ ov.style.display='none'; stopScen(); } });
+      var x=ov.querySelector('[data-dk4x]');
+      if(x) x.onclick=function(){ ov.style.display='none'; stopScen(); };
+      return ov;
+    }
+    var mSim=makeModal('dk4Sim',simModalHTML());
+    var mDrill=makeModal('dk4Drill',drillModalHTML());
+    document.body.appendChild(root);
+
+    b1.onclick=function(){ mSim.style.display='flex'; };
+    b2.onclick=function(){ mDrill.style.display='flex'; drillStart(); };
+
+    mSim.addEventListener('click',function(e){
+      var t=e.target;
+      if(t&&t.getAttribute&&t.getAttribute('data-dk4play')){
+        var i=parseInt(t.getAttribute('data-dk4play'),10);
+        if(!isNaN(i)) playScen(i);
+      }
+    });
+    var sb=$('dk4StopBtn'); if(sb) sb.onclick=stopScen;
+    var cs=$('dk4CopyScript');
+    if(cs) cs.onclick=function(){
+      var tx=SCEN[curScen]?SCEN[curScen].s:'';
+      if(!tx) return;
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(tx); }
+      else{ var ta=document.createElement('textarea'); ta.value=tx; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');}catch(e){} ta.remove(); }
+      cs.innerHTML='&#9989; Copied! Radar box mein paste karo';
+      setTimeout(function(){ cs.innerHTML='&#128203; Script copy karo (real radar test)'; },2000);
+    };
+    var dg=$('dk4DnaGo'); if(dg) dg.onclick=dnaAnalyze;
+    var dt=$('dk4DnaTxt');
+    if(dt) dt.onkeydown=function(ev){ if(ev.key==='Enter'&&ev.ctrlKey) dnaAnalyze(); };
+  }
+
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',init); }
+  else{ init(); }
+})();
+</script>
+<!-- ═════════ PACK 4 END ═════════ -->
+<!-- ═══════════════════════════════════════════════════════════════
+     ⚡ DHWANI KAVACH — PACK 5: LANGUAGE ENGINE (11 languages)
+     Dropdown = poora defense UI translate. Packs 1–4 UNTOUCHED.
+     Paste: last </body> ke UPAR, Pack 4 ke NEECHE.
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  'use strict';
+  function $(id){return document.getElementById(id);}
+  function nuke(sel){var l=document.querySelectorAll(sel);for(var i=0;i<l.length;i++){if(l[i].parentNode)l[i].parentNode.removeChild(l[i]);}}
+
+  var CSS='#dk5LangWrap{display:flex;align-items:center;gap:8px;background:#fff;border-radius:14px;padding:8px 12px;box-shadow:0 8px 24px rgba(0,0,0,.35);font-family:\'Segoe UI\',system-ui,Arial,sans-serif}'
+    +'#dk5LangWrap label{font-size:16px}'
+    +'#dk5Lang{cursor:pointer;border:2px solid #d1d5db;border-radius:10px;padding:7px 8px;font-size:14px;font-weight:800;font-family:inherit;background:#fff;color:#0f172a;max-width:150px}'
+    +'#dk5OwnBar{position:fixed;right:14px;bottom:14px;z-index:99989;display:flex;flex-direction:column;gap:10px}';
+
+  var LANGS=['hg','en','hi','bn','ta','te','mr','gu','kn','ml','pa'];
+  var NAMES={hg:'Hinglish (Default)',en:'English',hi:'हिन्दी',bn:'বাংলা',ta:'தமிழ்',te:'తెలుగు',mr:'मराठी',gu:'ગુજરાતી',kn:'ಕನ್ನಡ',ml:'മലയാളം',pa:'ਪੰਜਾਬੀ'};
+  var IDX={}; for(var q0=0;q0<LANGS.length;q0++) IDX[LANGS[q0]]=q0;
+
+  /* order: hg, en, hi, bn, ta, te, mr, gu, kn, ml, pa */
+  var K={
+  btn_elder:['ELDER MODE','ELDER MODE','बड़ों का मोड','প্রবীণ মোড','முதியோர் முறை','పెద్దల మోడ్','वयस्क मोड','વડીલ મોડ','ಹಿರಿಯರ ಮೋಡ್','മുതിർന്നവരുടെ മോഡ്','ਬਜ਼ੁਰਗ ਮੋਡ'],
+  btn_elder_on:['ELDER MODE: ON','ELDER MODE: ON','बड़ों का मोड: चालू','প্রবীণ মোড: চালু','முதியோர் முறை: ஆன்','పెద్దల మోడ్: ఆన్','वयस्क मोड: चालू','વડીલ મોડ: ચાલુ','ಹಿರಿಯರ ಮೋಡ್: ಆನ್','മുതിർന്നവരുടെ മോഡ്: ഓൺ','ਬਜ਼ੁਰਗ ਮੋਡ: ਚਾਲੂ'],
+  btn_test:['TEST CALLER','TEST CALLER','कॉलर टेस्ट','কলার পরীক্ষা','காலர் சோதனை','కాలర్ టెస్ట్','कॉलर टेस्ट','કૉલર ટેસ્ટ','ಕಾಲರ್ ಟೆಸ್ಟ್','കാളർ ടെസ്റ്റ്','ਕਾਲਰ ਟੈਸਟ'],
+  btn_fam:['ALERT FAMILY','ALERT FAMILY','परिवार को बताओ','পরিবারকে সতর্ক করুন','குடும்பத்திற்கு தெரிவிக்கவும்','కుటుంబానికి తెలియజేయండి','परिवाराला कळवा','કુટુંબને જણાવો','ಕುಟುಂಬಕ್ಕೆ ತಿಳಿಸಿ','കുടുംബത്തെ അറിയിക്കുക','ਪਰਿਵਾਰ ਨੂੰ ਦੱਸੋ'],
+  btn_vitals:['FORENSIC VITALS','FORENSIC VITALS','फोरेंसिक जाँच','ফরেনসিক পরীক্ষা','ஃபாரென்சிக் சோதனை','ఫోరెన్సిక్ పరీక్ష','फॉरेन्सिक तपासणी','ફોરેન્સિક તપાસ','ಫೊರೆನ್ಸಿಕ್ ಪರಿಶೀಲನೆ','ഫോറൻസിക് പരിശോധന','ਫੋਰੈਂਸਿਕ ਜਾਂਚ'],
+  btn_safe:['SAFE WORD','SAFE WORD','सुरक्षित शब्द','নিরাপদ শব্দ','பாதுகாப்பு சொல்','రక్షణ పదం','सुरक्षित शब्द','સુરક્ષિત શબ્દ','ಸುರಕ್ಷಿತ ಪದ','സുരക്ഷിത വാക്ക്','ਸੁਰੱਖਿਅਤ ਸ਼ਬਦ'],
+  btn_bank:['BANK CHECK','BANK CHECK','बैंक जाँच','ব্যাঙ্ক যাচাই','வங்கி சரிபார்ப்பு','బ్యాంక్ తనిఖీ','बँक तपासणी','બેંક ચેક','ಬ್ಯಾಂಕ್ ಪರಿಶೀಲನೆ','ബാങ്ക് പരിശോധന','ਬੈਂਕ ਜਾਂਚ'],
+  btn_pat:['PATTERNS','PATTERNS','पैटर्न','প্যাটার্ন','மோசடி மாதிரிகள்','నమూనాలు','पॅटर्न','પેટર્ન','ಮಾದರಿಗಳು','പാറ്റേണുകൾ','ਪੈਟਰਨ'],
+  btn_rep:['REPORT','REPORT','रिपोर्ट करें','রিপোর্ট করুন','புகார் அளிக்கவும்','నివేదించండి','तक्रार करा','અહેવાલ કરો','ವರದಿ ಮಾಡಿ','റിപ്പോർട്ട് ചെയ്യുക','ਰਿਪੋਰਟ ਕਰੋ'],
+  btn_sim:['SIMULATE CALL','SIMULATE CALL','नकली कॉल','নকল কল','போலி அழைப்பு','నకిలీ కాల్','खोटा कॉल','નકલી કૉલ','ನಕಲಿ ಕಾಲ್','നക്കൽ കാൾ','ਨਕਲੀ ਕਾਲ'],
+  btn_drill:['SCAM DRILL','SCAM DRILL','स्कैम अभ्यास','স্ক্যাম অনুশীলন','மோசடி பயிற்சி','మోసం శిక్షణ','घोटाळा सराव','સ્કેમ પ્રેક્ટિસ','ಹಗರಣ ಅಭ್ಯಾಸ','തട്ടിപ്പ് പരിശീലനം','ਘੋਟਾਲਾ ਅਭਿਆਸ'],
+  m0:['SAB THEEK HAI','ALL OK','सब ठीक है','সব ঠিক আছে','எல்லாம் சரி','అంతా బాగుంది','सगळं ठीक आहे','બધું બરાબર છે','ಎಲ್ಲಾ ಸರಿ','എല്ലാം ശരി','ਸਭ ਠੀਕ ਹੈ'],
+  m1:['DHYAAN DO!','STAY ALERT!','ध्यान दो!','সতর্ক হও!','கவனமாக இரு!','జాగ్రత్త!','लक्ष द्या!','ધ્યાન આપો!','ಗಮನವಿಡಿ!','ശ്രദ്ധിക്കൂ!','ਧਿਆਨ ਦਿਓ!'],
+  m2:['KHATRA! CALL KAAT DO!','DANGER! HANG UP NOW!','खतरा! कॉल काट दो!','বিপদ! কল কেটে দাও!','ஆபத்து! அழைப்பை வெட்டு!','ప్రమాదం! కాల్ కట్ చేయండి!','धोका! कॉल कापून टाका!','ભય! કૉલ કાપી નાખો!','ಅಪಾಯ! ಕಾಲ್ ಕತ್ತರಿಸಿ!','അപകടം! കാൾ വെട്ടിക്കളയൂ!','ਖਤਰਾ! ਕਾਲ ਕੱਟ ਦਿਓ!'],
+  m3:['COMBINED ATTACK — CALL KAAT DO!','COMBINED ATTACK — HANG UP NOW!','संयुक्त हमला — कॉल काट दो!','সম্মিলিত আক্রমণ — কল কেটে দাও!','இணைந்த தாக்குதல் — அழைப்பை வெட்டு!','సంయుక్త దాడి — కాల్ కట్ చేయండి!','संयुक्त हल्ला — कॉल कापा!','સંયુક્ત હુમલો — કૉલ કાપો!','ಸಂಯುಕ್ತ ದಾಳಿ — ಕಾಲ್ ಕತ್ತರಿಸಿ!','സംയുക്ത ആക്രമണം — കാൾ വെട്ടൂ!','ਸਾਂਝਾ ਹਮਲਾ — ਕਾਲ ਕੱਟ ਦਿਓ!'],
+  comb_t:['COMBINED ATTACK DETECTED','COMBINED ATTACK DETECTED','संयुक्त हमला पकड़ा गया!','সম্মিলিত আক্রমণ ধরা পড়েছে!','இணைந்த தாக்குதல் கண்டறியப்பட்டது!','సంయుక్త దాడి గుర్తించబడింది!','संयुक्त हल्ला आढळला!','સંયુક્ત હુમલો પકડાયો!','ಸಂಯುಕ್ತ ದಾಳಿ ಪತ್ತೆಯಾಗಿದೆ!','സംയുക്ത ആക്രമണം കണ്ടെത്തി!','ਸਾਂਝਾ ਹਮਲਾ ਪਕੜਿਆ ਗਿਆ!'],
+  s0:['Aaram se baat karo — abhi koi khatra nahi dikha.','Talk freely — no threat right now.','आराम से बात करो — अभी कोई खतरा नहीं।','নিশ্চিন্তে কথা বলুন — এখন কোনো বিপদ নেই।','நிம்மதியாக பேசுங்கள் — இப்போது ஆபத்து இல்லை.','ముక్తంగా మాట్లాడండి — ప్రస్తుతం ప్రమాదం లేదు.','निश्चिंत बोला — सध्या धोका नाही.','નિશ્ચિંત વાત કરો — હાલ કોઈ ભય નથી.','ನಿಶ್ಚಿಂತೆಯಾಗಿ ಮಾತನಾಡಿ — ಈಗ ಅಪಾಯವಿಲ್ಲ.','ശാന്തമായി സംസാരിക്കൂ — ഇപ്പോൾ ഭീഷണിയില്ല.','ਸਹਿਜ ਰਹੋ — ਹੁਣ ਕੋਈ ਖਤਰਾ ਨਹੀਂ।'],
+  s1:['Dhyaan se suno — paisa, OTP, ya bank details MAT do.','Listen carefully — do NOT share money, OTP or bank details.','ध्यान से सुनो — पैसे, OTP या बैंक जानकारी मत दो।','মন দিয়ে শুনুন — টাকা, OTP বা ব্যাঙ্কের তথ্য দেবেন না।','கவனமாகக் கேளுங்கள் — பணம், OTP, வங்கி விவரங்களைக் கொடுக்க வேண்டாம்.','జాగ్రత్తగా వినండి — డబ్బు, OTP, బ్యాంక్ వివరాలు ఇవ్వకండి.','लक्ष ठेवा — पैसे, OTP किंवा बँक माहिती देऊ नका.','ધ્યાનથી સાંભળો — પૈસા, OTP કે બેંક માહિતી ન આપો.','ಗಮನವಿಟ್ಟು ಕೇಳಿ — ಹಣ, OTP, ಬ್ಯಾಂಕ್ ಮಾಹಿತಿ ನೀಡಬೇಡಿ.','ശ്രദ്ധിച്ചു കേൾക്കൂ — പണം, OTP, ബാങ്ക് വിവരങ്ങൾ നൽകരുത്.','ਧਿਆਨ ਨਾਲ ਸੁਣੋ — ਪੈਸੇ, OTP ਜਾਂ ਬੈਂਕ ਜਾਣਕਾਰੀ ਨਾ ਦਿਓ।'],
+  s2:['Ye awaaz AI ki lag rahi hai — pehchaan confirm nahi hui!','This voice sounds like AI — identity not confirmed!','यह आवाज़ AI की लग रही है — पहचान पक्की नहीं हुई!','এই গলা AI-এর মতো শোনাচ্ছে — পরিচয় নিশ্চিত হয়নি!','இந்தக் குரல் AI போல் இருக்கிறது — அடையாளம் உறுதியாகவில்லை!','ఈ స్వరం AI లా ఉంది — గుర్తింపు నిర్ధారించబడలేదు!','हा आवाज AI सारखा वाटतो — ओळख निश्चित नाही!','આ અવાજ AI જેવો લાગે છે — ઓળખ ખાતરી નથી!','ಈ ಧ್ವನಿ AI ಂತೆ ಇದೆ — ಗುರುತು ಖಚಿತವಾಗಿಲ್ಲ!','ഈ ശബ്ദം AI പോലെ തോന്നുന്നു — തിരിച്ചറിയൽ ഉറപ്പില്ല!','ਇਹ ਆਵਾਜ਼ AI ਵਾਂਗ ਲੱਗਦੀ ਹੈ — ਪਛਾਣ ਪੱਕੀ ਨਹੀਂ ਹੋਈ!'],
+  s3:['AI voice + scam script DONO ek saath — ye 100% scam hai!','AI voice + scam script TOGETHER — this is 100% a scam!','AI आवाज़ + स्कैम स्क्रिप्ट साथ — यह 100% स्कैम है!','AI গলা + স্ক্যাম স্ক্রিপ্ট একসাথে — এটি 100% স্ক্যাম!','AI குரல் + மோசடி ஸ்கிரிப்ட் இணைந்து — இது 100% மோசடி!','AI స్వరం + మోసపూరిత స్క్రిప్ట్ కలిసి — ఇది 100% మోసం!','AI आवाज + स्कॅम स्क्रिप्ट एकत्र — हे 100% घोटाळा आहे!','AI અવાજ + સ્કેમ સ્ક્રિપ્ટ સાથે — આ 100% સ્કેમ છે!','AI ಧ್ವನಿ + ಹಗರಣ ಸ್ಕ್ರಿಪ್ಟ್ ಒಟ್ಟಿಗೆ — ಇದು 100% ಹಗರಣ!','AI ശബ്ദം + തട്ടിപ്പ് സ്ക്രിപ്റ്റ് ഒന്നിച്ച് — ഇത് 100% തട്ടിപ്പാണ്!','AI ਆਵਾਜ਼ + ਘੋਟਾਲਾ ਸਕ੍ਰਿਪਟ ਇਕੱਠੇ — ਇਹ 100% ਘੋਟਾਲਾ ਹੈ!'],
+  c_ai:['AI voice','AI voice','AI आवाज़','AI কণ্ঠ','AI குரல்','AI స్వరం','AI आवाज','AI અવાજ','AI ಧ್ವನಿ','AI ശബ്ദം','AI ਆਵਾਜ਼'],
+  c_radar:['Scam radar','Scam radar','स्कैम राडार','স্ক্যাম রাডার','மோசடி ரேடார்','మోసం రాడార్','स्कॅम रडार','સ્કેમ રડાર','ಹಗರಣ ರೇಡಾರ್','തട്ടിപ്പ് റഡാർ','ਘੋਟਾਲਾ ਰਾਡਾਰ'],
+  c_ch:['Challenge','Challenge','चैलेंज','চ্যালেঞ্জ','சவால்','ఛాలెంజ్','आव्हान','ચેલેન્જ','ಸವಾಲು','ചാലൻജ്','ਚੈਲੰਜ'],
+  t_test:['TEST CALLER — live insaan test','TEST CALLER — live human check','कॉलर टेस्ट — लाइव जाँच','কলার টেস্ট — লাইভ পরীক্ষা','காலர் டெஸ்ட் — நேரடி சோதனை','కాలర్ టెస్ట్ — లైవ్ పరీక్ష','कॉलर टेस्ट — लाइव्ह तपासणी','કૉલર ટેસ્ટ — લાઇવ તપાસ','ಕಾಲರ್ ಟೆಸ್ಟ್ — ಲೈವ್ ಪರಿಶೀಲನೆ','കാളർ ടെസ്റ്റ് — ലൈവ് പരിശോധന','ਕਾਲਰ ਟੈਸਟ — ਲਾਈਵ ਜਾਂਚ'],
+  t_safe:['Family Safe Word','Family Safe Word','पारिवारिक सुरक्षित शब्द','পারিবারিক নিরাপদ শব্দ','குடும்ப பாதுகாப்பு சொல்','కుటుంబ రక్షణ పదం','कौटुंबिक सुरक्षित शब्द','કૌટુંબિક સુરક્ષિત શબ્દ','ಕುಟುಂಬದ ಸುರಕ್ಷಿತ ಪದ','കുടുംബ സുരക്ഷിത വാക്ക്','ਪਰਿਵਾਰਕ ਸੁਰੱਖਿਅਤ ਸ਼ਬਦ'],
+  t_bank:['1600-Series Bank Check','1600-Series Bank Check','1600-सीरीज़ बैंक जाँच','1600-সিরিজ ব্যাঙ্ক যাচাই','1600-தொடர் வங்கி சரிபார்ப்பு','1600-సిరీస్ బ్యాంక్ తనిఖీ','1600-सिरीज बँक तपासणी','1600-સિરીઝ બેંક ચેક','1600-ಸರಣಿ ಬ್ಯಾಂಕ್ ಪರಿಶೀಲನೆ','1600-സീരീസ് ബാങ്ക് പരിശോധന','1600-ਸੀਰੀਜ਼ ਬੈਂਕ ਜਾਂਚ'],
+  t_pat:['Global Scam Pattern Library','Global Scam Pattern Library','वैश्विक स्कैम पैटर्न लाइब्रेरी','বিশ্বব্যাপী স্ক্যাম প্যাটার্ন লাইব্রেরি','உலக மோசடி மாதிரி நூலகம்','ప్రపంచ మోసం నమూనా లైబ్రరీ','जागतिक स्कॅम पॅटर्न लायब्ररी','વૈશ્વિક સ્કેમ પેટર્ન લાઇબ્રેરી','ಜಾಗತಿಕ ಹಗರಣ ಮಾದರಿ ಗ್ರಂಥಾಲಯ','ആഗോള തട്ടിപ്പ് പാറ്റേൺ ലൈബ്രറി','ਵਿਸ਼ਵ ਘੋਟਾਲਾ ਪੈਟਰਨ ਲਾਇਬ੍ਰੇਰੀ'],
+  t_rep:['Report Scam','Report Scam','स्कैम रिपोर्ट करें','স্ক্যাম রিপোর্ট করুন','மோசடியைப் புகார் அளிக்கவும்','మోసాన్ని నివేదించండి','घोटाळ्याची तक्रार करा','સ્કેમની અહેવાલ કરો','ಹಗರಣ ವರದಿ ಮಾಡಿ','തട്ടിപ്പ് റിപ്പോർട്ട് ചെയ്യുക','ਘੋਟਾਲੇ ਦੀ ਰਿਪੋਰਟ ਕਰੋ'],
+  t_sim:['Call Simulator','Call Simulator','कॉल सिम्युलेटर','কল সিমুলেটর','கால் சிமுலேட்டர்','కాల్ సిమ్యులేటర్','कॉल सिम्युलेटर','કૉલ સિમ્યુલેટર','ಕಾಲ್ ಸಿಮ್ಯುಲೇಟರ್','കാൾ സിമുലേറ്റർ','ਕਾਲ ਸਿਮੂਲੇਟਰ'],
+  b_pass:['PASS — bol gaya','PASS — spoke it','पास — बोल दिया','পাস — বলে ফেলেছে','பாஸ் — சொன்னார்','పాస్ — చెప్పారు','पास — म्हणाले','પાસ — બોલ્યા','ಪಾಸ್ — ಹೇಳಿದರು','പാസ് — പറഞ്ഞു','ਪਾਸ — ਬੋਲ ਦਿੱਤਾ'],
+  b_fail:['FAIL — atak gaya','FAIL — stumbled','फेल — अटक गया','ফেল — আটকে গেছে','ஃபெயில் — தடுமாறினார்','ఫెయిల్ — ఇబ్బంది పడ్డారు','फेल — अडकले','ફેલ — અટકી ગયા','ಫೇಲ್ — ತಡಬಡಿಸಿದರು','ഫെയിൽ — തട്ടി','ਫੇਲ — ਅਟਕ ਗਿਆ'],
+  b_roll:['Naya twister','New twister','नया ट्विस्टर','নতুন টুইস্টার','புதிய ட்விஸ்டர்','కొత్త ట్విస్టర్','नवा ट्विस्टर','નવો ટ્વિસ્ટર','ಹೊಸ ಟ್ವಿಸ್ಟರ್','പുതിയ ട്വിസ്റ്റർ','ਨਵਾਂ ਟਵਿਸਟਰ'],
+  b_close:['band karo','Close','बंद करो','বন্ধ করুন','மூடு','మూసివేయండి','बंद करा','બંધ કરો','ಮುಚ್ಚಿ','അടയ്ക്കുക','ਬੰਦ ਕਰੋ'],
+  b_send:['WhatsApp bhejo','Send on WhatsApp','WhatsApp भेजो','WhatsApp পাঠান','WhatsApp அனுப்பு','WhatsApp పంపండి','WhatsApp पाठवा','WhatsApp મોકલો','WhatsApp ಕಳುಹಿಸಿ','WhatsApp അയക്കൂ','WhatsApp ਭੇਜੋ'],
+  b_copy:['Copy message','Copy message','संदेश कॉपी करो','বার্তা কপি করুন','செய்தியை நகலெடு','సందేశం కాపీ చేయండి','संदेश कॉपी करा','સંદેશ કૉપિ કરો','ಸಂದೇಶ ಕಾಪಿ ಮಾಡಿ','സന്ദേശം കോപ്പി ചെയ്യുക','ਸੁਨੇਹਾ ਕਾਪੀ ਕਰੋ'],
+  b_check:['CHECK KARO','CHECK','जाँच करो','যাচাই করুন','சரிபார்க்கவும்','తనిఖీ చేయండి','तपासा','ચેક કરો','ಪರಿಶೀಲಿಸಿ','പരിശോധിക്കുക','ਜਾਂਚ ਕਰੋ'],
+  b_match:['bola — MATCH','Said it — MATCH','बोला — मैच','বলেছে — মিলেছে','சொன்னார் — பொருந்தும்','చెప్పారు — సరిపోయింది','म्हणाले — जुळले','બોલ્યા — મેચ','ಹೇಳಿದರು — ಹೊಂದಿಕೆ','പറഞ്ഞു — പൊരുത്തം','ਬੋਲਿਆ — ਮੈਚ'],
+  b_matchno:['nahi bola / galat','Didn\u2019t say / wrong','नहीं बोला / गलत','বলেনি / ভুল','சொல்லவில்லை / தவறு','చెప్పలేదు / తప్పు','म्हणाले नाही / चुकीचे','ના બોલ્યા / ખોટું','ಹೇಳಲಿಲ್ಲ / ತಪ್ಪು','പറയുന്നില്ല / തെറ്റ്','ਨਹੀਂ ਬੋਲਿਆ / ਗ਼ਲਤ'],
+  toast_pass:['\u2705 Human verified — live challenge PASS!','\u2705 Human verified — challenge PASS!','\u2705 इंसान पक्का — चैलेंज पास!','\u2705 মানুষ নিশ্চিত — চ্যালেঞ্জ পাস!','\u2705 மனிதர் உறுதி — சவால் பாஸ்!','\u2705 మానవుడు నిర్ధారించబడ్డాడు — ఛాలెంజ్ పాస్!','\u2705 माणूस निश्चित — आव्हान पास!','\u2705 માણસ ખાતરી — ચેલેન્જ પાસ!','\u2705 ಮಾನವ ದೃಢೀಕೃತ — ಸವಾಲು ಪಾಸ್!','\u2705 മനുഷ്യൻ ഉറപ്പ് — ചാലൻജ് പാസ്!','\u2705 ਇਨਸਾਨ ਪੱਕਾ — ਚੈਲੰਜ ਪਾਸ!'],
+  toast_fail:['\u274C Challenge FAIL — caller bahut suspicious hai!','\u274C Challenge FAIL — caller is highly suspicious!','\u274C चैलेंज फेल — कॉलर बहुत संदिग्ध है!','\u274C চ্যালেঞ্জ ফেল — কলার অত্যন্ত সন্দেহজনক!','\u274C சவால் ஃபெயில் — காலர் மிகவும் சந்தேகத்திற்குரியவர்!','\u274C ఛాలెంజ్ ఫెయిల్ — కాలర్ చాలా అనుమానాస్పదం!','\u274C आव्हान फेल — कॉलर अत्यंत संशयास्पद!','\u274C ચેલેન્જ ફેલ — કૉલર ખૂબ શંકાસ્પદ!','\u274C ಸವಾಲು ಫೇಲ್ — ಕಾಲರ್ ತುಂಬಾ ಅನುಮಾನಾಸ್ಪದ!','\u274C ചാലൻജ് ഫെയിൽ — കാളർ വളരെ സംശയാസ്പദൻ!','\u274C ਚੈਲੰਜ ਫੇਲ — ਕਾਲਰ ਬਹੁਤ ਸ਼ੱਕੀ ਹੈ!'],
+  toast_copied:['\uD83D\uDCCB Message copied!','\uD83D\uDCCB Copied!','\uD83D\uDCCB संदेश कॉपी हुआ!','\uD83D\uDCCB বার্তা কপি হয়েছে!','\uD83D\uDCCB செய்தி நகலெடுக்கப்பட்டது!','\uD83D\uDCCB సందేశం కాపీ అయింది!','\uD83D\uDCCB संदेश कॉपी झाला!','\uD83D\uDCCB સંદેશ કૉપિ થયો!','\uD83D\uDCCB ಸಂದೇಶ ಕಾಪಿ ಆಯಿತು!','\uD83D\uDCCB സന്ദേശം കോപ്പി ചെയ്തു!','\uD83D\uDCCB ਸੁਨੇਹਾ ਕਾਪੀ ਹੋ ਗਿਆ!'],
+  v_swpass:['\u2705 SAFE WORD MATCH — genuine family member. (Phir bhi transaction ki baat ho to callback karo known number pe.)','\u2705 SAFE WORD MATCH — genuine family member. (For money matters, still call back on a known number.)','\u2705 सेफ वर्ड मैच — असली परिवार का सदस्य। (फिर भी पैसों की बात हो तो ज्ञात नंबर पर कॉलबैक करो।)','\u2705 সেফ ওয়ার্ড মিলেছে — প্রকৃত পরিবারের সদস্য। (তবুও টাকার বিষয়ে পরিচিত নম্বরে কলব্যাক করুন।)','\u2705 பாதுகாப்பு சொல் பொருந்துகிறது — உண்மையான குடும்ப உறுப்பினர். (இருப்பினும் பணம் தொடர்பான விஷயத்தில் அறிந்த எண்ணிற்கு மீண்டும் அழையுங்கள்.)','\u2705 రక్షణ పదం సరిపోయింది — నిజమైన కుటుంబ సభ్యుడు. (అయినప్పటికీ డబ్బు విషయంలో తెలిసిన నంబర్‌కు కాల్ బ్యాక్ చేయండి.)','\u2705 सेफ वर्ड जुळला — खरा कौटुंबिक सदस्य. (तरीही पैशांच्या बाबतीत ओळखीच्या क्रमांकावर कॉलबॅक करा.)','\u2705 સેફ વર્ડ મેચ — અસલી કુટુંબનો સભ્ય. (છતાં પૈસાની વાત હોય તો ઓળખાયેલ નંબર પર કૉલ કરો.)','\u2705 ಸುರಕ್ಷಿತ ಪದ ಹೊಂದಿಕೆ — ನಿಜವಾದ ಕುಟುಂಬ ಸದಸ್ಯ. (ಆದರೂ ಹಣದ ವಿಷಯದಲ್ಲಿ ಗೊತ್ತಿರುವ ಸಂಖ್ಯೆಗೆ ಕಾಲ್ ಬ್ಯಾಕ್ ಮಾಡಿ.)','\u2705 സുരക്ഷിത വാക്ക് ചേരുന്നു — യഥാർത്ഥ കുടുംബ അംഗം. (എങ്കിലും പണകാര്യത്തിൽ അറിയാവുന്ന നമ്പറിൽ വീണ്ടും വിളിക്കുക.)','\u2705 ਸੇਫ ਵਰਡ ਮੈਚ — ਅਸਲੀ ਪਰਿਵਾਰ ਦਾ ਮੈਂਬਰ। (ਫਿਰ ਵੀ ਪੈਸਿਆਂ ਦੀ ਗੱਲ ਹੋਵੇ ਤਾਂ ਜਾਣੇ ਨੰਬਰ ਉੱਤੇ ਕਾਲ ਕਰੋ।)'],
+  v_swfail:['\u274C SAFE WORD FAIL — ye caller FAKE hai. AI ne awaaz clone ki, word nahi jaanta. Call KAAT do, family ko alert karo, 1930/Chakshu pe report karo.','\u274C SAFE WORD FAIL — this caller is FAKE. The AI cloned the voice but does not know the word. Hang up, alert family, report on 1930/Chakshu.','\u274C सेफ वर्ड फेल — यह कॉलर नकली है! AI ने आवाज़ क्लोन की, शब्द नहीं जानता। कॉल काट दो, परिवार को बताओ, 1930/चक्षु पर रिपोर्ट करो।','\u274C সেফ ওয়ার্ড ফেল — এই কলার নকল! AI গলা ক্লোন করেছে, শব্দ জানে না। কল কেটে দাও, পরিবারকে জানাও, 1930/চক্ষুতে রিপোর্ট করো।','\u274C பாதுகாப்பு சொல் தோல்வி — இந்த காலர் போலி! AI குரலை க்ளோன் செய்துள்ளது, சொல்லை தெரியாது. அழைப்பை வெட்டு, குடும்பத்திடம் சொல், 1930-ல் புகார் அளி.','\u274C రక్షణ పదం విఫలం — ఈ కాలర్ నకిలీ! AI స్వరాన్ని క్లోన్ చేసింది, పదం తెలియదు. కాల్ కట్ చేయండి, కుటుంబానికి చెప్పండి, 1930లో నివేదించండి.','\u274C सेफ वर्ड फेल — हा कॉलर खोटा! AI ने आवाज क्लोन केला, शब्द माहीत नाही. कॉल कापा, परिवाराला सांगा, 1930वर तक्रार करा.','\u274C સેફ વર્ડ ફેલ — આ કૉલર નકલી છે! AI એ અવાજ ક્લોન કર્યો છે, શબ્દ ખબર નથી. કૉલ કાપો, કુટુંબને કહો, 1930 પર રિપોર્ટ કરો.','\u274C ಸುರಕ್ಷಿತ ಪದ ವಿಫಲ — ಈ ಕಾಲರ್ ನಕಲಿ! AI ಧ್ವನಿಯನ್ನು ಕ್ಲೋನ್ ಮಾಡಿದೆ, ಪದ ಗೊತ್ತಿಲ್ಲ. ಕಾಲ್ ಕತ್ತರಿಸಿ, ಕುಟುಂಬಕ್ಕೆ ಹೇಳಿ, 1930ರಲ್ಲಿ ವರದಿ ಮಾಡಿ.','\u274C സുരക്ഷിത വാക്ക് പരാജയപ്പെട്ടു — ഈ കാളർ വ്യാജമാണ്! AI ശബ്ദം ക്ലോൺ ചെയ്തു, വാക്കറിയില്ല. കാൾ വെട്ടുക, കുടുംബത്തെ അറിയിക്കുക, 1930-ൽ റിപ്പോർട്ട് ചെയ്യുക.','\u274C ਸੇਫ ਵਰਡ ਫੇਲ — ਇਹ ਕਾਲਰ ਨਕਲੀ ਹੈ! AI ਨੇ ਆਵਾਜ਼ ਕਲੋਨ ਕੀਤੀ ਹੈ, ਸ਼ਬਦ ਨਹੀਂ ਜਾਣਦਾ। ਕਾਲ ਕੱਟ ਦਿਓ, ਪਰਿਵਾਰ ਨੂੰ ਦੱਸੋ, 1930 ਤੇ ਰਿਪੋਰਟ ਕਰੋ।']
+  };
+
+  var CUR='hg';
+  function t(k){ var a=K[k]; if(!a) return ''; var v=a[IDX[CUR]]; return v||a[0]; }
+  function norm(s){ return String(s||'').toUpperCase().replace(/[^0-9A-Z\u0900-\u0D7F]/g,''); }
+  var EMO={btn_elder:'\uD83D\uDC75 ',btn_elder_on:'\uD83D\uDC75 ',btn_test:'\uD83C\uDF99\uFE0F ',btn_fam:'\uD83D\uDEA8 ',btn_vitals:'\uD83D\uDD2C ',btn_safe:'\uD83D\uDD10 ',btn_bank:'\uD83D\uDCDE ',btn_pat:'\uD83C\uDF0D ',btn_rep:'\uD83D\uDEA8 ',btn_sim:'\uD83C\uDFAC ',btn_drill:'\uD83E\uDD4A '};
+  var EMO2={m0:'\uD83D\uDFE2 ',m1:'\u26A0\uFE0F ',m2:'\uD83D\uDD34 ',m3:'\u2694\uFE0F ',comb_t:'\u2694\uFE0F '};
+  var EMO3={t_test:'\uD83C\uDF99\uFE0F ',t_fam:'\uD83D\uDEA8 ',t_vit:'\uD83D\uDD2C ',t_safe:'\uD83D\uDD10 ',t_bank:'\uD83D\uDCDE ',t_pat:'\uD83C\uDF0D ',t_rep:'\uD83D\uDEA8 ',t_sim:'\uD83C\uDFAC ',t_drill:'\uD83E\uDD4A '};
+  var IDM={dk1TestBtn:'btn_test',dk1FamBtn:'btn_fam',dk2VitBtn:'btn_vitals',dk3SafeBtn:'btn_safe',dk3BankBtn:'btn_bank',dk3PatBtn:'btn_pat',dk3RepBtn:'btn_rep',dk4SimBtn:'btn_sim',dk4DrillBtn:'btn_drill',
+    dk1Pass:'b_pass',dk1Fail:'b_fail',dk1Roll:'b_roll',dk1CloseM:'b_close',dk1CloseF:'b_close',dk1Send:'b_send',dk1Copy:'b_copy',dk3SwPass:'b_match',dk3SwFail:'b_matchno',dk3BankGo:'b_check'};
+  var N2K=null;
+  function buildIndex(){
+    N2K={};
+    for(var key in K){
+      var arr=K[key];
+      for(var j=0;j<arr.length;j++){
+        var nn=norm(arr[j]);
+        if(nn&&N2K[nn]===undefined) N2K[nn]=key;
+      }
+    }
+    N2K[norm('Forensic Vitals')]='btn_vitals';
+    N2K[norm('ALERT FAMILY')]='btn_fam';
+    N2K[norm('Scam Drill')]='btn_drill';
+  }
+
+  var busy=false;
+  function setTxt(el,val){ if(el&&el.textContent!==val){ el.textContent=val; } }
+  function applyAll(){
+    if(busy||!N2K) return; busy=true;
+    try{
+      var id,k,el,v;
+      for(id in IDM){
+        k=IDM[id]; el=$(id);
+        if(el){ v=(EMO[k]||'')+t(k); if(el.innerHTML!==v) el.innerHTML=v; }
+      }
+      el=$('dk1ElderBtn');
+      if(el){ var on=/(^|\s)on(\s|$)/.test(el.className); k=on?'btn_elder_on':'btn_elder'; v=(EMO[k]||'')+t(k); if(el.innerHTML!==v) el.innerHTML=v; }
+      var els=document.querySelectorAll('.dk1Main,.dk1Sub,.dk1cT,.dk1cS,.dk1Head,.dk2Title,.dk3Title,.dk4Title,.dk3V');
+      for(var i=0;i<els.length;i++){
+        var kk=N2K[norm(els[i].textContent)];
+        if(kk){ setTxt(els[i],((EMO2[kk]||EMO3[kk]||''))+t(kk)); }
+      }
+      var chips=document.querySelectorAll('.dk1Chip');
+      for(var c=0;c<chips.length;c++){
+        var parts=chips[c].textContent.split(':');
+        if(parts.length>1){
+          var ck=N2K[norm(parts[0])];
+          if(ck&&ck.indexOf('c_')===0){ parts[0]=t(ck); chips[c].textContent=parts.join(':'); }
+        }
+      }
+      var toasts=document.querySelectorAll('#dk1Toast,#dk3Toast');
+      for(var w=0;w<toasts.length;w++){
+        var tk=N2K[norm(toasts[w].textContent)];
+        if(tk) setTxt(toasts[w],t(tk));
+      }
+    }catch(e){}
+    busy=false;
+  }
+  var deb=null;
+  function schedule(){ if(deb) clearTimeout(deb); deb=setTimeout(applyAll,150); }
+
+  function init(){
+    nuke('#dk5Style,#dk5LangWrap');
+    var st=document.createElement('style'); st.id='dk5Style'; st.textContent=CSS;
+    (document.head||document.getElementsByTagName('head')[0]).appendChild(st);
+    buildIndex();
+    var wrap=document.createElement('div'); wrap.id='dk5LangWrap';
+    wrap.innerHTML='<label for="dk5Lang">\uD83C\uDF10</label><select id="dk5Lang" title="Beta translations \u2014 community review welcome"></select>';
+    var bar=document.getElementById('dk1Bar');
+    if(bar){ bar.insertBefore(wrap,bar.firstChild); }
+    else{ var ob=document.createElement('div'); ob.id='dk5OwnBar'; ob.appendChild(wrap); document.body.appendChild(ob); }
+    var sel=wrap.querySelector('#dk5Lang');
+    var opts='';
+    for(var i=0;i<LANGS.length;i++){ opts+='<option value="'+LANGS[i]+'">'+NAMES[LANGS[i]]+'</option>'; }
+    sel.innerHTML=opts;
+    var saved='hg'; try{ saved=localStorage.getItem('dk5Lang')||'hg'; }catch(e){}
+    if(IDX[saved]===undefined) saved='hg';
+    CUR=saved; sel.value=saved;
+    sel.onchange=function(){
+      CUR=sel.value;
+      try{ localStorage.setItem('dk5Lang',CUR); }catch(e){}
+      try{ document.documentElement.setAttribute('lang',CUR==='hg'?'hi':CUR); }catch(e){}
+      applyAll();
+    };
+    try{ document.documentElement.setAttribute('lang',CUR==='hg'?'hi':CUR); }catch(e){}
+    applyAll();
+    setTimeout(applyAll,400); setTimeout(applyAll,1200);
+    try{
+      var mo=new MutationObserver(function(){ if(!busy) schedule(); });
+      mo.observe(document.body,{childList:true,subtree:true,characterData:true});
+    }catch(e){}
+    setInterval(applyAll,4000);
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',init); }
+  else{ init(); }
+})();
+</script>
+<!-- ═════════ PACK 5 END ═════════ -->
+<!-- ═══════════════════════════════════════════════════════════════
+     ⚡ DHWANI KAVACH — PACK 6: ELDER STRIP GUARDIAN (hotfix)
+     Paste: last </body> ke UPAR, Pack 5 ke NEECHE.
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  'use strict';
+  function $(id){return document.getElementById(id);}
+
+  var T={tier:null,radar:0};
+  window.DK6=T;
+  window.dk6Set=function(tier,radar){ if(tier)T.tier=tier; if(typeof radar==='number')T.radar=radar; };
+
+  function deepFind(o,keys,d){
+    d=d||0; if(!o||typeof o!=='object'||d>3) return undefined;
+    for(var i=0;i<keys.length;i++){ if(o[keys[i]]!==undefined&&o[keys[i]]!==null) return o[keys[i]]; }
+    for(var k in o){ var v=deepFind(o[k],keys,d+1); if(v!==undefined) return v; }
+    return undefined;
+  }
+  function normTier(v){
+    if(v===undefined||v===null) return null;
+    var s=String(v).toUpperCase();
+    if(/LOW|SAFE|REAL|BONA|GENUINE|NATURAL|CLEAN|HUMAN/.test(s)) return 'LOW';
+    if(/MED|MODERATE|BORDER|CAUTION|WARN/.test(s)) return 'MED';
+    if(/HIGH|FAKE|SUSP|SPOOF|PSEUDO|DEEP|ALERT|DANGER|FRAUD|SCAM|BOT|CLONE|SYNTH|TTS/.test(s)) return 'HIGH';
+    return null;
+  }
+  function handle(url,text){
+    if(!url||!text) return;
+    var j; try{j=JSON.parse(text);}catch(e){return;}
+    if(url.indexOf('/api/score')>-1||url.indexOf('/api/analyze')>-1||url.indexOf('/api/predict')>-1){
+      var t=normTier(deepFind(j,['tier','risk_tier','riskTier','verdict','label','level','result']));
+      if(!t){
+        var p=Number(deepFind(j,['p_fake','prob_fake','ai_prob','p_ai','fake_prob','prob','probability','confidence','score']));
+        if(!isNaN(p)){ var q=(p<=1)?p*100:p; t=q>=62?'HIGH':(q>=35?'MED':'LOW'); }
+      }
+      if(t) T.tier=t;
+    }else if(url.indexOf('/api/radar')>-1){
+      var n=Number(deepFind(j,['score','risk_score','riskScore','total','combined','value','risk']));
+      if(!isNaN(n)) T.radar=Math.round(n);
+    }
+  }
+  try{
+    if(window.fetch){
+      var FF=window.fetch;
+      window.fetch=function(){
+        var a=arguments;
+        return FF.apply(window,a).then(function(r){
+          try{
+            if(r&&r.url&&/\/api\/(score|radar|analyze|predict)/.test(r.url)){
+              r.clone().text().then(function(t){handle(r.url,t);}).catch(function(){});
+            }
+          }catch(e){}
+          return r;
+        });
+      };
+    }
+  }catch(e){}
+  try{
+    var XO=XMLHttpRequest.prototype.open,XS=XMLHttpRequest.prototype.send;
+    XMLHttpRequest.prototype.open=function(m,u){this._dk6u=String(u);return XO.apply(this,arguments);};
+    XMLHttpRequest.prototype.send=function(){
+      var x=this;
+      x.addEventListener('load',function(){try{handle(x._dk6u,x.responseText);}catch(e){}});
+      return XS.apply(this,arguments);
+    };
+  }catch(e){}
+
+  var lastBeep=0;
+  function beep(){
+    try{
+      var now=Date.now(); if(now-lastBeep<12000) return; lastBeep=now;
+      var AC=new (window.AudioContext||window.webkitAudioContext)();
+      if(AC.state==='suspended') AC.resume();
+      for(var i=0;i<3;i++){
+        var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime+i*0.28;
+        o.type='square';o.frequency.value=880;o.connect(g);g.connect(AC.destination);
+        g.gain.setValueAtTime(0.0001,t);
+        g.gain.exponentialRampToValueAtTime(0.25,t+0.02);
+        g.gain.exponentialRampToValueAtTime(0.0001,t+0.22);
+        o.start(t);o.stop(t+0.24);
+      }
+    }catch(e){}
+  }
+  function simDanger(){
+    try{
+      var v=$('dk4Verdict');
+      if(v&&v.style.display!=='none'&&v.innerHTML.indexOf('SCAM')>-1) return true;
+    }catch(e){}
+    return false;
+  }
+  setInterval(function(){
+    try{
+      var st=$('dk1Strip'), eb=$('dk1ElderBtn');
+      if(!st) return;
+      if(st.className.indexOf('red')>-1) return; /* already red — sab theek */
+      var elderOn=eb&&/(^|\s)on(\s|$)/.test(eb.className);
+      var high=(T.tier==='HIGH');
+      var comb=high&&T.radar>=70;
+      var danger=high||comb||simDanger();
+      if(!danger) return;
+      if(!elderOn&&!comb) return;
+      st.style.display='block';
+      st.className='dk1-red';
+      st.innerHTML='<button class="dk1X" id="dk6Off">\u2715 OFF</button>'
+        +'<div class="dk1Main">'+(comb?'\u2694\uFE0F COMBINED ATTACK \u2014 CALL KAAT DO!':'\uD83D\uDD34 KHATRA! CALL KAAT DO!')+'</div>'
+        +'<div class="dk1Sub">Ye awaaz AI ki lag rahi hai \u2014 pehchaan confirm nahi hui!</div>';
+      var o=$('dk6Off'); if(o&&eb) o.onclick=function(){ eb.click(); };
+      beep();
+    }catch(e){}
+  },800);
+})();
+</script>
+<!-- ═════════ PACK 6 END ═════════ -->
 </body>
 </html>
