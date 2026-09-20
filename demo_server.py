@@ -89,6 +89,13 @@ OFFICIAL_NUMBERS = {
 }
 
 app = Flask(__name__, static_folder="static")
+# --- Defense API (SIH26104 screening) - try/except = server never breaks ---
+try:
+    from defense_api import bp as _defense_bp
+    app.register_blueprint(_defense_bp)
+    print("[OK] defense_api registered: /api/evidence/dossier, /api/npci/freeze, /api/challenge/verify")
+except Exception as _e:
+    print("[WARN] defense_api not loaded:", _e)
 
 try:
     from flask_cors import CORS

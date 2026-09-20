@@ -5489,5 +5489,351 @@ document.addEventListener('click',function(e){
 })();
 </script>
 <!-- ═════════ PACK 6 END ═════════ -->
+<!-- ═══════════════════════════════════════════════════════════════
+     ⚡ DHWANI KAVACH — PACK 7: PRO PACK
+     • 🌐 LANGUAGE EXTENSION (16 aur strings × 11 languages)
+     • 🧊 FINANCIAL COOLDOWN (simulated NPCI hook, disclosed)
+     • ⚖️ LEGAL DOSSIER (Section 63 BSA template, print-to-PDF)
+     Paste: last </body> ke UPAR, Pack 6 ke NEECHE.
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  'use strict';
+  function $(id){return document.getElementById(id);}
+  function nuke(sel){var l=document.querySelectorAll(sel);for(var i=0;i<l.length;i++){if(l[i].parentNode)l[i].parentNode.removeChild(l[i]);}}
+
+  var CSS='#dk7Btn{cursor:pointer;border:0;border-radius:14px;padding:14px 18px;font-size:16px;font-weight:800;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35);display:flex;align-items:center;gap:10px;min-width:200px;justify-content:center;font-family:\'Segoe UI\',system-ui,Arial,sans-serif;transition:transform .12s;background:linear-gradient(135deg,#a16207,#eab308)}'
+    +'#dk7Btn:hover{transform:translateY(-2px)}'
+    +'.dk7Overlay{position:fixed;inset:0;z-index:99996;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;font-family:\'Segoe UI\',system-ui,Arial,sans-serif}'
+    +'.dk7Card{position:relative;background:#fff;border-radius:20px;max-width:680px;width:92%;max-height:88vh;overflow:auto;padding:24px;box-shadow:0 30px 80px rgba(0,0,0,.5)}'
+    +'.dk7X{position:absolute;top:12px;right:12px;background:#f1f5f9;border:0;color:#334155;font-size:13px;font-weight:800;border-radius:8px;padding:6px 10px;cursor:pointer;font-family:inherit}'
+    +'.dk7Title{font-size:22px;font-weight:900;color:#0f172a;padding-right:40px}'
+    +'.dk7Sub{color:#475569;font-size:13.5px;margin-top:8px;line-height:1.5}'
+    +'.dk7RowB{display:flex;gap:10px;justify-content:center;margin-top:14px;flex-wrap:wrap}'
+    +'.dk7B{cursor:pointer;border:0;border-radius:12px;padding:12px 22px;font-size:14.5px;font-weight:800;color:#fff;font-family:inherit}'
+    +'.dk7Amber{background:#b45309}.dk7Grey{background:#475569}.dk7Teal{background:#0e7490}'
+    +'#dk7Cool{display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:99994;background:#0f172a;color:#fff;border:2px solid #38bdf8;border-radius:18px;padding:16px 20px;max-width:520px;width:92%;box-shadow:0 20px 60px rgba(0,0,0,.6);font-family:\'Segoe UI\',system-ui,Arial,sans-serif;text-align:center}'
+    +'#dk7Cool .dk7cT{font-size:17px;font-weight:900;color:#7dd3fc}'
+    +'#dk7Cool .dk7cD{font-size:13px;color:#e2e8f0;margin-top:6px;line-height:1.5}'
+    +'#dk7Cool .dk7cT2{font-size:30px;font-weight:900;font-family:Consolas,monospace;margin-top:8px;color:#fde047}'
+    +'.dk7Chip{display:inline-block;background:#1e293b;border:1px solid #475569;color:#cbd5e1;font-size:11.5px;font-weight:800;padding:4px 10px;border-radius:999px;margin:6px 4px 0 0}'
+    +'#dk7Dossier{font-size:13px;color:#1e293b;line-height:1.6}'
+    +'#dk7Dossier h3{font-size:16px;margin:14px 0 6px;color:#0f172a}'
+    +'#dk7Dossier table{width:100%;border-collapse:collapse;margin-top:6px}'
+    +'#dk7Dossier td{border:1px solid #cbd5e1;padding:6px 8px;font-size:12.5px}'
+    +'#dk7Dossier .dk7Sig{border:2px dashed #94a3b8;border-radius:12px;padding:12px;margin-top:10px;font-size:12.5px;color:#334155}'
+    +'#dk7PrintArea{display:none}'
+    +'@media print{body.dk7Printing>*{display:none!important}body.dk7Printing #dk7PrintArea{display:block!important;font-size:12px;color:#000}}'
+    +'#dk7PrintArea table{width:100%;border-collapse:collapse}#dk7PrintArea td{border:1px solid #999;padding:5px 7px;font-size:11px}#dk7PrintArea h2{font-size:16px;margin:10px 0 4px}#dk7PrintArea h3{font-size:13px;margin:10px 0 4px}#dk7PrintArea .dk7Sig{border:2px dashed #666;padding:10px;margin-top:8px;font-size:11px}#dk7PrintArea .dk7Foot{font-size:10px;color:#444;margin-top:10px}';
+
+  /* ============ A) LANGUAGE EXTENSION (16 strings × 11) ============ */
+  var LANGS=['hg','en','hi','bn','ta','te','mr','gu','kn','ml','pa'];
+  var IDX={}; for(var q0=0;q0<LANGS.length;q0++) IDX[LANGS[q0]]=q0;
+  var X={
+  play:['PLAY','PLAY','चलाओ','চালান','இயக்கு','ప్లే','चालवा','પ્લે','ಪ್ಲೇ','പ്ലേ','ਚਲਾਓ'],
+  stop:['STOP','STOP','रोको','থামান','நிறுத்து','ఆపండి','थांबा','રોકો','ನಿಲ್ಲಿಸಿ','നിർത്തുക','ਰੋਕੋ'],
+  analyze:['ANALYZE','ANALYZE','विश्लेषण करो','বিশ্লেষণ করুন','பகுப்பாய்வு','విశ్లేషించండి','विश्लेषण करा','વિશ્લેષણ કરો','ವಿಶ್ಲೇಷಿಸಿ','വിശകലനം ചെയ്യുക','ਵਿਸ਼ਲੇਸ਼ਣ ਕਰੋ'],
+  rec:['RECORD 6s — bolo kuch bhi','RECORD 6s — say anything','रिकॉर्ड 6 सेकेंड — कुछ भी बोलो','রেকর্ড ৬ সেকেন্ড — কিছু বলুন','ரெக்கார்டு 6 விநாடி — ஏதாவது பேசுங்கள்','రికార్డ్ 6 సెకన్లు — ఏదైనా మాట్లాడండి','रेकॉर्ड 6 सेकंद — काहीही बोला','રેકોર્ડ 6 સેકંડ — કંઈપણ બોલો','ರೆಕಾರ್ಡ್ 6 ಸೆಕೆಂಡ್ — ಏನಾದರೂ ಹೇಳಿ','റെക്കോർഡ് 6 സെക്കൻഡ് — എന്തെങ്കിലും പറയൂ','ਰਿਕਾਰਡ 6 ਸਕਿੰਟ — ਕੁਝ ਵੀ ਬੋਲੋ'],
+  scenario:['SCENARIO CHUNO','CHOOSE SCENARIO','परिदृश्य चुनो','পরিস্থিতি বেছে নিন','காட்சியைத் தேர்ந்தெடு','సన్నివేశం ఎంచుకోండి','परिस्थिती निवडा','સ્થિતિ પસંદ કરો','ಸನ್ನಿವೇಶ ಆಯ್ಕೆಮಾಡಿ','സാഹചര്യം തിരഞ്ഞെടുക്കൂ','ਦ੍ਰਿਸ਼ ਚੁਣੋ'],
+  dnatest:['DNA TEST — apna transcript paste karo','DNA TEST — paste your transcript','DNA टेस्ट — अपना ट्रांसक्रिप्ट पेस्ट करो','DNA টেস্ট — আপনার ট্রান্সক্রিপ্ট পেস্ট করুন','DNA டெஸ்ட் — உங்கள் டிரான்ஸ்கிரிப்டை ஒட்டவும்','DNA టెస్ట్ — మీ ట్రాన్స్‌క్రిప్ట్ పేస్ట్ చేయండి','DNA टेस्ट — तुमचा ट्रान्सक्रिप्ट पेस्ट करा','DNA ટેસ્ટ — તમારું ટ્રાન્સ્ક્રિપ્ટ પેસ્ટ કરો','DNA ಟೆಸ್ಟ್ — ನಿಮ್ಮ ಟ್ರಾನ್ಸ್ಕ್ರಿಪ್ಟ್ ಅಂಟಿಸಿ','DNA ടെസ്റ്റ് — നിങ്ങളുടെ ട്രാൻസ്ക്രിപ്റ്റ് പേസ്റ്റ് ചെയ്യൂ','DNA ਟੈਸਟ — ਆਪਣਾ ਟ੍ਰਾਂਸਕ੍ਰਿਪਟ ਪੇਸਟ ਕਰੋ'],
+  sawal:['SAWAL','QUESTION','सवाल','প্রশ্ন','கேள்வி','ప్రశ్న','प्रश्न','પ્રશ્ન','ಪ್ರಶ್ನೆ','ചോദ്യം','ਸਵਾਲ'],
+  nextq:['AGLA SAWAAL','NEXT QUESTION','अगला सवाल','পরের প্রশ্ন','அடுத்த கேள்வி','తరువాతి ప్రశ్న','पुढचा प्रश्न','આગળનો પ્રશ્ન','ಮುಂದಿನ ಪ್ರಶ್ನೆ','അടുത്ത ചോദ്യം','ਅਗਲਾ ਸਵਾਲ'],
+  result:['RESULT DEKHO','SEE RESULT','रिजल्ट देखो','ফলাফল দেখুন','முடிவைப் பாருங்கள்','ఫలితం చూడండి','निकाल पहा','પરિણામ જુઓ','ಫಲಿತಾಂಶ ನೋಡಿ','റിസൾട്ട് കാണുക','ਨਤੀਜਾ ਵੇਖੋ'],
+  retry:['Dubara khelo','Play again','दोबारा खेलो','আবার খেলুন','மீண்டும் விளையாடுங்கள்','మళ్లీ ఆడండి','पुन्हा खेळा','ફરી રમો','ಮತ್ತೆ ಆಡಿ','വീണ്ടും കളിക്കൂ','ਦੁਬਾਰਾ ਖੇਡੋ'],
+  share:['Share score','Share score','स्कोर शेयर करो','স্কোর শেয়ার করুন','மதிப்பெண்ணைப் பகிரவும்','స్కోర్ షేర్ చేయండి','स्कोअर शेअर करा','સ્કોર શેર કરો','ಸ್ಕೋರ್ ಹಂಚಿಕೊಳ್ಳಿ','സ്കോർ ഷെയർ ചെയ്യൂ','ਸਕੋਰ ਸਾਂਝਾ ਕਰੋ'],
+  connecting:['line connected… caller bol raha hai','line connected… caller speaking','लाइन कनेक्टेड… कॉलर बोल रहा है','লাইন সংযুক্ত… কলার কথা বলছে','வரி இணைக்கப்பட்டது… காலர் பேசுகிறார்','లైన్ కనెక్ట్ అయింది… కాలర్ మాట్లాడుతున్నారు','लाइन जोडली… कॉलर बोलत आहे','લાઇન જોડાઈ… કૉલર બોલી રહ્યો છે','ಲೈನ್ ಸಂಪರ್ಕಿತ… ಕಾಲರ್ ಮಾತನಾಡುತ್ತಿದ್ದಾರೆ','ലൈൻ കണക്റ്റ് ചെയ്തു… കാളർ സംസാരിക്കുന്നു','ਲਾਈਨ ਜੁੜ ਗਈ… ਕਾਲਰ ਬੋਲ ਰਿਹਾ ਹੈ'],
+  callend:['call ended','call ended','कॉल समाप्त','কল শেষ','அழைப்பு முடிந்தது','కాల్ ముగిసింది','कॉल समाप्त','કૉલ સમાપ્ત','ಕಾಲ್ ಮುಗಿದಿದೆ','കാൾ അവസാനിച്ചു','ਕਾਲ ਖ਼ਤਮ'],
+  copyv:['Copy vitals','Copy vitals','वाइटल्स कॉपी करो','ভাইটালস কপি করুন','வைட்டல்ஸ் நகலெடுக்கவும்','వైటల్స్ కాపీ చేయండి','व्हायटल्स कॉपी करा','વાઇટલ્સ કૉપિ કરો','ವೈಟಲ್ಸ್ ಕಾಪಿ ಮಾಡಿ','വൈറ്റൽസ് കോപ്പി ചെയ്യൂ','ਵਾਈਟਲਜ਼ ਕਾਪੀ ਕਰੋ'],
+  rerec:['Re-record','Re-record','दोबारा रिकॉर्ड करो','আবার রেকর্ড করুন','மீண்டும் ரெக்கார்டு செய்யவும்','మళ్లీ రికార్డ్ చేయండి','पुन्हा रेकॉर्ड करा','ફરી રેકોર્ડ કરો','ಮತ್ತೆ ರೆಕಾರ್ಡ್ ಮಾಡಿ','വീണ്ടും റെക്കോർഡ് ചെയ്യൂ','ਦੁਬਾਰਾ ਰਿਕਾਰਡ ਕਰੋ']
+  };
+  var CUR='hg';
+  function tx(k){ var a=X[k]; if(!a) return ''; return a[IDX[CUR]]||a[0]; }
+  function norm(s){ return String(s||'').toUpperCase().replace(/[^0-9A-Z\u0900-\u0D7F]/g,''); }
+  var N2X=null;
+  function buildIdx(){
+    N2X={};
+    for(var k in X){ for(var j=0;j<X[k].length;j++){ var n=norm(X[k][j]); if(n&&N2X[n]===undefined) N2X[n]=k; } }
+  }
+  var lbusy=false;
+  function applyLang(){
+    if(lbusy||!N2X) return; lbusy=true;
+    try{
+      var map=[['dk4StopBtn','stop'],['dk4DnaGo','analyze'],['dk2RecBtn','rec'],['dk2Copy','copyv'],['dk2Again','rerec'],['dk4Retry','retry'],['dk4ShareDrill','share']];
+      for(var i=0;i<map.length;i++){
+        var el=$(map[i][0]);
+        if(el){ var v=tx(map[i][1]); if(el.textContent!==v) el.textContent=v; }
+      }
+      var pls=document.querySelectorAll('.dk4Play');
+      for(var p=0;p<pls.length;p++){ var pv='\u25B6 '+tx('play'); if(pls[p].textContent!==pv) pls[p].textContent=pv; }
+      var qn=$('dk4QNum');
+      if(qn){ var m=qn.textContent.match(/^(.+?)(\s+\d.*)$/); if(m){ var nv=tx('sawal')+m[2]; if(qn.textContent!==nv) qn.textContent=nv; } }
+      var ids2=[['dk4NextBtn',null],['dk4PStat',null]];
+      for(var d=0;d<ids2.length;d++){
+        var e2=$(ids2[d][0]);
+        if(e2){
+          var kk=N2X[norm(e2.textContent)];
+          if(kk){ var vv=tx(kk); if(e2.textContent!==vv) e2.textContent=vv; }
+        }
+      }
+      var secs=document.querySelectorAll('.dk4Sec');
+      for(var s=0;s<secs.length;s++){
+        var sk=N2X[norm(secs[s].textContent)];
+        if(sk){ var sv=tx(sk); if(secs[s].textContent!==sv) secs[s].textContent=sv; }
+      }
+    }catch(e){}
+    lbusy=false;
+  }
+
+  /* ============ B) FINANCIAL COOLDOWN (simulated NPCI) ============ */
+  var coolOn=false, coolEnd=0, coolTimer=null, coolSleep=0;
+  function coolShow(){
+    if(coolOn||Date.now()<coolSleep) return;
+    coolOn=true; coolEnd=Date.now()+60*60*1000;
+    var c=$('dk7Cool'); if(!c) return;
+    c.style.display='block';
+    if(coolTimer) clearInterval(coolTimer);
+    coolTimer=setInterval(function(){
+      var left=Math.max(0,Math.floor((coolEnd-Date.now())/1000));
+      var el=$('dk7CoolT');
+      if(el) el.textContent=String(Math.floor(left/60)).padStart(2,'0')+':'+String(left%60).padStart(2,'0');
+      if(left<=0) coolHide(true);
+    },1000);
+  }
+  function coolHide(expired){
+    coolOn=false;
+    if(coolTimer){ clearInterval(coolTimer); coolTimer=null; }
+    var c=$('dk7Cool'); if(c) c.style.display='none';
+    if(expired) coolSleep=Date.now()+5*60*1000;
+  }
+
+  /* ============ C) LEGAL DOSSIER ============ */
+  function uuid(){
+    var u='';
+    try{ u=localStorage.getItem('dk7uuid')||''; }catch(e){}
+    if(!u){
+      u='DK-'+Math.random().toString(36).slice(2,8).toUpperCase()+Math.random().toString(36).slice(2,8).toUpperCase();
+      try{ localStorage.setItem('dk7uuid',u); }catch(e){}
+    }
+    return u;
+  }
+  function collect(){
+    var sw=false,fam=false,drill='—',lang='Hinglish';
+    try{ sw=!!localStorage.getItem('dk3SafeWord'); }catch(e){}
+    try{ fam=!!localStorage.getItem('dk1Family'); }catch(e){}
+    try{ var b=localStorage.getItem('dk4DrillBest'); if(b) drill=b+'/5'; }catch(e){}
+    try{ var l=localStorage.getItem('dk5Lang'); if(l&&l!=='hg') lang=l; }catch(e){}
+    var tier='—',radar='—';
+    try{ if(window.DK6){ if(window.DK6.tier) tier=window.DK6.tier; if(window.DK6.radar) radar=window.DK6.radar+'/100'; } }catch(e){}
+    return {caseId:'DK-'+Date.now().toString(36).toUpperCase(),time:new Date().toLocaleString('en-IN'),dev:uuid(),sw:sw,fam:fam,drill:drill,lang:lang,tier:tier,radar:radar};
+  }
+  function dossierHTML(d,forPrint){
+    return '<h2 style="margin:0 0 2px">\uD83D\uDEE1\uFE0F DHWANI KAVACH \u2014 EVIDENCE DOSSIER</h2>'
+      +'<div style="font-size:11px;color:#555">Auto-generated on-device \u2022 DEMONSTRATION \u2014 telephone channel simulated \u2022 not legal advice</div>'
+      +'<h3>1. Case Summary</h3>'
+      +'<table><tr><td><b>Case ID</b></td><td>'+d.caseId+'</td><td><b>Generated</b></td><td>'+d.time+'</td></tr>'
+      +'<tr><td><b>Device ID</b></td><td>'+d.dev+'</td><td><b>UI Language</b></td><td>'+d.lang+'</td></tr>'
+      +'<tr><td><b>AI voice tier (last)</b></td><td>'+d.tier+'</td><td><b>Scam radar (last)</b></td><td>'+d.radar+'</td></tr>'
+      +'<tr><td><b>Safe Word configured</b></td><td>'+(d.sw?'YES':'NO')+'</td><td><b>Family contact saved</b></td><td>'+(d.fam?'YES':'NO')+'</td></tr>'
+      +'<tr><td><b>Scam Drill best score</b></td><td>'+d.drill+'</td><td><b>Model</b></td><td>MelCNN cnn_v1 \u2022 236,141 params</td></tr></table>'
+      +'<h3>2. Acoustic Evidence (attach from dashboard)</h3>'
+      +'<table><tr><td><b>Evidence</b></td><td><b>Source</b></td></tr>'
+      +'<tr><td>Per-window AI scores + rolling SHA-256 window hash chain</td><td>Dashboard SHA-256 hash report (engine-computed at analysis time)</td></tr>'
+      +'<tr><td>Forensic vitals (pause ratio, jitter, shimmer, spectral metrics)</td><td>FORENSIC VITALS panel \u2014 computed locally in-browser</td></tr>'
+      +'<tr><td>Scam pattern categories matched</td><td>Scam Radar engine output</td></tr></table>'
+      +'<div style="font-size:11px;color:#555;margin-top:4px">Chain of custody: hashes computed on-device at analysis time; no raw audio uploaded; this dossier generated locally.</div>'
+      +'<h3>3. Certificate Template \u2014 Section 63, Bharatiya Sakshya Adhiniyam / IT Act s.65B</h3>'
+      +'<div class="dk7Sig"><b>Certificate (template)</b><br>'
+      +'\u201CI, ____________________ (name), certify that the electronic record(s) described above were produced by the Dhwani Kavach application running on device '+d.dev+' during a regular course of activity, and the SHA-256 hash values were computed by the application at the time of analysis. Output was produced without human intervention on the audio content.\u201D<br><br>'
+      +'Signature: ____________________ &nbsp;&nbsp; Date: '+new Date().toLocaleDateString('en-IN')+' &nbsp;&nbsp; Place: ____________________</div>'
+      +'<div class="dk7Foot">DEMONSTRATION artifact for Smart India Hackathon 2026 (SIH26104). Telephone channel is simulated and disclosed; legal certificate is a template \u2014 consult counsel before filing.</div>';
+  }
+
+  function init(){
+    nuke('#dk7Style,#dk7Root,#dk7Cool,#dk7PrintArea');
+    var st=document.createElement('style'); st.id='dk7Style'; st.textContent=CSS;
+    (document.head||document.getElementsByTagName('head')[0]).appendChild(st);
+    buildIdx();
+
+    var bar=document.getElementById('dk1Bar');
+    var btn=document.createElement('button'); btn.id='dk7Btn'; btn.innerHTML='\u2696\uFE0F LEGAL DOSSIER';
+    if(bar){ bar.appendChild(btn); } else { document.body.appendChild(btn); }
+
+    var cool=document.createElement('div'); cool.id='dk7Cool';
+    cool.innerHTML='<div class="dk7cT">\uD83E\uDDCA BANKING COOLDOWN ACTIVATED <span style="font-size:10px;background:#1e293b;border:1px solid #475569;border-radius:99px;padding:2px 8px;color:#94a3b8">SIMULATION</span></div>'
+      +'<div class="dk7cD">High risk detected \u2014 <b>outbound UPI/IMPS limit capped at \u20B92,000</b> for the cooldown window (simulated NPCI hook; bank integration = roadmap).</div>'
+      +'<div class="dk7cT2" id="dk7CoolT">60:00</div>'
+      +'<span class="dk7Chip">\uD83D\uDCDE Family approval request ready</span><span class="dk7Chip">\uD83D\uDD12 Emergency transfer lock</span>'
+      +'<div class="dk7RowB"><button class="dk7B dk7Teal" id="dk7CoolWA">\uD83D\uDCF2 Family ko approval request bhejo</button><button class="dk7B dk7Grey" id="dk7CoolOff">Main safe hoon \u2014 band karo</button></div>';
+    document.body.appendChild(cool);
+    $('dk7CoolOff').onclick=function(){ coolHide(false); };
+    $('dk7CoolWA').onclick=function(){
+      var num=''; try{ num=localStorage.getItem('dk1Family')||''; }catch(e){}
+      var t='\uD83E\uDDCA *DHWANI KAVACH \u2014 BANKING COOLDOWN (SIMULATION)*\n\nHigh-risk call detect hui thi. Aapke family member ke UPI/IMPS outbound limit ko 60 minute ke liye \u20B92,000 par cap karne ka suggestion active hai.\n\nKripya turant unse contact karke confirm karein ki koi suspicious transfer nahi ho raha.\n\nReport: 1930 / cybercrime.gov.in / sancharsaathi.gov.in';
+      var url=num?('https://wa.me/'+num+'?text='+encodeURIComponent(t)):('https://wa.me/?text='+encodeURIComponent(t));
+      window.open(url,'_blank');
+    };
+
+    var ov=document.createElement('div'); ov.className='dk7Overlay'; ov.style.display='none';
+    ov.innerHTML='<div class="dk7Card"><button class="dk7X" id="dk7Close">\u2715</button>'
+      +'<div class="dk7Title">\u2696\uFE0F Legal Evidence Dossier</div>'
+      +'<div class="dk7Sub">1-click evidence summary \u2014 print ya PDF save karo. <b>DEMONSTRATION</b> \u2014 certificate template hai, legal advice nahi.</div>'
+      +'<div id="dk7Dossier"></div>'
+      +'<div class="dk7RowB"><button class="dk7B dk7Amber" id="dk7Print">\uD83D\uDDA8\uFE0F PRINT / SAVE PDF</button><button class="dk7B dk7Grey" id="dk7ReCopy">\uD83D\uDCCB Copy text</button></div></div>';
+    document.body.appendChild(ov);
+    $('dk7Close').onclick=function(){ ov.style.display='none'; };
+    ov.addEventListener('click',function(e){ if(e.target===ov) ov.style.display='none'; });
+    btn.onclick=function(){
+      $('dk7Dossier').innerHTML=dossierHTML(collect(),false);
+      ov.style.display='flex';
+    };
+    $('dk7ReCopy').onclick=function(){
+      var d=collect();
+      var tx2=dossierHTML(d,false).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+      if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(tx2); }
+      var b=$('dk7ReCopy'); b.innerHTML='\u2705 Copied'; setTimeout(function(){ b.innerHTML='\uD83D\uDCCB Copy text'; },1600);
+    };
+    $('dk7Print').onclick=function(){
+      var pa=$('dk7PrintArea');
+      if(!pa){ pa=document.createElement('div'); pa.id='dk7PrintArea'; document.body.appendChild(pa); }
+      pa.innerHTML=dossierHTML(collect(),true);
+      document.body.className='dk7Printing';
+      setTimeout(function(){
+        try{ window.print(); }catch(e){}
+        setTimeout(function(){ document.body.className=''; },800);
+      },60);
+    };
+
+    setInterval(function(){
+      var l='hg'; try{ l=localStorage.getItem('dk5Lang')||'hg'; }catch(e){}
+      if(IDX[l]===undefined) l='hg';
+      CUR=l; applyLang();
+    },2500);
+    setInterval(function(){
+      try{
+        if(window.DK6&&window.DK6.tier==='HIGH'&&window.DK6.radar>=70) coolShow();
+      }catch(e){}
+    },1500);
+    applyLang();
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',init); }
+  else{ init(); }
+})();
+</script>
+<!-- ═════════ PACK 7 END ═════════ -->   
+<!-- ═══════════════════════════════════════════════════════════════
+     ⚡ DHWANI KAVACH — PACK 8: API INTEGRATION HOOKS
+     Paste: last </body> ke UPAR, Pack 7 ke NEECHE.
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  'use strict';
+  function $(id){return document.getElementById(id);}
+  function post(url,body,cb){
+    try{
+      fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body||{})})
+        .then(function(r){return r.json();})
+        .then(function(j){cb(j);})
+        .catch(function(){cb(null);});
+    }catch(e){cb(null);}
+  }
+  /* 1) Latency STOP -> server verdict */
+  document.addEventListener('click',function(e){
+    var b=e.target;
+    if(b&&b.id==='dk2LatStop'){
+      setTimeout(function(){
+        var tm=$('dk2LatTime'), rs=$('dk2LatRes');
+        if(!tm||!rs) return;
+        var m=tm.textContent.match(/([\d.]+)\s*s/);
+        if(!m) return;
+        var ms=Math.round(parseFloat(m[1])*1000);
+        post('/api/challenge/verify',{ttft_ms:ms},function(j){
+          if(j&&j.success){
+            rs.innerHTML+=' <span style="font-size:11px;color:#64748b">\u00B7 server: '+j.verdict+'</span>';
+          }
+        });
+      },50);
+    }
+  },true);
+  /* 2) Combined attack -> freeze API (5-min re-fire guard) */
+  var freezeFired=0;
+  setInterval(function(){
+    try{
+      if(!window.DK6||window.DK6.tier!=='HIGH'||!(window.DK6.radar>=70)) return;
+      var cool=$('dk7Cool'); if(!cool||cool.style.display==='none') return;
+      if(freezeFired&&Date.now()-freezeFired<300000) return;
+      freezeFired=Date.now();
+      post('/api/npci/freeze',{risk_tier:'HIGH',radar_score:window.DK6.radar},function(j){
+        if(j&&j.success){
+          var line=document.createElement('div');
+          line.style.cssText='font-size:11px;color:#94a3b8;margin-top:6px';
+          line.textContent='Freeze ref: '+j.freeze.reference+' \u00B7 SHA-256 '+j.freeze.receipt_sha256.slice(0,16)+'\u2026 (simulated)';
+          cool.appendChild(line);
+        }
+      });
+    }catch(e){}
+  },2000);
+  /* 3) Dossier button -> server certificate stamp */
+  document.addEventListener('click',function(e){
+    var b=e.target;
+    if(b&&b.id==='dk7Btn'){
+      setTimeout(function(){
+        var box=$('dk7Dossier'); if(!box) return;
+        var tier='UNKNOWN',radar=null;
+        try{ if(window.DK6){tier=window.DK6.tier||'UNKNOWN';radar=window.DK6.radar||null;} }catch(e2){}
+        post('/api/evidence/dossier',{risk_tier:tier,radar_score:radar},function(j){
+          if(j&&j.success&&j.dossier){
+            var line=document.createElement('div');
+            line.style.cssText='margin-top:10px;padding:10px;border:2px dashed #38bdf8;border-radius:12px;font-size:12px;color:#0c4a6e';
+            line.innerHTML='<b>SERVER-STAMPED (Section 63 BSA certificate)</b><br>Case ID: '+j.dossier.case_id+'<br>Record SHA-256: '+j.dossier.record_sha256+'<br><i style="font-size:10.5px">'+j.dossier.disclaimer+'</i>';
+            box.appendChild(line);
+          }
+        });
+      },100);
+    }
+  },true);
+})();
+</script>
+<!-- ═════════ PACK 8 END ═════════ -->
+<!-- ⚡ PACK 9: ANTI-REPLAY DYNAMIC TOKEN widget — paste last </body> ke UPAR -->
+<script>
+(function(){
+  'use strict';
+  function $(id){return document.getElementById(id);}
+  function boot(){
+    var iv=null;
+    function render(j){
+      var box=$('dk9Tok'); if(!box) return;
+      if(!j){ box.innerHTML='<div style="font-size:12px;color:#94a3b8;margin-top:10px;text-align:center">dynamic token: server offline</div>'; return; }
+      box.innerHTML='<div style="margin-top:12px;border:2px dashed #a78bfa;border-radius:12px;padding:10px;text-align:center">'
+        +'<div style="font-size:11px;font-weight:900;color:#6d28d9;letter-spacing:.5px">ANTI-REPLAY DYNAMIC TOKEN (server-synced)</div>'
+        +'<div style="font-size:26px;font-weight:900;font-family:Consolas,monospace;color:#0f172a;letter-spacing:6px">'+j.token+'</div>'
+        +'<div style="font-size:12px;color:#475569">phrase: &ldquo;'+j.challenge_phrase+'&rdquo;</div>'
+        +'<div style="font-size:11px;color:#94a3b8;margin-top:2px">expires in '+j.expires_in_s+'s &mdash; recorded clip ye naya token nahi jaanta</div></div>';
+    }
+    function fetchTok(){
+      try{
+        fetch('/api/challenge/token').then(function(r){return r.json();}).then(render).catch(function(){render(null);});
+      }catch(e){render(null);}
+    }
+    document.addEventListener('click',function(e){
+      if(e.target&&e.target.id==='dk3SafeBtn'){
+        var card=document.querySelector('#dk3Safe .dk3Card');
+        if(!card) return;
+        if(!$('dk9Tok')){ var d=document.createElement('div'); d.id='dk9Tok'; card.appendChild(d); }
+        fetchTok();
+        if(iv) clearInterval(iv);
+        iv=setInterval(function(){
+          var m=$('dk3Safe');
+          if(!m||m.style.display==='none'){ clearInterval(iv); iv=null; return; }
+          fetchTok();
+        },5000);
+      }
+    },true);
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',boot); }
+  else{ boot(); }
+})();
+</script>
+<!-- ═════════ PACK 9 END ═════════ -->
 </body>
 </html>
