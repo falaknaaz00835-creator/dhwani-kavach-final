@@ -5489,5 +5489,297 @@ document.addEventListener('click',function(e){
 })();
 </script>
 <!-- ═════════ PACK 6 END ═════════ -->
+<!-- ═══════════════════════════════════════════════════════════════
+     ⚡ DHWANI KAVACH — PACK 10 (FIX PACK)
+     A) ELDER MODE GUARDIAN v2  — strip ko DISPLAY se drive karta hai
+     B) LANGUAGE ENGINE v2 — POORA interface badalta hai
+     ═══════════════════════════════════════════════════════════════ -->
+<script>
+/* ═══════════ PART A :: ELDER MODE GUARDIAN v2 ═══════════ */
+(function(){
+  'use strict';
+  function $(id){return document.getElementById(id);}
+  function isGreen(c){
+    if(!c) return false;
+    var m=c.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/); if(!m) return false;
+    var r=+m[1],g=+m[2],b=+m[3];
+    return (g>r+25)&&(g>b+25)&&g>90;
+  }
+  function isRed(c){
+    if(!c) return false;
+    var m=c.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/); if(!m) return false;
+    var r=+m[1],g=+m[2],b=+m[3];
+    return (r>g+60)&&(r>b+40);
+  }
+  function stripCandidates(){
+    var out=[], all=document.body.querySelectorAll('div,span,td,li');
+    for(var i=0;i<all.length;i++){
+      var el=all[i];
+      if(el.dataset&&el.dataset.dk10skip) continue;
+      var r=el.getBoundingClientRect();
+      if(r.width<60||r.height<3||r.height>48) continue;
+      var cs=getComputedStyle(el);
+      out.push({el:el,bg:cs.backgroundColor,green:isGreen(cs.backgroundColor),red:isRed(cs.backgroundColor)});
+    }
+    return out;
+  }
+  function beep(){
+    try{
+      if(window.__dkBeepLock&&Date.now()-window.__dkBeepLock<12000) return;
+      window.__dkBeepLock=Date.now();
+      var AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
+      var ctx=new AC(), o=ctx.createOscillator(), g=ctx.createGain();
+      o.type='sine'; o.frequency.value=880; g.gain.value=0.25;
+      o.connect(g); g.connect(ctx.destination); o.start();
+      setTimeout(function(){try{o.stop();ctx.close();}catch(e){}},450);
+    }catch(e){}
+  }
+  var shownHigh=false;
+  function tierIsHigh(){
+    try{ if(window.DK6&&window.DK6.tier==='HIGH') return true; }catch(e){}
+    var els=document.querySelectorAll('div,span,b,strong');
+    for(var i=0;i<els.length;i++){
+      var t=(els[i].textContent||'').trim();
+      if(t.length>0&&t.length<=8&&/^(HIGH|HIGH RISK|उच्च|उच्च धोका)$/i.test(t)) return true;
+    }
+    return false;
+  }
+  function enforce(){
+    var high=tierIsHigh(), strips=stripCandidates(), i, c;
+    for(i=0;i<strips.length;i++){
+      c=strips[i];
+      if(high){
+        if(c.green){
+          if(!c.el.dataset.dk10orig) c.el.dataset.dk10orig=c.el.style.cssText||'';
+          c.el.style.background='#dc2626';
+          c.el.style.backgroundImage='none';
+          c.el.style.boxShadow='0 0 12px rgba(220,38,38,.75)';
+          c.el.setAttribute('data-dk10strip','1');
+        }
+        if(c.red) c.el.setAttribute('data-dk10strip','1');
+      }else{
+        if(c.el.dataset.dk10orig!==undefined&&c.el.getAttribute('data-dk10strip')){
+          c.el.style.cssText=c.el.dataset.dk10orig;
+          c.el.removeAttribute('data-dk10strip');
+        }
+      }
+    }
+    if(high&&!shownHigh) beep();
+    shownHigh=high;
+  }
+  window.DK_DIAG=function(){
+    var scripts=document.querySelectorAll('script'), packs={}, i;
+    for(i=0;i<scripts.length;i++){
+      var m=(scripts[i].textContent||'').match(/PACK\s*(\d+)/g);
+      if(m) for(var k=0;k<m.length;k++){ var n=m[k]; packs[n]=(packs[n]||0)+1; }
+    }
+    var dupes=[];
+    for(var key in packs){ if(packs[key]>2) dupes.push(key+' x'+packs[key]); }
+    var strips=stripCandidates(), green=0, red=0;
+    for(i=0;i<strips.length;i++){ if(strips[i].green) green++; if(strips[i].red) red++; }
+    var d={
+      'DK6.tier': (window.DK6&&window.DK6.tier)||'(none)',
+      'displayed HIGH?': tierIsHigh(),
+      'green strips': green,
+      'red strips': red,
+      'language (dk5Lang)': (function(){try{return localStorage.getItem('dk5Lang')||'(none)';}catch(e){return 'n/a';}})()
+    };
+    if(dupes.length) d['!! DUPLICATE PACK BLOCKS']=dupes.join(', ');
+    console.table ? console.table(d) : console.log(d);
+    if(dupes.length){
+      var w=$('dk10Warn');
+      if(!w){
+        w=document.createElement('div'); w.id='dk10Warn';
+        w.style.cssText='position:fixed;right:10px;bottom:10px;z-index:99999;background:#7f1d1d;color:#fff;font:600 11px system-ui;padding:8px 10px;border-radius:10px;max-width:320px';
+        w.textContent='⚠ duplicate pack blocks: '+dupes.join(', ')+' — delete one copy.';
+        document.body.appendChild(w);
+      }
+    }
+    return d;
+  };
+  setInterval(function(){ try{enforce();}catch(e){} }, 600);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',function(){setTimeout(function(){try{window.DK_DIAG();}catch(e){}},1500);});
+  else setTimeout(function(){try{window.DK_DIAG();}catch(e){}},1500);
+})();
+/* ═══════════ PART B :: LANGUAGE ENGINE v2 (full interface) ═══════════ */
+(function(){
+  'use strict';
+  var W = {
+    hi:{'close':'बंद करें','copy':'कॉपी करें','copy message':'संदेश कॉपी करें','send':'भेजें','save':'सहेजें','cancel':'रद्द करें','family':'परिवार','family member':'परिवार का सदस्य','number':'नंबर','call':'कॉल','caller':'कॉल करने वाला','test caller':'कॉलर टेस्ट करें','risk':'जोखिम','high':'उच्च','moderate':'मध्यम','low':'कम','detected':'पकड़ा गया','not detected':'नहीं पकड़ा गया','voice':'आवाज़','human':'इंसान','clone':'क्लोन','fraud':'धोखाधड़ी','scam':'घोटाला','bank':'बैंक','report':'रिपोर्ट करें','message':'संदेश','ready':'तैयार','time':'समय','score':'स्कोर','language':'भाषा','settings':'सेटिंग्स','help':'मदद','stop':'रोकें','play':'चलाएँ','record':'रिकॉर्ड','download':'डाउनलोड','print':'प्रिंट','share':'शेयर करें','enter':'दर्ज करें','phone':'फ़ोन','alert':'अलर्ट','elder':'बुज़ुर्ग','mode':'मोड','safe word':'सेफ वर्ड','challenge':'चुनौती','analysis':'विश्लेषण','result':'परिणाम','pattern':'पैटर्न','patterns':'पैटर्न','simulator':'सिम्युलेटर','drill':'अभ्यास','forensic':'फ़ॉरेंसिक','vitals':'वाइटल्स','latency':'लेटेंसी','guardian':'गार्ज़ियन','freeze':'फ़्रीज़','evidence':'सबूत','certificate':'प्रमाणपत्र','police':'पुलिस','complaint':'शिकायत','transfer':'ट्रांसफ़र','money':'पैसा','test':'टेस्ट','reset':'रीसेट','clear':'साफ़ करें','login':'लॉगिन','loading':'लोड हो रहा है','optional':'वैकल्पिक','required':'आवश्यक','yes':'हाँ','no':'नहीं','warning':'चेतावनी','danger':'खतरा','safe':'सुरक्षित','good':'अच्छा','bad':'खराब','start':'शुरू करें','finish':'समाप्त','next':'आगे','back':'पीछे','whatsapp number':'व्हाट्सएप नंबर','click to chat':'चैट के लिए क्लिक करें'},
+    mr:{'close':'बंद करा','copy':'कॉपी करा','copy message':'संदेश कॉपी करा','send':'पाठवा','save':'जतन करा','cancel':'रद्द करा','family':'कुटुंब','family member':'कुटुंबातील सदस्य','number':'क्रमांक','call':'कॉल','caller':'कॉल करणारा','test caller':'कॉलर तपासा','risk':'धोका','high':'उच्च','moderate':'मध्यम','low':'कमी','detected':'आढळले','not detected':'आढळले नाही','voice':'आवाज','human':'माणूस','clone':'क्लोन','fraud':'फसवणूक','scam':'घोटाळा','bank':'बँक','report':'तक्रार करा','message':'संदेश','ready':'तयार','time':'वेळ','score':'गुण','language':'भाषा','settings':'सेटिंग्ज','help':'मदत','stop':'थांबवा','play':'वाजवा','record':'रेकॉर्ड','download':'डाउनलोड','print':'प्रिंट','share':'शेअर करा','enter':'टाका','phone':'फोन','alert':'अलर्ट','elder':'ज्येष्ठ','mode':'मोड','safe word':'सेफ वर्ड','challenge':'आव्हान','analysis':'विश्लेषण','result':'निकाल','pattern':'नमुना','patterns':'नमुने','simulator':'सिम्युलेटर','drill':'सराव','forensic':'फॉरेन्सिक','vitals':'व्हायटल्स','latency':'लेटन्सी','guardian':'गार्डियन','freeze':'फ्रीझ','evidence':'पुरावा','certificate':'प्रमाणपत्र','police':'पोलीस','complaint':'तक्रार','transfer':'ट्रान्सफर','money':'पैसे','test':'चाचणी','reset':'रीसेट','clear':'साफ करा','login':'लॉगिन','loading':'लोड होत आहे','optional':'ऐच्छिक','required':'आवश्यक','yes':'होय','no':'नाही','warning':'इशारा','danger':'धोका','safe':'सुरक्षित','good':'चांगले','bad':'वाईट','start':'सुरू करा','finish':'पूर्ण','next':'पुढे','back':'मागे','whatsapp number':'व्हॉट्सअ‍ॅप क्रमांक','click to chat':'चॅटसाठी क्लिक करा'}
+  };
+  var SKIP = {'dhwani':1,'kavach':1,'sih26104':1,'dk':1,'whatsapp':1,'otp':1,'upin':1,'url':1,'sha':1,'ai':1};
+  var PACK = {}, cur = 'en', busy = false, pending = false;
+
+  function norm(s){ return s.replace(/\s+/g,' ').trim(); }
+  function lookup(lang,s){
+    var k=norm(s).toLowerCase().replace(/[.。!?:;,\u0964]+$/,'').trim();
+    if(!k) return null;
+    if(PACK[lang]&&PACK[lang][k]) return PACK[lang][k];
+    if(W[lang]&&W[lang][k]) return W[lang][k];
+    return null;
+  }
+  function wordTranslate(lang,txt){
+    var d=W[lang]; if(!d) return null;
+    var any=false;
+    var out=txt.replace(/([A-Za-z][A-Za-z'\-]*)/g,function(w){
+      var lw=w.toLowerCase();
+      if(SKIP[lw]) return w;
+      if(d[lw]){ any=true; return d[lw]; }
+      return w;
+    });
+    return any?out:null;
+  }
+  function translate(lang,raw){
+    if(lang==='en'||!raw) return raw;
+    var trimmed=raw.replace(/^\s+|\s+$/g,'');
+    if(!trimmed) return raw;
+    if(/^[\d\s\W]+$/.test(trimmed)) return raw;
+    var ph=lookup(lang,trimmed);
+    if(ph) return raw.replace(trimmed,ph);
+    var wt=wordTranslate(lang,trimmed);
+    if(wt) return raw.replace(trimmed,wt);
+    return raw;
+  }
+    function procTextNode(n,lang){
+    if(!n.parentNode||!n.nodeValue) return;
+    var tag=n.parentNode.nodeName;
+    if(tag==='SCRIPT'||tag==='STYLE'||tag==='NOSCRIPT') return;
+    if(n.__dk10o===undefined) n.__dk10o=n.nodeValue;
+    var target=translate(lang,n.__dk10o);
+    if(n.nodeValue!==target) n.nodeValue=target;
+  }
+  function procAttrs(el,lang){
+    var attrs=['placeholder','title','aria-label'];
+    for(var i=0;i<attrs.length;i++){
+      var a=attrs[i];
+      if(el.hasAttribute&&el.hasAttribute(a)){
+        var orig=el.getAttribute('data-dk10-'+a);
+        if(orig===null){ orig=el.getAttribute(a); el.setAttribute('data-dk10-'+a,orig); }
+        var t=translate(lang,orig);
+        if(el.getAttribute(a)!==t) el.setAttribute(a,t);
+      }
+    }
+    if((el.tagName==='INPUT'||el.tagName==='BUTTON')&&/^(submit|button|reset)$/i.test(el.getAttribute('type')||'')){
+      var vo=el.getAttribute('data-dk10-value');
+      if(vo===null){ vo=el.getAttribute('value')||''; el.setAttribute('data-dk10-value',vo); }
+      var tv=translate(lang,vo);
+      if(tv&&(el.getAttribute('value')||'')!==tv) el.setAttribute('value',tv);
+    }
+  }
+  function lang(){ try{ return localStorage.getItem('dk5Lang')||'en'; }catch(e){ return 'en'; } }
+  function setLang(code){ cur=code||'en'; schedule(); }
+  function apply(){
+    var l=cur; if(l==='en'||!l){ return; }
+    busy=true;
+    try{
+      var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null,false), n;
+      while((n=walker.nextNode())) procTextNode(n,l);
+      var els=document.body.querySelectorAll('input,textarea,button,select,[title],[aria-label]');
+      for(var i=0;i<els.length;i++) procAttrs(els[i],l);
+    }catch(e){}
+    busy=false;
+  }
+  function schedule(){
+    if(pending) return;
+    pending=true;
+    setTimeout(function(){ pending=false; try{apply();}catch(e){} },120);
+  }
+  var lastLang=lang();
+  function checkLang(){
+    var l=lang();
+    if(l!==lastLang){ lastLang=l; cur=l; schedule(); }
+  }
+  function loadPack(cb){
+    var done=false;
+    try{
+      var ls=localStorage.getItem('dk10pack_'+lang());
+      if(ls){ try{ PACK[lang()]=JSON.parse(ls); done=true; }catch(e){} }
+    }catch(e){}
+    if(done){ cb(); return; }
+    try{
+      fetch('lang_pack.json',{cache:'no-store'})
+        .then(function(r){ return r.ok?r.json():null; })
+        .then(function(j){
+          if(j&&typeof j==='object'){
+            if(j.phrases&&j.lang){ PACK[j.lang]=j.phrases; }
+            else{ for(var k in j){ if(typeof j[k]==='object') PACK[k]=j[k]; } }
+          }
+          cb();
+        })
+        .catch(function(){ cb(); });
+    }catch(e){ cb(); }
+  }
+  window.DK10Export = function(){
+    var l=lang(), out={}, walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null,false), n;
+    while((n=walker.nextNode())){
+      var tag=n.parentNode&&n.parentNode.nodeName;
+      if(tag==='SCRIPT'||tag==='STYLE'||tag==='NOSCRIPT') continue;
+      var o=n.__dk10o!==undefined?n.__dk10o:n.nodeValue;
+      o=norm(o);
+      if(o.length<3||o.length>220) continue;
+      if(/^[\d\s\W]+$/.test(o)) continue;
+      if(lookup(l,o)) continue;
+      out[o.toLowerCase()]='';
+    }
+    var payload={ lang:l, count:Object.keys(out).length, phrases:out,
+      instructions:'Har string ka ' + l + ' translation bharo, phir is file ko static/lang_pack.json naam se save karo. Reload = poora interface us bhasha mein.' };
+    var blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='lang_pack_'+l+'.json';
+    a.click();
+    return payload.count;
+  };
+  window.DK10 = { apply:apply, setLang:setLang, export:window.DK10Export,
+    status:function(){ return {lang:cur, packLangs:Object.keys(PACK)}; } };
+  try{
+    var mo=new MutationObserver(function(muts){
+      if(busy) return;
+      for(var i=0;i<muts.length;i++){
+        var t=muts[i].type;
+        if(t==='childList'||t==='characterData'){ schedule(); return; }
+      }
+    });
+    if(document.body) mo.observe(document.body,{childList:true,subtree:true,characterData:true});
+  }catch(e){}
+  document.addEventListener('change',function(e){
+    if(e.target&&e.target.tagName==='SELECT'){ setTimeout(checkLang,60); }
+  },true);
+  document.addEventListener('click',function(e){
+    if(e.target&&e.target.tagName==='SELECT'){ setTimeout(checkLang,60); }
+  },true);
+  setInterval(function(){ try{ checkLang(); }catch(e){} }, 1000);
+  function boot(){
+    cur=lang();
+    loadPack(function(){ try{apply();}catch(e){} });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
+  else boot();
+})();
+</script>
+<script>
+/* ═══ PACK 10 PRESENCE BADGE ═══ */
+(function(){
+  if (window.__DK10BADGE) return;
+  window.__DK10BADGE = 1;
+  function put(){
+    if (document.getElementById('dk10badge')) return;
+    var on = !!(window.DK10 && window.DK_DIAG);
+    var d = document.createElement('div');
+    d.id = 'dk10badge';
+    d.style.cssText = 'position:fixed;left:8px;bottom:8px;z-index:2147483647;padding:4px 9px;'
+      + 'border-radius:6px;font:11px/1.4 system-ui,sans-serif;color:#fff;cursor:pointer;'
+      + 'background:' + (on ? '#15803d' : '#b91c1c') + ';box-shadow:0 1px 6px rgba(0,0,0,.35)';
+    d.textContent = on ? 'DK10 FIX PACK ✓ LOADED — click = diagnostics'
+                       : 'DK10 FIX PACK ✗ NOT LOADED';
+    d.onclick = function(){ try { window.DK_DIAG(); } catch(e){} };
+    (document.body || document.documentElement).appendChild(d);
+  }
+  setTimeout(put, 900);
+  setInterval(put, 3000);
+})();
+</script>
+<!-- ═════════ END OF PACK 10 ═════════ -->
 </body>
 </html>
