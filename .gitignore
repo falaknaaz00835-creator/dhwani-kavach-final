@@ -2,6 +2,7 @@
 data/
 results/*
 !results/cnn_v1/
+!results/cnn_v2/
 __pycache__/
 dist/
 build/
@@ -16,3 +17,5 @@ static/index_internal_trophy.html
 AUDDT/
 __pycache__/
 *.pyc
+
+metrics.prev.json

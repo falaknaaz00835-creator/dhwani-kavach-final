@@ -1,0 +1,366 @@
+{
+  "run": "18_evaluate_auddt.py",
+  "started": "2026-09-25 10:16:38",
+  "smoke": false,
+  "partial": false,
+  "dev_skip_gates": false,
+  "host": "Windows-10-10.0.26200-SP0",
+  "python": "3.11.9",
+  "torch": "2.14.0+cpu",
+  "git": "d4c66e3",
+  "model": {
+    "path": "results\\cnn_v2\\model.pt",
+    "bytes": 973515,
+    "sha256": "a7aeb383a12b09ac5355df7daa59059222c0148690dca78c7848e9888796cd91",
+    "params": 236141,
+    "tag": "cnn_v2"
+  },
+  "protocol": {
+    "split": "eval",
+    "n_rows": 71237,
+    "n_scored": 71237,
+    "n_bonafide": 7355,
+    "n_spoof": 63882,
+    "window_seconds": 4.0,
+    "padding": "ml.audio.io.fix_length tiles the clip to 4 s (product behaviour)",
+    "scorer": "log-Mel 80/16k/512/160/power2.0/ref1.0 -> per-window standardise -> MelCNN -> sigmoid",
+    "harness": "this script only; no third-party AUDDT package is imported",
+    "seed": 20260925,
+    "undecodable": 0
+  },
+  "clean": {
+    "eer_pct": 88.4,
+    "auc": 0.9489,
+    "eer_threshold": 0.0091,
+    "n": 71237
+  },
+  "clean_calibrated": {
+    "eer_pct": 88.4,
+    "auc": 0.9469,
+    "note": "logit bias is monotone: AUC and EER must be identical to clean"
+  },
+  "operating_point_raw_tau0.50": {
+    "threshold": 0.5,
+    "n": 71237,
+    "accuracy": 0.8264,
+    "precision_spoof": 0.9966,
+    "recall_spoof_TPR": 0.8091,
+    "specificity_TNR": 0.9762,
+    "fpr_pct": 2.38,
+    "F1": 0.8931,
+    "confusion": {
+      "TN": 7180,
+      "FP": 175,
+      "FN": 12193,
+      "TP": 51689
+    }
+  },
+  "operating_point_shipped_theta_lo": {
+    "threshold": 0.62,
+    "n": 71237,
+    "accuracy": 0.7443,
+    "precision_spoof": 0.9994,
+    "recall_spoof_TPR": 0.7153,
+    "specificity_TNR": 0.9962,
+    "fpr_pct": 0.38,
+    "F1": 0.8338,
+    "confusion": {
+      "TN": 7327,
+      "FP": 28,
+      "FN": 18188,
+      "TP": 45694
+    }
+  },
+  "tpr_at_fpr1pct": 0.7694,
+  "per_attack_eer": {
+    "A07": {
+      "n": 12269,
+      "n_spoof": 4914,
+      "eer_pct": 98.9,
+      "auc": 0.9989
+    },
+    "A08": {
+      "n": 12269,
+      "n_spoof": 4914,
+      "eer_pct": 93.0,
+      "auc": 0.9809
+    },
+    "A09": {
+      "n": 12269,
+      "n_spoof": 4914,
+      "eer_pct": 99.95,
+      "auc": 1.0
+    },
+    "A10": {
+      "n": 12269,
+      "n_spoof": 4914,
+      "eer_pct": 98.56,
+      "auc": 0.9981
+    },
+    "A11": {
+      "n": 12269,
+      "n_spoof": 4914,
+      "eer_pct": 98.63,
+      "auc": 0.9983
+    },
+    "A12": {
+      "n": 12269,
+      "n_spoof": 4914,
+      "eer_pct": 99.47,
+      "auc": 0.9998
+    },
+    "A13": {
+      "n": 12269,
+      "n_spoof": 4914,
+      "eer_pct": 97.82,
+      "auc": 0.9972
+    },
+    "A14": {
+      "n": 12269,
+      "n_spoof": 4914,
+      "eer_pct": 98.8,
+      "auc": 0.9992
+    },
+    "A15": {
+      "n": 12269,
+      "n_spoof": 4914,
+      "eer_pct": 97.68,
+      "auc": 0.997
+    },
+    "A16": {
+      "n": 12269,
+      "n_spoof": 4914,
+      "eer_pct": 96.79,
+      "auc": 0.9952
+    },
+    "A17": {
+      "n": 12269,
+      "n_spoof": 4914,
+      "eer_pct": 55.56,
+      "auc": 0.572
+    },
+    "A18": {
+      "n": 12269,
+      "n_spoof": 4914,
+      "eer_pct": 82.42,
+      "auc": 0.9068
+    },
+    "A19": {
+      "n": 12269,
+      "n_spoof": 4914,
+      "eer_pct": 81.18,
+      "auc": 0.8919
+    }
+  },
+  "gates": [
+    {
+      "check": "model-file",
+      "pass": true,
+      "detail": "results\\cnn_v2\\model.pt  973515 B  sha256 a7aeb383a12b09ac  236,141 params"
+    },
+    {
+      "check": "calibration",
+      "pass": true,
+      "detail": "logit_bias=-3.677 theta_lo=0.62 theta_hi=0.9 vad_min=0.25 (fitted 2026-09-09, source ['falak.wav'], 29 voiced windows)"
+    },
+    {
+      "check": "parity-vs-live-server",
+      "pass": true,
+      "detail": "max |delta| = 0.00e+00"
+    },
+    {
+      "check": "manifest",
+      "pass": true,
+      "detail": "share\\manifest.csv -> 71237 rows with split=eval"
+    },
+    {
+      "check": "corpus-mounted",
+      "pass": true,
+      "detail": "71237 of 71237 rows readable. If this is 0, C:\\dhwani_data is not mounted under this folder - do not 'fix' it, tell Saniya."
+    },
+    {
+      "check": "two-classes",
+      "pass": true,
+      "detail": "7355 bonafide / 63882 spoof"
+    },
+    {
+      "check": "decodable",
+      "pass": true,
+      "detail": "0/71237 clips failed to decode"
+    },
+    {
+      "check": "ranking-direction",
+      "pass": true,
+      "detail": "AUC 0.9489 on 71237 clips (if this is below 0.5 the labels or the checkpoint are wrong)"
+    }
+  ],
+  "robustness": {
+    "n_per_condition": 1190,
+    "rows": [
+      {
+        "condition": "clean",
+        "n": 1190,
+        "publishable": true,
+        "eer_pct": 88.24,
+        "auc": 0.9416,
+        "delta_auc_vs_clean": 0.0,
+        "mean_bonafide": 0.0454,
+        "mean_spoof": 0.799,
+        "recall_at_shipped_theta": 0.705,
+        "fpr_at_shipped_theta_pct": 1.18,
+        "flag": ""
+      },
+      {
+        "condition": "snr20",
+        "n": 1190,
+        "publishable": true,
+        "eer_pct": 63.44,
+        "auc": 0.7045,
+        "delta_auc_vs_clean": -0.2371,
+        "mean_bonafide": 0.6171,
+        "mean_spoof": 0.8937,
+        "recall_at_shipped_theta": 0.7855,
+        "fpr_at_shipped_theta_pct": 42.35,
+        "flag": ""
+      },
+      {
+        "condition": "snr10",
+        "n": 1190,
+        "publishable": false,
+        "eer_pct": 35.66,
+        "auc": 0.3574,
+        "delta_auc_vs_clean": -0.5842,
+        "mean_bonafide": 0.9827,
+        "mean_spoof": 0.9355,
+        "recall_at_shipped_theta": 0.7502,
+        "fpr_at_shipped_theta_pct": 90.59,
+        "flag": "AUC<0.5: ranking inverted, do not publish"
+      },
+      {
+        "condition": "snr5",
+        "n": 1190,
+        "publishable": false,
+        "eer_pct": 30.59,
+        "auc": 0.2546,
+        "delta_auc_vs_clean": -0.687,
+        "mean_bonafide": 0.9914,
+        "mean_spoof": 0.9305,
+        "recall_at_shipped_theta": 0.7158,
+        "fpr_at_shipped_theta_pct": 96.47,
+        "flag": "AUC<0.5: ranking inverted, do not publish"
+      },
+      {
+        "condition": "dur500",
+        "n": 1190,
+        "publishable": true,
+        "eer_pct": 84.71,
+        "auc": 0.9206,
+        "delta_auc_vs_clean": -0.021,
+        "mean_bonafide": 0.1476,
+        "mean_spoof": 0.8275,
+        "recall_at_shipped_theta": 0.7149,
+        "fpr_at_shipped_theta_pct": 2.35,
+        "flag": ""
+      },
+      {
+        "condition": "mulaw",
+        "n": 1190,
+        "publishable": true,
+        "eer_pct": 88.24,
+        "auc": 0.9371,
+        "delta_auc_vs_clean": -0.0045,
+        "mean_bonafide": 0.0762,
+        "mean_spoof": 0.8238,
+        "recall_at_shipped_theta": 0.6968,
+        "fpr_at_shipped_theta_pct": 2.35,
+        "flag": ""
+      },
+      {
+        "condition": "alaw",
+        "n": 1190,
+        "publishable": true,
+        "eer_pct": 88.24,
+        "auc": 0.9378,
+        "delta_auc_vs_clean": -0.0038,
+        "mean_bonafide": 0.074,
+        "mean_spoof": 0.821,
+        "recall_at_shipped_theta": 0.6977,
+        "fpr_at_shipped_theta_pct": 2.35,
+        "flag": ""
+      },
+      {
+        "condition": "amrnb",
+        "n": 1190,
+        "publishable": true,
+        "eer_pct": 87.06,
+        "auc": 0.9473,
+        "delta_auc_vs_clean": 0.0057,
+        "mean_bonafide": 0.0668,
+        "mean_spoof": 0.8334,
+        "recall_at_shipped_theta": 0.7466,
+        "fpr_at_shipped_theta_pct": 1.18,
+        "flag": ""
+      },
+      {
+        "condition": "opus16",
+        "n": 1190,
+        "publishable": true,
+        "eer_pct": 87.06,
+        "auc": 0.9412,
+        "delta_auc_vs_clean": -0.0004,
+        "mean_bonafide": 0.0656,
+        "mean_spoof": 0.8322,
+        "recall_at_shipped_theta": 0.7294,
+        "fpr_at_shipped_theta_pct": 1.18,
+        "flag": ""
+      },
+      {
+        "condition": "mp3_64",
+        "n": 1190,
+        "publishable": true,
+        "eer_pct": 88.24,
+        "auc": 0.9418,
+        "delta_auc_vs_clean": 0.0002,
+        "mean_bonafide": 0.0547,
+        "mean_spoof": 0.8106,
+        "recall_at_shipped_theta": 0.7077,
+        "fpr_at_shipped_theta_pct": 1.18,
+        "flag": ""
+      }
+    ],
+    "codecs_applied": [
+      "mulaw",
+      "alaw",
+      "amrnb",
+      "opus16",
+      "mp3_64"
+    ],
+    "note": "clean row here is the same 4 s window re-decoded; SNR is additive white noise on the full clip; dur500 truncates to 0.5 s and the product's fix_length then tiles it to 4 s"
+  },
+  "policy_stream": {
+    "n_per_class": {
+      "0": 750,
+      "1": 750
+    },
+    "tiers_bonafide": {
+      "INSUFFICIENT_AUDIO": 1.0
+    },
+    "tiers_spoof": {
+      "INSUFFICIENT_AUDIO": 1.0
+    },
+    "false_warning_rate_pct_bonafide": 0.0,
+    "caught_high_or_suspicious_pct_spoof": 0.0,
+    "windows_per_call_mean": 1.0,
+    "no_dwell_tiers_bonafide": {
+      "SAFE": 0.9987,
+      "SUSPICIOUS": 0.0013
+    },
+    "no_dwell_tiers_spoof": {
+      "SUSPICIOUS": 0.5853,
+      "SAFE": 0.4147
+    },
+    "no_dwell_caught_pct_spoof": 58.53,
+    "no_dwell_false_warning_pct_bonafide": 0.13,
+    "note": "streamed exactly as the browser demo does: 1 s hop over the file, 4 s window, VAD gate, logit bias, EMA + LLR evidence, 2-window dwell. Mechanism worth knowing: the engine starts in INSUFFICIENT_AUDIO and only leaves it after 2 agreeing windows, so a 4 s clip (1 window) can never produce a verdict - that is why tiers_* is ~100% INSUFFICIENT_AUDIO on this corpus. It is a corpus property, not a product failure: real calls stream many windows. no_dwell_* repeats the same thresholds on the final call_p with the dwell rule ignored, purely so the short-clip corpus can still be read."
+  }
+}
