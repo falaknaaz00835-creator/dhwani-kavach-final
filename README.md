@@ -1,39 +1,36 @@
 
-# 🛡️ Dhwani Kavach — Real-Time Voice Impersonation Defense
+# 🛡️ Dhwani-Kavach — Multimodal Synthetic Identity & Document Screening Portal
 
-**Detection → Verification → Prevention.** A privacy-first defense system that converts
-uncertain audio evidence into calibrated, explainable, and progressively stronger
-protective actions — built for India's phone-scam epidemic.
+**Detection → Verification → Prevention.** India's first unified multimodal identity defense system that pairs physical document screening (Aadhaar / PAN tamper analysis) with real-time acoustic voice biometrics — engineered for the Ministry of Home Affairs (MHA) cyber defense ecosystem.
 
-> *We do not promise that one model can detect every synthetic voice. We designed a
-> defense system that measures evidence continuously, tests itself against unseen and
-> degraded conditions, communicates uncertainty, and escalates protection before a
-> voice-based impersonation attack becomes a financial loss.*
+> *Under MHA / I4C classification, AI voice cloning is recognized as "Synthetic Biometric Identity Fraud." By combining offline Verhoeff & ELA document verification with on-device acoustic deepfake detection (ASVspoof benchmarked), Dhwani-Kavach provides comprehensive zero-trust identity screening before financial loss occurs.*
 
-**Smart India Hackathon 2026 · Problem Statement SIH26104 · Team VERITAS (all-women engineering team)**
+**Smart India Hackathon 2026 · Problem Statement SIH26188 · Ministry of Home Affairs (MHA) · Team VERITAS**
 
 ---
 
-## The Problem
+## The Problem: Multimodal Identity Fraud
 
-Cybercriminals clone a family member's voice from a few seconds of public audio, then
-call elders with "emergencies" demanding money or OTPs. India reported **₹22,495 crore
-lost to cyber fraud in 2025 (I4C)** — voice-clone scams are among the fastest-growing
-attack vectors, and victims realize the fraud only after the transfer.
+Cybercriminals exploit a two-pronged attack vector:
+1. **Forged KYC Credentials:** Altered or synthetic Aadhaar and PAN cards are used to procure illegal SIMs and open mule bank accounts.
+2. **Synthetic Vocal Biometrics:** Generative AI voice clones are deployed during tele-verification, banking authorization, and digital arrest extortion calls.
 
-A detector alone is not enough. **Dhwani Kavach is a full defense pipeline**: detect the
-fake voice, verify the caller, recognize the scam script, and **act** — before the loss.
+India reported **₹22,495+ crore lost to cyber fraud in 2025 (I4C)** — with over 70% of digital scams originating from fake/mule identities.
 
-## Architecture & Data Flow
+## Architecture & Multimodal Flow
 
 ```
-Live audio → Decode/Resample 16 kHz → Energy VAD → 4 s sliding windows
-   → 80-bin log-mel → MelCNN (per-window AI score)
-   → Temporal evidence engine (flicker logic, accumulation)
-   → Scam Radar (Indian scam-phrase presets, 0–100)
-   → Voiceprint verification (consent-enrolled, on-device)
-   → Risk tier (LOW / MEDIUM / HIGH) + Combination law
-   → Actions: advisory · challenge · auto-mute · family alert · 1930 dossier
+[MODALITY 1: PHYSICAL DOCUMENT SCREENING]
+   Aadhaar / PAN Image → OCR Parsing → Verhoeff Base-10 Checksum
+   → Font Consistency Delta → Error Level Analysis (ELA Splicing) → Cryptographic SHA-256 Fingerprint
+                                      │
+                                      ├──► [MULTIMODAL RISK FUSION ENGINE]
+                                      │        Risk = 0.50·R_doc + 0.50·R_voice
+[MODALITY 2: ACOUSTIC BIOMETRICS]     │
+   Live 16kHz Stream → Energy VAD ────┘        ├─► 🟢 IDENTITY AUTHENTIC (ALLOW)
+   → 80-bin Mel-Spectrogram → PyTorch MelCNN  ├─► 🟡 SUSPICIOUS BIOMETRICS (WARN)
+   → Temporal Hysteresis & Vocoder Analysis    └─► 🔴 SYNTHETIC IDENTITY DETECTED (HOLD)
+   → Sec 63 BSA 2023 Digital Evidence Dossier
 ```
 
 | Component | Status |

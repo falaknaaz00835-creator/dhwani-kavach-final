@@ -1,0 +1,628 @@
+{
+  "timestamp": "2026-09-24 20:20:59",
+  "eval_duration_sec": 6.61,
+  "total_evaluated_samples": 20,
+  "bonafide_count": 18,
+  "spoof_count": 2,
+  "model_metadata": {
+    "name": "MelCNN v2",
+    "parameters": 236141,
+    "architecture": "4-Block SE-ResNet-Style MelCNN + Adaptive Stats Pooling + MLP Head",
+    "input_spec": "16kHz Mono -> 80-bin Log-Mel Spectrogram -> 4.0s Window"
+  },
+  "calibration_metadata": {
+    "logit_bias": -3.677,
+    "theta_lo": 0.62,
+    "theta_hi": 0.9,
+    "vad_min": 0.25
+  },
+  "metrics": {
+    "raw_uncalibrated_05": {
+      "accuracy": 0.15,
+      "roc_auc": 0.9583,
+      "eer": 0.0,
+      "eer_threshold": 1.0,
+      "precision": 0.1053,
+      "recall": 1.0,
+      "f1_score": 0.1905,
+      "specificity": 0.0556,
+      "operating_threshold": 0.5,
+      "confusion_matrix": {
+        "tp": 2,
+        "fp": 17,
+        "tn": 1,
+        "fn": 0
+      },
+      "sample_counts": {
+        "total": 20,
+        "bonafide": 18,
+        "spoof": 2
+      }
+    },
+    "raw_uncalibrated_eer_opt": {
+      "accuracy": 0.95,
+      "roc_auc": 0.9583,
+      "eer": 0.0,
+      "eer_threshold": 1.0,
+      "precision": 0.6667,
+      "recall": 1.0,
+      "f1_score": 0.8,
+      "specificity": 0.9444,
+      "operating_threshold": 1.0,
+      "confusion_matrix": {
+        "tp": 2,
+        "fp": 1,
+        "tn": 17,
+        "fn": 0
+      },
+      "sample_counts": {
+        "total": 20,
+        "bonafide": 18,
+        "spoof": 2
+      }
+    },
+    "calibrated_theta_lo": {
+      "accuracy": 0.6,
+      "roc_auc": 0.9444,
+      "eer": 0.0,
+      "eer_threshold": 1.0,
+      "precision": 0.2,
+      "recall": 1.0,
+      "f1_score": 0.3333,
+      "specificity": 0.5556,
+      "operating_threshold": 0.62,
+      "confusion_matrix": {
+        "tp": 2,
+        "fp": 8,
+        "tn": 10,
+        "fn": 0
+      },
+      "sample_counts": {
+        "total": 20,
+        "bonafide": 18,
+        "spoof": 2
+      }
+    }
+  },
+  "condition_breakdown": {
+    "clean_reference": {
+      "sample_count": 1,
+      "bonafide_count": 1,
+      "spoof_count": 0,
+      "raw": {
+        "accuracy": 0.0,
+        "roc_auc": 0.5,
+        "eer": 0.0,
+        "eer_threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 0.0,
+        "operating_threshold": 0.5,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 1,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 1,
+          "bonafide": 1,
+          "spoof": 0
+        }
+      },
+      "calibrated": {
+        "accuracy": 0.0,
+        "roc_auc": 0.5,
+        "eer": 0.0,
+        "eer_threshold": 0.62,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 0.0,
+        "operating_threshold": 0.62,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 1,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 1,
+          "bonafide": 1,
+          "spoof": 0
+        }
+      }
+    },
+    "clean_studio": {
+      "sample_count": 2,
+      "bonafide_count": 1,
+      "spoof_count": 1,
+      "raw": {
+        "accuracy": 1.0,
+        "roc_auc": 1.0,
+        "eer": 0.0,
+        "eer_threshold": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "specificity": 1.0,
+        "operating_threshold": 0.5,
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 2,
+          "bonafide": 1,
+          "spoof": 1
+        }
+      },
+      "calibrated": {
+        "accuracy": 1.0,
+        "roc_auc": 1.0,
+        "eer": 0.0,
+        "eer_threshold": 1.0,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "specificity": 1.0,
+        "operating_threshold": 0.62,
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 2,
+          "bonafide": 1,
+          "spoof": 1
+        }
+      }
+    },
+    "inspect_ai": {
+      "sample_count": 1,
+      "bonafide_count": 0,
+      "spoof_count": 1,
+      "raw": {
+        "accuracy": 1.0,
+        "roc_auc": 1.0,
+        "eer": 0.0,
+        "eer_threshold": 0.5,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "specificity": 1.0,
+        "operating_threshold": 0.5,
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 1,
+          "bonafide": 0,
+          "spoof": 1
+        }
+      },
+      "calibrated": {
+        "accuracy": 1.0,
+        "roc_auc": 1.0,
+        "eer": 0.0,
+        "eer_threshold": 0.62,
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1_score": 1.0,
+        "specificity": 1.0,
+        "operating_threshold": 0.62,
+        "confusion_matrix": {
+          "tp": 1,
+          "fp": 0,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 1,
+          "bonafide": 0,
+          "spoof": 1
+        }
+      }
+    },
+    "inspect_real": {
+      "sample_count": 6,
+      "bonafide_count": 6,
+      "spoof_count": 0,
+      "raw": {
+        "accuracy": 0.0,
+        "roc_auc": 0.5,
+        "eer": 0.0,
+        "eer_threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 0.0,
+        "operating_threshold": 0.5,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 6,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 6,
+          "bonafide": 6,
+          "spoof": 0
+        }
+      },
+      "calibrated": {
+        "accuracy": 0.8333,
+        "roc_auc": 0.5,
+        "eer": 0.0,
+        "eer_threshold": 0.62,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 0.8333,
+        "operating_threshold": 0.62,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 1,
+          "tn": 5,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 6,
+          "bonafide": 6,
+          "spoof": 0
+        }
+      }
+    },
+    "lossy_mp3": {
+      "sample_count": 2,
+      "bonafide_count": 2,
+      "spoof_count": 0,
+      "raw": {
+        "accuracy": 0.0,
+        "roc_auc": 0.5,
+        "eer": 0.0,
+        "eer_threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 0.0,
+        "operating_threshold": 0.5,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 2,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 2,
+          "bonafide": 2,
+          "spoof": 0
+        }
+      },
+      "calibrated": {
+        "accuracy": 0.0,
+        "roc_auc": 0.5,
+        "eer": 0.0,
+        "eer_threshold": 0.62,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 0.0,
+        "operating_threshold": 0.62,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 2,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 2,
+          "bonafide": 2,
+          "spoof": 0
+        }
+      }
+    },
+    "my_voice": {
+      "sample_count": 1,
+      "bonafide_count": 1,
+      "spoof_count": 0,
+      "raw": {
+        "accuracy": 0.0,
+        "roc_auc": 0.5,
+        "eer": 0.0,
+        "eer_threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 0.0,
+        "operating_threshold": 0.5,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 1,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 1,
+          "bonafide": 1,
+          "spoof": 0
+        }
+      },
+      "calibrated": {
+        "accuracy": 1.0,
+        "roc_auc": 1.0,
+        "eer": 0.0,
+        "eer_threshold": 0.62,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 1.0,
+        "operating_threshold": 0.62,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 1,
+          "bonafide": 1,
+          "spoof": 0
+        }
+      }
+    },
+    "team_real": {
+      "sample_count": 1,
+      "bonafide_count": 1,
+      "spoof_count": 0,
+      "raw": {
+        "accuracy": 0.0,
+        "roc_auc": 0.5,
+        "eer": 0.0,
+        "eer_threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 0.0,
+        "operating_threshold": 0.5,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 1,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 1,
+          "bonafide": 1,
+          "spoof": 0
+        }
+      },
+      "calibrated": {
+        "accuracy": 1.0,
+        "roc_auc": 1.0,
+        "eer": 0.0,
+        "eer_threshold": 0.62,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 1.0,
+        "operating_threshold": 0.62,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 1,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 1,
+          "bonafide": 1,
+          "spoof": 0
+        }
+      }
+    },
+    "telephony_alaw": {
+      "sample_count": 2,
+      "bonafide_count": 2,
+      "spoof_count": 0,
+      "raw": {
+        "accuracy": 0.0,
+        "roc_auc": 0.5,
+        "eer": 0.0,
+        "eer_threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 0.0,
+        "operating_threshold": 0.5,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 2,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 2,
+          "bonafide": 2,
+          "spoof": 0
+        }
+      },
+      "calibrated": {
+        "accuracy": 1.0,
+        "roc_auc": 1.0,
+        "eer": 0.0,
+        "eer_threshold": 0.62,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 1.0,
+        "operating_threshold": 0.62,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 0,
+          "tn": 2,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 2,
+          "bonafide": 2,
+          "spoof": 0
+        }
+      }
+    },
+    "telephony_amrnb": {
+      "sample_count": 1,
+      "bonafide_count": 1,
+      "spoof_count": 0,
+      "raw": {
+        "accuracy": 0.0,
+        "roc_auc": 0.5,
+        "eer": 0.0,
+        "eer_threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 0.0,
+        "operating_threshold": 0.5,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 1,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 1,
+          "bonafide": 1,
+          "spoof": 0
+        }
+      },
+      "calibrated": {
+        "accuracy": 0.0,
+        "roc_auc": 0.5,
+        "eer": 0.0,
+        "eer_threshold": 0.62,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 0.0,
+        "operating_threshold": 0.62,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 1,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 1,
+          "bonafide": 1,
+          "spoof": 0
+        }
+      }
+    },
+    "telephony_mulaw": {
+      "sample_count": 2,
+      "bonafide_count": 2,
+      "spoof_count": 0,
+      "raw": {
+        "accuracy": 0.0,
+        "roc_auc": 0.5,
+        "eer": 0.0,
+        "eer_threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 0.0,
+        "operating_threshold": 0.5,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 2,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 2,
+          "bonafide": 2,
+          "spoof": 0
+        }
+      },
+      "calibrated": {
+        "accuracy": 0.0,
+        "roc_auc": 0.5,
+        "eer": 0.0,
+        "eer_threshold": 0.62,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 0.0,
+        "operating_threshold": 0.62,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 2,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 2,
+          "bonafide": 2,
+          "spoof": 0
+        }
+      }
+    },
+    "voip_opus16": {
+      "sample_count": 1,
+      "bonafide_count": 1,
+      "spoof_count": 0,
+      "raw": {
+        "accuracy": 0.0,
+        "roc_auc": 0.5,
+        "eer": 0.0,
+        "eer_threshold": 0.5,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 0.0,
+        "operating_threshold": 0.5,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 1,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 1,
+          "bonafide": 1,
+          "spoof": 0
+        }
+      },
+      "calibrated": {
+        "accuracy": 0.0,
+        "roc_auc": 0.5,
+        "eer": 0.0,
+        "eer_threshold": 0.62,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0,
+        "specificity": 0.0,
+        "operating_threshold": 0.62,
+        "confusion_matrix": {
+          "tp": 0,
+          "fp": 1,
+          "tn": 0,
+          "fn": 0
+        },
+        "sample_counts": {
+          "total": 1,
+          "bonafide": 1,
+          "spoof": 0
+        }
+      }
+    }
+  }
+}
