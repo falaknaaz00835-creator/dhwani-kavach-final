@@ -4,6 +4,8 @@ import time
 import numpy as np
 import librosa
 import re
+import uuid
+import random
 import hashlib
 from fastapi import FastAPI, UploadFile, File, WebSocket, WebSocketDisconnect, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -228,4 +230,94 @@ async def analyze_document_forensics(file: UploadFile = File(...)):
         "metadata_flags": metadata_flags,
         "forensic_risk_score": min(1.0, risk_score),
         "verdict": "HOLD" if risk_score >= 0.50 else "ALLOW"
+    }
+# ==========================================
+# Dynamic Liveness & TTFT Latency Trap
+# ==========================================
+# Temporary store for active challenges (In production, use Redis)
+ACTIVE_CHALLENGES = {}
+
+class LivenessVerification(BaseModel):
+    token: str
+    ttft_ms: float  # Time-to-First-Token in milliseconds
+
+@app.get("/api/v2/liveness/challenge")
+async def generate_liveness_challenge():
+    challenges = [
+        "Please read the 4th and 5th characters of your PAN card out loud.",
+        "Say your current city and today's date backwards.",
+        "Repeat after me: The quick brown fox jumps over the lazy dog."
+    ]
+    selected_challenge = random.choice(challenges)
+    token = str(uuid.uuid4())
+    
+    # Store the token with its issuance timestamp
+    ACTIVE_CHALLENGES[token] = {
+        "prompt": selected_challenge,
+        "issued_at": time.time()
+    }
+    
+    return {
+        "token": token,
+        "challenge_text": selected_challenge,
+        "max_allowed_ttft_ms": 1500  # Humans generally answer in < 1500ms
+    }
+
+@app.post("/api/v2/liveness/verify")
+async def verify_liveness_latency(payload: LivenessVerification):
+    if payload.token not in ACTIVE_CHALLENGES:
+        raise HTTPException(status_code=400, detail="Invalid or expired challenge token.")
+        
+    # AI Voice Conversion Pipelines usually have > 1800ms latency due to transcription & TTS generation
+    if payload.ttft_ms > 1800:
+        verdict = "SYNTHETIC_LATENCY_DETECTED"
+        risk = "HIGH"
+        message = "Failed: AI voice clone processing latency detected."
+    else:
+        verdict = "HUMAN_LATENCY_VERIFIED"
+        risk = "LOW"
+        message = "Passed: Latency matches normal human cognitive response limits."
+        
+    # Clear the challenge so it cannot be reused (Anti-Replay)
+    del ACTIVE_CHALLENGES[payload.token]
+    
+    return {
+        "verdict": verdict,
+        "measured_ttft_ms": payload.ttft_ms,
+        "latency_risk_level": risk,
+        "message": message
+    }
+# ==========================================
+# Cross-Modal Risk Fusion Engine
+# ==========================================
+class FusionRequest(BaseModel):
+    document_risk_score: float
+    voice_risk_score: float
+
+@app.post("/api/identity/multimodal-fusion")
+async def calculate_fusion_risk(data: FusionRequest):
+    composite_risk = (0.50 * data.document_risk_score) + (0.50 * data.voice_risk_score)
+    
+    if composite_risk < 0.35:
+        verdict = "ALLOW"
+        status_message = "🟢 Identity Authentic. Both document and voice verified."
+        action = "Clear Transaction"
+    elif composite_risk < 0.70:
+        verdict = "WARN"
+        status_message = "🟡 Suspicious Biometrics. Partial mismatch detected."
+        action = "Trigger Step-Up Authentication / In-Person KYC"
+    else:
+        verdict = "HOLD"
+        status_message = "🔴 SYNTHETIC IDENTITY DETECTED. Syndicate mule operation."
+        action = "Freeze Account & Dispatch I4C 1930 Alert"
+        
+    return {
+        "composite_risk_score": round(composite_risk, 4),
+        "verdict": verdict,
+        "status_message": status_message,
+        "recommended_action": action,
+        "telemetry": {
+            "document_weight": 0.50,
+            "voice_weight": 0.50
+        }
     }
