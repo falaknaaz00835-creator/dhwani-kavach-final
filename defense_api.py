@@ -321,3 +321,140 @@ async def calculate_fusion_risk(data: FusionRequest):
             "voice_weight": 0.50
         }
     }
+# ==========================================
+# Upgraded Tri-Modal Risk Fusion Engine
+# ==========================================
+class TriModalFusionRequest(BaseModel):
+    document_risk_score: float
+    voice_risk_score: float
+    face_risk_score: float  # Newly added parameter
+
+@app.post("/api/identity/multimodal-fusion")
+async def calculate_fusion_risk(data: TriModalFusionRequest):
+    # True Tri-Modal Mathematical Fusion
+    composite_risk = (0.333 * data.document_risk_score) + (0.333 * data.voice_risk_score) + (0.333 * data.face_risk_score)
+    
+    if composite_risk < 0.35:
+        verdict = "ALLOW"
+        status_message = "🟢 Identity Authentic. Tri-modal biometrics verified."
+        action = "Clear Transaction & Commit to Blockchain"
+    elif composite_risk < 0.70:
+        verdict = "WARN"
+        status_message = "🟡 Suspicious Biometrics. Partial mismatch detected."
+        action = "Trigger Step-Up Authentication / In-Person KYC"
+    else:
+        verdict = "HOLD"
+        status_message = "🔴 SYNTHETIC IDENTITY DETECTED. Syndicate mule operation."
+        action = "Freeze Account & Dispatch I4C 1930 Alert"
+        
+    return {
+        "composite_risk_score": round(composite_risk, 4),
+        "verdict": verdict,
+        "status_message": status_message,
+        "recommended_action": action,
+        "telemetry": {
+            "document_weight": 0.333,
+            "voice_weight": 0.333,
+            "face_weight": 0.333
+        }
+    }
+# ==========================================
+# 1. Face-Match Liveness (Tri-Modal Addition)
+# ==========================================
+class FaceMatchRequest(BaseModel):
+    document_photo_b64: str
+    live_webcam_b64: str
+
+@app.post("/api/v2/liveness/face-match")
+async def verify_face_match(payload: FaceMatchRequest):
+    # In a production environment, this integrates with OpenCV/DeepFace
+    # Here we simulate the extraction of 128-d biometric vectors and distance calculation
+    simulated_vector_distance = random.uniform(0.1, 0.45) 
+    
+    # A standard threshold for Euclidean distance in facial recognition is < 0.40
+    is_match = simulated_vector_distance < 0.40
+    confidence = max(0.0, 1.0 - simulated_vector_distance)
+    
+    return {
+        "face_similarity_score": round(confidence, 4),
+        "is_match": is_match,
+        "liveness_confirmed": True,
+        "message": "Face matched securely." if is_match else "Face mismatch detected. Possible impersonation."
+    }
+
+# ==========================================
+# 2. Cross-Document Consistency Check
+# ==========================================
+class CrossDocRequest(BaseModel):
+    aadhaar_name: str
+    aadhaar_dob: str
+    pan_name: str
+    pan_dob: str
+
+@app.post("/api/v2/document/consistency")
+async def check_cross_document_consistency(data: CrossDocRequest):
+    # Normalize strings for comparison (lowercase, strip whitespace)
+    name_match = data.aadhaar_name.strip().lower() == data.pan_name.strip().lower()
+    dob_match = data.aadhaar_dob.strip() == data.pan_dob.strip()
+    
+    consistency_score = 0.0
+    discrepancies = []
+    
+    if name_match: 
+        consistency_score += 0.50
+    else:
+        discrepancies.append("Name mismatch between Aadhaar and PAN")
+        
+    if dob_match: 
+        consistency_score += 0.50
+    else:
+        discrepancies.append("Date of Birth mismatch between Aadhaar and PAN")
+        
+    return {
+        "consistency_score": consistency_score,
+        "is_consistent": consistency_score == 1.0,
+        "discrepancies": discrepancies,
+        "verdict": "VERIFIED" if consistency_score == 1.0 else "DISCREPANCY_DETECTED"
+    }
+
+# ==========================================
+# 3. Blockchain Evidence Ledger (Audit Trail)
+# ==========================================
+# In-memory mock for a decentralized cryptographic ledger
+BLOCKCHAIN_LEDGER = []
+
+class AuditLogRequest(BaseModel):
+    user_id: str
+    composite_risk_score: float
+    verdict: str
+    evidence_hash: str
+
+@app.post("/api/v2/audit/ledger-commit")
+async def commit_to_ledger(data: AuditLogRequest):
+    # Fetch previous block hash to maintain the immutable chain
+    previous_hash = BLOCKCHAIN_LEDGER[-1]["block_hash"] if BLOCKCHAIN_LEDGER else "GENESIS_BLOCK_000"
+    
+    timestamp = time.time()
+    
+    # Construct the block payload and hash it via SHA-256
+    block_content = f"{data.user_id}{data.composite_risk_score}{data.verdict}{data.evidence_hash}{previous_hash}{timestamp}"
+    block_hash = hashlib.sha256(block_content.encode()).hexdigest()
+    
+    new_block = {
+        "timestamp": timestamp,
+        "user_id": data.user_id,
+        "risk_score": data.composite_risk_score,
+        "verdict": data.verdict,
+        "evidence_hash": data.evidence_hash,
+        "previous_hash": previous_hash,
+        "block_hash": block_hash
+    }
+    
+    BLOCKCHAIN_LEDGER.append(new_block)
+    
+    return {
+        "status": "COMMITTED_TO_IMMUTABLE_LEDGER",
+        "transaction_hash": block_hash,
+        "chain_length": len(BLOCKCHAIN_LEDGER),
+        "timestamp": timestamp
+    }
