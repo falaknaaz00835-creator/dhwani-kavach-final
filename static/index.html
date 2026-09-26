@@ -1258,58 +1258,187 @@ button:active:not(:disabled),
           </div>
 
           <!-- Pulsing Avatar & Audio Waves -->
-          <div class="relative w-32 h-32 my-3 flex justify-center items-center">
+          <div class="relative w-24 h-24 my-2 flex justify-center items-center">
             <div id="ringingVisual" class="absolute inset-0 flex justify-center items-center transition-opacity duration-300">
               <div id="mainPulseRing" class="pulse-ring"></div>
               <div class="pulse-ring" style="animation-delay: 0.7s"></div>
-              <div class="w-22 h-22 rounded-full bg-[var(--avatar-bg)] border-[var(--avatar-border)] flex items-center justify-center relative z-10 shadow-lg">
-                <span class="material-symbols-outlined text-5xl text-[var(--avatar-icon)]">person</span>
+              <div class="w-18 h-18 rounded-full bg-[var(--avatar-bg)] border-[var(--avatar-border)] flex items-center justify-center relative z-10 shadow-lg">
+                <span class="material-symbols-outlined text-4xl text-[var(--avatar-icon)]">person</span>
               </div>
             </div>
-            <div id="activeVisual" class="absolute inset-0 hidden flex justify-center items-center gap-1.5 opacity-0 transition-opacity duration-300 bg-[var(--wave-container-bg)] rounded-full border border-[var(--border-card)] px-3">
-              <div class="wave-bar" style="height: 12px;"></div>
-              <div class="wave-bar" style="height: 24px;"></div>
+            <div id="activeVisual" class="absolute inset-0 hidden flex justify-center items-center gap-1 opacity-0 transition-opacity duration-300 bg-[var(--wave-container-bg)] rounded-full border border-[var(--border-card)] px-2.5">
+              <div class="wave-bar" style="height: 10px;"></div>
+              <div class="wave-bar" style="height: 18px;"></div>
+              <div class="wave-bar" style="height: 28px;"></div>
               <div class="wave-bar" style="height: 38px;"></div>
-              <div class="wave-bar" style="height: 54px;"></div>
-              <div class="wave-bar" style="height: 62px;"></div>
-              <div class="wave-bar" style="height: 48px;"></div>
-              <div class="wave-bar" style="height: 34px;"></div>
-              <div class="wave-bar" style="height: 22px;"></div>
-              <div class="wave-bar" style="height: 12px;"></div>
+              <div class="wave-bar" style="height: 46px;"></div>
+              <div class="wave-bar" style="height: 36px;"></div>
+              <div class="wave-bar" style="height: 26px;"></div>
+              <div class="wave-bar" style="height: 16px;"></div>
+              <div class="wave-bar" style="height: 10px;"></div>
             </div>
           </div>
 
           <!-- Threat Banner (Appears only on threat) -->
-          <div id="threatBanner" class="w-full bg-[var(--accent-crimson)]/20 border border-[var(--accent-crimson)]/60 rounded-xl p-3.5 my-2 hidden opacity-0 flex flex-col items-center justify-center transition-all duration-300 shadow-md">
-            <div class="flex items-center gap-2 text-[var(--accent-crimson)] font-extrabold text-[15px] font-mono tracking-wider text-center">
-              <span class="material-symbols-outlined text-[22px]">warning</span>
+          <div id="threatBanner" class="w-full bg-[var(--accent-crimson)]/20 border border-[var(--accent-crimson)]/60 rounded-xl p-3 my-1.5 hidden opacity-0 flex flex-col items-center justify-center transition-all duration-300 shadow-md">
+            <div class="flex items-center gap-1.5 text-[var(--accent-crimson)] font-extrabold text-[13.5px] font-mono tracking-wider text-center">
+              <span class="material-symbols-outlined text-[19px]">warning</span>
               <span id="threatBannerTitle">🚨 SYNTHETIC IDENTITY SPOOF DETECTED</span>
             </div>
-            <p id="threatBannerDetail" class="text-[12px] font-mono text-[var(--accent-crimson)] text-center mt-1 font-bold">Applicant vocal prosody or physical KYC document failed zero-trust verification</p>
-            <div id="threatVectorsChips" class="flex flex-wrap items-center justify-center gap-1.5 mt-2"></div>
+            <p id="threatBannerDetail" class="text-[11px] font-mono text-[var(--accent-crimson)] text-center mt-0.5 font-bold">Applicant vocal prosody or physical KYC document failed zero-trust verification</p>
+            <div id="threatVectorsChips" class="flex flex-wrap items-center justify-center gap-1 mt-1.5"></div>
           </div>
 
           <!-- Incoming Action Buttons -->
-          <div id="incomingActions" class="flex justify-around w-full max-w-[280px] mt-2 relative z-20">
-            <button id="btnDecline" type="button" onclick="resetCall()" class="flex flex-col items-center gap-2 group cursor-pointer transition-transform active:scale-95" aria-label="Decline Call">
-              <div class="w-14 h-14 rounded-full bg-[var(--btn-decline-bg)] border-[var(--btn-decline-border)] flex items-center justify-center text-[var(--btn-decline-icon)] transition-all group-hover:scale-105 shadow-md">
-                <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">call_end</span>
+          <div id="incomingActions" class="flex justify-around w-full max-w-[260px] my-1 relative z-20">
+            <button id="btnDecline" type="button" onclick="resetCall()" class="flex flex-col items-center gap-1.5 group cursor-pointer transition-transform active:scale-95" aria-label="Decline Call">
+              <div class="w-12 h-12 rounded-full bg-[var(--btn-decline-bg)] border-[var(--btn-decline-border)] flex items-center justify-center text-[var(--btn-decline-icon)] transition-all group-hover:scale-105 shadow-md">
+                <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">call_end</span>
               </div>
-              <span class="text-[13px] font-sans text-[var(--text-muted)] font-bold">Reject</span>
+              <span class="text-[12px] font-sans text-[var(--text-muted)] font-bold">Reject</span>
             </button>
-            <button id="btnAnswer" type="button" onclick="acceptCall()" class="flex flex-col items-center gap-2 group cursor-pointer transition-transform active:scale-95" aria-label="Answer Call">
-              <div class="w-14 h-14 rounded-full bg-[var(--btn-answer-bg)] border-[var(--btn-answer-border)] flex items-center justify-center text-[var(--btn-answer-icon)] transition-all group-hover:scale-105 shadow-[var(--btn-answer-shadow)] animate-bounce">
-                <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">call</span>
+            <button id="btnAnswer" type="button" onclick="acceptCall()" class="flex flex-col items-center gap-1.5 group cursor-pointer transition-transform active:scale-95" aria-label="Answer Call">
+              <div class="w-12 h-12 rounded-full bg-[var(--btn-answer-bg)] border-[var(--btn-answer-border)] flex items-center justify-center text-[var(--btn-answer-icon)] transition-all group-hover:scale-105 shadow-[var(--btn-answer-shadow)] animate-bounce">
+                <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">call</span>
               </div>
-              <span class="text-[13px] font-sans text-[var(--accent-emerald)] font-extrabold">Start Liveness</span>
+              <span class="text-[12px] font-sans text-[var(--accent-emerald)] font-extrabold">Start Liveness</span>
             </button>
           </div>
 
           <!-- Active Call Terminate Button -->
-          <div id="activeControls" class="w-full hidden justify-center items-center mt-2 opacity-0 transition-all duration-300 relative z-20">
-            <button id="btnEndCall" type="button" onclick="resetCall()" class="flex items-center gap-2 px-8 py-3.5 rounded-full bg-[var(--accent-crimson)] text-white font-mono text-[14.5px] font-extrabold tracking-wider hover:opacity-95 active:scale-95 transition-all shadow-lg cursor-pointer">
-              <span class="material-symbols-outlined text-[22px]">call_end</span> END LIVENESS SESSION
+          <div id="activeControls" class="w-full hidden justify-center items-center my-1 opacity-0 transition-all duration-300 relative z-20">
+            <button id="btnEndCall" type="button" onclick="resetCall()" class="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[var(--accent-crimson)] text-white font-mono text-[13px] font-extrabold tracking-wider hover:opacity-95 active:scale-95 transition-all shadow-lg cursor-pointer">
+              <span class="material-symbols-outlined text-[19px]">call_end</span> END LIVENESS SESSION
             </button>
+          </div>
+
+          <!-- Divider inside Phone -->
+          <div class="w-full h-px bg-[var(--border-card)]/70 my-2.5"></div>
+
+          <!-- 1. EXPLAINABLE AI BIOMETRIC RISK TELEMETRY (COMPACT PHONE WIDGET) -->
+          <div class="w-full flex flex-col gap-2 font-mono">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[var(--accent-cyan)] text-[16px]">radar</span>
+                <span class="text-[11px] font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase">AI Risk Telemetry</span>
+              </div>
+              <span id="telemetryStatusPill" class="text-[9.5px] px-2 py-0.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)] text-[var(--header-badge-text)] font-extrabold whitespace-nowrap">STANDBY / LISTENING</span>
+            </div>
+
+            <!-- Gauge + Sub-metrics Grid -->
+            <div class="grid grid-cols-12 gap-2 items-center p-2.5 rounded-2xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
+              <!-- Circular Gauge (Cols 5) -->
+              <div class="col-span-5 flex flex-col items-center justify-center">
+                <div class="relative w-22 h-22 flex items-center justify-center">
+                  <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                    <path class="text-[var(--gauge-bg)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="3"></path>
+                    <path id="svgGaugeCircle" class="text-[var(--accent-emerald)] transition-all duration-700 ease-out" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="0, 100" stroke-linecap="round" stroke-width="3.6"></path>
+                  </svg>
+                  <div class="absolute inset-0 flex flex-col items-center justify-center text-center select-none px-1">
+                    <span id="riskScoreNumber" class="text-[24px] font-mono font-extrabold text-[var(--accent-emerald)] leading-none">0%</span>
+                    <span id="riskScoreLabel" class="text-[8.5px] font-mono font-extrabold text-[var(--accent-emerald)] uppercase tracking-tight mt-0.5 leading-tight text-center">SAFE</span>
+                  </div>
+                </div>
+                <div id="vocalProsodyLabel" class="mt-1 text-center text-[9px] font-mono font-extrabold text-[var(--accent-emerald)] bg-[var(--header-badge-bg)] px-2 py-0.5 rounded-full border border-[var(--header-badge-border)] tracking-wider whitespace-nowrap">STANDBY</div>
+              </div>
+
+              <!-- 4 Sub-Metrics Bars (Cols 7) -->
+              <div class="col-span-7 flex flex-col gap-1.5 font-mono">
+                <!-- Synthetics -->
+                <div class="flex flex-col gap-0.5">
+                  <div class="flex justify-between items-baseline text-[9px]">
+                    <span class="text-[var(--text-muted)] font-bold uppercase truncate">Synthetics</span>
+                    <span id="voiceBadge" class="text-[var(--accent-emerald)] font-extrabold whitespace-nowrap ml-1">10% (HUMAN)</span>
+                  </div>
+                  <div class="h-1.5 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden">
+                    <div id="barVoiceAuth" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 10%;"></div>
+                  </div>
+                </div>
+
+                <!-- Vocoder -->
+                <div class="flex flex-col gap-0.5">
+                  <div class="flex justify-between items-baseline text-[9px]">
+                    <span class="text-[var(--text-muted)] font-bold uppercase truncate">Vocoder</span>
+                    <span id="vocoderBadge" class="text-[var(--accent-emerald)] font-extrabold whitespace-nowrap ml-1">CLEAN</span>
+                  </div>
+                  <div class="h-1.5 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden">
+                    <div id="barVocoder" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 8%;"></div>
+                  </div>
+                </div>
+
+                <!-- Coercion Intent -->
+                <div class="flex flex-col gap-0.5">
+                  <div class="flex justify-between items-baseline text-[9px]">
+                    <span class="text-[var(--text-muted)] font-bold uppercase truncate">Coercion</span>
+                    <span id="scriptBadge" class="text-[var(--accent-emerald)] font-extrabold whitespace-nowrap ml-1">CLEAN</span>
+                  </div>
+                  <div class="h-1.5 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden">
+                    <div id="barScriptNlp" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 5%;"></div>
+                  </div>
+                </div>
+
+                <!-- Evidence LLR -->
+                <div class="flex flex-col gap-0.5">
+                  <div class="flex justify-between items-baseline text-[9px]">
+                    <span class="text-[var(--text-muted)] font-bold uppercase truncate">LLR</span>
+                    <span id="xaiLlrVal" class="text-[var(--accent-emerald)] font-extrabold whitespace-nowrap ml-1">-2.45 dB</span>
+                  </div>
+                  <div class="h-1.5 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden">
+                    <div id="xaiLlrBar" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 12%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fallback elements for JS queries -->
+            <span id="audioLevelDisplay" class="hidden">0</span>
+            <span id="noiseGateNotice" class="hidden"></span>
+          </div>
+
+          <!-- 2. AUTONOMOUS DEFENSE & FORENSIC SEAL -->
+          <div id="bankingDefenseCard" class="w-full mt-2 rounded-2xl p-2.5 flex flex-col gap-1.5 transition-all duration-300 border font-mono text-[10.5px]" style="background: var(--defense-safe-bg); border-color: var(--defense-safe-border);">
+            <div class="flex items-center justify-between gap-1">
+              <div id="bankingPolicyBadge" class="flex items-center gap-1.5 font-extrabold uppercase tracking-tight" style="color: var(--defense-safe-text);">
+                <span id="defenseStatusDot" class="w-2 h-2 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span>
+                <span id="bankingPolicyText" class="truncate">AUTONOMOUS DEFENSE: ACTIVE</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span class="text-[9px] text-[var(--text-muted)] font-bold">SEAL:</span>
+                <span id="evidenceHashDisplay" class="text-[9px] text-[var(--accent-cyan)] font-mono truncate max-w-[80px] select-all">SHA256-e3b0...</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between gap-1.5 pt-1 border-t border-black/10 dark:border-white/10">
+              <button id="btnDispatch1930" type="button" class="flex-1 flex items-center justify-center gap-1 py-1 px-2 rounded-lg bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/35 text-[10px] text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/25 font-extrabold transition-all cursor-pointer shadow-sm whitespace-nowrap" title="Dispatch Live Telemetry to I4C Cyber Crime 1930">
+                <span class="material-symbols-outlined text-[13px]">call</span> 1930 DISPATCH
+              </button>
+              <button id="btnBiometricOverride" type="button" onclick="openBiometricModal()" class="hidden py-1 px-2 rounded-lg bg-[var(--accent-crimson)] text-white text-[10px] font-extrabold hover:opacity-90 active:scale-95 transition-all shadow-md animate-pulse cursor-pointer whitespace-nowrap">
+                <span class="material-symbols-outlined text-[13px]">fingerprint</span> OVERRIDE
+              </button>
+              <button id="btnManualLock" type="button" class="p-1 rounded-lg bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent-cyan)] transition-all cursor-pointer font-bold flex items-center justify-center shrink-0" title="Toggle Emergency Shield">
+                <span class="material-symbols-outlined text-[15px]">lock</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 3. KYC SCRIPT SCANNER & REAL-TIME FORENSIC AUDIT TRAIL -->
+          <div class="w-full mt-2 flex flex-col gap-1.5 font-mono">
+            <div class="flex items-center justify-between pb-1 border-b border-[var(--border-card)]/50">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-[var(--accent-cyan)] animate-pulse"></span>
+                <span class="text-[10px] font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase">KYC Statement Scanner</span>
+              </div>
+              <span id="speechStateTag" class="text-[9px] text-[var(--accent-cyan)] uppercase font-extrabold">MIC READY</span>
+            </div>
+            <div id="detectedKeywordsBox" class="flex flex-wrap gap-1 hidden"></div>
+            <!-- Mini Transcript Feed -->
+            <div id="transcriptFeed" class="h-20 max-h-20 overflow-y-auto bg-[var(--bg-card-sub)] p-2 rounded-xl border border-[var(--border-card)] flex flex-col gap-1 text-[10.5px] font-bold leading-normal text-[var(--text-primary)]">
+              <p class="text-[var(--text-muted)] italic text-[10px]">&gt; Monitoring live applicant vocal tract &amp; KYC statements...</p>
+            </div>
+            <!-- Script Scanner Input -->
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <input type="text" id="quickScriptInput" placeholder="Simulate KYC statement (e.g. UIDAI update, bank KYC)..." class="flex-1 min-w-0 px-2.5 py-1.5 rounded-lg bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[10px] text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent-cyan)]">
+              <button id="btnTestScript" type="button" class="px-2.5 py-1.5 rounded-lg bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/40 text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/25 text-[10px] font-bold cursor-pointer whitespace-nowrap">Scan</button>
+            </div>
           </div>
         </div>
       </div>
@@ -1482,141 +1611,6 @@ button:active:not(:disabled),
     </table>
   </div>
 </section>
-
-<!-- ═════════ FULL-WIDTH ROW: EXPLAINABLE AI RISK TELEMETRY & EXTORTION STREAM ═════════ -->
-<div class="w-full flex flex-col gap-5 mt-2">
-  <!-- 1. EXPLAINABLE AI RISK & SPECTRAL MATRIX -->
-      <section class="glass-panel rounded-3xl p-5 sm:p-6 flex flex-col gap-4">
-        <div class="flex items-center justify-between pb-3 border-b border-[var(--border-card)]">
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-[var(--accent-cyan)] text-[24px]">radar</span>
-            <span class="text-[15px] font-mono font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase whitespace-nowrap">EXPLAINABLE AI RISK TELEMETRY</span>
-          </div>
-          <span id="telemetryStatusPill" class="text-[12.5px] font-mono px-3.5 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)] text-[var(--header-badge-text)] font-extrabold whitespace-nowrap">STANDBY / LISTENING</span>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-12 gap-5 items-center">
-          <!-- Circular Gauge -->
-          <div class="sm:col-span-5 flex flex-col items-center justify-center p-4 rounded-2xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
-            <div class="relative w-40 h-40 flex items-center justify-center">
-              <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-                <path class="text-[var(--gauge-bg)]" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="100, 100" stroke-width="2.8"></path>
-                <path id="svgGaugeCircle" class="text-[var(--accent-emerald)] transition-all duration-700 ease-out" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="0, 100" stroke-linecap="round" stroke-width="3.2"></path>
-              </svg>
-              <div class="absolute inset-0 flex flex-col items-center justify-center text-center select-none">
-                <span id="riskScoreNumber" class="text-[50px] sm:text-[54px] font-mono font-extrabold text-[var(--accent-emerald)] leading-none">0%</span>
-                <span id="riskScoreLabel" class="text-[16px] sm:text-[17px] font-mono font-extrabold text-[var(--accent-emerald)] uppercase tracking-wider mt-1">SAFE</span>
-              </div>
-            </div>
-            <div id="vocalProsodyLabel" class="mt-3 text-center text-[13px] font-mono font-extrabold text-[var(--accent-emerald)] bg-[var(--header-badge-bg)] px-4 py-1.5 rounded-full border border-[var(--header-badge-border)] tracking-wider whitespace-nowrap">STANDBY / MONITORING</div>
-          </div>
-
-          <!-- Live Acoustic Spectral Matrix (FFT) -->
-          <div class="sm:col-span-7 flex flex-col p-4 rounded-2xl bg-[var(--bg-card-sub)] border border-[var(--border-card)]">
-            <div class="flex justify-between items-center pb-2 text-[13px] font-mono font-bold text-[var(--text-muted)]">
-              <span class="flex items-center gap-2 text-[var(--accent-cyan)] whitespace-nowrap">
-                <span class="material-symbols-outlined text-[18px]">graphic_eq</span> LIVE ACOUSTIC SPECTRAL MATRIX
-              </span>
-              <span id="spectralStatusTag" class="text-[11.5px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap">60 FPS FFT</span>
-            </div>
-            <div class="relative w-full h-34 sm:h-38 mt-1 rounded-xl overflow-hidden border border-[var(--border-card)]" style="background: var(--spec-canvas-bg);">
-              <canvas id="spectralMatrixCanvas" class="w-full h-full block"></canvas>
-              <div class="absolute top-1 left-2 text-[11px] font-mono text-[var(--accent-cyan)] font-bold pointer-events-none">8kHz</div>
-              <div class="absolute top-1/2 -translate-y-1/2 left-2 text-[10.5px] font-mono text-white/70 font-bold pointer-events-none">4kHz</div>
-              <div class="absolute bottom-1 left-2 text-[11px] font-mono text-[var(--accent-cyan)] font-bold pointer-events-none">0kHz</div>
-            </div>
-            <div class="flex justify-between items-center mt-2.5 text-[12.5px] font-mono text-[var(--text-sublabel)] font-semibold">
-              <span>RMS Energy: <span id="audioLevelDisplay" class="font-bold text-[var(--text-primary)]">0</span>%</span>
-              <span id="noiseGateNotice" class="whitespace-nowrap">Adaptive Silence Gate</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 4 Sub-Metrics Bars -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3.5 pt-3.5 border-t border-[var(--border-card)]/60 font-mono">
-          <div class="flex flex-col gap-1.5 p-2.5 sm:p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0" title="Acoustic Synthetics Analysis">
-            <div class="flex justify-between items-baseline gap-1 text-[11.5px] sm:text-[12px]">
-              <span class="text-[var(--text-muted)] font-bold uppercase tracking-tight truncate">Synthetics</span>
-              <span id="voiceBadge" class="text-[12.5px] sm:text-[13.5px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap ml-1">10% (HUMAN)</span>
-            </div>
-            <div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5">
-              <div id="barVoiceAuth" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 10%;"></div>
-            </div>
-          </div>
-          <div class="flex flex-col gap-1.5 p-2.5 sm:p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0" title="Vocoder Artifact Detection">
-            <div class="flex justify-between items-baseline gap-1 text-[11.5px] sm:text-[12px]">
-              <span class="text-[var(--text-muted)] font-bold uppercase tracking-tight truncate">Vocoder</span>
-              <span id="vocoderBadge" class="text-[12.5px] sm:text-[13px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap ml-1">CLEAN</span>
-            </div>
-            <div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5">
-              <div id="barVocoder" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 8%;"></div>
-            </div>
-          </div>
-          <div class="flex flex-col gap-1.5 p-2.5 sm:p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0" title="Coercion & Urgency NLP Intent">
-            <div class="flex justify-between items-baseline gap-1 text-[11.5px] sm:text-[12px]">
-              <span class="text-[var(--text-muted)] font-bold uppercase tracking-tight truncate">Coercion</span>
-              <span id="scriptBadge" class="text-[12.5px] sm:text-[13.5px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap ml-1">CLEAN</span>
-            </div>
-            <div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5">
-              <div id="barScriptNlp" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 5%;"></div>
-            </div>
-          </div>
-          <div class="flex flex-col gap-1.5 p-2.5 sm:p-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] min-w-0" title="Evidence Log-Likelihood Ratio">
-            <div class="flex justify-between items-baseline gap-1 text-[11.5px] sm:text-[12px]">
-              <span class="text-[var(--text-muted)] font-bold uppercase tracking-tight truncate">Evidence LLR</span>
-              <span id="xaiLlrVal" class="text-[12.5px] sm:text-[13.5px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap ml-1">-2.45 dB</span>
-            </div>
-            <div class="h-2 w-full bg-[var(--bar-bg)] rounded-full overflow-hidden mt-0.5">
-              <div id="xaiLlrBar" class="h-full bg-[var(--accent-emerald)] rounded-full transition-all duration-300" style="width: 12%;"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 2. AUTONOMOUS BANKING CARD -->
-      <section id="bankingDefenseCard" class="glass-panel rounded-2xl p-3.5 sm:p-4.5 flex flex-wrap items-center justify-between gap-3 transition-all duration-300 overflow-hidden" style="background: var(--defense-safe-bg); border-color: var(--defense-safe-border);">
-        <div class="flex items-center gap-2.5 flex-wrap min-w-0">
-          <div id="bankingPolicyBadge" class="flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[13px] sm:text-[14px] font-mono font-extrabold tracking-wide whitespace-nowrap" style="background: var(--defense-safe-bg); border-color: var(--defense-safe-border); color: var(--defense-safe-text);">
-            <span id="defenseStatusDot" class="w-2.5 h-2.5 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span>
-            <span id="bankingPolicyText">AUTONOMOUS DEFENSE: ACTIVE &amp; MONITORING</span>
-          </div>
-          <button id="btnBiometricOverride" type="button" onclick="openBiometricModal()" class="hidden flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[var(--accent-crimson)] text-white text-[12.5px] font-mono font-extrabold hover:opacity-90 active:scale-95 transition-all shadow-md animate-pulse cursor-pointer whitespace-nowrap">
-            <span class="material-symbols-outlined text-[18px]">fingerprint</span> BIOMETRIC OVERRIDE
-          </button>
-        </div>
-        <div class="flex items-center gap-2.5 flex-wrap sm:flex-nowrap ml-auto">
-          <div class="hidden xl:flex items-center gap-1.5 overflow-hidden max-w-[260px] whitespace-nowrap font-mono text-[12px] bg-[var(--bg-card-sub)] px-2.5 py-1 rounded-lg border border-[var(--border-card)]">
-            <span class="font-bold text-[var(--text-sublabel)] whitespace-nowrap">SEAL:</span>
-            <span id="evidenceHashDisplay" class="text-[var(--accent-cyan)] font-semibold truncate select-all">SHA256-e3b0c442...991b855</span>
-          </div>
-          <button id="btnDispatch1930" type="button" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/35 text-[12.5px] sm:text-[13px] font-mono text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/25 font-extrabold transition-all whitespace-nowrap shadow-sm cursor-pointer" title="Dispatch Live Telemetry to I4C Cyber Crime 1930">
-            <span class="material-symbols-outlined text-[17px]">call</span> 1930 DISPATCH (I4C)
-          </button>
-          <button id="btnManualLock" type="button" class="p-1.5 sm:p-2 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent-cyan)] transition-all cursor-pointer font-bold flex-shrink-0 flex items-center justify-center" title="Toggle Emergency Shield">
-            <span class="material-symbols-outlined text-[19px]">lock</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- 3. MULTI-VECTOR EXTORTION STREAM -->
-      <section class="glass-panel rounded-2xl p-5 sm:p-6 flex flex-col gap-3.5">
-        <div class="flex items-center justify-between pb-2.5 border-b border-[var(--border-card)]">
-          <div class="flex items-center gap-2">
-            <span class="w-3 h-3 rounded-full bg-[var(--accent-cyan)] animate-pulse"></span>
-            <span class="text-[14.5px] font-mono font-extrabold tracking-wider text-[var(--accent-cyan)] uppercase whitespace-nowrap">REAL-TIME MULTIMODAL FORENSIC AUDIT TRAIL</span>
-          </div>
-          <span id="speechStateTag" class="text-[12.5px] font-mono text-[var(--accent-cyan)] uppercase font-extrabold whitespace-nowrap">MIC READY</span>
-        </div>
-        <div id="detectedKeywordsBox" class="flex flex-wrap gap-2.5 hidden"></div>
-        <div id="transcriptFeed" class="h-38 sm:h-44 overflow-y-auto bg-[var(--bg-card-sub)] p-4 rounded-xl border border-[var(--border-card)] flex flex-col gap-3 font-mono text-[15.5px] font-bold leading-[1.7] pr-2">
-          <p class="text-[var(--text-muted)] italic text-[14px] animate-pulse font-medium">&gt; Forensic audit trail active. Monitoring live applicant vocal tract &amp; physical document telemetry...</p>
-        </div>
-        <div class="flex items-center gap-2 mt-0.5">
-          <input type="text" id="quickScriptInput" placeholder="Simulate KYC statement (e.g. 'UIDAI biometric update', 'official bank KYC verification')..." class="flex-1 px-3.5 py-2 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[13px] font-mono text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-[var(--accent-cyan)]">
-          <button id="btnTestScript" type="button" class="px-3.5 py-2 rounded-xl bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/40 text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/25 font-mono text-[12.5px] font-bold cursor-pointer whitespace-nowrap">Scan Script</button>
-        </div>
-      </section>
-    </div>
   </div>
 </main>
 
@@ -3028,7 +3022,7 @@ function updateXaiMetrics(jitter, distortion, llr, vocoderLevel) {
 
     if (llrVal) {
         llrVal.textContent = (xaiLlr >= 0 ? "+" : "") + xaiLlr.toFixed(2) + " dB";
-        llrVal.className = xaiLlr >= 3.0 ? "text-[15px] text-[var(--accent-crimson)] font-extrabold ml-1" : (xaiLlr > 0 ? "text-[15px] text-[var(--accent-amber)] font-extrabold ml-1" : "text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1");
+        llrVal.className = xaiLlr >= 3.0 ? "text-[9.5px] text-[var(--accent-crimson)] font-extrabold ml-1 truncate" : (xaiLlr > 0 ? "text-[9.5px] text-[var(--accent-amber)] font-extrabold ml-1 truncate" : "text-[9.5px] text-[var(--accent-emerald)] font-extrabold ml-1 truncate");
     }
     if (llrBar) {
         var lpct = Math.min(100, Math.max(5, ((xaiLlr + 4.0) / 9.0) * 100));
@@ -3039,22 +3033,22 @@ function updateXaiMetrics(jitter, distortion, llr, vocoderLevel) {
     if (vocoderBadge && barVocoder) {
         var vLevel = vocoderLevel;
         if (!vLevel) {
-            if (xaiLlr >= 3.0 || xaiDistortion > 6.0) vLevel = "UNNATURAL VOCAL SPECTRUM";
+            if (xaiLlr >= 3.0 || xaiDistortion > 6.0) vLevel = "UNNATURAL SPECTRUM";
             else if (xaiLlr > 0 || xaiDistortion > 2.0) vLevel = "MODERATE";
-            else vLevel = "CLEAN / BIOLOGICAL";
+            else vLevel = "CLEAN";
         }
         vocoderBadge.textContent = vLevel;
-        if (vLevel === 'UNNATURAL VOCAL SPECTRUM' || vLevel === 'CRITICAL' || vLevel === 'UNNATURAL HARMONICS') {
-            vocoderBadge.className = "text-[14px] text-[var(--accent-crimson)] font-extrabold ml-1 truncate";
+        if (vLevel === 'UNNATURAL VOCAL SPECTRUM' || vLevel === 'UNNATURAL SPECTRUM' || vLevel === 'CRITICAL' || vLevel === 'UNNATURAL HARMONICS') {
+            vocoderBadge.className = "text-[9.5px] text-[var(--accent-crimson)] font-extrabold ml-1 truncate";
             barVocoder.style.background = "var(--accent-crimson)";
             barVocoder.style.width = "92%";
         } else if (vLevel === 'MODERATE') {
-            vocoderBadge.className = "text-[14px] text-[var(--accent-amber)] font-extrabold ml-1 truncate";
+            vocoderBadge.className = "text-[9.5px] text-[var(--accent-amber)] font-extrabold ml-1 truncate";
             barVocoder.style.background = "var(--accent-amber)";
             barVocoder.style.width = "50%";
         } else {
-            vocoderBadge.textContent = "CLEAN / BIOLOGICAL";
-            vocoderBadge.className = "text-[14px] text-[var(--accent-emerald)] font-extrabold ml-1 truncate";
+            vocoderBadge.textContent = "CLEAN";
+            vocoderBadge.className = "text-[9.5px] text-[var(--accent-emerald)] font-extrabold ml-1 truncate";
             barVocoder.style.background = "var(--accent-emerald)";
             barVocoder.style.width = "8%";
         }
@@ -3221,18 +3215,18 @@ function updateVoiceAuthUI(riskPercent, humanPercent, badgeLabel) {
             bar.style.width = val + '%';
             bar.style.background = 'var(--accent-crimson)';
             badge.textContent = badgeLabel || (val + "% (AI CLONE)");
-            badge.className = 'text-[15px] text-[var(--accent-crimson)] font-extrabold ml-1';
+            badge.className = 'text-[9.5px] text-[var(--accent-crimson)] font-extrabold ml-1 truncate';
         } else if (riskPercent >= 30) {
             bar.style.width = riskPercent + '%';
             bar.style.background = 'var(--accent-amber)';
             badge.textContent = badgeLabel || (riskPercent + "% (SUSPICIOUS)");
-            badge.className = 'text-[15px] text-[var(--accent-amber)] font-extrabold ml-1';
+            badge.className = 'text-[9.5px] text-[var(--accent-amber)] font-extrabold ml-1 truncate';
         } else {
             var safeVal = Math.max(8, Math.min(12, riskPercent));
             bar.style.width = safeVal + '%';
             bar.style.background = 'var(--accent-emerald)';
             badge.textContent = safeVal + "% (HUMAN)";
-            badge.className = 'text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1';
+            badge.className = 'text-[9.5px] text-[var(--accent-emerald)] font-extrabold ml-1 truncate';
         }
     }
 }
@@ -3247,17 +3241,17 @@ function updateScriptNlpUI(riskPercent, topThreat, intentLevel) {
             bar.style.width = riskPercent + '%';
             bar.style.background = 'var(--accent-crimson)';
             badge.textContent = label;
-            badge.className = 'text-[14px] text-[var(--accent-crimson)] font-extrabold ml-1 truncate';
+            badge.className = 'text-[9.5px] text-[var(--accent-crimson)] font-extrabold ml-1 truncate';
         } else if (riskPercent >= 30) {
             bar.style.width = riskPercent + '%';
             bar.style.background = 'var(--accent-amber)';
             badge.textContent = label;
-            badge.className = 'text-[15px] text-[var(--accent-amber)] font-extrabold ml-1';
+            badge.className = 'text-[9.5px] text-[var(--accent-amber)] font-extrabold ml-1 truncate';
         } else {
             bar.style.width = Math.max(5, riskPercent) + '%';
             bar.style.background = 'var(--accent-emerald)';
             badge.textContent = label;
-            badge.className = 'text-[15px] text-[var(--accent-emerald)] font-extrabold ml-1';
+            badge.className = 'text-[9.5px] text-[var(--accent-emerald)] font-extrabold ml-1 truncate';
         }
     }
 }
@@ -3311,19 +3305,19 @@ function updateCombinedRiskUI() {
         }
         if (scoreEl) {
             scoreEl.textContent = '0%';
-            scoreEl.className = 'text-[50px] sm:text-[54px] font-mono font-extrabold text-[var(--accent-emerald)] leading-none';
+            scoreEl.className = 'text-[24px] font-mono font-extrabold text-[var(--accent-emerald)] leading-none';
         }
         if (labelEl) {
             labelEl.textContent = 'IDENTITY AUTHENTIC (ALLOW)';
-            labelEl.className = 'text-[15px] sm:text-[16px] font-mono font-extrabold text-[var(--accent-emerald)] uppercase tracking-wider mt-1';
+            labelEl.className = 'text-[8.5px] font-mono font-extrabold text-[var(--accent-emerald)] uppercase tracking-tight mt-0.5 leading-tight text-center';
         }
         if (vocalProsodyLabel) {
             vocalProsodyLabel.textContent = 'AUTHENTIC HUMAN SPEECH';
-            vocalProsodyLabel.className = 'mt-3 text-center text-[13.5px] font-mono font-extrabold text-[var(--accent-emerald)] bg-[var(--header-badge-bg)] px-4 py-1.5 rounded-full border border-[var(--header-badge-border)] tracking-wider whitespace-nowrap';
+            vocalProsodyLabel.className = 'mt-1 text-center text-[9px] font-mono font-extrabold text-[var(--accent-emerald)] bg-[var(--header-badge-bg)] px-2 py-0.5 rounded-full border border-[var(--header-badge-border)] tracking-wider whitespace-nowrap';
         }
         if (statusPill) {
             statusPill.textContent = 'STANDBY / LISTENING';
-            statusPill.className = 'text-[13px] font-mono px-3.5 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)] text-[var(--header-badge-text)] font-extrabold whitespace-nowrap';
+            statusPill.className = 'text-[9.5px] font-mono px-2 py-0.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)] text-[var(--header-badge-text)] font-extrabold whitespace-nowrap';
         }
         if (headerStatusText) {
             headerStatusText.textContent = 'SYSTEM SECURE';
@@ -3366,10 +3360,10 @@ function updateCombinedRiskUI() {
     // 2. CRITICAL THREAT (Risk >= 70% or manual lock)
     if (overallRisk >= 70 || manualBankingLock) {
         emergencyActive = true;
-        if (scoreEl) scoreEl.className = 'text-[50px] sm:text-[54px] font-mono font-extrabold text-[var(--accent-crimson)] leading-none animate-pulse';
+        if (scoreEl) scoreEl.className = 'text-[24px] font-mono font-extrabold text-[var(--accent-crimson)] leading-none animate-pulse';
         if (labelEl) {
             labelEl.textContent = "SYNTHETIC IDENTITY DETECTED (HOLD)";
-            labelEl.className = 'text-[14px] sm:text-[15px] font-mono font-extrabold text-[var(--accent-crimson)] uppercase tracking-wider mt-1 animate-pulse';
+            labelEl.className = 'text-[8.5px] font-mono font-extrabold text-[var(--accent-crimson)] uppercase tracking-tight mt-0.5 leading-tight text-center animate-pulse';
         }
         if (typeof updateVoiceBiometricStatusBadge === 'function') {
             updateVoiceBiometricStatusBadge('synthetic');
@@ -3400,11 +3394,11 @@ function updateCombinedRiskUI() {
 
         if (vocalProsodyLabel) {
             vocalProsodyLabel.textContent = vocalProsodyText;
-            vocalProsodyLabel.className = "mt-3 text-center text-[13.5px] font-mono font-extrabold text-[var(--accent-crimson)] bg-[var(--accent-crimson)]/20 px-4 py-1.5 rounded-full border border-[var(--accent-crimson)] tracking-wider animate-pulse whitespace-nowrap";
+            vocalProsodyLabel.className = "mt-1 text-center text-[9px] font-mono font-extrabold text-[var(--accent-crimson)] bg-[var(--accent-crimson)]/20 px-2 py-0.5 rounded-full border border-[var(--accent-crimson)] tracking-wider animate-pulse whitespace-nowrap";
         }
         if (statusPill) {
             statusPill.textContent = liveVoiceRisk >= 70 ? "SYNTHETIC AI VOICE CLONE DETECTED" : "CRITICAL THREAT DETECTED";
-            statusPill.className = "text-[13px] font-mono px-3.5 py-1.5 rounded-full bg-[var(--accent-crimson)]/20 border border-[var(--accent-crimson)] text-[var(--accent-crimson)] font-extrabold animate-pulse whitespace-nowrap";
+            statusPill.className = "text-[9.5px] font-mono px-2 py-0.5 rounded-full bg-[var(--accent-crimson)]/20 border border-[var(--accent-crimson)] text-[var(--accent-crimson)] font-extrabold animate-pulse whitespace-nowrap";
         }
         if (headerStatusText) {
             headerStatusText.textContent = "CRITICAL DEFENSE ACTIVE";
@@ -3461,10 +3455,10 @@ function updateCombinedRiskUI() {
         emergencyActive = false;
         stopEmergencySiren();
 
-        if (scoreEl) scoreEl.className = 'text-[50px] sm:text-[54px] font-mono font-extrabold text-[var(--accent-amber)] leading-none';
+        if (scoreEl) scoreEl.className = 'text-[24px] font-mono font-extrabold text-[var(--accent-amber)] leading-none';
         if (labelEl) {
             labelEl.textContent = "SUSPICIOUS BIOMETRICS (WARN)";
-            labelEl.className = 'text-[14px] sm:text-[15px] font-mono font-extrabold text-[var(--accent-amber)] uppercase tracking-wider mt-1';
+            labelEl.className = 'text-[8.5px] font-mono font-extrabold text-[var(--accent-amber)] uppercase tracking-tight mt-0.5 leading-tight text-center';
         }
         if (typeof updateVoiceBiometricStatusBadge === 'function') {
             updateVoiceBiometricStatusBadge('suspicious');
@@ -3473,11 +3467,11 @@ function updateCombinedRiskUI() {
 
         if (vocalProsodyLabel) {
             vocalProsodyLabel.textContent = "UNUSUAL PROSODY / CAUTION";
-            vocalProsodyLabel.className = "mt-3 text-center text-[13.5px] font-mono font-extrabold text-[var(--accent-amber)] bg-[var(--accent-amber)]/20 px-4 py-1.5 rounded-full border border-[var(--accent-amber)] tracking-wider whitespace-nowrap";
+            vocalProsodyLabel.className = "mt-1 text-center text-[9px] font-mono font-extrabold text-[var(--accent-amber)] bg-[var(--accent-amber)]/20 px-2 py-0.5 rounded-full border border-[var(--accent-amber)] tracking-wider whitespace-nowrap";
         }
         if (statusPill) {
             statusPill.textContent = "CAUTION ADVISED";
-            statusPill.className = "text-[13px] font-mono px-3.5 py-1.5 rounded-full bg-[var(--accent-amber)]/20 border border-[var(--accent-amber)] text-[var(--accent-amber)] font-extrabold whitespace-nowrap";
+            statusPill.className = "text-[9.5px] font-mono px-2 py-0.5 rounded-full bg-[var(--accent-amber)]/20 border border-[var(--accent-amber)] text-[var(--accent-amber)] font-extrabold whitespace-nowrap";
         }
         if (headerStatusText) {
             headerStatusText.textContent = "SUSPICIOUS PATTERN";
@@ -3518,10 +3512,10 @@ function updateCombinedRiskUI() {
         emergencyActive = false;
         stopEmergencySiren();
 
-        if (scoreEl) scoreEl.className = 'text-[50px] sm:text-[54px] font-mono font-extrabold text-[var(--accent-emerald)] leading-none';
+        if (scoreEl) scoreEl.className = 'text-[24px] font-mono font-extrabold text-[var(--accent-emerald)] leading-none';
         if (labelEl) {
             labelEl.textContent = "IDENTITY AUTHENTIC (ALLOW)";
-            labelEl.className = 'text-[14px] sm:text-[15px] font-mono font-extrabold text-[var(--accent-emerald)] uppercase tracking-wider mt-1';
+            labelEl.className = 'text-[8.5px] font-mono font-extrabold text-[var(--accent-emerald)] uppercase tracking-tight mt-0.5 leading-tight text-center';
         }
         if (typeof updateVoiceBiometricStatusBadge === 'function') {
             updateVoiceBiometricStatusBadge('safe');
@@ -3530,11 +3524,11 @@ function updateCombinedRiskUI() {
 
         if (vocalProsodyLabel) {
             vocalProsodyLabel.textContent = "AUTHENTIC HUMAN SPEECH";
-            vocalProsodyLabel.className = "mt-3 text-center text-[13.5px] font-mono font-extrabold text-[var(--accent-emerald)] bg-[var(--header-badge-bg)] px-4 py-1.5 rounded-full border border-[var(--header-badge-border)] tracking-wider whitespace-nowrap";
+            vocalProsodyLabel.className = "mt-1 text-center text-[9px] font-mono font-extrabold text-[var(--accent-emerald)] bg-[var(--header-badge-bg)] px-2 py-0.5 rounded-full border border-[var(--header-badge-border)] tracking-wider whitespace-nowrap";
         }
         if (statusPill) {
             statusPill.textContent = "AUTHENTIC HUMAN SPEECH";
-            statusPill.className = "text-[13px] font-mono px-3.5 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)] text-[var(--header-badge-text)] font-extrabold whitespace-nowrap";
+            statusPill.className = "text-[9.5px] font-mono px-2 py-0.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)] text-[var(--header-badge-text)] font-extrabold whitespace-nowrap";
         }
         if (headerStatusText) {
             headerStatusText.textContent = "SYSTEM SECURE";
