@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" class="dark theme-cyber"><head><meta charset="utf-8"><meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"><title>Dhwani-Kavach — Multimodal Synthetic Identity &amp; Document Screening Portal (SIH26188 | MHA Cyber Defense Track)</title><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"><script id="tailwind-config">if (typeof tailwind !== 'undefined') {
+<!DOCTYPE html><html lang="en" class="dark theme-cyber"><head><meta charset="utf-8"><meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"><title>Identity-Kavach — Multimodal Synthetic Identity &amp; Document Screening Portal (SIH26188 | MHA Cyber Defense Track)</title><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&family=JetBrains+Mono:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"><script id="tailwind-config">if (typeof tailwind !== 'undefined') {
     tailwind.config = {
         darkMode: "class",
         theme: {
@@ -841,7 +841,7 @@ button:active:not(:disabled),
     <div class="flex items-center gap-2.5">
       <span class="material-symbols-outlined text-[var(--accent-cyan)] text-3xl sm:text-4xl animate-pulse">security</span>
       <div class="flex flex-col">
-        <span class="font-mono font-extrabold text-[22px] sm:text-[24px] tracking-[0.16em] text-[var(--text-primary)] uppercase leading-tight">DHWANI-KAVACH</span>
+        <span class="font-mono font-extrabold text-[22px] sm:text-[24px] tracking-[0.16em] text-[var(--text-primary)] uppercase leading-tight">IDENTITY-KAVACH</span>
         <span class="text-[12px] sm:text-[12.5px] font-mono text-[var(--text-muted)] hidden sm:inline font-bold">Multimodal Synthetic Identity &amp; Document Screening Portal</span>
       </div>
     </div>
@@ -1365,7 +1365,7 @@ button:active:not(:disabled),
 
 
 <!-- APPLE-STYLE FLOATING GLASS DECK (OPTION 1) -->
-<nav id="appleGlassDeck" class="fixed right-5 top-1/2 -translate-y-1/2 z-65 flex flex-col items-stretch gap-1 px-2.5 py-3 rounded-2xl transition-all shadow-2xl" title="Dhwani-Kavach Active Defense Deck">
+<nav id="appleGlassDeck" class="fixed right-5 top-1/2 -translate-y-1/2 z-65 flex flex-col items-stretch gap-1 px-2.5 py-3 rounded-2xl transition-all shadow-2xl" title="Identity-Kavach Active Defense Deck">
   <!-- 1. Elder Mode -->
   <button id="deckElderBtn" type="button" onclick="toggleDeckElderMode()" class="deck-btn" title="Toggle Elder Mode (Enlarged Fonts + Regional TTS Audio)">
     <span class="deck-icon">👵</span>
@@ -7396,7 +7396,7 @@ document.addEventListener('click',function(e){
     return {caseId:'DK-'+Date.now().toString(36).toUpperCase(),time:new Date().toLocaleString('en-IN'),dev:uuid(),sw:sw,fam:fam,drill:drill,lang:lang,tier:tier,radar:radar};
   }
   function dossierHTML(d,forPrint){
-    return '<h2 style="margin:0 0 2px">\uD83D\uDEE1\uFE0F DHWANI KAVACH \u2014 EVIDENCE DOSSIER</h2>'
+    return '<h2 style="margin:0 0 2px">\uD83D\uDEE1\uFE0F IDENTITY KAVACH \u2014 EVIDENCE DOSSIER</h2>'
       +'<div style="font-size:11px;color:#555">Auto-generated on-device \u2022 DEMONSTRATION \u2014 telephone channel simulated \u2022 not legal advice</div>'
       +'<h3>1. Case Summary</h3>'
       +'<table><tr><td><b>Case ID</b></td><td>'+d.caseId+'</td><td><b>Generated</b></td><td>'+d.time+'</td></tr>'
@@ -7412,7 +7412,7 @@ document.addEventListener('click',function(e){
       +'<div style="font-size:11px;color:#555;margin-top:4px">Chain of custody: hashes computed on-device at analysis time; no raw audio uploaded; this dossier generated locally.</div>'
       +'<h3>3. Certificate Template \u2014 Section 63, Bharatiya Sakshya Adhiniyam / IT Act s.65B</h3>'
       +'<div class="dk7Sig"><b>Certificate (template)</b><br>'
-      +'\u201CI, ____________________ (name), certify that the electronic record(s) described above were produced by the Dhwani Kavach application running on device '+d.dev+' during a regular course of activity, and the SHA-256 hash values were computed by the application at the time of analysis. Output was produced without human intervention on the audio content.\u201D<br><br>'
+      +'\u201CI, ____________________ (name), certify that the electronic record(s) described above were produced by the Identity Kavach application running on device '+d.dev+' during a regular course of activity, and the SHA-256 hash values were computed by the application at the time of analysis. Output was produced without human intervention on the audio content.\u201D<br><br>'
       +'Signature: ____________________ &nbsp;&nbsp; Date: '+new Date().toLocaleDateString('en-IN')+' &nbsp;&nbsp; Place: ____________________</div>'
       +'<div class="dk7Foot">DEMONSTRATION artifact for Smart India Hackathon 2026 (SIH26188 - MHA Track). Telephone channel is simulated and disclosed; legal certificate is a template \u2014 consult counsel before filing.</div>';
   }
@@ -8511,7 +8511,7 @@ function downloadEvidenceCertificate() {
 NATIONAL CYBER CRIME INVESTIGATION EVIDENCE CERTIFICATE
 Indian Evidence Act Section 65B Admissible Digital Telemetry Dossier
 ========================================================================
-Platform: Dhwani-Kavach Multimodal Synthetic Identity & Document Screening Portal (SIH26188 | MHA Track)
+Platform: Identity-Kavach Multimodal Synthetic Identity & Document Screening Portal (SIH26188 | MHA Track)
 Generated Timestamp: ${now}
 Cryptographic SHA-256 Custody Hash: ${hash}
 System Status: I4C 1930 Active Defense Integration
@@ -8533,7 +8533,7 @@ tamper-proof from the instant of call interception.
     var blob = new Blob([text], { type: 'text/plain' });
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'Dhwani_Kavach_Evidence_Cert_65B.txt';
+    a.download = 'Identity_Kavach_Evidence_Cert_65B.txt';
     a.click();
 }
 
