@@ -99,10 +99,17 @@ except Exception as _e:
 
 try:
     from flask_cors import CORS
-    CORS(app)
+    CORS(app, resources={r"/*": {"origins": "*"}})
     print("CORS: on")
 except ImportError:
     print("CORS: flask-cors not installed - other devices may be blocked")
+
+@app.after_request
+def add_cors_headers(response):
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization, Access-Control-Allow-Origin"
+    response.headers["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS, PUT, DELETE"
+    return response
 
 
 def score_audio(y):
@@ -137,8 +144,8 @@ def reset():
 
 @app.route("/api/ping", methods=["GET", "POST"])
 def ping():
-    return jsonify({"ok": True, "status": "ok", "online": True,
-                    "backend": "online", "model": MODEL_NAME})
+    return jsonify({"ok": True, "status": "ONLINE", "online": True,
+                    "backend": "online", "app": "DHWANI-KAVACH", "model": MODEL_NAME})
 
 @app.route("/api/context", methods=["POST"])
 def context():
@@ -172,7 +179,33 @@ def context():
         notes.append("Caller claims to be from a bank but the number is not the "
                      "bank's official helpline - classic impersonation pattern")
         level = "danger"
-    return jsonify({"number": number, "level": level, "notes": notes})
+    trust_score = 38 if level == "danger" else (85 if level == "safe" else 60)
+    return jsonify({"number": number, "level": level, "notes": notes, "trust_score": trust_score})
+
+
+@app.route("/api/action/oob", methods=["POST"])
+def action_oob():
+    d = request.get_json(force=True) if request.is_json else {}
+    return jsonify({"ok": True, "status": "INITIATED", "number": d.get("number")})
+
+
+@app.route("/api/action/report", methods=["POST"])
+def action_report():
+    d = request.get_json(force=True) if request.is_json else {}
+    return jsonify({"ok": True, "status": "DISPATCHED", "tier": d.get("tier")})
+
+
+@app.route("/api/demo_audio/<kind>", methods=["GET"])
+def demo_audio(kind):
+    paths = {
+        "real": "results/demo/demo_real_studio.wav",
+        "fake": "results/demo/demo_fake_studio.wav",
+        "my_voice": "results/codec_test/myvoice_in.wav",
+    }
+    p = paths.get(kind)
+    if p and os.path.exists(p):
+        return send_file(p, mimetype="audio/wav")
+    return jsonify({"error": "not found"}), 404
 
 
 
@@ -284,8 +317,9 @@ if __name__ == "__main__":
         _s.close()
     except Exception:
         _lan_ip = "(run ipconfig to find it)"
+    port = int(os.environ.get("PORT", 8000))
     print()
     print("DHWANI-KAVACH demo v2. Open in your browser (Chrome recommended):")
-    print("       http://127.0.0.1:8000")
-    print(f"phones on the same Wi-Fi:  http://{_lan_ip}:8000")
-    app.run(host="0.0.0.0", port=8000, debug=False)
+    print(f"       http://127.0.0.1:{port}")
+    print(f"phones on the same Wi-Fi:  http://{_lan_ip}:{port}")
+    app.run(host="0.0.0.0", port=port, debug=False)

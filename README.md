@@ -106,6 +106,13 @@ Key scripts: `1_record_voice.py` (enrol your voice) · `7_train_cnn.py` / `8_tra
 (training) · `2_test_codecs.py` (codec robustness) · `13_MAKE_BENCHMARK_PAIR.PY`
 (benchmarks) · `17_export_onnx.py` (ONNX self-test) · `test_server_api.py` (API tests).
 
+## 🚀 Live Cloud Deployment & Auto-CI/CD
+
+The repository includes complete auto-deployment support (Render, Hugging Face Spaces, Docker):
+- **Continuous Deployment (CI/CD)**: Every `git push` to `main` triggers automated testing and auto-updates the live deployment.
+- **Full Guide**: See [DEPLOYMENT.md](DEPLOYMENT.md) for 1-click Render and Hugging Face deployment steps.
+- **Docker**: Run locally or in cloud using `docker build -t dhwani-kavach . && docker run -p 8000:8000 dhwani-kavach`.
+
 ## Privacy & Ethics
 
 - **On-device / on-premise first** — forensic vitals are computed locally in the browser; audio is not uploaded for telemetry.

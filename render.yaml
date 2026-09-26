@@ -1,0 +1,15 @@
+# Render Blueprint for Dhwani-Kavach
+# Automatically enables CI/CD auto-deploy on every git push to main
+services:
+  - type: web
+    name: dhwani-kavach
+    runtime: docker
+    dockerfilePath: Dockerfile
+    plan: free
+    region: singapore
+    branch: main
+    autoDeploy: true
+    healthCheckPath: /api/ping
+    envVars:
+      - key: PORT
+        value: 8000
