@@ -1312,8 +1312,22 @@ button:active:not(:disabled),
             </button>
           </div>
 
+          <!-- Phone Audio Upload & Session Reset Controls -->
+          <div class="flex items-center justify-between gap-2 w-full max-w-[300px] my-1.5 relative z-20">
+            <label class="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] hover:border-[var(--accent-cyan)] text-[11px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer transition-all shadow-sm">
+              <span class="material-symbols-outlined text-[16px] text-[var(--accent-cyan)]">upload_file</span>
+              <span id="citizenUploadLabel" class="font-bold">Upload Audio</span>
+              <input type="file" id="citizenAudioUpload" accept=".wav,.mp3,.ogg,.webm,.m4a" class="hidden">
+            </label>
+            <button type="button" onclick="resetCall()" class="py-2 px-3 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[11px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent-cyan)] active:scale-95 transition-all flex items-center justify-center gap-1 cursor-pointer shadow-sm" title="Reset Session">
+              <span class="material-symbols-outlined text-[15px]">restart_alt</span>
+              <span class="font-bold">Reset</span>
+            </button>
+          </div>
+          <span id="activeScenarioIndicator" class="hidden">MODE: LIVE</span>
+
           <!-- Divider inside Phone -->
-          <div class="w-full h-px bg-[var(--border-card)]/70 my-2.5"></div>
+          <div class="w-full h-px bg-[var(--border-card)]/70 my-2"></div>
 
           <!-- 1. EXPLAINABLE AI BIOMETRIC RISK TELEMETRY (COMPACT PHONE WIDGET) -->
           <div class="w-full flex flex-col gap-2 font-mono">
@@ -1442,34 +1456,6 @@ button:active:not(:disabled),
           </div>
         </div>
       </div>
-
-      <!-- Clean Simulator Preset Card (Zero Clutter) -->
-      <section class="w-full max-w-[430px] glass-panel rounded-2xl p-4 sm:p-5 flex flex-col gap-3">
-        <div class="flex items-center justify-between">
-          <span class="text-[12px] font-mono font-extrabold tracking-wider text-[var(--text-muted)] uppercase whitespace-nowrap">SCREENING SCENARIO PRESETS</span>
-          <span id="activeScenarioIndicator" class="text-[11px] font-mono text-[var(--accent-cyan)] font-extrabold whitespace-nowrap">MODE: LIVE</span>
-        </div>
-        <div class="grid grid-cols-3 gap-2">
-          <button type="button" onclick="triggerScenario('safe')" class="flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-xl bg-[var(--accent-emerald)]/15 border border-[var(--accent-emerald)]/35 text-[var(--accent-emerald)] hover:bg-[var(--accent-emerald)]/25 text-[11px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm text-center">
-            <span class="text-[14px]">🟢</span> <span class="font-extrabold leading-tight">1. Authentic Applicant</span> <span class="text-[9px] text-[var(--text-muted)] mt-0.5">Valid ID + Voice</span>
-          </button>
-          <button type="button" onclick="triggerScenario('digital_arrest')" class="flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-xl bg-[var(--accent-amber)]/15 border border-[var(--accent-amber)]/35 text-[var(--accent-amber)] hover:bg-[var(--accent-amber)]/25 text-[11px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm text-center">
-            <span class="text-[14px]">⚠️</span> <span class="font-extrabold leading-tight">2. Spliced ID Card</span> <span class="text-[9px] text-[var(--text-muted)] mt-0.5">Forged + Real Voice</span>
-          </button>
-          <button type="button" onclick="triggerScenario('clone_extortion')" class="flex flex-col items-center justify-center gap-1 py-2 px-1 rounded-xl bg-[var(--accent-crimson)]/20 border border-[var(--accent-crimson)]/50 text-[var(--accent-crimson)] hover:bg-[var(--accent-crimson)]/30 text-[11px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm text-center">
-            <span class="text-[14px]">🚨</span> <span class="font-extrabold leading-tight">3. Synthetic Voice</span> <span class="text-[9px] text-[var(--text-muted)] mt-0.5">Valid ID + Clone</span>
-          </button>
-        </div>
-        <div class="flex items-center justify-between pt-1">
-          <button type="button" onclick="resetCall()" class="py-1.5 px-3 rounded-lg bg-[var(--bg-card-sub)] border border-[var(--border-card)] text-[12px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:border-[var(--accent-cyan)] active:scale-95 transition-all flex items-center gap-1.5 cursor-pointer">
-            <span class="material-symbols-outlined text-[16px]">restart_alt</span> Reset Session
-          </button>
-          <label class="flex items-center gap-1.5 py-1.5 px-3 rounded-lg bg-[var(--bg-card-sub)] border border-[var(--border-card)] hover:border-[var(--accent-cyan)] text-[12px] font-mono text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer transition-all">
-            <span class="material-symbols-outlined text-[16px] text-[var(--accent-cyan)]">upload_file</span>
-            <span id="citizenUploadLabel">Upload Audio</span>
-            <input type="file" id="citizenAudioUpload" accept=".wav,.mp3,.ogg,.webm,.m4a" class="hidden">
-          </label>
-      </section>
     </div>
   </div>
 </section>
@@ -8308,32 +8294,7 @@ async function secureAuditTrail(userId, riskScore, verdict, hash) {
         console.error("Blockchain ledger commit failed:", error);
     }
 }
-/* ═══ PACK 10 PRESENCE BADGE ═══ */
-(function(){
-  if (window.__DK10BADGE) return;
-  window.__DK10BADGE = 1;
-  function put(){
-    if (document.getElementById('dk10badge')) return;
-    var on = !!(window.DK10 && window.DK_DIAG);
-    var d = document.createElement('div');
-    d.id = 'dk10badge';
-    d.style.cssText = 'position:fixed;left:8px;bottom:8px;z-index:2147483647;padding:4px 9px;'
-      + 'border-radius:6px;font:11px/1.4 system-ui,sans-serif;color:#fff;cursor:pointer;'
-      + 'background:' + (on ? '#15803d' : '#b91c1c') + ';box-shadow:0 1px 6px rgba(0,0,0,.35)';
-    d.textContent = on ? 'DK10 FIX PACK ✓ LOADED — click for diagnostics'
-                       : 'DK10 FIX PACK ✗ NOT LOADED IN THIS FILE';
-    d.title = 'Click = DK_DIAG() table';
-    d.onclick = function(){ try { window.DK_DIAG(); } catch(e){} };
-    (document.body || document.documentElement).appendChild(d);
-  }
-  setTimeout(put, 900);
-  setInterval(put, 3000);
-})();
 </script>
-<!-- ═════════ PACK 10 BADGE END ═════════ -->
-
-<!-- ═════════ END OF PACK 10 (badge included) ═════════ -->
-=======
 <script>
 // Auto-close Left Navigation Drawer when opening any modal
 (function(){
