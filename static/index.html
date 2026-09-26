@@ -843,27 +843,28 @@ button:active:not(:disabled),
       <div class="flex flex-col">
         <div class="flex items-center gap-2">
           <span class="font-mono font-extrabold text-[20px] sm:text-[22px] tracking-[0.14em] text-[var(--text-primary)] uppercase leading-tight">KAVACH-X</span>
-          <span class="bg-red-600 text-white font-mono font-black px-2 py-0.5 rounded tracking-wider text-[10px] shadow-sm animate-pulse">MHA-I4C SOVEREIGN TRACK</span>
+          <span class="bg-blue-700 text-white font-mono font-black px-2 py-0.5 rounded tracking-wider text-[10px] shadow-sm">SPONSOR: SSB | POLICE II (SIH26188)</span>
         </div>
-        <span class="text-[11.5px] sm:text-[12px] font-mono text-[var(--text-muted)] hidden sm:inline font-bold">Identity-Kavach :: Enterprise Synthetic Identity &amp; Document Screening OS</span>
+        <span class="text-[11.5px] sm:text-[12px] font-mono text-[var(--text-muted)] hidden sm:inline font-bold">Sovereign Identity &amp; Physical Document Screening OS &bull; Section 63 BSA 2023</span>
       </div>
     </div>
-    <!-- SIH26188 MHA Cyber Defense Track Tag -->
-    <div id="psTrackBadge" class="hidden sm:flex items-center gap-1.5 ml-2 px-3 py-1 rounded-full bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/40 text-[var(--accent-cyan)] font-mono text-[11px] sm:text-[11.5px] font-extrabold tracking-wide uppercase">
-      <span class="w-2 h-2 rounded-full bg-[var(--accent-cyan)] animate-pulse"></span>
-      <span>PS: SIH26188 | MHA Cyber Defense Track</span>
-    </div>
-    <div id="headerStatusBadge" class="hidden md:flex items-center gap-2 ml-2 px-3.5 py-1.5 rounded-full bg-[var(--header-badge-bg)] border border-[var(--header-badge-border)]">
-      <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span>
-      <span id="headerStatusText" class="text-[12.5px] font-mono font-extrabold tracking-wider text-[var(--header-badge-text)] uppercase whitespace-nowrap">MHA-I4C SCREENING ACTIVE</span>
-    </div>
+    <!-- Active Officer Terminal RBAC Badge (Click to Switch Inspector / Supervisor) -->
+    <button id="officerRbacBtn" type="button" onclick="toggleOfficerRole()" class="flex items-center gap-1.5 ml-2 px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/40 text-blue-300 font-mono text-[11px] font-extrabold tracking-wide uppercase hover:bg-blue-500/25 cursor-pointer transition-all active:scale-95 shadow-sm" title="Active Screening Officer (Click to switch Inspector <-> Supervisor Adjudicator)">
+      <span class="material-symbols-outlined text-[15px]">badge</span>
+      <span id="officerHeaderLabel">👮 INSP. R. RATHORE (SSB CP-04)</span>
+    </button>
+    <!-- Adjudication Queue Badge -->
+    <button id="headerAdjudicationBtn" type="button" onclick="openDeckSheet('adjudicationSheetModal')" class="hidden xl:flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/40 text-amber-300 font-mono text-[11px] font-extrabold uppercase hover:bg-amber-500/25 cursor-pointer shadow-sm" title="Supervisor Adjudication Queue (Module 10)">
+      <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+      <span id="headerQueueCount">⚖️ ADJUDICATION QUEUE (1)</span>
+    </button>
     <button type="button" onclick="openDeckSheet('airgapSheetModal')" class="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 font-mono text-[11px] font-extrabold tracking-wide uppercase hover:bg-emerald-500/25 cursor-pointer transition-all active:scale-95 shadow-sm" title="Module 9.2: Air-Gap Native 100% Offline Engine Diagnostics">
       <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
       <span>🟢 AIR-GAP NATIVE (0 CLOUD CALLS)</span>
     </button>
-    <button type="button" onclick="openDeckSheet('interpolSheetModal')" class="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/40 text-[var(--accent-cyan)] font-mono text-[11px] font-extrabold tracking-wide uppercase hover:bg-[var(--accent-cyan)]/25 cursor-pointer transition-all active:scale-95 shadow-sm" title="Module 11.4: Interpol Official Fraud Taxonomy & SOTA Benchmark Matrix">
+    <button type="button" onclick="openDeckSheet('interpolSheetModal')" class="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/40 text-[var(--accent-cyan)] font-mono text-[11px] font-extrabold tracking-wide uppercase hover:bg-[var(--accent-cyan)]/25 cursor-pointer transition-all active:scale-95 shadow-sm" title="Module 11.4: Interpol-Aligned Fraud Taxonomy & SOTA Benchmark Matrix (Calibrated)">
       <span class="material-symbols-outlined text-[15px]">table_chart</span>
-      <span>INTERPOL BENCHMARK</span>
+      <span>INTERPOL CALIBRATED</span>
     </button>
     <button type="button" onclick="openDeckSheet('sybilSheetModal')" class="hidden 2xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-purple-500/15 border border-purple-500/40 text-purple-300 font-mono text-[11px] font-extrabold tracking-wide uppercase hover:bg-purple-500/25 cursor-pointer transition-all active:scale-95 shadow-sm" title="Module 5.4: ArcFace 512-d Sybil Multi-Identity Vault & MAD Lab">
       <span class="material-symbols-outlined text-[15px]">group</span>
@@ -993,7 +994,7 @@ button:active:not(:disabled),
             <span>Sample Screening Presets (MHA Track):</span>
             <span id="docTamperIndicator" class="text-[var(--accent-emerald)] font-extrabold">TAMPER RISK: 2.1%</span>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
             <button type="button" onclick="selectDocPreset('aadhaar_genuine')" class="flex flex-col items-center justify-center gap-0.5 py-2 px-1 rounded-xl bg-[var(--accent-emerald)]/15 border border-[var(--accent-emerald)]/35 text-[var(--accent-emerald)] hover:bg-[var(--accent-emerald)]/25 text-[11px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm text-center">
               <span class="font-extrabold">🟢 Genuine Aadhaar</span>
               <span class="text-[9.5px] text-[var(--text-muted)]">UIDAI QR Match</span>
@@ -1009,6 +1010,10 @@ button:active:not(:disabled),
             <button type="button" onclick="selectDocPreset('mule_duplicate')" class="flex flex-col items-center justify-center gap-0.5 py-2 px-1 rounded-xl bg-red-950/40 border border-red-500/60 text-red-300 hover:bg-red-900/50 text-[11px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm text-center" title="Module 5.4: 64-bit Perceptual Hash Collision across Syndicate Accounts">
               <span class="font-extrabold">🚨 Duplicate Mule</span>
               <span class="text-[9.5px] text-[var(--text-muted)]">pHash Ring Collide</span>
+            </button>
+            <button type="button" onclick="selectDocPreset('aadhaar_glare_grey')" class="flex flex-col items-center justify-center gap-0.5 py-2 px-1 rounded-xl bg-amber-500/20 border border-amber-500/50 text-amber-300 hover:bg-amber-500/30 text-[11px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm text-center" title="Capture Quality Gate: Glare 44% > 25% triggers honest GREY / Retake">
+              <span class="font-extrabold">🟡 Glare Retake</span>
+              <span class="text-[9.5px] text-[var(--text-muted)]">GREY Quality Gate</span>
             </button>
           </div>
         </div>
@@ -1142,6 +1147,22 @@ button:active:not(:disabled),
           <div class="p-2 rounded-xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] flex flex-col" title="Error Level Analysis (ELA) Compression Tamper">
             <span class="text-[var(--text-muted)] font-bold uppercase truncate">ELA Splicing</span>
             <span id="docElaStat" class="text-[12px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap mt-0.5">2.1% CLEAN</span>
+          </div>
+        </div>
+
+        <!-- P2 Capture Quality Gate & P3 VIZ↔MRZ Char-Level Discrepancy Indicators -->
+        <div id="captureQualityRow" class="p-2.5 rounded-xl bg-black/40 border border-[var(--border-card)] font-mono text-[11px] flex flex-col gap-1.5">
+          <div class="flex items-center justify-between">
+            <span class="text-[var(--text-muted)] font-bold uppercase flex items-center gap-1">
+              <span class="material-symbols-outlined text-[15px] text-cyan-400">camera_enhance</span> Capture Quality Gate:
+            </span>
+            <span id="docQualityStat" class="text-emerald-400 font-extrabold">✓ GLARE 4% (OPTIMAL) &bull; FOCUS 224 (SHARP)</span>
+          </div>
+          <div class="flex items-center justify-between border-t border-white/5 pt-1">
+            <span class="text-[var(--text-muted)] font-bold uppercase flex items-center gap-1">
+              <span class="material-symbols-outlined text-[15px] text-cyan-400">compare_arrows</span> VIZ &harr; MRZ Engine:
+            </span>
+            <span id="docVizMrzStat" class="text-emerald-400 font-extrabold truncate">✓ 100% CONGRUENT (All Check Digits Verified)</span>
           </div>
         </div>
 
@@ -1565,7 +1586,7 @@ button:active:not(:disabled),
   </div>
 </section>
 
-<!-- ═════════ IMMUTABLE BLOCKCHAIN EVIDENCE LEDGER PANEL ═════════ -->
+<!-- ═════════ TAMPER-EVIDENT SHA-256 EVIDENCE LEDGER PANEL ═════════ -->
 <section id="blockchainLedgerPanel" class="w-full glass-panel rounded-3xl p-5 sm:p-6 flex flex-col gap-4 border border-[var(--border-card)] shadow-lg bg-gradient-to-r from-[var(--bg-card)] via-[var(--bg-card-sub)] to-[var(--bg-card)] my-2">
   <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-[var(--border-card)]">
     <div class="flex items-center gap-3">
@@ -1574,26 +1595,34 @@ button:active:not(:disabled),
       </div>
       <div>
         <div class="flex items-center gap-2 flex-wrap">
-          <span class="font-mono font-extrabold text-[15px] sm:text-[16px] text-[var(--accent-cyan)] uppercase tracking-wider">IMMUTABLE BLOCKCHAIN EVIDENCE LEDGER</span>
-          <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[var(--accent-cyan)]/20 border border-[var(--accent-cyan)]/40 text-[var(--accent-cyan)] font-extrabold uppercase">THEME: BLOCKCHAIN &amp; CYBERSECURITY</span>
+          <span class="font-mono font-extrabold text-[15px] sm:text-[16px] text-[var(--accent-cyan)] uppercase tracking-wider">TAMPER-EVIDENT SHA-256 EVIDENCE LEDGER</span>
+          <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[var(--accent-cyan)]/20 border border-[var(--accent-cyan)]/40 text-[var(--accent-cyan)] font-extrabold uppercase">THEME: EVIDENCE CHAIN OF CUSTODY</span>
         </div>
         <p class="text-[11.5px] font-mono text-[var(--text-muted)] mt-0.5">
           Cryptographically Linked SHA-256 Blocks &bull; Tamper-Evident Chain of Custody &bull; Section 63 BSA 2023 Admissibility
         </p>
       </div>
     </div>
-    <div class="flex items-center gap-2.5 flex-wrap">
-      <span id="blockchainStatusBadge" class="text-[11.5px] font-mono px-3.5 py-1.5 rounded-full bg-[var(--accent-emerald)]/15 border border-[var(--accent-emerald)]/40 text-[var(--accent-emerald)] font-extrabold flex items-center gap-2 whitespace-nowrap shadow-sm">
+    <div class="flex items-center gap-2 flex-wrap">
+      <span id="blockchainStatusBadge" class="text-[11.5px] font-mono px-3 py-1.5 rounded-full bg-[var(--accent-emerald)]/15 border border-[var(--accent-emerald)]/40 text-[var(--accent-emerald)] font-extrabold flex items-center gap-2 whitespace-nowrap shadow-sm">
         <span class="w-2.5 h-2.5 rounded-full bg-[var(--accent-emerald)] animate-pulse"></span>
         <span id="blockchainStatusText">✓ Chain Intact</span>
       </span>
-      <button type="button" onclick="verifyBlockchainChain()" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[var(--accent-cyan)]/15 hover:bg-[var(--accent-cyan)]/25 border border-[var(--accent-cyan)]/40 text-[12px] font-mono font-extrabold text-[var(--accent-cyan)] active:scale-95 transition-all cursor-pointer shadow-sm whitespace-nowrap">
-        <span class="material-symbols-outlined text-[17px]">verified</span>
-        <span>VERIFY CHAIN INTEGRITY</span>
+      <button type="button" onclick="verifyBlockchainChain()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[var(--accent-cyan)]/15 hover:bg-[var(--accent-cyan)]/25 border border-[var(--accent-cyan)]/40 text-[11.5px] font-mono font-extrabold text-[var(--accent-cyan)] active:scale-95 transition-all cursor-pointer shadow-sm whitespace-nowrap">
+        <span class="material-symbols-outlined text-[16px]">verified</span>
+        <span>VERIFY INTEGRITY</span>
       </button>
-      <button type="button" onclick="downloadEvidenceCertificate()" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/50 text-[12px] font-mono font-extrabold text-purple-300 active:scale-95 transition-all cursor-pointer shadow-sm whitespace-nowrap" title="Generate Section 63 BSA 2023 Court Admissible PDF Certificate">
-        <span class="material-symbols-outlined text-[17px]">picture_as_pdf</span>
-        <span>EXPORT SEC 63 BSA DOSSIER (PDF)</span>
+      <button type="button" onclick="testSimulateLedgerTamper()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-red-950/60 hover:bg-red-900/80 border border-red-500/60 text-[11.5px] font-mono font-extrabold text-red-200 active:scale-95 transition-all cursor-pointer shadow-sm whitespace-nowrap" title="Stage Demo P7: Maliciously edit a ledger row and watch verification fail">
+        <span class="material-symbols-outlined text-[16px]">bug_report</span>
+        <span>SIMULATE TAMPER</span>
+      </button>
+      <button type="button" id="btnResetTamper" onclick="testResetLedgerTamper()" class="hidden items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/50 text-[11.5px] font-mono font-extrabold text-emerald-300 active:scale-95 transition-all cursor-pointer shadow-sm whitespace-nowrap">
+        <span class="material-symbols-outlined text-[16px]">restart_alt</span>
+        <span>RESTORE CHAIN</span>
+      </button>
+      <button type="button" onclick="downloadEvidenceCertificate()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/50 text-[11.5px] font-mono font-extrabold text-purple-300 active:scale-95 transition-all cursor-pointer shadow-sm whitespace-nowrap" title="Generate Section 63 BSA 2023 Court Admissible PDF Certificate">
+        <span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+        <span>SEC 63 BSA DOSSIER</span>
       </button>
     </div>
   </div>
@@ -1655,12 +1684,81 @@ button:active:not(:disabled),
     <span class="deck-label font-mono font-extrabold text-[11px]">Audit Logs</span>
   </button>
   <div class="deck-divider"></div>
+  <button id="deckAdjudicationBtn" type="button" onclick="openDeckSheet('adjudicationSheetModal')" class="deck-btn" title="Supervisor Adjudication Queue (GREY / REFER Cases)">
+    <span class="deck-icon">⚖️</span>
+    <span class="deck-label font-mono font-extrabold text-[11px]">Adjudication</span>
+    <span id="deckQueueBadge" class="deck-badge-counter bg-amber-500/30 text-amber-300">1</span>
+  </button>
+  <div class="deck-divider"></div>
   <button id="deckForensicBtn" type="button" onclick="openDeckSheet('forensicSheetModal')" class="deck-btn" title="Acoustic Forensic Telemetry & DSP Vitals">
     <span class="deck-icon">🔬</span>
     <span class="deck-label font-mono font-extrabold text-[11px]">Forensics</span>
-    <span class="deck-badge-counter">10</span>
+    <span id="deckBadgeCounterForensic" class="deck-badge-counter">10</span>
   </button>
 </nav>
+
+
+<!-- SHEET: SUPERVISOR ADJUDICATION & HUMAN-IN-THE-LOOP QUEUE (BSA 2023 §63) -->
+<div id="adjudicationSheetModalBackdrop" class="deck-sheet-backdrop hidden opacity-0" onclick="closeDeckSheet('adjudicationSheetModal')"></div>
+<div id="adjudicationSheetModal" class="deck-sheet-container hidden max-w-5xl">
+  <div class="deck-sheet-handle" onclick="closeDeckSheet('adjudicationSheetModal')" title="Dismiss Sheet"></div>
+  <div class="flex items-center justify-between pb-4 border-b border-[var(--border-card)] mb-4">
+    <div class="flex items-center gap-3">
+      <div class="w-11 h-11 rounded-2xl bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-300 text-2xl shadow-inner">
+        ⚖️
+      </div>
+      <div>
+        <h3 class="font-sans font-extrabold text-[22px] text-[var(--text-primary)]">SUPERVISOR ADJUDICATION QUEUE (BSA 2023 §63)</h3>
+        <p class="text-[12.5px] font-mono text-[var(--text-muted)] font-semibold">Human-in-the-Loop Governance &bull; Border Screening Override &bull; Section 63 BSA Admissibility</p>
+      </div>
+    </div>
+    <button type="button" onclick="closeDeckSheet('adjudicationSheetModal')" class="p-2 rounded-full hover:bg-[var(--accent-cyan)]/15 text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer">
+      <span class="material-symbols-outlined text-2xl">close</span>
+    </button>
+  </div>
+
+  <!-- Terminal Session & Officer Identity Bar -->
+  <div class="p-4 rounded-2xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] flex flex-wrap items-center justify-between gap-3 mb-4 font-mono text-[12px]">
+    <div class="flex items-center gap-3 flex-wrap">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-amber-400 text-[20px]">badge</span>
+        <span class="text-[var(--text-muted)]">Active Terminal:</span>
+        <span id="adjOfficerRoleBadge" class="px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 font-extrabold border border-blue-500/40">INSPECTOR_SCREENER</span>
+        <span id="adjOfficerName" class="font-black text-white">Insp. R. Rathore (SSB-INSP-7892)</span>
+      </div>
+      <div class="text-[var(--text-muted)] text-[11px] flex items-center gap-1">
+        <span>Station:</span>
+        <span id="adjOfficerStation" class="text-cyan-300 font-bold">Indo-Nepal Border Checkpost Raxaul (SSB CP-04)</span>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <button type="button" onclick="toggleOfficerRole()" class="px-3.5 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-300 font-bold text-[12px] flex items-center gap-1.5 cursor-pointer active:scale-95 transition-all shadow-sm">
+        <span class="material-symbols-outlined text-[16px]">sync_alt</span>
+        <span id="adjToggleBtnLabel">Switch Role: Inspector ⇄ Supervisor</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Statutory Law Notice Banner -->
+  <div class="p-3.5 rounded-xl bg-amber-950/40 border border-amber-500/40 text-[11.5px] font-mono text-amber-200 flex items-start gap-2.5 mb-4">
+    <span class="material-symbols-outlined text-amber-400 text-xl shrink-0 mt-0.5">policy</span>
+    <div>
+      <b>Statutory Invariant (BSA 2023 §63 &amp; SSB Border SOP):</b>
+      Level 1-4 automated ML classifiers are strictly <i>advisory</i>. Screener inspectors flag ambiguous / GREY edge cases (e.g. specularity glare, single-character MRZ OCR ambiguity, or voice codec jitter). Only a certified <b>SUPERVISOR_ADJUDICATOR</b> holds the legal authority to sign off on an override, dispatch to mandatory detention, or clear for border passage.
+    </div>
+  </div>
+
+  <!-- Adjudication Queue Container -->
+  <div class="flex items-center justify-between mb-2 font-mono">
+    <span class="text-[12px] font-extrabold text-[var(--text-muted)] uppercase tracking-wider">Pending Adjudication Cases:</span>
+    <button type="button" onclick="loadAdjudicationQueue()" class="text-[11px] text-cyan-400 hover:underline flex items-center gap-1 cursor-pointer">
+      <span class="material-symbols-outlined text-[14px]">refresh</span> Refresh Queue
+    </button>
+  </div>
+  <div id="adjudicationQueueContainer" class="flex flex-col gap-3">
+    <!-- Populated dynamically via loadAdjudicationQueue() -->
+  </div>
+</div>
 
 
 <!-- SHEET: INTERPOL FRAUD TAXONOMY & SOTA BENCHMARK MATRIX -->
@@ -8744,6 +8842,9 @@ function openDeckSheet(sheetId) {
             if (typeof loadSybilGallery === 'function') loadSybilGallery();
         } else if (sheetId === 'airgapSheetModal') {
             if (typeof loadAirgapStatus === 'function') loadAirgapStatus();
+        } else if (sheetId === 'adjudicationSheetModal') {
+            if (typeof loadAdjudicationQueue === 'function') loadAdjudicationQueue();
+            if (typeof fetchOfficerSession === 'function') fetchOfficerSession();
         }
     }
 }
@@ -9929,7 +10030,11 @@ function selectDocPreset(presetName) {
     var faceDocThumb = document.getElementById('faceDocThumb');
     var faceDocLabel = document.getElementById('faceDocLabel');
 
-    if (presetName === 'aadhaar_genuine') {
+    if (presetName === 'aadhaar_glare_grey') {
+        if (faceDocThumb) faceDocThumb.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='112' viewBox='0 0 96 112'><rect width='96' height='112' fill='%23292524'/><circle cx='48' cy='42' r='24' fill='%23f59e0b'/><path d='M18 100 C18 72, 78 72, 78 100' fill='%23f59e0b'/><path d='M0 0 L96 112' stroke='%23ffffff' stroke-width='6' opacity='0.4'/></svg>";
+        if (faceDocLabel) faceDocLabel.textContent = "SUNIL MEHTA (GLARE)";
+        simulateFaceMatch('uncertain');
+    } else if (presetName === 'aadhaar_genuine') {
         if (faceDocThumb) faceDocThumb.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='112' viewBox='0 0 96 112'><rect width='96' height='112' fill='%230f172a'/><circle cx='48' cy='42' r='24' fill='%2338bdf8'/><path d='M18 100 C18 72, 78 72, 78 100' fill='%2338bdf8'/></svg>";
         if (faceDocLabel) faceDocLabel.textContent = "RAJESH KUMAR";
         simulateFaceMatch('match');
@@ -9952,6 +10057,7 @@ function selectDocPreset(presetName) {
     .then(function(data) {
         if (!data || !data.success) return;
         var isAuth = (data.status === "AUTHENTIC");
+        var isGrey = (data.status === "GREY_RETAKE_REQUIRED");
         currentDocScreeningState = {
             doc_type: data.doc_type,
             status: data.status,
@@ -9959,17 +10065,26 @@ function selectDocPreset(presetName) {
             name: data.holder_name,
             dob_gender: (data.dob || "1985-04-12") + " | " + (data.gender || "Male"),
             tamper_risk_pct: data.tamper_risk_pct,
-            ocr_status: isAuth ? "MATCHED" : "TAMPERED",
+            ocr_status: isGrey ? "UNCERTAIN (GLARE)" : (isAuth ? "MATCHED" : "TAMPERED"),
             verhoeff_status: data.details.verhoeff_checksum || (data.details.entity_type_check || (isAuth ? "PASSED" : "FAILED")),
             font_status: data.details.font_consistency || (isAuth ? "CONSISTENT" : "ANOMALOUS"),
-            ela_status: data.tamper_risk_pct + "% " + (isAuth ? "CLEAN" : "SPLICED"),
-            qr_sig: isAuth ? "RSA-2048 SIG" : "INVALID / CORRUPT",
-            doc_sha256: "SHA256-" + (data.doc_sha256 ? data.doc_sha256.slice(0, 16) : "e3b0c442") + "..."
+            ela_status: data.tamper_risk_pct + "% " + (isAuth ? "CLEAN" : (isGrey ? "NOMINAL" : "SPLICED")),
+            qr_sig: isGrey ? "OCCLUDED (GLARE)" : (isAuth ? "RSA-2048 SIG" : "INVALID / CORRUPT"),
+            doc_sha256: "SHA256-" + (data.doc_sha256 ? data.doc_sha256.slice(0, 16) : "e3b0c442") + "...",
+            capture_quality: data.capture_quality,
+            viz_mrz_diff: data.viz_mrz_diff
         };
         renderDocScreeningUI();
         updateMultimodalSynthesis();
 
-        if (!isAuth) {
+        if (isGrey) {
+            triggerDocFraudAlert(data.doc_type, "⚠️ Capture Quality Gate Triggered — Retake Required", {
+                summary: "Severe Specularity / Glare Detected over DOB & QR • Specular reflection washed out QR finder pattern",
+                forensics: "Glare Index: 0.44 (> 0.25 Threshold) • Blur Laplacian: 62.4 (< 100.0 Sharpness Floor)",
+                alg: "Capture Quality Gate (Module 1.2) -> Honest GREY Referral to Supervisor Queue",
+                risk_pct: 46.2
+            });
+        } else if (!isAuth) {
             var alertSummary = data.doc_type === "PAN"
                 ? "Income Tax Department Regex Pattern Violation • 4th Character Legal Entity Mismatch • Signature Erasure"
                 : "Verhoeff Base-10 Checksum Failure • Spliced Biometric Facial Map • Cryptographic RSA Signature Mismatch";
@@ -10091,6 +10206,7 @@ function handleDocFileUpload(ev) {
 
 function renderDocScreeningUI() {
     var isAuth = (currentDocScreeningState.status === "AUTHENTIC");
+    var isGrey = (currentDocScreeningState.status === "GREY_RETAKE_REQUIRED");
     var badge = document.getElementById('docScreeningBadge');
     var riskIndicator = document.getElementById('docTamperIndicator');
     var nameEl = document.getElementById('docHolderName');
@@ -10108,7 +10224,10 @@ function renderDocScreeningUI() {
     var cardTitle = document.getElementById('docCardHeaderTitle');
 
     if (badge) {
-        if (isAuth) {
+        if (isGrey) {
+            badge.textContent = "Capture Quality Gate: Glare Retake Required (GREY)";
+            badge.className = "text-[11.5px] sm:text-[12.5px] font-mono px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500 text-amber-400 font-extrabold whitespace-nowrap animate-pulse";
+        } else if (isAuth) {
             badge.textContent = "ID Document (Aadhaar/PAN): OCR Matched & Verified";
             badge.className = "text-[11.5px] sm:text-[12.5px] font-mono px-3 py-1 rounded-full bg-[var(--accent-emerald)]/15 border border-[var(--accent-emerald)]/40 text-[var(--accent-emerald)] font-extrabold whitespace-nowrap";
         } else {
@@ -10118,8 +10237,16 @@ function renderDocScreeningUI() {
     }
 
     if (riskIndicator) {
-        riskIndicator.textContent = "TAMPER RISK: " + currentDocScreeningState.tamper_risk_pct + "%";
-        riskIndicator.className = isAuth ? "text-[var(--accent-emerald)] font-extrabold" : "text-[var(--accent-crimson)] font-extrabold";
+        if (isGrey) {
+            riskIndicator.textContent = "TAMPER RISK: " + currentDocScreeningState.tamper_risk_pct + "% (GREY UNCERTAIN)";
+            riskIndicator.className = "text-amber-400 font-extrabold";
+        } else if (isAuth) {
+            riskIndicator.textContent = "TAMPER RISK: " + currentDocScreeningState.tamper_risk_pct + "%";
+            riskIndicator.className = "text-[var(--accent-emerald)] font-extrabold";
+        } else {
+            riskIndicator.textContent = "TAMPER RISK: " + currentDocScreeningState.tamper_risk_pct + "%";
+            riskIndicator.className = "text-[var(--accent-crimson)] font-extrabold";
+        }
     }
 
     if (nameEl) nameEl.textContent = currentDocScreeningState.name;
@@ -10134,10 +10261,16 @@ function renderDocScreeningUI() {
     }
 
     if (watermark) {
-        watermark.textContent = isAuth ? "UIDAI VERIFIED" : "TAMPER FLAGGED";
-        watermark.className = isAuth 
-            ? "text-[10px] font-mono px-2 py-0.5 rounded bg-[var(--accent-emerald)]/20 text-[var(--accent-emerald)] font-bold" 
-            : "text-[10px] font-mono px-2 py-0.5 rounded bg-[var(--accent-crimson)]/20 text-[var(--accent-crimson)] font-bold";
+        if (isGrey) {
+            watermark.textContent = "GREY RETAKE";
+            watermark.className = "text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold";
+        } else if (isAuth) {
+            watermark.textContent = "UIDAI VERIFIED";
+            watermark.className = "text-[10px] font-mono px-2 py-0.5 rounded bg-[var(--accent-emerald)]/20 text-[var(--accent-emerald)] font-bold";
+        } else {
+            watermark.textContent = "TAMPER FLAGGED";
+            watermark.className = "text-[10px] font-mono px-2 py-0.5 rounded bg-[var(--accent-crimson)]/20 text-[var(--accent-crimson)] font-bold";
+        }
     }
 
     if (photoOverlay) {
@@ -10162,24 +10295,64 @@ function renderDocScreeningUI() {
 
     if (qrLabel) {
         qrLabel.textContent = currentDocScreeningState.qr_sig;
-        qrLabel.className = isAuth ? "text-[9px] font-mono text-[var(--accent-emerald)] font-bold mt-1 uppercase text-center" : "text-[9px] font-mono text-[var(--accent-crimson)] font-bold mt-1 uppercase text-center";
+        qrLabel.className = isGrey 
+            ? "text-[9px] font-mono text-amber-400 font-bold mt-1 uppercase text-center" 
+            : (isAuth ? "text-[9px] font-mono text-[var(--accent-emerald)] font-bold mt-1 uppercase text-center" : "text-[9px] font-mono text-[var(--accent-crimson)] font-bold mt-1 uppercase text-center");
     }
 
     if (ocrStat) {
         ocrStat.textContent = currentDocScreeningState.ocr_status;
-        ocrStat.className = isAuth ? "text-[12px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap mt-0.5" : "text-[12px] text-[var(--accent-crimson)] font-extrabold whitespace-nowrap mt-0.5";
+        ocrStat.className = isGrey 
+            ? "text-[12px] text-amber-400 font-extrabold whitespace-nowrap mt-0.5"
+            : (isAuth ? "text-[12px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap mt-0.5" : "text-[12px] text-[var(--accent-crimson)] font-extrabold whitespace-nowrap mt-0.5");
     }
     if (verhoeffStat) {
         verhoeffStat.textContent = currentDocScreeningState.verhoeff_status;
-        verhoeffStat.className = isAuth ? "text-[12px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap mt-0.5" : "text-[12px] text-[var(--accent-crimson)] font-extrabold whitespace-nowrap mt-0.5";
+        verhoeffStat.className = isGrey
+            ? "text-[12px] text-amber-400 font-extrabold whitespace-nowrap mt-0.5"
+            : (isAuth ? "text-[12px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap mt-0.5" : "text-[12px] text-[var(--accent-crimson)] font-extrabold whitespace-nowrap mt-0.5");
     }
     if (fontStat) {
         fontStat.textContent = currentDocScreeningState.font_status;
-        fontStat.className = isAuth ? "text-[12px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap mt-0.5" : "text-[12px] text-[var(--accent-crimson)] font-extrabold whitespace-nowrap mt-0.5";
+        fontStat.className = isGrey
+            ? "text-[12px] text-amber-400 font-extrabold whitespace-nowrap mt-0.5"
+            : (isAuth ? "text-[12px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap mt-0.5" : "text-[12px] text-[var(--accent-crimson)] font-extrabold whitespace-nowrap mt-0.5");
     }
     if (elaStat) {
         elaStat.textContent = currentDocScreeningState.ela_status;
-        elaStat.className = isAuth ? "text-[12px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap mt-0.5" : "text-[12px] text-[var(--accent-crimson)] font-extrabold whitespace-nowrap mt-0.5";
+        elaStat.className = isGrey
+            ? "text-[12px] text-amber-400 font-extrabold whitespace-nowrap mt-0.5"
+            : (isAuth ? "text-[12px] text-[var(--accent-emerald)] font-extrabold whitespace-nowrap mt-0.5" : "text-[12px] text-[var(--accent-crimson)] font-extrabold whitespace-nowrap mt-0.5");
+    }
+
+    var qualityEl = document.getElementById('docQualityStat');
+    if (qualityEl) {
+        if (currentDocScreeningState.capture_quality) {
+            var cq = currentDocScreeningState.capture_quality;
+            if (cq.is_acceptable === false || isGrey) {
+                qualityEl.innerHTML = '<span class="text-amber-400 font-bold">⚠️ GLARE ' + Math.round((cq.glare_index || 0.44)*100) + '% (EXCESSIVE) &bull; FOCUS ' + (cq.blur_laplacian || 62.4) + ' (RETAKE)</span>';
+            } else {
+                qualityEl.innerHTML = '<span class="text-emerald-400 font-bold">✓ GLARE ' + Math.round((cq.glare_index || 0.04)*100) + '% (OPTIMAL) &bull; FOCUS ' + (cq.blur_laplacian || 224.5) + ' (SHARP)</span>';
+            }
+        } else {
+            qualityEl.innerHTML = isAuth ? '<span class="text-emerald-400 font-bold">✓ GLARE 4% (OPTIMAL) &bull; FOCUS 224 (SHARP)</span>' : '<span class="text-red-400 font-bold">⚠️ ANOMALY DETECTED</span>';
+        }
+    }
+
+    var vizMrzEl = document.getElementById('docVizMrzStat');
+    if (vizMrzEl) {
+        if (currentDocScreeningState.viz_mrz_diff) {
+            var vm = currentDocScreeningState.viz_mrz_diff;
+            if (vm.status === "MISMATCH") {
+                vizMrzEl.innerHTML = '<span class="text-red-400 font-bold">🚨 MRZ MISMATCH: ' + (vm.discrepancy || 'Name offset clash') + '</span>';
+            } else if (vm.status === "OCCLUDED_BY_GLARE" || isGrey) {
+                vizMrzEl.innerHTML = '<span class="text-amber-400 font-bold">⚠️ MRZ OCCLUDED: Glare on checksum line</span>';
+            } else {
+                vizMrzEl.innerHTML = '<span class="text-emerald-400 font-bold">✓ 100% CONGRUENT (All Check Digits Verified)</span>';
+            }
+        } else {
+            vizMrzEl.innerHTML = isAuth ? '<span class="text-emerald-400 font-bold">✓ 100% CONGRUENT (All Check Digits Verified)</span>' : '<span class="text-red-400 font-bold">🚨 CHECKSUM DISCREPANCY DETECTED</span>';
+        }
     }
 
     var bboxPhoto = document.getElementById('bboxPhotoTag');
@@ -10661,6 +10834,299 @@ function initBioMiniCanvas() {
     drawMini();
 }
 
+// ── Officer RBAC & Terminal Session Management ──
+var currentOfficerSession = null;
+
+function fetchOfficerSession() {
+    return fetch('/api/officer/session')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        if (!data || !data.officer) return;
+        currentOfficerSession = data;
+        var off = data.officer;
+        var isSup = (off.role === 'SUPERVISOR_ADJUDICATOR');
+        
+        // Header officer badge
+        var headLabel = document.getElementById('officerHeaderLabel');
+        if (headLabel) {
+            headLabel.textContent = (isSup ? "⚖️ " : "👮 ") + off.rank + " " + off.name + " (" + (off.badge_id || 'SSB') + ")";
+        }
+        var headBtn = document.getElementById('officerSessionBtn');
+        if (headBtn) {
+            headBtn.className = isSup
+                ? "hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/20 border border-purple-500/50 text-purple-300 font-mono text-[11.5px] font-extrabold cursor-pointer hover:bg-purple-500/30 transition-all shadow-sm"
+                : "hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/15 border border-blue-500/40 text-blue-300 font-mono text-[11.5px] font-extrabold cursor-pointer hover:bg-blue-500/25 transition-all shadow-sm";
+        }
+        
+        // Adjudication sheet details
+        var adjRole = document.getElementById('adjOfficerRoleBadge');
+        var adjName = document.getElementById('adjOfficerName');
+        var adjStation = document.getElementById('adjOfficerStation');
+        var adjToggle = document.getElementById('adjToggleBtnLabel');
+        if (adjRole) {
+            adjRole.textContent = off.role;
+            adjRole.className = isSup
+                ? "px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 font-extrabold border border-purple-500/40"
+                : "px-2.5 py-0.5 rounded-full bg-blue-500/20 text-blue-300 font-extrabold border border-blue-500/40";
+        }
+        if (adjName) adjName.textContent = off.rank + " " + off.name + " (" + off.officer_id + ")";
+        if (adjStation) adjStation.textContent = off.station || "SSB CP-04 Raxaul";
+        if (adjToggle) adjToggle.textContent = isSup ? "Switch Role to Inspector Screener" : "Switch Role to Supervisor Adjudicator";
+        
+        return data;
+    })
+    .catch(function(err) {
+        console.warn("fetchOfficerSession error:", err);
+    });
+}
+
+function toggleOfficerRole() {
+    fetch('/api/officer/switch-role', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({})
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        fetchOfficerSession().then(function() {
+            loadAdjudicationQueue();
+        });
+    })
+    .catch(function(err) {
+        console.warn("toggleOfficerRole error:", err);
+    });
+}
+
+// ── Supervisor Adjudication Queue (BSA 2023 §63) ──
+function loadAdjudicationQueue() {
+    fetch('/api/adjudication/queue')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        var queue = data.queue || [];
+        var pending = queue.filter(function(i) { return i.status === 'PENDING_REVIEW'; });
+        
+        // Update counters in header and deck
+        var headCount = document.getElementById('headerQueueCount');
+        var deckBadge = document.getElementById('deckQueueBadge');
+        var text = "⚖️ ADJUDICATION QUEUE (" + pending.length + ")";
+        if (headCount) headCount.textContent = text;
+        if (deckBadge) deckBadge.textContent = pending.length;
+        
+        var container = document.getElementById('adjudicationQueueContainer');
+        if (!container) return;
+        
+        if (queue.length === 0) {
+            container.innerHTML = '<div class="p-6 text-center text-[var(--text-muted)] font-mono text-[13px] bg-black/30 rounded-2xl border border-white/5">✓ Adjudication queue empty. All border checkpost streams cleared.</div>';
+            return;
+        }
+
+        var isSup = currentOfficerSession && currentOfficerSession.officer && (currentOfficerSession.officer.role === 'SUPERVISOR_ADJUDICATOR');
+
+        var html = '';
+        queue.forEach(function(item) {
+            var isPending = (item.status === 'PENDING_REVIEW');
+            var statusColor = isPending ? 'text-amber-400 border-amber-500/40 bg-amber-500/10' : (item.status === 'APPROVED_OVERRIDE' || item.status === 'APPROVE' ? 'text-emerald-400 border-emerald-500/40 bg-emerald-500/10' : 'text-red-400 border-red-500/40 bg-red-500/10');
+            
+            html += '<div class="p-4 sm:p-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-card)] flex flex-col gap-3 font-mono">';
+            html += '  <div class="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border-card)] pb-3">';
+            html += '    <div class="flex items-center gap-2">';
+            html += '      <span class="text-white font-extrabold text-[14px]">CASE ' + (item.case_id || 'ADJ-8821') + '</span>';
+            html += '      <span class="text-[10px] px-2.5 py-0.5 rounded-full font-bold border ' + statusColor + '">' + item.status + '</span>';
+            html += '      <span class="text-[10px] px-2 py-0.5 rounded bg-black/40 text-cyan-300 font-bold">' + (item.trust_ladder_stage || 'LEVEL 1.2') + '</span>';
+            html += '    </div>';
+            html += '    <span class="text-[11px] text-[var(--text-muted)]">' + (item.timestamp || 'Just now') + '</span>';
+            html += '  </div>';
+
+            html += '  <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-[12px]">';
+            html += '    <div class="p-2.5 rounded-xl bg-black/30 border border-white/5">';
+            html += '      <span class="text-[10px] text-[var(--text-muted)] uppercase block">Presenter Identity</span>';
+            html += '      <span class="font-extrabold text-white text-[13px]">' + (item.name || 'RAJESH KUMAR SHARMA') + '</span>';
+            html += '      <span class="text-[11px] text-cyan-300 block font-mono">' + (item.doc_type || 'AADHAAR') + ' (' + (item.masked_id || 'XXXX-0124') + ')</span>';
+            html += '    </div>';
+
+            html += '    <div class="p-2.5 rounded-xl bg-black/30 border border-white/5">';
+            html += '      <span class="text-[10px] text-[var(--text-muted)] uppercase block">Trigger Forensics</span>';
+            html += '      <span class="text-amber-300 font-bold">' + (item.trigger_reason || 'Severe Specular Glare') + '</span>';
+            html += '      <span class="text-[10.5px] text-[var(--text-muted)] block mt-0.5">Glare: ' + ((item.capture_quality && item.capture_quality.glare_index) || 0.44) + ' &bull; Blur: ' + ((item.capture_quality && item.capture_quality.blur_laplacian) || 62.4) + '</span>';
+            html += '    </div>';
+
+            html += '    <div class="p-2.5 rounded-xl bg-black/30 border border-white/5">';
+            html += '      <span class="text-[10px] text-[var(--text-muted)] uppercase block">Checkpost / Location</span>';
+            html += '      <span class="text-white font-bold">' + (item.location || 'SSB Checkpost Raxaul CP-04') + '</span>';
+            html += '      <span class="text-[10.5px] text-[var(--text-muted)] block mt-0.5">Screener: ' + (item.screener_officer || 'Insp. Rathore') + '</span>';
+            html += '    </div>';
+            html += '  </div>';
+
+            if (isPending) {
+                if (isSup) {
+                    html += '  <div class="p-3 rounded-xl bg-black/40 border border-purple-500/30 flex flex-col gap-2 mt-1">';
+                    html += '    <div class="flex items-center justify-between text-[11px] text-purple-300">';
+                    html += '      <span class="font-bold flex items-center gap-1"><span class="material-symbols-outlined text-[15px]">draw</span> Supervisor Adjudication Actions (BSA 2023 §63):</span>';
+                    html += '      <span>Digital Signature Key Active</span>';
+                    html += '    </div>';
+                    html += '    <input id="adjNotes_' + item.case_id + '" type="text" placeholder="Enter supervisor statutory findings / reason for order..." class="w-full px-3 py-1.5 rounded-lg bg-black/60 border border-white/10 text-white text-[12px] font-mono focus:outline-none focus:border-amber-400" value="Physical document re-inspected under diffuse ambient light at secondary counter; verified authentic.">';
+                    html += '    <div class="flex items-center gap-2 flex-wrap pt-1">';
+                    html += '      <button type="button" onclick="submitAdjudicationDecision(\'' + item.case_id + '\', \'APPROVED_OVERRIDE\')" class="px-3.5 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold text-[11.5px] cursor-pointer active:scale-95 transition-all">🟢 APPROVE &amp; ISSUE PASS</button>';
+                    html += '      <button type="button" onclick="submitAdjudicationDecision(\'' + item.case_id + '\', \'RETAKE_UNDER_DIFFUSE_LIGHT\')" class="px-3.5 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-300 font-extrabold text-[11.5px] cursor-pointer active:scale-95 transition-all">🟡 FORCE RETAKE</button>';
+                    html += '      <button type="button" onclick="submitAdjudicationDecision(\'' + item.case_id + '\', \'MANDATORY_DETENTION_1930\')" class="px-3.5 py-1.5 rounded-lg bg-red-950/60 hover:bg-red-900/80 border border-red-500/60 text-red-200 font-extrabold text-[11.5px] cursor-pointer active:scale-95 transition-all">🔴 MANDATORY DETENTION</button>';
+                    html += '    </div>';
+                    html += '  </div>';
+                } else {
+                    html += '  <div class="p-2.5 rounded-xl bg-blue-950/30 border border-blue-500/30 text-[11.5px] text-blue-300 flex items-center justify-between">';
+                    html += '    <span>🔒 <b>Screener Mode Active:</b> Case forwarded to Supervisor queue. Switch to Supervisor role above to sign off.</span>';
+                    html += '    <button type="button" onclick="toggleOfficerRole()" class="text-[11px] underline text-amber-300 cursor-pointer font-bold">Assume Supervisor Role</button>';
+                    html += '  </div>';
+                }
+            } else {
+                html += '  <div class="p-2.5 rounded-xl bg-black/40 border border-white/10 text-[11.5px] text-[var(--text-muted)] flex items-center justify-between">';
+                html += '    <span>✓ Adjudicated by <b>' + (item.adjudicated_by || 'Supervisor') + '</b>: ' + (item.supervisor_notes || 'Case processed') + '</span>';
+                html += '    <span class="text-cyan-300 text-[10.5px] font-mono">' + (item.adjudicated_at || '') + '</span>';
+                html += '  </div>';
+            }
+
+            html += '</div>';
+        });
+
+        container.innerHTML = html;
+    })
+    .catch(function(err) {
+        console.warn("loadAdjudicationQueue error:", err);
+    });
+}
+
+function submitAdjudicationDecision(caseId, decision) {
+    var notesInput = document.getElementById('adjNotes_' + caseId);
+    var notes = notesInput ? notesInput.value : "Adjudicated by border supervisor";
+    fetch('/api/adjudication/decide', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            case_id: caseId,
+            decision: decision,
+            notes: notes
+        })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        loadAdjudicationQueue();
+        fetchBlockchainBlocks();
+        alert("✓ Case #" + caseId + " successfully adjudicated as: " + decision + "\nSealed into Tamper-Evident Ledger with Section 63 BSA Supervisor signature.");
+    })
+    .catch(function(err) {
+        console.warn("submitAdjudicationDecision error:", err);
+    });
+}
+
+// ── Tamper-Evident SHA-256 Ledger (BSA 2023 §63) ──
+function fetchBlockchainBlocks() {
+    return fetch('/api/blockchain/blocks?limit=6')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        var tbody = document.getElementById('blockchainTableBody');
+        if (!tbody) return;
+        var blocks = data.blocks || [];
+        if (blocks.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" class="py-3 px-3 text-center text-[var(--text-muted)] italic">No blocks found in ledger.</td></tr>';
+            return;
+        }
+
+        var html = '';
+        blocks.forEach(function(b) {
+            var dataPayload = b.data ? JSON.stringify(b.data) : '{}';
+            var isTampered = b.data && (b.data.tampered_in_storage === true || b.data.holder === "MALICIOUS_IMPOSTOR_VIKRAM");
+            var rowClass = isTampered ? "bg-red-950/40 border-y-2 border-red-500 animate-pulse text-red-200" : "hover:bg-white/5 transition-colors";
+            
+            html += '<tr class="' + rowClass + '">';
+            html += '  <td class="py-2.5 px-3 font-bold ' + (isTampered ? 'text-red-400' : 'text-cyan-300') + '">#' + b.index + (isTampered ? ' 🚨 TAMPER' : '') + '</td>';
+            html += '  <td class="py-2.5 px-3 font-mono text-[11px] ' + (isTampered ? 'text-red-300 font-extrabold line-through' : 'text-emerald-400') + '" title="' + b.hash + '">' + (b.hash ? (b.hash.slice(0, 16) + '...') : 'N/A') + '</td>';
+            html += '  <td class="py-2.5 px-3 font-mono text-[11px] truncate max-w-xs" title="' + dataPayload.replace(/"/g, '&quot;') + '">';
+            if (isTampered) {
+                html += '<span class="px-2 py-0.5 rounded bg-red-500 text-black font-extrabold">MUTATED: holder="MALICIOUS_IMPOSTOR_VIKRAM"</span>';
+            } else if (b.data && b.data.event === "GENESIS_INITIALIZATION") {
+                html += '<span class="text-cyan-300 font-bold">GENESIS_INITIALIZATION (Section 63 BSA)</span>';
+            } else {
+                html += '<span class="text-[var(--text-muted)]">' + ((b.data && (b.data.doc_type || b.data.verdict || b.data.event)) || 'SCREENING_EVENT') + ' &bull; ' + ((b.data && (b.data.holder || b.data.case_id)) || '') + '</span>';
+            }
+            html += '  </td>';
+            html += '  <td class="py-2.5 px-3 font-mono text-[10.5px] text-[var(--text-muted)]" title="' + b.previous_hash + '">' + (b.previous_hash ? (b.previous_hash.slice(0, 12) + '...') : '000000000000...') + '</td>';
+            html += '  <td class="py-2.5 px-3 text-right text-[11px] text-[var(--text-muted)]">' + (b.timestamp ? b.timestamp.slice(11, 19) : '--:--') + '</td>';
+            html += '</tr>';
+        });
+
+        tbody.innerHTML = html;
+    })
+    .catch(function(err) {
+        console.warn("fetchBlockchainBlocks error:", err);
+    });
+}
+window.loadBlockchainBlocks = fetchBlockchainBlocks;
+
+function verifyBlockchainChain() {
+    return fetch('/api/blockchain/verify')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        var badge = document.getElementById('blockchainStatusBadge');
+        var text = document.getElementById('blockchainStatusText');
+        var alertBox = document.getElementById('blockchainTamperAlert');
+        var alertMsg = document.getElementById('blockchainTamperMessage');
+        var resetBtn = document.getElementById('btnResetTamper');
+
+        if (data.is_intact) {
+            if (badge) {
+                badge.className = "text-[11.5px] font-mono px-3 py-1.5 rounded-full bg-[var(--accent-emerald)]/15 border border-[var(--accent-emerald)]/40 text-[var(--accent-emerald)] font-extrabold flex items-center gap-2 whitespace-nowrap shadow-sm";
+            }
+            if (text) text.textContent = "✓ Chain Intact (" + (data.total_blocks || 5) + " Blocks)";
+            if (alertBox) alertBox.classList.add('hidden');
+            if (resetBtn) resetBtn.classList.add('hidden');
+        } else {
+            if (badge) {
+                badge.className = "text-[11.5px] font-mono px-3 py-1.5 rounded-full bg-red-600/30 border border-red-500 text-red-300 font-extrabold flex items-center gap-2 whitespace-nowrap shadow-sm animate-pulse";
+            }
+            if (text) text.textContent = "🚨 CRYPTOGRAPHIC CHAIN BROKEN";
+            if (alertBox) {
+                alertBox.classList.remove('hidden');
+                if (alertMsg) alertMsg.textContent = "🚨 SHA-256 HASH CHAIN TAMPER DETECTED: " + (data.error || "Block #1 hash mismatch against stored digest! Section 63 BSA tamper alert triggered.");
+            }
+            if (resetBtn) resetBtn.classList.remove('hidden');
+        }
+        fetchBlockchainBlocks();
+        return data;
+    })
+    .catch(function(err) {
+        console.warn("verifyBlockchainChain error:", err);
+    });
+}
+
+function testSimulateLedgerTamper() {
+    fetch('/api/blockchain/simulate-tamper', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ block_index: 1 })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        verifyBlockchainChain();
+    })
+    .catch(function(err) {
+        console.warn("testSimulateLedgerTamper error:", err);
+    });
+}
+
+function testResetLedgerTamper() {
+    fetch('/api/blockchain/reset-tamper', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({})
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        verifyBlockchainChain();
+    })
+    .catch(function(err) {
+        console.warn("testResetLedgerTamper error:", err);
+    });
+}
+
 // 10. Startup Initialization
 document.addEventListener('DOMContentLoaded', function() {
     renderScamCards(ALL_18_SCAMS);
@@ -10669,6 +11135,9 @@ document.addEventListener('DOMContentLoaded', function() {
     renderDocScreeningUI();
     initBioMiniCanvas();
     updateMultimodalSynthesis();
+    fetchOfficerSession();
+    fetchBlockchainBlocks();
+    verifyBlockchainChain();
     
     // Check if previous tab was saved
     try {

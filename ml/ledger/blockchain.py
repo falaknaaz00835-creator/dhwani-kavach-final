@@ -58,6 +58,7 @@ class EvidenceChain:
     def __init__(self, storage_path: str = "data/evidence_chain.json"):
         self.storage_path = storage_path
         self.chain: List[EvidenceBlock] = []
+        self.is_tampered: bool = False
         # Ensure parent directory exists
         os.makedirs(os.path.dirname(self.storage_path), exist_ok=True)
         self.load_chain()
@@ -77,7 +78,9 @@ class EvidenceChain:
             previous_hash="0" * 64,
         )
 
-    def load_chain(self) -> None:
+    def load_chain(self, force: bool = False) -> None:
+        if getattr(self, "is_tampered", False) and not force:
+            return
         if os.path.exists(self.storage_path) and os.path.getsize(self.storage_path) > 0:
             try:
                 with open(self.storage_path, "r", encoding="utf-8") as f:
@@ -156,6 +159,37 @@ class EvidenceChain:
         self.load_chain()
         blocks = self.chain[-limit:]
         return [b.to_dict() for b in reversed(blocks)]
+
+    def simulate_tamper(self, block_index: int = 1) -> Dict[str, Any]:
+        """Subtly alters block data in memory to demonstrate cryptographic tamper detection."""
+        if len(self.chain) <= 1:
+            self.add_block({
+                "case_id": "KAVACH-DEMO-01",
+                "verdict": "AUTHENTIC",
+                "holder": "RAJESH KUMAR SHARMA",
+                "status": "CLEAR"
+            })
+        
+        idx = min(block_index, len(self.chain) - 1)
+        target = self.chain[idx]
+        original_data = dict(target.data)
+        # Malicious in-place alteration without re-signing hash
+        target.data = dict(target.data)
+        target.data["holder"] = "MALICIOUS_IMPOSTOR_VIKRAM"
+        target.data["tampered_in_storage"] = True
+        self.is_tampered = True
+        return {
+            "tampered_block_index": idx,
+            "original_holder": original_data.get("holder", "RAJESH KUMAR SHARMA"),
+            "tampered_holder": target.data["holder"],
+            "stored_hash": target.hash,
+            "actual_recomputed_hash": target.calculate_hash()
+        }
+
+    def reset_tamper(self) -> None:
+        """Reloads pristine persistent chain from disk."""
+        self.is_tampered = False
+        self.load_chain(force=True)
 
 
 # Global singleton instance for application use
