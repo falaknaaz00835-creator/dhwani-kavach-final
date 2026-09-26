@@ -7256,15 +7256,7 @@ document.addEventListener('click',function(e){
   });
 })();
 </script>
-<!-- ═════════ PACK 6 END ═════════ -->
-<<<<<<< Updated upstream
-<!-- ═══════════════════════════════════════════════════════════════
-     ⚡ DHWANI KAVACH — PACK 7: PRO PACK
-     • 🌐 LANGUAGE EXTENSION (16 aur strings × 11 languages)
-     • 🧊 FINANCIAL COOLDOWN (simulated NPCI hook, disclosed)
-     • ⚖️ LEGAL DOSSIER (Section 63 BSA template, print-to-PDF)
-     Paste: last </body> ke UPAR, Pack 6 ke NEECHE.
-     ═══════════════════════════════════════════════════════════════ -->
+
 <script>
 (function(){
   'use strict';
@@ -7614,6 +7606,154 @@ document.addEventListener('click',function(e){
      Paste: last </body> ke UPAR (Pack 9 ke neeche). ADD-only.
      ═══════════════════════════════════════════════════════════════ -->
 <script>
+  // ==========================================
+// 1. Document Forensics & KYC Verification
+// ==========================================
+async function uploadAndScreenDocument(fileInput) {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+        // Call Document Forensics (EXIF & Hash Check)
+        const forensicsResponse = await fetch('/api/v2/document/forensics', {
+            method: 'POST',
+            body: formData
+        });
+        const forensicsData = await forensicsResponse.json();
+
+        // Update UI Badges
+        updateForensicUI(forensicsData);
+
+        // Calculate Multimodal Risk if voice score is available
+        const currentVoiceRisk = window.currentVoiceRisk || 0.15; // default fallback
+        await calculateMultimodalRisk(forensicsData.forensic_risk_score, currentVoiceRisk);
+
+    } catch (error) {
+        console.error("Document Screening Failed:", error);
+    }
+}
+
+function updateForensicUI(data) {
+    const statusBadge = document.getElementById('doc-status-badge');
+    const hashLabel = document.getElementById('doc-hash-label');
+    const flagsList = document.getElementById('doc-flags-list');
+
+    if (hashLabel) hashLabel.innerText = `MD5: ${data.md5_hash}`;
+
+    if (flagsList) {
+        flagsList.innerHTML = data.metadata_flags.length > 0
+            ? data.metadata_flags.map(flag => `<li class="text-red-500">${flag}</li>`).join('')
+            : '<li class="text-green-500">No manipulation signatures found</li>';
+    }
+
+    if (data.verdict === "HOLD") {
+        statusBadge.className = "px-3 py-1 bg-red-600 text-white rounded-full font-bold";
+        statusBadge.innerText = "🔴 SUSPICIOUS DOCUMENT";
+        triggerEmergencyAlert("FORGED OR MANIPULATED DOCUMENT DETECTED");
+    } else {
+        statusBadge.className = "px-3 py-1 bg-green-600 text-white rounded-full font-bold";
+        statusBadge.innerText = "🟢 DOCUMENT PASSED";
+    }
+}
+
+// ==========================================
+// 2. Multimodal Risk Fusion
+// ==========================================
+async function calculateMultimodalRisk(docRisk, voiceRisk) {
+    try {
+        const response = await fetch('/api/identity/multimodal-fusion', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                document_risk_score: docRisk,
+                voice_risk_score: voiceRisk
+            })
+        });
+
+        const result = await response.json();
+
+        // Update Composite Risk Gauge
+        const riskMeter = document.getElementById('composite-risk-score');
+        const verdictBox = document.getElementById('fusion-verdict-box');
+
+        if (riskMeter) riskMeter.innerText = `${(result.composite_risk_score * 100).toFixed(1)}%`;
+
+        if (verdictBox) {
+            verdictBox.innerText = `${result.verdict}: ${result.status_message}`;
+            verdictBox.className = `p-4 rounded-lg font-bold text-center ${
+                result.verdict === 'ALLOW' ? 'bg-green-100 text-green-800' :
+                result.verdict === 'WARN'  ? 'bg-yellow-100 text-yellow-800' :
+                                            'bg-red-100 text-red-800'
+            }`;
+        }
+
+        if (result.verdict === 'HOLD') {
+            triggerEmergencyAlert("SYNTHETIC IDENTITY DETECTED - MULE OPERATION");
+        }
+    } catch (error) {
+        console.error("Fusion Calculation Error:", error);
+    }
+}
+
+// ==========================================
+// 3. Dynamic TTFT Liveness Trap
+// ==========================================
+let currentLivenessToken = null;
+
+async function startLivenessTrap() {
+    try {
+        const response = await fetch('/api/v2/liveness/challenge');
+        const challenge = await response.json();
+
+        currentLivenessToken = challenge.token;
+
+        const promptElement = document.getElementById('liveness-prompt-text');
+        if (promptElement) promptElement.innerText = challenge.challenge_text;
+
+        // Record start time to measure TTFT
+        window.livenessStartTime = performance.now();
+    } catch (error) {
+        console.error("Liveness Challenge Request Failed:", error);
+    }
+}
+
+async function submitLivenessResponse() {
+    if (!currentLivenessToken) return;
+
+    const ttftMs = performance.now() - window.livenessStartTime;
+
+    try {
+        const response = await fetch('/api/v2/liveness/verify', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                token: currentLivenessToken,
+                ttft_ms: ttftMs
+            })
+        });
+
+        const result = await response.json();
+        const livenessStatus = document.getElementById('liveness-result-status');
+
+        if (livenessStatus) {
+            livenessStatus.innerText = `${result.verdict} (${Math.round(ttftMs)}ms)`;
+            livenessStatus.className = result.latency_risk_level === 'HIGH' ? 'text-red-600 font-bold' : 'text-green-600 font-bold';
+        }
+    } catch (error) {
+        console.error("Liveness Verification Error:", error);
+    }
+}
+
+function triggerEmergencyAlert(message) {
+    const banner = document.getElementById('emergency-alert-banner');
+    if (banner) {
+        banner.classList.remove('hidden');
+        banner.innerText = `⚠️ ${message}`;
+    }
+}
 /* ═══════════ PART A :: ELDER MODE GUARDIAN v2 ═══════════ */
 (function(){
   'use strict';
@@ -7890,6 +8030,62 @@ document.addEventListener('click',function(e){
 </script>
 <!-- ═════════ PACK 10 END ═════════ -->
 <script>
+  // ==========================================
+// 4. Tri-Modal Face Match Liveness
+// ==========================================
+async function runFaceMatch(docBase64, webcamBase64) {
+    try {
+        const response = await fetch('/api/v2/liveness/face-match', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                document_photo_b64: docBase64,
+                live_webcam_b64: webcamBase64
+            })
+        });
+        const result = await response.json();
+        
+        const faceStatus = document.getElementById('face-match-status');
+        if (faceStatus) {
+            faceStatus.innerText = result.message;
+            faceStatus.className = result.is_match 
+                ? "px-3 py-1 bg-green-600 text-white rounded-full font-bold" 
+                : "px-3 py-1 bg-red-600 text-white rounded-full font-bold";
+        }
+        
+        return result.is_match;
+    } catch (error) {
+        console.error("Face match connection error:", error);
+    }
+}
+
+// ==========================================
+// 5. Blockchain Evidence Ledger Commit
+// ==========================================
+async function secureAuditTrail(userId, riskScore, verdict, hash) {
+    try {
+        const response = await fetch('/api/v2/audit/ledger-commit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                user_id: userId,
+                composite_risk_score: riskScore,
+                verdict: verdict,
+                evidence_hash: hash
+            })
+        });
+        const receipt = await response.json();
+        
+        const ledgerBanner = document.getElementById('blockchain-receipt');
+        if (ledgerBanner) {
+            ledgerBanner.classList.remove('hidden');
+            ledgerBanner.innerHTML = `🔗 <strong>Immutable Record Created</strong><br>Tx Hash: <code>${receipt.transaction_hash}</code>`;
+            ledgerBanner.className = "mt-4 p-3 bg-gray-900 text-green-400 border border-green-500 rounded-lg text-sm font-mono break-all";
+        }
+    } catch (error) {
+        console.error("Blockchain ledger commit failed:", error);
+    }
+}
 /* ═══ PACK 10 PRESENCE BADGE ═══ */
 (function(){
   if (window.__DK10BADGE) return;
@@ -7932,8 +8128,7 @@ document.addEventListener('click',function(e){
   if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', wireAutoClose); }
   else{ wireAutoClose(); }
 })();
-</script>
->>>>>>> Stashed changes
+`</script>
 
 <script>
 // ============================================================================
@@ -8254,36 +8449,53 @@ var ALL_18_SCAMS = [
     }
 ];
 
+function escapeHtml(value) {
+    if (value === null || value === undefined) return '';
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
 function renderScamCards(cards) {
     var grid = document.getElementById('scamCardsGrid');
     if (!grid) return;
     grid.innerHTML = '';
+
     for (var i = 0; i < cards.length; i++) {
         var scam = cards[i];
         var card = document.createElement('div');
-        card.className = 'p-4 rounded-2xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] flex flex-col justify-between gap-3 kavach-card-hover font-mono';
-        card.innerHTML = `
+        var regionLabel = scam.region === 'IN' ? '🇮🇳 INDIA' : '🌐 GLOBAL';
+        var coercionBadge = scam.coercion ? '<span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-crimson)]/15 text-[var(--accent-crimson)] border border-[var(--accent-crimson)]/35 font-extrabold">COERCION</span>' : '';
+        var ui = `
             <div>
+              <div>
                 <div class="flex items-center justify-between pb-2 border-b border-[var(--border-card)]/60">
-                    <span class="text-2xl">${scam.icon}</span>
+                    <span class="text-2xl">${escapeHtml(scam.icon)}</span>
                     <div class="flex items-center gap-1.5">
-                        <span class="text-[10px] px-2 py-0.5 rounded-full ${scam.region === 'IN' ? 'bg-[var(--accent-emerald)]/15 text-[var(--accent-emerald)] border border-[var(--accent-emerald)]/35' : 'bg-[var(--accent-cyan)]/15 text-[var(--accent-cyan)] border border-[var(--accent-cyan)]/35'} font-extrabold">${scam.region === 'IN' ? '🇮🇳 INDIA' : '🌐 GLOBAL'}</span>
-                        ${scam.coercion ? '<span class="text-[10px] px-2 py-0.5 rounded-full bg-[var(--accent-crimson)]/15 text-[var(--accent-crimson)] border border-[var(--accent-crimson)]/35 font-extrabold">COERCION</span>' : ''}
+                        <span class="text-[10px] px-2 py-0.5 rounded-full ${scam.region === 'IN' ? 'bg-[var(--accent-emerald)]/15 text-[var(--accent-emerald)] border border-[var(--accent-emerald)]/35' : 'bg-[var(--accent-cyan)]/15 text-[var(--accent-cyan)] border border-[var(--accent-cyan)]/35'} font-extrabold">${regionLabel}</span>
+                        ${coercionBadge}
                     </div>
                 </div>
-                <h3 class="font-bold text-[14.5px] text-[var(--text-primary)] mt-2 leading-snug">${scam.title}</h3>
-                <p class="text-[12px] text-[var(--text-muted)] font-semibold mt-1.5 leading-relaxed">${scam.desc}</p>
+                <h3 class="font-bold text-[14.5px] text-[var(--text-primary)] mt-2 leading-snug">${escapeHtml(scam.title)}</h3>
+                <p class="text-[12px] text-[var(--text-muted)] font-semibold mt-1.5 leading-relaxed">${escapeHtml(scam.desc)}</p>
                 <div class="mt-2.5 p-2 rounded-lg bg-[var(--bg-card)] border border-[var(--border-card)] text-[11.5px]">
                     <span class="text-[var(--accent-amber)] font-bold">Heuristic Clues:</span>
-                    <span class="text-[var(--text-muted)] italic block mt-0.5">"${scam.phrases}"</span>
+                    <span class="text-[var(--text-muted)] italic block mt-0.5">"${escapeHtml(scam.phrases)}"</span>
                 </div>
-            </div>
-            <div class="pt-2.5 border-t border-[var(--border-card)]/60 flex items-center justify-between gap-2">
-                <button type="button" onclick="simulateScamOnPhone('${scam.id}')" class="w-full py-2 px-3 rounded-xl bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/35 text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/25 text-[12px] font-extrabold active:scale-95 transition-all cursor-pointer text-center">
+                </div>
+                <div class="pt-2.5 border-t border-[var(--border-card)]/60 flex items-center justify-between gap-2">
+                <button type="button" onclick="simulateScamOnPhone('${escapeHtml(scam.id)}')" class="w-full py-2 px-3 rounded-xl bg-[var(--accent-cyan)]/15 border border-[var(--accent-cyan)]/35 text-[var(--accent-cyan)] hover:bg-[var(--accent-cyan)]/25 text-[12px] font-extrabold active:scale-95 transition-all cursor-pointer text-center">
                     ⚡ SIMULATE IN TAB 1
                 </button>
+                </div>
             </div>
         `;
+
+        card.className = 'p-4 rounded-2xl bg-[var(--bg-card-sub)] border border-[var(--border-card)] flex flex-col justify-between gap-3 kavach-card-hover font-mono';
+        card.innerHTML = ui;
         grid.appendChild(card);
     }
 }
@@ -8294,6 +8506,7 @@ function filterScamCards(cat) {
         c.classList.remove('active', 'bg-[var(--accent-cyan)]', 'text-black', 'font-extrabold');
         c.classList.add('bg-[var(--bg-card-sub)]', 'text-[var(--text-muted)]', 'font-bold');
     });
+
     var activeId = 'scamFilter' + cat.charAt(0).toUpperCase() + cat.slice(1);
     var activeChip = document.getElementById(activeId);
     if (activeChip) {
@@ -8314,6 +8527,7 @@ function filterScamCards(cat) {
 
 function simulateScamOnPhone(scamId) {
     switchKavachTab(1);
+
     if (scamId === 'digital_arrest') {
         triggerScenario('digital_arrest');
     } else if (scamId === 'clone_extortion' || scamId === 'cfo_wire_fraud') {
@@ -9320,5 +9534,23 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
+<!-- Face Match Status Badge -->
+<div class="mt-4">
+    <p class="font-semibold">Live Face Verification:</p>
+    <span id="face-match-status" class="px-3 py-1 bg-gray-400 text-white rounded-full font-bold">Awaiting Camera...</span>
+</div>
+
+<!-- Blockchain Immutable Receipt Banner -->
+<div id="blockchain-receipt" class="hidden"></div>
+<!-- Elite MHA-I4C Header Branding -->
+<div class="flex items-center space-x-3">
+    <div class="bg-red-600 text-white font-black px-3 py-1 rounded tracking-wider text-xs shadow-lg animate-pulse">
+        MHA-I4C SOVEREIGN TRACK
+    </div>
+    <h1 class="text-xl font-extrabold tracking-tight text-white">
+        KAVACH-X <span class="text-blue-400 font-light text-sm">| Enterprise Synthetic Identity & Cyber Defense OS</span>
+    </h1>
+
+    </div>
 </body>
 </html>

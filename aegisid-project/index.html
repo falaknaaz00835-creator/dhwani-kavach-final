@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AegisID - Identity & Document Defense Portal</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col items-center justify-between p-6">
+
+    <!-- Top Header with Icon -->
+    <header class="w-full max-w-3xl flex items-center justify-between border-b border-slate-800 pb-4 mb-8">
+        <div class="flex items-center space-x-3">
+            <!-- Security Shield Icon placed up top -->
+            <div class="bg-indigo-600 p-2.5 rounded-xl shadow-lg shadow-indigo-500/30">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold tracking-tight">AegisID Core</h1>
+                <p class="text-xs text-slate-400">Multimodal Document Screening & Forensics</p>
+            </div>
+        </div>
+        <div class="text-xs bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-full text-emerald-400 font-medium">
+            ● System Active
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-3xl bg-slate-900/60 backdrop-blur border border-slate-800 p-6 rounded-2xl shadow-xl">
+        <h2 class="text-lg font-semibold mb-2">Document Forensic Analysis</h2>
+        <p class="text-sm text-slate-400 mb-6">Upload an identity document or image to run Error Level Analysis (ELA) and cryptographic verification.</p>
+
+        <!-- Upload Form -->
+        <form id="uploadForm" class="space-y-4">
+            <div class="border-2 border-dashed border-slate-700 hover:border-indigo-500 transition rounded-xl p-8 text-center cursor-pointer bg-slate-950/40" onclick="document.getElementById('fileInput').click()">
+                <input type="file" id="fileInput" class="hidden" accept=".jpg, .jpeg, .png, .webp" required>
+                <div id="fileLabel" class="text-slate-400 text-sm">
+                    <span class="font-semibold text-indigo-400">Click to upload</span> or drag and drop<br>
+                    <span class="text-xs text-slate-500">Supports JPG, PNG, WEBP</span>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-500 transition font-medium py-2.5 rounded-xl text-white shadow-lg shadow-indigo-600/20">
+                Run Forensic Screen
+            </button>
+        </form>
+
+        <!-- Results Section (Hidden by Default) -->
+        <div id="resultCard" class="mt-6 hidden border border-slate-800 bg-slate-950 p-5 rounded-xl space-y-3">
+            <h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">Analysis Telemetry</h3>
+            <div class="grid grid-cols-2 gap-4 text-sm">
+                <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
+                    <span class="text-xs text-slate-400 block">Filename</span>
+                    <span id="resFilename" class="font-mono font-medium text-slate-200">-</span>
+                </div>
+                <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
+                    <span class="text-xs text-slate-400 block">Risk Status</span>
+                    <span id="resRisk" class="font-bold">-</span>
+                </div>
+                <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
+                    <span class="text-xs text-slate-400 block">ELA Variance Score</span>
+                    <span id="resEla" class="font-mono font-medium text-slate-200">-</span>
+                </div>
+                <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
+                    <span class="text-xs text-slate-400 block">Tampering Flag</span>
+                    <span id="resTamper" class="font-medium">-</span>
+                </div>
+            </div>
+            <div class="bg-slate-900 p-3 rounded-lg border border-slate-800">
+                <span class="text-xs text-slate-400 block">SHA-256 Cryptographic Hash</span>
+                <span id="resHash" class="font-mono text-xs text-indigo-400 break-all">-</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="text-xs text-slate-500 mt-8">
+        AegisID Defense Engine &bull; Secure Autonomous Screening Gateway
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const fileLabel = document.getElementById('fileLabel');
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                fileLabel.innerHTML = `<span class="text-emerald-400 font-medium">Selected: ${fileInput.files[0].name}</span>`;
+            }
+        });
+
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/api/v1/screen-document', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+                if (response.ok) {
+                    document.getElementById('resultCard').classList.remove('hidden');
+                    document.getElementById('resFilename').innerText = data.filename;
+                    document.getElementById('resEla').innerText = data.ela_score;
+                    document.getElementById('resHash').innerText = data.integrity_hash;
+                    
+                    const riskElem = document.getElementById('resRisk');
+                    const tamperElem = document.getElementById('resTamper');
+
+                    if (data.risk_level === 'HIGH') {
+                        riskElem.innerText = 'HIGH RISK';
+                        riskElem.className = 'font-bold text-rose-400';
+                        tamperElem.innerText = 'MANIPULATION DETECTED';
+                        tamperElem.className = 'font-medium text-rose-400';
+                    } else {
+                        riskElem.innerText = 'LOW RISK';
+                        riskElem.className = 'font-bold text-emerald-400';
+                        tamperElem.innerText = 'CONSISTENT';
+                        tamperElem.className = 'font-medium text-emerald-400';
+                    }
+                } else {
+                    alert('Error: ' + (data.detail || 'Screening failed'));
+                }
+            } catch (err) {
+                alert('Failed to connect to the backend server. Make sure FastAPI is running.');
+                console.error(err);
+            }
+        });
+    </script>
+</body>
+</html>
