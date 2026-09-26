@@ -1,2 +1,0 @@
-[tool.vercel]
-entrypoint = "demo_server.py:app"
