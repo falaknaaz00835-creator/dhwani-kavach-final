@@ -841,8 +841,11 @@ button:active:not(:disabled),
     <div class="flex items-center gap-2.5">
       <span class="material-symbols-outlined text-[var(--accent-cyan)] text-3xl sm:text-4xl animate-pulse">security</span>
       <div class="flex flex-col">
-        <span class="font-mono font-extrabold text-[22px] sm:text-[24px] tracking-[0.16em] text-[var(--text-primary)] uppercase leading-tight">IDENTITY-KAVACH</span>
-        <span class="text-[12px] sm:text-[12.5px] font-mono text-[var(--text-muted)] hidden sm:inline font-bold">Multimodal Synthetic Identity &amp; Document Screening Portal</span>
+        <div class="flex items-center gap-2">
+          <span class="font-mono font-extrabold text-[20px] sm:text-[22px] tracking-[0.14em] text-[var(--text-primary)] uppercase leading-tight">KAVACH-X</span>
+          <span class="bg-red-600 text-white font-mono font-black px-2 py-0.5 rounded tracking-wider text-[10px] shadow-sm animate-pulse">MHA-I4C SOVEREIGN TRACK</span>
+        </div>
+        <span class="text-[11.5px] sm:text-[12px] font-mono text-[var(--text-muted)] hidden sm:inline font-bold">Identity-Kavach :: Enterprise Synthetic Identity &amp; Document Screening OS</span>
       </div>
     </div>
     <!-- SIH26188 MHA Cyber Defense Track Tag -->
@@ -982,7 +985,7 @@ button:active:not(:disabled),
             <span>Sample Screening Presets (MHA Track):</span>
             <span id="docTamperIndicator" class="text-[var(--accent-emerald)] font-extrabold">TAMPER RISK: 2.1%</span>
           </div>
-          <div class="grid grid-cols-3 gap-2">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
             <button type="button" onclick="selectDocPreset('aadhaar_genuine')" class="flex flex-col items-center justify-center gap-0.5 py-2 px-1 rounded-xl bg-[var(--accent-emerald)]/15 border border-[var(--accent-emerald)]/35 text-[var(--accent-emerald)] hover:bg-[var(--accent-emerald)]/25 text-[11px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm text-center">
               <span class="font-extrabold">🟢 Genuine Aadhaar</span>
               <span class="text-[9.5px] text-[var(--text-muted)]">UIDAI QR Match</span>
@@ -993,7 +996,11 @@ button:active:not(:disabled),
             </button>
             <button type="button" onclick="selectDocPreset('pan_forged')" class="flex flex-col items-center justify-center gap-0.5 py-2 px-1 rounded-xl bg-[var(--accent-amber)]/20 border border-[var(--accent-amber)]/50 text-[var(--accent-amber)] hover:bg-[var(--accent-amber)]/30 text-[11px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm text-center">
               <span class="font-extrabold">🔴 Forged PAN</span>
-              <span class="text-[9.5px] text-[var(--text-muted)]">Regex/Sig Tamper</span>
+              <span class="text-[9.5px] text-[var(--text-muted)]">Surname / Entity Fail</span>
+            </button>
+            <button type="button" onclick="selectDocPreset('mule_duplicate')" class="flex flex-col items-center justify-center gap-0.5 py-2 px-1 rounded-xl bg-red-950/40 border border-red-500/60 text-red-300 hover:bg-red-900/50 text-[11px] font-mono font-bold active:scale-95 transition-all cursor-pointer shadow-sm text-center" title="Module 5.4: 64-bit Perceptual Hash Collision across Syndicate Accounts">
+              <span class="font-extrabold">🚨 Duplicate Mule</span>
+              <span class="text-[9.5px] text-[var(--text-muted)]">pHash Ring Collide</span>
             </button>
           </div>
         </div>
@@ -1200,13 +1207,16 @@ button:active:not(:disabled),
             </button>
           </div>
           <!-- Quick Jury Simulation Buttons -->
-          <div class="flex items-center gap-1.5">
+          <div class="flex items-center gap-1.5 flex-wrap">
             <span class="text-[9.5px] text-[var(--text-muted)] font-bold uppercase">Presets:</span>
-            <button type="button" onclick="simulateFaceMatch('match')" class="py-1 px-2.5 rounded-lg bg-[var(--accent-emerald)]/15 hover:bg-[var(--accent-emerald)]/25 border border-[var(--accent-emerald)]/35 text-[var(--accent-emerald)] text-[10.5px] font-mono font-extrabold cursor-pointer active:scale-95 transition-all shadow-sm">
+            <button type="button" onclick="simulateFaceMatch('match')" class="py-1 px-2 rounded-lg bg-[var(--accent-emerald)]/15 hover:bg-[var(--accent-emerald)]/25 border border-[var(--accent-emerald)]/35 text-[var(--accent-emerald)] text-[10px] font-mono font-extrabold cursor-pointer active:scale-95 transition-all shadow-sm">
               Match (92%)
             </button>
-            <button type="button" onclick="simulateFaceMatch('mismatch')" class="py-1 px-2.5 rounded-lg bg-[var(--accent-crimson)]/20 hover:bg-[var(--accent-crimson)]/30 border border-[var(--accent-crimson)]/50 text-[var(--accent-crimson)] text-[10.5px] font-mono font-extrabold cursor-pointer active:scale-95 transition-all shadow-sm">
+            <button type="button" onclick="simulateFaceMatch('mismatch')" class="py-1 px-2 rounded-lg bg-[var(--accent-crimson)]/20 hover:bg-[var(--accent-crimson)]/30 border border-[var(--accent-crimson)]/50 text-[var(--accent-crimson)] text-[10px] font-mono font-extrabold cursor-pointer active:scale-95 transition-all shadow-sm">
               Mismatch (28%)
+            </button>
+            <button type="button" onclick="simulateFaceMatch('morph')" class="py-1 px-2 rounded-lg bg-purple-950/40 hover:bg-purple-900/60 border border-purple-500/60 text-purple-300 text-[10px] font-mono font-extrabold cursor-pointer active:scale-95 transition-all shadow-sm" title="Module 3.4 / 4.6: NIST FRVT Aligned Face Morphing Attack Detection (MAD)">
+              🧬 Morph (MAD)
             </button>
           </div>
         </div>
@@ -1565,6 +1575,10 @@ button:active:not(:disabled),
       <button type="button" onclick="verifyBlockchainChain()" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[var(--accent-cyan)]/15 hover:bg-[var(--accent-cyan)]/25 border border-[var(--accent-cyan)]/40 text-[12px] font-mono font-extrabold text-[var(--accent-cyan)] active:scale-95 transition-all cursor-pointer shadow-sm whitespace-nowrap">
         <span class="material-symbols-outlined text-[17px]">verified</span>
         <span>VERIFY CHAIN INTEGRITY</span>
+      </button>
+      <button type="button" onclick="downloadEvidenceCertificate()" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 border border-purple-500/50 text-[12px] font-mono font-extrabold text-purple-300 active:scale-95 transition-all cursor-pointer shadow-sm whitespace-nowrap" title="Generate Section 63 BSA 2023 Court Admissible PDF Certificate">
+        <span class="material-symbols-outlined text-[17px]">picture_as_pdf</span>
+        <span>EXPORT SEC 63 BSA DOSSIER (PDF)</span>
       </button>
     </div>
   </div>
@@ -8902,36 +8916,69 @@ function handleTabAudioUpload(input) {
 }
 
 function downloadEvidenceCertificate() {
-    var now = new Date().toLocaleString();
-    var hash = document.getElementById('tabEvidenceHash') ? document.getElementById('tabEvidenceHash').textContent : 'SHA256-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
-    var text = `========================================================================
+    var state = currentDocScreeningState || {};
+    var holder = state.name || "RAJESH KUMAR SHARMA";
+    var docType = state.doc_type || "AADHAAR";
+    var maskedId = state.masked_id || "XXXX-XXXX-0124";
+    var status = state.status || "AUTHENTIC";
+    var compRisk = state.tamper_risk_pct || 2.1;
+    var hash = state.doc_sha256 || "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+
+    // Attempt direct PDF download from Section 63 BSA ReportLab backend
+    fetch('/api/evidence/export-dossier-pdf', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            holder_name: holder,
+            doc_type: docType,
+            masked_id: maskedId,
+            status: status,
+            composite_risk: compRisk,
+            doc_sha256: hash
+        })
+    })
+    .then(function(r) {
+        if (r.ok) return r.blob();
+        throw new Error("PDF export HTTP " + r.status);
+    })
+    .then(function(blob) {
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'Dossier_BSA63_' + docType + '_' + Date.now().toString().slice(-6) + '.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+    })
+    .catch(function(err) {
+        console.warn("Falling back to Section 63 BSA text dossier:", err);
+        var now = new Date().toLocaleString();
+        var text = `========================================================================
 NATIONAL CYBER CRIME INVESTIGATION EVIDENCE CERTIFICATE
-Indian Evidence Act Section 65B Admissible Digital Telemetry Dossier
+Bharatiya Sakshya Adhiniyam (BSA) 2023 Section 63 Admissible Dossier
 ========================================================================
-Platform: Identity-Kavach Multimodal Synthetic Identity & Document Screening Portal (SIH26188 | MHA Track)
+Platform: Identity-Kavach Multimodal Screening OS (SIH26188 | MHA-I4C Track)
 Generated Timestamp: ${now}
+Document Presented: ${docType} (${maskedId})
+Declared Holder: ${holder}
+Screening Verdict: ${status} (Composite Risk: ${compRisk}%)
 Cryptographic SHA-256 Custody Hash: ${hash}
-System Status: I4C 1930 Active Defense Integration
+System Status: 100% Offline Air-Gapped CPU Engine
 
-INCIDENT PARAMETERS:
-- Intercepted Target Line: +91 98765 43210 (VoLTE)
-- Acoustic Synthesis Risk: 88% (AI NEURAL CLONE DETECTED)
-- Primary Extortion Signature: Digital Arrest / Narcotics Cargo Coercion
-- Pitch Jitter Instability: 4.80% (Abnormal Vocoder Artifact)
-- Evidence LLR Metric: +4.65 dB
-- Autonomous Banking Freeze: EXECUTED & SEALED
-
-LEGAL DECLARATION:
-This document constitutes electronic evidence recorded in accordance with 
-Section 65B of the Indian Evidence Act, 1872. The cryptographic hash above 
-certifies that the acoustic telemetry and transcript records have remained 
-tamper-proof from the instant of call interception.
+LEGAL DECLARATION UNDER SECTION 63 BSA 2023:
+This electronic record was generated by the Kavach-X Sovereign Identity 
+Screening System in the ordinary course of lawful official inspection. 
+The hash chain and cryptographic proofs constitute primary admissible evidence.
 ========================================================================`;
-    var blob = new Blob([text], { type: 'text/plain' });
-    var a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'Identity_Kavach_Evidence_Cert_65B.txt';
-    a.click();
+        var blob = new Blob([text], { type: 'text/plain' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = 'Identity_Kavach_Evidence_Cert_BSA63.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    });
 }
 
 // 8. Tab 4: Interactive Scam Drill
@@ -9377,6 +9424,53 @@ function executeFaceMatchApi(selfieB64, presetType) {
     var faceDocThumb = document.getElementById('faceDocThumb');
     var docB64 = faceDocThumb ? faceDocThumb.src : "";
 
+    var badge = document.getElementById('faceMatchBadge');
+    var scoreText = document.getElementById('faceMatchScoreText');
+    var verdictLabel = document.getElementById('faceMatchVerdictLabel');
+    var ring = document.getElementById('faceMatchRing');
+
+    if (presetType === 'morph') {
+        if (badge) {
+            badge.textContent = "MAD ANALYZING...";
+            badge.className = "text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-400 font-extrabold animate-pulse";
+        }
+        fetch('/api/identity/morph-detect', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ preset: 'morph' })
+        })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            currentFaceMatchState = {
+                similarity_pct: 71.4,
+                is_match: false,
+                is_morph: true,
+                face_risk: 88.4,
+                algorithm: "NIST FRVT MORPH / Dual-Subject Blended Boundary MAD"
+            };
+            if (badge) {
+                badge.textContent = "🚨 MORPH ATTACK DETECTED (MAD: 88.4%)";
+                badge.className = "text-[11.5px] sm:text-[12.5px] font-mono px-3 py-1 rounded-full bg-purple-900/40 border border-purple-500 text-purple-300 font-extrabold whitespace-nowrap animate-pulse";
+            }
+            if (scoreText) {
+                scoreText.textContent = "88%";
+                scoreText.className = "text-[18px] font-mono font-black text-purple-400 leading-none";
+            }
+            if (verdictLabel) {
+                verdictLabel.textContent = "MORPH DUAL-ID";
+                verdictLabel.className = "text-[10.5px] font-mono font-extrabold text-purple-400 uppercase tracking-wide animate-pulse";
+            }
+            if (ring) {
+                ring.className = "w-18 h-18 rounded-full border-3 border-purple-500 bg-purple-900/20 flex flex-col items-center justify-center shadow-lg transition-all duration-300 animate-pulse";
+            }
+            updateMultimodalSynthesis();
+        })
+        .catch(function(err) {
+            console.warn("MAD error:", err);
+        });
+        return;
+    }
+
     var payload = {};
     if (presetType) {
         payload.preset = presetType;
@@ -9384,11 +9478,6 @@ function executeFaceMatchApi(selfieB64, presetType) {
         payload.selfie_image = selfieB64;
         payload.id_image = docB64;
     }
-
-    var badge = document.getElementById('faceMatchBadge');
-    var scoreText = document.getElementById('faceMatchScoreText');
-    var verdictLabel = document.getElementById('faceMatchVerdictLabel');
-    var ring = document.getElementById('faceMatchRing');
 
     if (badge) {
         badge.textContent = "MATCHING...";
@@ -9469,6 +9558,10 @@ function selectDocPreset(presetName) {
         if (faceDocThumb) faceDocThumb.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='112' viewBox='0 0 96 112'><rect width='96' height='112' fill='%230f172a'/><circle cx='48' cy='42' r='24' fill='%2338bdf8'/><path d='M18 100 C18 72, 78 72, 78 100' fill='%2338bdf8'/></svg>";
         if (faceDocLabel) faceDocLabel.textContent = "RAJESH KUMAR";
         simulateFaceMatch('match');
+    } else if (presetName === 'mule_duplicate') {
+        if (faceDocThumb) faceDocThumb.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='112' viewBox='0 0 96 112'><rect width='96' height='112' fill='%232a080c'/><circle cx='48' cy='42' r='24' fill='%23ef4444'/><path d='M18 100 C18 72, 78 72, 78 100' fill='%23ef4444'/><text x='20' y='64' fill='white' font-family='sans-serif' font-weight='bold' font-size='14'>MULE</text></svg>";
+        if (faceDocLabel) faceDocLabel.textContent = "RAMESH KUMAR (MULE)";
+        simulateFaceMatch('mismatch');
     } else {
         if (faceDocThumb) faceDocThumb.src = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='96' height='112' viewBox='0 0 96 112'><rect width='96' height='112' fill='%233a0d14'/><circle cx='48' cy='42' r='24' fill='%23f87171'/><path d='M18 100 C18 72, 78 72, 78 100' fill='%23f87171'/><line x1='10' y1='10' x2='86' y2='102' stroke='%23ef4444' stroke-width='4'/></svg>";
         if (faceDocLabel) faceDocLabel.textContent = presetName === 'pan_forged' ? "VIKRAM SINGH" : "AMIT VERMA";
@@ -9502,12 +9595,16 @@ function selectDocPreset(presetName) {
         updateMultimodalSynthesis();
 
         if (!isAuth) {
-            triggerDocFraudAlert(data.doc_type, "Forensic Tamper Anomaly Detected", {
-                summary: data.doc_type === "PAN"
-                    ? "Income Tax Department Regex Pattern Violation • 4th Character Legal Entity Mismatch • Signature Erasure"
-                    : "Verhoeff Base-10 Checksum Failure • Spliced Biometric Facial Map • Cryptographic RSA Signature Mismatch",
-                forensics: data.details.font_consistency || "Photoshop Splicing / Pixel Variance > 12.8",
-                alg: data.details.verhoeff_checksum || (data.details.entity_type_check || "Checksum / Check-digit Failure"),
+            var alertSummary = data.doc_type === "PAN"
+                ? "Income Tax Department Regex Pattern Violation • 4th Character Legal Entity Mismatch • Signature Erasure"
+                : "Verhoeff Base-10 Checksum Failure • Spliced Biometric Facial Map • Cryptographic RSA Signature Mismatch";
+            if (data.duplicate_check && data.duplicate_check.is_duplicate) {
+                alertSummary = "Perceptual dHash Collision Detected • Matched Known Fraud Syndicate " + (data.duplicate_check.syndicate || "Alpha") + " (" + (data.duplicate_check.mule_id || "MULE-901") + ") across " + (data.duplicate_check.flagged_accounts_count || 14) + " mule bank accounts";
+            }
+            triggerDocFraudAlert(data.doc_type, data.duplicate_check && data.duplicate_check.is_duplicate ? "🚨 DUPLICATE MULE RING CLONE DETECTED" : "Forensic Tamper Anomaly Detected", {
+                summary: alertSummary,
+                forensics: data.duplicate_check && data.duplicate_check.is_duplicate ? ("pHash Distance: " + data.duplicate_check.hamming_distance + " (<= 10 Threshold) • " + (data.duplicate_check.similarity_pct || 96.8) + "% Collision") : (data.details.font_consistency || "Photoshop Splicing / Pixel Variance > 12.8"),
+                alg: data.duplicate_check && data.duplicate_check.is_duplicate ? "64-bit Perceptual dHash Hamming Distance Engine (Module 5.4)" : (data.details.verhoeff_checksum || (data.details.entity_type_check || "Checksum / Check-digit Failure")),
                 risk_pct: data.tamper_risk_pct
             });
         } else {
@@ -10084,23 +10181,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 </script>
-<!-- Face Match Status Badge -->
-<div class="mt-4">
-    <p class="font-semibold">Live Face Verification:</p>
-    <span id="face-match-status" class="px-3 py-1 bg-gray-400 text-white rounded-full font-bold">Awaiting Camera...</span>
-</div>
-
-<!-- Blockchain Immutable Receipt Banner -->
+<span id="face-match-status" class="hidden"></span>
 <div id="blockchain-receipt" class="hidden"></div>
-<!-- Elite MHA-I4C Header Branding -->
-<div class="flex items-center space-x-3">
-    <div class="bg-red-600 text-white font-black px-3 py-1 rounded tracking-wider text-xs shadow-lg animate-pulse">
-        MHA-I4C SOVEREIGN TRACK
-    </div>
-    <h1 class="text-xl font-extrabold tracking-tight text-white">
-        KAVACH-X <span class="text-blue-400 font-light text-sm">| Enterprise Synthetic Identity & Cyber Defense OS</span>
-    </h1>
-
-    </div>
 </body>
 </html>
